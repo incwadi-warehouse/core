@@ -4,16 +4,44 @@ incwadi is a book database to manage a lot of books.
 
 ## Install
 
-Clone the repo:
-
 ```shell
 git clone https://gitlab.com/a.baldeweg/incwadi_core.git
 ```
 
-Install Composer dependencies:
+Define env vars in your vHost. For which have a look at `.env`.
+
+In you dev env you can do
 
 ```shell
-composer install
+touch .env.local
+```
+
+The content of the file could be the following. Please fit it to you needs.
+
+```apache
+DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
+```
+
+Then install the composer dependencies.
+
+```shell
+composer install --no-dev
+```
+
+In dev env omit the `--no-dev` param.
+
+Now, create the database.
+
+```shell
+bin/console doctrine:database:create
+```
+
+## Update
+
+```shell
+git pull
+composer install --no-dev
+bin/console doctrine:schema:update --force
 ```
 
 ## Dev
