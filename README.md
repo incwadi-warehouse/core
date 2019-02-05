@@ -18,14 +18,14 @@ git clone https://gitlab.com/a.baldeweg/incwadi_core.git
 
 Define env vars in your vHost. For which have a look at `.env`.
 
-In you dev env you can do
+In your dev env you can do
 
 ```shell
 touch .env.local
 touch .env.test.local
 ```
 
-The content of both files could be the following. Please fit it to you needs.
+The content of both files could be the following. Please fit it to your needs.
 
 ```shell
 DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
@@ -47,6 +47,8 @@ bin/console doctrine:schema:update --force
 ```
 
 ## Update
+
+Pull for the new files, update dependencies with Composer and update the database.
 
 ```shell
 git pull
