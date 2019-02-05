@@ -2,13 +2,6 @@
 
 incwadi is a book database to manage a lot of books.
 
-- [baldeweg/incwadi-core](#baldewegincwadi-core)
-  - [Getting Started](#getting-started)
-    - [Requirements](#requirements)
-    - [Install](#install)
-  - [Update](#update)
-  - [Dev](#dev)
-
 ## Getting Started
 
 ### Requirements
