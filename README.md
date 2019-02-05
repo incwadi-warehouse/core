@@ -2,7 +2,22 @@
 
 incwadi is a book database to manage a lot of books.
 
-## Install
+- [baldeweg/incwadi-core](#baldewegincwadi-core)
+  - [Getting Started](#getting-started)
+    - [Requirements](#requirements)
+    - [Install](#install)
+  - [Update](#update)
+  - [Dev](#dev)
+
+## Getting Started
+
+### Requirements
+
+- PHP 7.2
+- PHP Composer
+- SSH Access
+
+### Install
 
 ```shell
 git clone https://gitlab.com/a.baldeweg/incwadi_core.git
@@ -14,11 +29,12 @@ In you dev env you can do
 
 ```shell
 touch .env.local
+touch .env.test.local
 ```
 
-The content of the file could be the following. Please fit it to you needs.
+The content of both files could be the following. Please fit it to you needs.
 
-```apache
+```shell
 DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 ```
 
