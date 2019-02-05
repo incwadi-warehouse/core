@@ -1,13 +1,28 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
     providers:
-        in_memory: { memory: ~ }
+        # in_memory: { memory: ~ }
+        in_memory:
+            memory:
+                users:
+                    admin:
+                        password: password
+                        roles: 'ROLE_ADMIN'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
-
+            provider: in_memory
             http_basic: true
+
+    access_decision_manager:
+        strategy: unanimous
 
     access_control: ~
