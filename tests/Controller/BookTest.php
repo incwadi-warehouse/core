@@ -56,7 +56,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
-         // show
+        // show
         $request = $this->request($id, 'GET');
 
         $this->assertTrue(isset($request->id));
