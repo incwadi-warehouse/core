@@ -65,7 +65,7 @@ class Book implements \JsonSerializable
             'added' => $this->getAdded()->getTimestamp(),
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
-            'genre' => $this->getGenre(),
+            'genre' => (int)$this->getGenre(),
             'price' => $this->getPrice(),
             'currency' => $this->getCurrency(),
             'stocked' => $this->getStocked()
