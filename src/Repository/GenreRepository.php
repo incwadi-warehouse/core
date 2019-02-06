@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This script is part of baldeweg/incwadi-core
+ *
+ * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
+ */
+
 namespace Baldeweg\Repository;
 
 use Baldeweg\Entity\Genre;
