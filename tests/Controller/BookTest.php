@@ -16,7 +16,7 @@ class BookTest extends WebTestCase
     {
         // new
         $action = 'new';
-        $request = $this->request($action, 'POST', [
+        $request = $this->request($action, 'POST', [], [
             'title' => 'title',
             'author' => 'author',
             'genre' => 1,
@@ -38,7 +38,7 @@ class BookTest extends WebTestCase
 
         // edit
         $action = 'edit';
-        $request = $this->request($action . '/' . $id, 'POST', [
+        $request = $this->request($action . '/' . $id, 'POST', [], [
             'title' => 'book',
             'author' => 'authors',
             'genre' => 2,
@@ -68,9 +68,27 @@ class BookTest extends WebTestCase
         $this->assertEquals('2.00', $request->price);
         $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
+
+        // find
+        $action = 'find';
+        $request = $this->request($action, 'GET', [
+            'term' => 'book',
+            'offset' => '0'
+        ]);
+
+        $this->assertInternalType('array', $request);
+        $this->assertTrue(isset($request[0]->id));
+        $this->assertInternalType('integer', $request[0]->id);
+        $this->assertInternalType('integer', $request[0]->added);
+        $this->assertEquals('book', $request[0]->title);
+        $this->assertEquals('authors', $request[0]->author);
+        $this->assertEquals(2, $request[0]->genre);
+        $this->assertEquals('2.00', $request[0]->price);
+        $this->assertEquals('EUR', $request[0]->currency);
+        $this->assertTrue($request[0]->stocked);
     }
 
-    protected function request($action, $method = 'GET', $content = [])
+    protected function request(string $action, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'admin',
@@ -80,7 +98,7 @@ class BookTest extends WebTestCase
         $crawler = $client->request(
             $method,
             '/book/' . $action,
-            [],
+            $params,
             [],
             [],
             json_encode($content)

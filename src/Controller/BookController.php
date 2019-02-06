@@ -22,6 +22,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
+     * @Route("/find", methods={"GET"}, name="find")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function find(Request $request): JsonResponse
+    {
+        return $this->json(
+            $this->getDoctrine()->getRepository(Book::class)->findDemanded(
+                $request->query->get('term'),
+                ($request->query->has('offset') ? $request->query->get('offset') : 0)
+                )
+            );
+        }
+
+    /**
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER')")
      */

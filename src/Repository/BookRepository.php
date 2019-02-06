@@ -20,8 +20,26 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class BookRepository extends ServiceEntityRepository
 {
+    const LIMIT = 20;
+
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Book::class);
+    }
+
+    public function findDemanded(string $term, ?int $offset = 0)
+    {
+        $query = $this->getEntityManager()->createQuery('
+            SELECT b
+            FROM Baldeweg:Book b
+            WHERE b.title LIKE :term
+            OR b.author LIKE :term
+        ');
+        $query->setParameter('term', '%' . $term . '%');
+        $query->setMaxResults(self::LIMIT);
+        $query->setFirstResult($offset);
+
+        return $query->getResult();
     }
 }
