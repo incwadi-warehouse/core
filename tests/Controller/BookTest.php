@@ -35,6 +35,26 @@ class BookTest extends WebTestCase
         $this->assertTrue($request->stocked);
 
         $id = $request->id;
+
+        // edit
+        $action = 'edit';
+        $request = $this->request($action . '/' . $id, 'POST', [
+            'title' => 'book',
+            'author' => 'authors',
+            'genre' => 2,
+            'price' => '2.00',
+            'stocked' => true
+        ]);
+
+        $this->assertTrue(isset($request->id));
+        $this->assertInternalType('integer', $request->id);
+        $this->assertInternalType('integer', $request->added);
+        $this->assertEquals('book', $request->title);
+        $this->assertEquals('authors', $request->author);
+        $this->assertEquals(2, $request->genre);
+        $this->assertEquals('2.00', $request->price);
+        $this->assertEquals('EUR', $request->currency);
+        $this->assertTrue($request->stocked);
     }
 
     protected function request($action, $method = 'GET', $content = [])

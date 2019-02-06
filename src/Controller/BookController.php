@@ -49,4 +49,30 @@ class BookController extends AbstractController
             'msg' => 'Please enter a valid book!'
         ]);
     }
+
+    /**
+     * @Route("/edit/{id}", methods={"POST"}, name="edit")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function edit(Request $request, Book $book): JsonResponse
+    {
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->submit(
+            json_decode(
+                $request->getContent(),
+                true
+            )
+        );
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->json($book);
+        }
+
+        return $this->json([
+            'msg' => 'Please enter a valid book!'
+        ]);
+    }
 }
