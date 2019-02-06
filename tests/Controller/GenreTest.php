@@ -14,7 +14,19 @@ class GenreTest extends WebTestCase
 {
     public function testScenario()
     {
-        // show
+        // new
+        $action = 'new';
+        $request = $this->request($action, 'POST', [], [
+            'name' => 'name'
+        ]);
+
+        $this->assertTrue(isset($request->id));
+        $this->assertInternalType('integer', $request->id);
+        $this->assertEquals('name', $request->name);
+
+        $id = $request->id;
+
+        // list
         $action = '/';
         $request = $this->request($action, 'GET');
 
