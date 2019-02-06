@@ -12,14 +12,36 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookTest extends WebTestCase
 {
+    protected $genreId;
+
+
+    public function setUp()
+    {
+        $request = $this->request('/genre/new', 'POST', [], [
+            'name' => 'name'
+        ]);
+
+        $this->assertTrue(isset($request->id));
+        $this->assertInternalType('integer', $request->id);
+        $this->assertEquals('name', $request->name);
+
+        $this->genreId = $request->id;
+    }
+
+    public function tearDown()
+    {
+        $request = $this->request('/genre/' . $this->genreId, 'DELETE');
+
+        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+    }
+
     public function testScenario()
     {
         // new
-        $action = 'new';
-        $request = $this->request($action, 'POST', [], [
+        $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'author',
-            'genre' => 1,
+            'genre' => $this->genreId,
             'price' => '1.00',
             'stocked' => true
         ]);
@@ -29,7 +51,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
-        $this->assertEquals(1, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('1.00', $request->price);
         $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
@@ -37,11 +59,10 @@ class BookTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $action = $id;
-        $request = $this->request($action, 'PUT', [], [
+        $request = $this->request('/book/' . $id, 'PUT', [], [
             'title' => 'book',
             'author' => 'authors',
-            'genre' => 2,
+            'genre' => $this->genreId,
             'price' => '2.00',
             'stocked' => true
         ]);
@@ -51,28 +72,26 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
-        $this->assertEquals(2, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('2.00', $request->price);
         $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
         // show
-        $action = $id;
-        $request = $this->request($action, 'GET');
+        $request = $this->request('/book/' . $id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
-        $this->assertEquals(2, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('2.00', $request->price);
         $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
         // find
-        $action = 'find';
-        $request = $this->request($action, 'GET', [
+        $request = $this->request('/book/find', 'GET', [
             'term' => 'book',
             'offset' => '0'
         ]);
@@ -83,19 +102,18 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request[0]->added);
         $this->assertEquals('book', $request[0]->title);
         $this->assertEquals('authors', $request[0]->author);
-        $this->assertEquals(2, $request[0]->genre);
+        $this->assertInternalType('integer', $request[0]->genre);
         $this->assertEquals('2.00', $request[0]->price);
         $this->assertEquals('EUR', $request[0]->currency);
         $this->assertTrue($request[0]->stocked);
 
         // delete
-        $action = $id;
-        $request = $this->request($action, 'DELETE');
+        $request = $this->request('/book/' . $id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
-    protected function request(string $action, ?string $method = 'GET', ?array $params = [], ?array $content = [])
+    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'admin',
@@ -104,14 +122,14 @@ class BookTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/book/' . $action,
+            $url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' /book/' . $action);
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
 
         return json_decode($client->getResponse()->getContent());
     }

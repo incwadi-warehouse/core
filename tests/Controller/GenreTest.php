@@ -15,8 +15,7 @@ class GenreTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $action = 'new';
-        $request = $this->request($action, 'POST', [], [
+        $request = $this->request('/genre/new', 'POST', [], [
             'name' => 'name'
         ]);
 
@@ -27,8 +26,7 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $action = $id;
-        $request = $this->request($action, 'PUT', [], [
+        $request = $this->request('/genre/' . $id, 'PUT', [], [
             'name' => 'name'
         ]);
 
@@ -37,16 +35,14 @@ class GenreTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // show
-        $action = $id;
-        $request = $this->request($action, 'GET');
+        $request = $this->request('/genre/' . $id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
 
         // list
-        $action = '/';
-        $request = $this->request($action, 'GET');
+        $request = $this->request('/genre/', 'GET');
 
         $this->assertInternalType('array', $request);
 
@@ -55,13 +51,12 @@ class GenreTest extends WebTestCase
         $this->assertInternalType('string', $request[0]->name);
 
         // delete
-        $action = $id;
-        $request = $this->request($action, 'DELETE');
+        $request = $this->request('/genre/' . $id, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
 
-    protected function request(string $action, ?string $method = 'GET', ?array $params = [], ?array $content = [])
+    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'admin',
@@ -70,14 +65,14 @@ class GenreTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/genre/' . $action,
+            $url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' /genre/' . $action);
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
 
         return json_decode($client->getResponse()->getContent());
     }
