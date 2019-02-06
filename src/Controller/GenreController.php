@@ -33,6 +33,15 @@ class GenreController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function show(Request $request, Genre $genre): JsonResponse
+    {
+        return $this->json($genre);
+    }
+
+    /**
      * @Route("/new", methods={"POST"}, name="new")
      * @Security("is_granted('ROLE_USER')")
      */
