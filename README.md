@@ -8,7 +8,7 @@ incwadi is a book database to manage a lot of books.
 
 - PHP 7.2
 - PHP Composer
-- SSH Access
+- SSH access
 
 ### Install
 
