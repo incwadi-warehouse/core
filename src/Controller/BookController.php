@@ -22,6 +22,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
+     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function show(Request $request, Book $book): JsonResponse
+    {
+        return $this->json($book);
+    }
+
+    /**
      * @Route("/new", methods={"POST"}, name="new")
      * @Security("is_granted('ROLE_USER')")
      */
