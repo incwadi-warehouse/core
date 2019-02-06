@@ -56,7 +56,7 @@ composer install --no-dev
 bin/console doctrine:schema:update --force
 ```
 
-## Dev
+## CLI
 
 - bin/console - Symfony commands
 - bin/watch - Starts the development environment
@@ -64,3 +64,99 @@ bin/console doctrine:schema:update --force
 - bin/phpunit - Runs the PHPUnit tests
 - bin/report - Runs the PHPUnit coverage report
 - bin/lint - Checks for code standard violations and fixes them partially
+
+## API
+
+### Find books
+
+`GET /book/find`
+
+Params
+
+- term (required) - string
+- offset - int
+
+### Create book
+
+`POST /book/new`
+
+Body
+
+- title (required) - string
+- author (required) - string
+- genre (required) - int
+- price (required) - decimal
+- stocked (required) - bool
+
+### Show book
+
+`GET /book/[id]`
+
+Params
+
+- id - int
+
+### Edit book
+
+`PUT /book/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- title (required) - string
+- author (required) - string
+- genre (required) - int
+- price (required) - decimal
+- stocked (required) - bool
+
+### Delete book
+
+`DELETE /book/[id]`
+
+Params
+
+- id - int
+
+### List genres
+
+`GET /genre/`
+
+### Create genre
+
+`POST /genre/new`
+
+Body
+
+- name - string
+
+### Show genre
+
+`GET /genre/[id]`
+
+Params
+
+id - int
+
+### Edit genre
+
+`PUT /genre/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+### Delete genre
+
+`DELETE /genre/[id]`
+
+Params
+
+- id - int
+
