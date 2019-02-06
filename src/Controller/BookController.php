@@ -74,7 +74,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", methods={"POST"}, name="edit")
+     * @Route("/{id}", methods={"PUT"}, name="edit")
      * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, Book $book): JsonResponse

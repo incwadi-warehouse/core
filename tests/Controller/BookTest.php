@@ -37,8 +37,8 @@ class BookTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $action = 'edit';
-        $request = $this->request($action . '/' . $id, 'POST', [], [
+        $action = $id;
+        $request = $this->request($action, 'PUT', [], [
             'title' => 'book',
             'author' => 'authors',
             'genre' => 2,
