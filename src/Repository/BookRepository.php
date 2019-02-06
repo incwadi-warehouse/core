@@ -30,6 +30,7 @@ class BookRepository extends ServiceEntityRepository
 
     public function findDemanded(string $term, ?int $offset = 0)
     {
+        $term = preg_replace('/[%\*]/', '', $term);
         $query = $this->getEntityManager()->createQuery('
             SELECT b
             FROM Baldeweg:Book b
