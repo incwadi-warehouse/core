@@ -14,7 +14,7 @@ class BookTest extends WebTestCase
 {
     public function testScenario()
     {
-        // New
+        // new
         $action = 'new';
         $request = $this->request($action, 'POST', [
             'title' => 'title',
