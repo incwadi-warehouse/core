@@ -1,13 +1,20 @@
 <?php
 
+/*
+ * This script is part of baldeweg/incwadi-core
+ *
+ * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
+ */
+
 namespace Baldeweg\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Baldeweg\Entity\Book;
 use Baldeweg\Form\BookType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/book", name="book_")
@@ -16,6 +23,7 @@ class BookController extends AbstractController
 {
     /**
      * @Route("/new", methods={"POST"}, name="new")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
     {
