@@ -10,7 +10,7 @@ namespace Baldeweg\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class BookTest extends WebTestCase
+class GenreTest extends WebTestCase
 {
     public function testScenario()
     {
