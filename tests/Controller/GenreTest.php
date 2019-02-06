@@ -49,6 +49,12 @@ class GenreTest extends WebTestCase
         $request = $this->request($action, 'GET');
 
         $this->assertInternalType('array', $request);
+
+        // delete
+        $action = $id;
+        $request = $this->request($action, 'DELETE');
+
+        $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
 
     protected function request(string $action, ?string $method = 'GET', ?array $params = [], ?array $content = [])

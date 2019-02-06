@@ -94,4 +94,19 @@ class GenreController extends AbstractController
             'msg' => 'Please enter a valid genre!'
         ]);
     }
+
+    /**
+     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function delete(Genre $genre): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($genre);
+        $em->flush();
+
+        return $this->json([
+            'msg' => 'The genre was successfully deleted.'
+        ]);
+    }
 }
