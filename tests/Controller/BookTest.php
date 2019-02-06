@@ -57,7 +57,8 @@ class BookTest extends WebTestCase
         $this->assertTrue($request->stocked);
 
         // show
-        $request = $this->request($id, 'GET');
+        $action = $id;
+        $request = $this->request($action, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
@@ -86,6 +87,12 @@ class BookTest extends WebTestCase
         $this->assertEquals('2.00', $request[0]->price);
         $this->assertEquals('EUR', $request[0]->currency);
         $this->assertTrue($request[0]->stocked);
+
+        // delete
+        $action = $id;
+        $request = $this->request($action, 'DELETE');
+
+        $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
     protected function request(string $action, ?string $method = 'GET', ?array $params = [], ?array $content = [])

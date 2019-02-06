@@ -98,4 +98,19 @@ class BookController extends AbstractController
             'msg' => 'Please enter a valid book!'
         ]);
     }
+
+    /**
+     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function delete(Book $book): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($book);
+        $em->flush();
+
+        return $this->json([
+            'msg' => 'The book was successfully deleted.'
+        ]);
+    }
 }
