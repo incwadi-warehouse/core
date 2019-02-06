@@ -31,9 +31,9 @@ class BookController extends AbstractController
             $this->getDoctrine()->getRepository(Book::class)->findDemanded(
                 $request->query->get('term'),
                 ($request->query->has('offset') ? $request->query->get('offset') : 0)
-                )
-            );
-        }
+            )
+        );
+    }
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
