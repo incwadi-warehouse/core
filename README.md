@@ -69,7 +69,7 @@ bin/console doctrine:schema:update --force
 
 ### Find books
 
-`GET /book/find`
+`GET /v1/book/find`
 
 Params
 
@@ -78,7 +78,7 @@ Params
 
 ### Create book
 
-`POST /book/new`
+`POST /v1/book/new`
 
 Body
 
@@ -90,7 +90,7 @@ Body
 
 ### Show book
 
-`GET /book/[id]`
+`GET /v1/book/[id]`
 
 Params
 
@@ -98,7 +98,7 @@ Params
 
 ### Edit book
 
-`PUT /book/[id]`
+`PUT /v1/book/[id]`
 
 Params
 
@@ -114,7 +114,7 @@ Body
 
 ### Delete book
 
-`DELETE /book/[id]`
+`DELETE /v1/book/[id]`
 
 Params
 
@@ -122,11 +122,11 @@ Params
 
 ### List genres
 
-`GET /genre/`
+`GET /v1/genre/`
 
 ### Create genre
 
-`POST /genre/new`
+`POST /v1/genre/new`
 
 Body
 
@@ -134,7 +134,7 @@ Body
 
 ### Show genre
 
-`GET /genre/[id]`
+`GET /v1/genre/[id]`
 
 Params
 
@@ -142,7 +142,7 @@ id - int
 
 ### Edit genre
 
-`PUT /genre/[id]`
+`PUT /v1/genre/[id]`
 
 Params
 
@@ -154,7 +154,7 @@ Body
 
 ### Delete genre
 
-`DELETE /genre/[id]`
+`DELETE /v1/genre/[id]`
 
 Params
 

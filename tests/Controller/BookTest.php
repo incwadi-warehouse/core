@@ -122,7 +122,7 @@ class BookTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            $url,
+            '/v1' . $url,
             $params,
             [],
             [],

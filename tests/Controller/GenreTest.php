@@ -104,7 +104,7 @@ class GenreTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            $url,
+            '/v1' . $url,
             $params,
             [],
             [],

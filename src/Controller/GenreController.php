@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/genre", name="genre_")
+ * @Route("/v1/genre", name="genre_")
  */
 class GenreController extends AbstractController
 {

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/book", name="book_")
+ * @Route("/v1/book", name="book_")
  */
 class BookController extends AbstractController
 {
