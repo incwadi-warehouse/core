@@ -9,6 +9,7 @@
 namespace Baldeweg\Controller;
 
 use Baldeweg\Entity\Genre;
+use Baldeweg\Entity\Book;
 use Baldeweg\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -102,6 +103,14 @@ class GenreController extends AbstractController
     public function delete(Genre $genre): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
+        $books = $em->getRepository(Book::class)->findBy(
+            [
+                'genre' => $genre
+            ]
+        );
+        foreach ($books as $book) {
+            $book->setGenre(null);
+        }
         $em->remove($genre);
         $em->flush();
 

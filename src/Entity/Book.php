@@ -9,6 +9,7 @@
 namespace Baldeweg\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Baldeweg\Entity\Genre;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\BookRepository")
@@ -38,7 +39,7 @@ class Book implements \JsonSerializable
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Genre")
      */
     private $genre;
 
@@ -65,7 +66,7 @@ class Book implements \JsonSerializable
             'added' => $this->getAdded()->getTimestamp(),
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
-            'genre' => (int)$this->getGenre(),
+            'genre' => $this->getGenre() ? (int)$this->getGenre()->getId() : null,
             'price' => $this->getPrice(),
             'currency' => $this->getCurrency(),
             'stocked' => $this->getStocked()
@@ -113,12 +114,12 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getGenre(): ?string
+    public function getGenre(): ?Genre
     {
         return $this->genre;
     }
 
-    public function setGenre(?string $genre): self
+    public function setGenre(?Genre $genre): self
     {
         $this->genre = $genre;
 

@@ -56,6 +56,45 @@ class GenreTest extends WebTestCase
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
 
+    public function testDeleteGenreWithReferringBooks() {
+        // new genre
+        $request = $this->request('/genre/new', 'POST', [], [
+            'name' => 'name'
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $genreId = $request->id;
+
+        // new book
+        $request = $this->request('/book/new', 'POST', [], [
+            'title' => 'title',
+            'author' => 'author',
+            'genre' => $genreId,
+            'price' => '1.00',
+            'stocked' => true
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $id = $request->id;
+
+        // delete genre
+        $request = $this->request('/genre/' . $genreId, 'DELETE');
+
+        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+
+        // show book
+        $request = $this->request('/book/' . $id, 'GET');
+
+        $this->assertEquals(null, $request->genre);
+
+        // delete book
+        $request = $this->request('/book/' . $id, 'DELETE');
+
+        $this->assertEquals('The book was successfully deleted.', $request->msg);
+    }
+
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
         $client = static::createClient([], [
