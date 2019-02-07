@@ -11,7 +11,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: password
+                        password: '%env(ADMIN_PASS)%'
                         roles: 'ROLE_ADMIN'
     firewalls:
         dev:
