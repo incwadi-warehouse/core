@@ -44,7 +44,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/new", methods={"POST"}, name="new")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): JsonResponse
     {
@@ -72,7 +72,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Genre $genre): JsonResponse
     {
