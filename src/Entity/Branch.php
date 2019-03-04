@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\BranchRepository")
  */
-class Branch
+class Branch implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -21,6 +21,14 @@ class Branch
      */
     private $name;
 
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName()
+        ];
+    }
 
     public function getId(): ?int
     {
