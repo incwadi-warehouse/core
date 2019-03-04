@@ -51,6 +51,8 @@ class BookController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $book = new Book();
+        // later when there are actual users, this must be changed
+        $book->setBranch(null);
         $book->setAdded(new \DateTime());
         $form = $this->createForm(BookType::class, $book);
 

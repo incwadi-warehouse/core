@@ -24,6 +24,11 @@ class Book implements \JsonSerializable
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
+     */
+    private $branch = null;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $added;
@@ -63,6 +68,7 @@ class Book implements \JsonSerializable
     {
         return [
             'id' => $this->getId(),
+            'branch' => $this->getBranch(),
             'added' => $this->getAdded()->getTimestamp(),
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
@@ -76,6 +82,18 @@ class Book implements \JsonSerializable
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getBranch(): ?Branch
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(?Branch $branch): self
+    {
+        $this->branch = $branch;
+
+        return $this;
     }
 
     public function getAdded(): ?\DateTimeInterface
