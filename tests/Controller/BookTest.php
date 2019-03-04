@@ -48,6 +48,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
+        $this->assertNull($request->branch);
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
@@ -69,6 +70,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
+        $this->assertNull($request->branch);
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
@@ -82,6 +84,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
+        $this->assertNull($request->branch);
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
@@ -98,6 +101,7 @@ class BookTest extends WebTestCase
 
         $this->assertInternalType('array', $request);
         $this->assertTrue(isset($request[0]->id));
+        $this->assertNull($request[0]->branch);
         $this->assertInternalType('integer', $request[0]->id);
         $this->assertInternalType('integer', $request[0]->added);
         $this->assertEquals('book', $request[0]->title);
