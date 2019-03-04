@@ -8,8 +8,8 @@
 
 namespace Baldeweg\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Baldeweg\Entity\Genre;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\BookRepository")

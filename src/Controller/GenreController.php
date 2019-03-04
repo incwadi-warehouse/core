@@ -8,8 +8,8 @@
 
 namespace Baldeweg\Controller;
 
-use Baldeweg\Entity\Genre;
 use Baldeweg\Entity\Book;
+use Baldeweg\Entity\Genre;
 use Baldeweg\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

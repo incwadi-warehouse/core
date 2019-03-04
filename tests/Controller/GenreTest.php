@@ -56,7 +56,8 @@ class GenreTest extends WebTestCase
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
 
-    public function testDeleteGenreWithReferringBooks() {
+    public function testDeleteGenreWithReferringBooks()
+    {
         // new genre
         $request = $this->request('/genre/new', 'POST', [], [
             'name' => 'name'
