@@ -8,9 +8,9 @@ An article can be found here https://medium.com/@A.Baldeweg/i-was-trying-new-thi
 
 ## Future
 
-The first goal is to make a minimum viable product (mvp). It delivers only the features actually needed to be usable. As soon as this is done version 1.0.0 will be released. After that I will start developing new features. The development will follow the principles of lean development. Building small features, try it and decide weather it makes sense to invest time more into it.
+The first goal is to make a minimum viable product (MVP). It delivers only the features actually needed to be usable. As soon as this is done version 1.0.0 will be released. After that I will start developing new features. The development will follow the principles of lean development. Building small features, try it and decide weather it makes sense to invest more time into it.
 
-I hope people will help in testing out the app as users oder getting involved into development. Since the languages (PHP, JavaScript) and the used tools are widespread, it should be easy to getting onboard.
+I hope people will help in testing out the app as users or getting involved into development. Since the languages (PHP, JavaScript) and the used tools are widespread, it should be easy to getting onboard.
 
 ## Getting Started
 
@@ -166,6 +166,46 @@ Body
 ### Delete genre
 
 `DELETE /v1/genre/[id]`
+
+Params
+
+- id - int
+
+### List branches
+
+`GET /v1/branch/`
+
+### Create branch
+
+`POST /v1/branch/new`
+
+Body
+
+- name - string
+
+### Show branch
+
+`GET /v1/branch/[id]`
+
+Params
+
+id - int
+
+### Edit branch
+
+`PUT /v1/branch/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+### Delete branch
+
+`DELETE /v1/branch/[id]`
 
 Params
 
