@@ -57,6 +57,14 @@ bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 ```
 
+## Dev
+
+Install fixtures
+
+```shell
+bin/console doctrine:fixtures:load
+```
+
 ## Update
 
 Pull for the new files, update dependencies with Composer and update the database.
