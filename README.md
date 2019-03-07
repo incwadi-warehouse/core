@@ -57,9 +57,7 @@ bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 ```
 
-## Dev
-
-Install fixtures
+In case you are in dev, load the fixtures.
 
 ```shell
 bin/console doctrine:fixtures:load
