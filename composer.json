@@ -8,7 +8,8 @@
     "symfony/flex": "^1.1"
   },
   "require-dev": {
-    "baldeweg/dev-pack": "^1.0"
+    "baldeweg/dev-pack": "^1.0",
+    "doctrine/doctrine-fixtures-bundle": "^3.1"
   },
   "config": {
     "preferred-install": {
