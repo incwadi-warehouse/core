@@ -3,23 +3,22 @@ security:
         ROLE_ADMIN: ROLE_USER
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Baldeweg\Entity\User:
+            algorithm: bcrypt
+            cost: 15
 
     providers:
-        # in_memory: { memory: ~ }
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: '%env(ADMIN_PASS)%'
-                        roles: 'ROLE_ADMIN'
+        app_user_provider:
+            entity:
+                class: Baldeweg\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
-            provider: in_memory
+            provider: app_user_provider
             http_basic: true
 
     access_decision_manager:
