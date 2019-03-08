@@ -45,10 +45,8 @@ DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 Then install the composer dependencies.
 
 ```shell
-composer install --no-dev
+composer install
 ```
-
-In dev env omit the `--no-dev` param.
 
 Now, create the database.
 
@@ -57,7 +55,14 @@ bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 ```
 
-In case you are in dev, load the fixtures.
+Create your first user
+
+```shell
+bin/console user:new [NAME] ROLE_ADMIN [PASSWORD]
+```
+Replace NAME and PASSWORD with your desired data.
+
+In case you are in dev, load the user with the fixtures instead.
 
 ```shell
 bin/console doctrine:fixtures:load
@@ -69,7 +74,7 @@ Pull for the new files, update dependencies with Composer and update the databas
 
 ```shell
 git pull
-composer install --no-dev
+composer install
 bin/console doctrine:schema:update --force
 ```
 
