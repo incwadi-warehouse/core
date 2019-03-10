@@ -8,28 +8,57 @@ An article can be found here https://medium.com/@A.Baldeweg/i-was-trying-new-thi
 
 ## Future
 
-The first goal is to make a minimum viable product (MVP). It delivers only the features actually needed to be usable. As soon as this is done version 1.0.0 will be released. After that I will start developing new features. The development will follow the principles of lean development. Building small features, try it and decide weather it makes sense to invest more time into it.
+The first goal is to make a minimum viable product (MVP). It delivers only the features actually needed to be usable. As soon as this is done version 1.0.0 will be released. After that I will start developing new features. The development will follow the principles of lean development. Building small features, try it and decide wether it makes sense to invest more time into it.
 
-I hope people will help in testing out the app as users or getting involved into development. Since the languages (PHP, JavaScript) and the used tools are widespread, it should be easy to getting onboard.
-
-## Getting Started
-
-### Requirements
+## Requirements
 
 - PHP 7.2
 - MySQL
 - PHP Composer
 - SSH access
 
-### Install
+## Getting Started
+
+Clone the repository:
 
 ```shell
 git clone https://gitlab.com/a.baldeweg/incwadi_core.git
 ```
 
-Define env vars in your vHost. For which have a look at `.env`.
+Point the web root to the public/ dir.
 
-In your dev env you can do
+Define env vars in your vHost. You need to set APP_ENV (set to "prod"), APP_SECRET, CORS_ALLOW_ORIGIN and DATABASE_URL. Refer to the section Options for more details.
+
+Then install the composer dependencies.
+
+```shell
+composer install
+```
+
+Now, create the database.
+
+```shell
+bin/console doctrine:database:create
+bin/console doctrine:schema:update --force
+```
+
+Create your first user
+
+```shell
+bin/console user:new [NAME] ROLE_ADMIN [PASSWORD]
+```
+
+Replace NAME and PASSWORD with your desired data.
+
+## Dev
+
+Clone the repository:
+
+```shell
+git clone https://gitlab.com/a.baldeweg/incwadi_core.git
+```
+
+Create the file .env.local and .env.test.local.
 
 ```shell
 touch .env.local
@@ -55,14 +84,7 @@ bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 ```
 
-Create your first user
-
-```shell
-bin/console user:new [NAME] ROLE_ADMIN [PASSWORD]
-```
-Replace NAME and PASSWORD with your desired data.
-
-In case you are in dev, load the user with the fixtures instead.
+Load the first user with the fixtures.
 
 ```shell
 bin/console doctrine:fixtures:load
@@ -76,6 +98,24 @@ Pull for the new files, update dependencies with Composer and update the databas
 git pull
 composer install
 bin/console doctrine:schema:update --force
+```
+
+## Options
+
+Explanations for the env vars.
+
+- APP_ENV - The environment, should be prod, dev or test.
+- APP_SECRET - Contains a random string, more info at https://symfony.com/doc/current/reference/configuration/framework.html#secret
+- CORS_ALLOW_ORIGIN - Contains a regex including the URI to the backend.
+- DATABASE_URL - Credentials for the database.
+
+Example for Apache2:
+
+```apache
+SetEnv APP_ENV "prod"
+SetEnv APP_SECRET "YOURSECRET"
+SetEnv CORS_ALLOW_ORIGIN "^https?://localhost:?[0-9]*$"
+SetEnv DATABASE_URL mysql://db_user:db_password@127.0.0.1:3306/db_name
 ```
 
 ## CLI
