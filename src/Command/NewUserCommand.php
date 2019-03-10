@@ -4,12 +4,13 @@
  * This script is part of baldeweg/incwadi-core
  *
  * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
+ * MIT-licensed
  */
 
 namespace Baldeweg\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Baldeweg\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

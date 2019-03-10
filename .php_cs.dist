@@ -16,6 +16,7 @@ $fileHeaderComment = <<<COMMENT
 This script is part of baldeweg/incwadi-core
 
 Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
+MIT-licensed
 COMMENT;
 
 return Config::create()
