@@ -9,9 +9,9 @@
 
 namespace Baldeweg\Entity;
 
+use Baldeweg\Entity\Branch;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Baldeweg\Entity\Branch;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\UserRepository")
