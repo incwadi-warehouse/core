@@ -60,7 +60,6 @@ class BookTest extends WebTestCase
         $this->assertEquals('author', $request->author);
         $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('1.00', $request->price);
-        $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
         $id = $request->id;
@@ -82,7 +81,6 @@ class BookTest extends WebTestCase
         $this->assertEquals('authors', $request->author);
         $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('2.00', $request->price);
-        $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
         // show
@@ -96,7 +94,6 @@ class BookTest extends WebTestCase
         $this->assertEquals('authors', $request->author);
         $this->assertEquals($this->genreId, $request->genre);
         $this->assertEquals('2.00', $request->price);
-        $this->assertEquals('EUR', $request->currency);
         $this->assertTrue($request->stocked);
 
         // find
@@ -114,7 +111,6 @@ class BookTest extends WebTestCase
         $this->assertEquals('authors', $request[0]->author);
         $this->assertInternalType('integer', $request[0]->genre);
         $this->assertEquals('2.00', $request[0]->price);
-        $this->assertEquals('EUR', $request[0]->currency);
         $this->assertTrue($request[0]->stocked);
 
         // delete

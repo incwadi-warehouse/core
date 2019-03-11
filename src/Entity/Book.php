@@ -67,11 +67,6 @@ class Book implements \JsonSerializable
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $currency = 'EUR';
-
-    /**
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean", message="Please enter only true or false.")
      */
@@ -109,7 +104,6 @@ class Book implements \JsonSerializable
             'author' => $this->getAuthor(),
             'genre' => $this->getGenre() ? (int)$this->getGenre()->getId() : null,
             'price' => $this->getPrice(),
-            'currency' => $this->getCurrency(),
             'stocked' => $this->getStocked(),
             'yearOfPublication' => $this->getYearOfPublication(),
             'type' => $this->getType(),
@@ -190,18 +184,6 @@ class Book implements \JsonSerializable
     public function setPrice($price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getCurrency(): ?string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(string $currency): self
-    {
-        $this->currency = $currency;
 
         return $this;
     }
