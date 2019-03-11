@@ -12,6 +12,7 @@ namespace Baldeweg\Entity;
 use Baldeweg\Entity\Branch;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\UserRepository")
@@ -45,7 +46,7 @@ class User implements UserInterface
      * @var Branch
      * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
      */
-    private $branch;
+    private $branch = null;
 
 
     public function getId(): ?int
