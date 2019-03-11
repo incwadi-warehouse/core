@@ -15,6 +15,15 @@ class BranchTest extends WebTestCase
 {
     public function testScenario()
     {
+        // list
+        $request = $this->request('/branch/', 'GET');
+
+        $this->assertInternalType('array', $request);
+
+        $this->assertTrue(isset($request[0]->id));
+        $this->assertInternalType('integer', $request[0]->id);
+        $this->assertInternalType('string', $request[0]->name);
+
         // new
         $request = $this->request('/branch/new', 'POST', [], [
             'name' => 'name'
@@ -41,15 +50,6 @@ class BranchTest extends WebTestCase
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
-
-        // list
-        $request = $this->request('/branch/', 'GET');
-
-        $this->assertInternalType('array', $request);
-
-        $this->assertTrue(isset($request[0]->id));
-        $this->assertInternalType('integer', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
 
         // delete
         $request = $this->request('/branch/' . $id, 'DELETE');

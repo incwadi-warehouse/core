@@ -23,6 +23,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
+     * @Route("/", methods={"GET"}, name="index")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function index()
+    {
+        return $this->json([]);
+    }
+
+    /**
      * @Route("/find", methods={"GET"}, name="find")
      * @Security("is_granted('ROLE_USER')")
      */

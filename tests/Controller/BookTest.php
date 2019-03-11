@@ -38,6 +38,11 @@ class BookTest extends WebTestCase
 
     public function testScenario()
     {
+        // index
+        $request = $this->request('/book/', 'GET', [], []);
+
+        $this->assertEquals([], $request);
+
         // new
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
