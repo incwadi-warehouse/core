@@ -95,6 +95,12 @@ bin/console doctrine:fixtures:load
 Pull for the new files, update dependencies with Composer and update the database.
 
 ```shell
+bin/update
+```
+
+or
+
+```shell
 git pull
 composer install
 bin/console doctrine:schema:update --force
