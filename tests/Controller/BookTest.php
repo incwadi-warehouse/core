@@ -58,7 +58,8 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
-        $this->assertEquals($this->genreId, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre->id);
+        $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('1.00', $request->price);
         $this->assertTrue($request->stocked);
 
@@ -79,7 +80,8 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
-        $this->assertEquals($this->genreId, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre->id);
+        $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
         $this->assertTrue($request->stocked);
 
@@ -92,7 +94,8 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
-        $this->assertEquals($this->genreId, $request->genre);
+        $this->assertEquals($this->genreId, $request->genre->id);
+        $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
         $this->assertTrue($request->stocked);
 
@@ -109,7 +112,8 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request[0]->added);
         $this->assertEquals('book', $request[0]->title);
         $this->assertEquals('authors', $request[0]->author);
-        $this->assertInternalType('integer', $request[0]->genre);
+        $this->assertInternalType('integer', $request[0]->genre->id);
+        $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request[0]->price);
         $this->assertTrue($request[0]->stocked);
 
