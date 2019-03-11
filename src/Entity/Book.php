@@ -11,12 +11,15 @@ namespace Baldeweg\Entity;
 
 use Baldeweg\Entity\Genre;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\BookRepository")
  */
 class Book implements \JsonSerializable
 {
+    const TYPES = ['hardcover', 'paperback'];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -64,6 +67,27 @@ class Book implements \JsonSerializable
      */
     private $stocked = true;
 
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
+     */
+    private $yearOfPublication;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices=Book:TYPES, message="This type is not allowed.")
+     */
+    private $type;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     * @Assert\Type(type="boolean")
+     */
+    private $premium;
+
 
     public function jsonSerialize()
     {
@@ -76,7 +100,10 @@ class Book implements \JsonSerializable
             'genre' => $this->getGenre() ? (int)$this->getGenre()->getId() : null,
             'price' => $this->getPrice(),
             'currency' => $this->getCurrency(),
-            'stocked' => $this->getStocked()
+            'stocked' => $this->getStocked(),
+            'yearOfPublication' => $this->getYearOfPublication(),
+            'type' => $this->getType(),
+            'premium' => $this->getPremium()
         ];
     }
 
@@ -177,6 +204,42 @@ class Book implements \JsonSerializable
     public function setStocked(bool $stocked): self
     {
         $this->stocked = $stocked;
+
+        return $this;
+    }
+
+    public function getYearOfPublication(): int
+    {
+        return $this->yearOfPublication;
+    }
+
+    public function setYearOfPublication(int $yearOfPublication): self
+    {
+        $this->yearOfPublication = $yearOfPublication;
+
+        return $this;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPremium(): bool
+    {
+        return $this->premium;
+    }
+
+    public function setPremium(bool $premium): self
+    {
+        $this->premium = $premium;
 
         return $this;
     }
