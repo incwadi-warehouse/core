@@ -77,7 +77,7 @@ class Book implements \JsonSerializable
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
-     * @Assert\Choice(choices=Book:TYPES, message="This type is not allowed.")
+     * @Assert\Choice(choices=Book::TYPES, message="This type is not allowed.")
      */
     private $type;
 
