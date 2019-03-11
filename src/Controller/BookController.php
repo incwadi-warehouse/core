@@ -79,7 +79,7 @@ class BookController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     public function edit(Request $request, Book $book): JsonResponse
     {
@@ -105,7 +105,7 @@ class BookController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
     public function delete(Book $book): JsonResponse
     {
