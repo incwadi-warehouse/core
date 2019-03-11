@@ -79,14 +79,14 @@ class Book implements \JsonSerializable
      * @ORM\Column(type="string", length=255)
      * @Assert\Choice(choices=Book::TYPES, message="This type is not allowed.")
      */
-    private $type;
+    private $type = 'paperback';
 
     /**
      * @var bool
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean")
      */
-    private $premium;
+    private $premium = false;
 
 
     public function jsonSerialize()
