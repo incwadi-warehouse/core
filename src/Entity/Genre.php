@@ -10,6 +10,7 @@
 namespace Baldeweg\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\GenreRepository")
@@ -25,6 +26,7 @@ class Genre implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a name.")
      */
     private $name;
 

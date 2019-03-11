@@ -37,26 +37,32 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime(message="Please enter a date.")
      */
     private $added;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a title.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Please enter an author.")
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Genre")
+     * Assert\NotBlank(message="Please enter a genre.")
      */
     private $genre;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\NotBlank(message="Please set a price.")
+     * @Assert\Type(type="decimal", message="Please enter a decimal.")
      */
     private $price;
 
@@ -67,6 +73,7 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type(type="boolean", message="Please enter only true or false.")
      */
     private $stocked = true;
 
