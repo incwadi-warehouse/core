@@ -15,10 +15,14 @@ class GenreTest extends WebTestCase
 {
     public function testScenario()
     {
-        // index
-        $request = $this->request('/genre/', 'GET', [], []);
+        // list
+        $request = $this->request('/genre/', 'GET');
 
-        $this->assertEquals([], $request);
+        $this->assertInternalType('array', $request);
+
+        $this->assertTrue(isset($request[0]->id));
+        $this->assertInternalType('integer', $request[0]->id);
+        $this->assertInternalType('string', $request[0]->name);
 
         // new
         $request = $this->request('/genre/new', 'POST', [], [
@@ -47,15 +51,6 @@ class GenreTest extends WebTestCase
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
 
-        // list
-        $request = $this->request('/genre/', 'GET');
-
-        $this->assertInternalType('array', $request);
-
-        $this->assertTrue(isset($request[0]->id));
-        $this->assertInternalType('integer', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
-
         // delete
         $request = $this->request('/genre/' . $id, 'DELETE');
 
@@ -79,7 +74,10 @@ class GenreTest extends WebTestCase
             'author' => 'author',
             'genre' => $genreId,
             'price' => '1.00',
-            'stocked' => true
+            'stocked' => true,
+            'yearOfPublication' => 2019,
+            'type' => 'paperback',
+            'premium' => false
         ]);
 
         $this->assertTrue(isset($request->id));
