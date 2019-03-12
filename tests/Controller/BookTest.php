@@ -123,21 +123,24 @@ class BookTest extends WebTestCase
             'offset' => '0'
         ]);
 
-        $this->assertInternalType('array', $request);
-        $this->assertTrue(isset($request[0]->id));
-        $this->assertNull($request[0]->branch);
-        $this->assertInternalType('integer', $request[0]->id);
-        $this->assertInternalType('integer', $request[0]->added);
-        $this->assertEquals('book', $request[0]->title);
-        $this->assertEquals('authors', $request[0]->author);
-        $this->assertInternalType('integer', $request[0]->genre->id);
-        $this->assertEquals('name', $request->genre->name);
-        $this->assertEquals('2.00', $request[0]->price);
-        $this->assertTrue($request[0]->stocked);
-        $this->assertEquals(2019, $request[0]->yearOfPublication);
-        $this->assertEquals('paperback', $request[0]->type);
-        $this->assertFalse($request[0]->premium);
-        $this->assertFalse($request[0]->lend);
+        $this->assertInternalType('int', $request->counter);
+        $this->assertInternalType('array', $request->books);
+        $this->assertTrue(isset($request->books[0]->id));
+        $this->assertNull($request->books[0]->branch);
+        $this->assertInternalType('integer', $request->books[0]->id);
+        $this->assertInternalType('integer', $request->books[0]->added);
+        $this->assertEquals('book', $request->books[0]->title);
+        $this->assertEquals('authors', $request->books[0]->author);
+        if ($request->books[0]->genre !== null) {
+            $this->assertInternalType('integer', $request->books[0]->genre->id);
+            $this->assertEquals('name', $request->books->genre->name);
+        }
+        $this->assertEquals('2.00', $request->books[0]->price);
+        $this->assertTrue($request->books[0]->stocked);
+        $this->assertEquals(2019, $request->books[0]->yearOfPublication);
+        $this->assertEquals('paperback', $request->books[0]->type);
+        $this->assertFalse($request->books[0]->premium);
+        $this->assertFalse($request->books[0]->lend);
 
         // delete
         $request = $this->request('/book/' . $id, 'DELETE');
