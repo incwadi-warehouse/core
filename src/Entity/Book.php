@@ -113,7 +113,7 @@ class Book implements \JsonSerializable
             'yearOfPublication' => $this->getYearOfPublication(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
-            'lend' => $this->getLend()
+            'lend' => $this->getLend() ? true : false
         ];
     }
 
