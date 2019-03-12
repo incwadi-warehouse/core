@@ -21,7 +21,7 @@ class Book implements \JsonSerializable
     /**
      * @var array
      */
-    const TYPES = ['hardcover', 'paperback'];
+    const TYPES = ['paperback', 'hardcover'];
 
     /**
      * @ORM\Id()
@@ -62,7 +62,7 @@ class Book implements \JsonSerializable
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
      * @Assert\NotBlank(message="Please set a price.")
-     * @Assert\Type(type="decimal", message="Please enter a decimal.")
+     * @Assert\Type(type="float", message="Please enter a decimal.")
      */
     private $price;
 
