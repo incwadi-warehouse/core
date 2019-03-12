@@ -99,6 +99,12 @@ class Book implements \JsonSerializable
     private $lend;
 
 
+    public function __construct()
+    {
+        $yearOfPublication = new \DateTime();
+        $this->yearOfPublication = $yearOfPublication->format('Y');
+    }
+
     public function jsonSerialize()
     {
         return [
