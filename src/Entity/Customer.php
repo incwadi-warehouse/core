@@ -36,7 +36,7 @@ class Customer implements \JsonSerializable
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Lend", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Lend", mappedBy="customer")
      */
     private $lends;
 
@@ -51,7 +51,8 @@ class Customer implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'notes' => $this->getNotes()
+            'notes' => $this->getNotes(),
+            'lends' => $this->getLends()
         ];
     }
 
@@ -96,7 +97,7 @@ class Customer implements \JsonSerializable
     {
         if (!$this->lends->contains($lend)) {
             $this->lends[] = $lend;
-            $lend->setUser($this);
+            $lend->setCustomer($this);
         }
 
         return $this;
@@ -106,8 +107,8 @@ class Customer implements \JsonSerializable
     {
         if ($this->lends->contains($lend)) {
             $this->lends->removeElement($lend);
-            if ($lend->getUser() === $this) {
-                $lend->setUser(null);
+            if ($lend->getCustomer() === $this) {
+                $lend->setCustomer(null);
             }
         }
 

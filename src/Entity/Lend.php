@@ -27,7 +27,7 @@ class Lend implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="lends")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $customer;
 
     /**
      * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lend", cascade={"persist", "remove"})
@@ -45,7 +45,7 @@ class Lend implements \JsonSerializable
     {
         return [
             'id' => $this->getId(),
-            'user' => $this->getUser(),
+            'customer' => $this->getCustomer(),
             'book' => $this->getBook(),
             'lendOn' => $this->getLendOn()
         ];
@@ -56,14 +56,14 @@ class Lend implements \JsonSerializable
         return $this->id;
     }
 
-    public function getUser(): ?Customer
+    public function getCustomer(): ?Customer
     {
-        return $this->user;
+        return $this->customer;
     }
 
-    public function setUser(?Customer $user): self
+    public function setCustomer(?Customer $customer): self
     {
-        $this->user = $user;
+        $this->customer = $customer;
 
         return $this;
     }
