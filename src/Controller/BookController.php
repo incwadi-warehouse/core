@@ -37,12 +37,15 @@ class BookController extends AbstractController
      */
     public function find(Request $request): JsonResponse
     {
-        return $this->json(
-            $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-                $request->query->get('term'),
-                ($request->query->has('offset') ? $request->query->get('offset') : 0)
-            )
+        $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
+            $request->query->get('term'),
+            ($request->query->has('offset') ? $request->query->get('offset') : 0)
         );
+
+        return $this->json([
+            'counter' => count($books),
+            'books' => $books
+        ]);
     }
 
     /**
