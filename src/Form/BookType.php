@@ -24,6 +24,9 @@ class BookType extends AbstractType
             ->add('price')
             ->add('title')
             ->add('stocked')
+            ->add('yearOfPublication')
+            ->add('type')
+            ->add('premium')
         ;
     }
 
