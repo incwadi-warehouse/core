@@ -30,7 +30,7 @@ class Lend implements \JsonSerializable
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lend", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lend")
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;
@@ -52,7 +52,7 @@ class Lend implements \JsonSerializable
             'id' => $this->getId(),
             'customer' => $this->getCustomer(),
             'book' => $this->getBook(),
-            'lendOn' => $this->getLendOn()
+            'lendOn' => $this->getLendOn()->format('d.m.Y H:i')
         ];
     }
 
