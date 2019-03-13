@@ -24,7 +24,7 @@ class CustomerTest extends WebTestCase
         if ($request[0]->notes) {
             $this->assertInternalType('string', $request[0]->notes);
         }
-        $this->assertInternalType('array', $request[0]->lends);
+        $this->assertInternalType('int', $request[0]->lends);
 
         // new
         $request = $this->request('/customer/new', 'POST', [], [
@@ -35,7 +35,7 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('array', $request->lends);
+        $this->assertInternalType('int', $request->lends);
 
         $id = $request->id;
 
@@ -48,7 +48,7 @@ class CustomerTest extends WebTestCase
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('array', $request->lends);
+        $this->assertInternalType('int', $request->lends);
 
         // show
         $request = $this->request('/customer/' . $id, 'GET');
@@ -56,7 +56,7 @@ class CustomerTest extends WebTestCase
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('array', $request->lends);
+        $this->assertInternalType('int', $request->lends);
 
         // delete
         $request = $this->request('/customer/' . $id, 'DELETE');

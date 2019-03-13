@@ -52,7 +52,7 @@ class Customer implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'notes' => $this->getNotes(),
-            'lends' => $this->getLends()
+            'lends' => count($this->getLends())
         ];
     }
 
