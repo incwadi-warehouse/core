@@ -29,7 +29,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('array', $request->lends);
+        $this->assertInternalType('int', $request->lends);
 
         $this->customerId = $request->id;
 
@@ -37,7 +37,7 @@ class LendTest extends WebTestCase
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'author',
-            'genre' => $this->genreId,
+            'genre' => null,
             'price' => '1.00',
             'stocked' => true,
             'yearOfPublication' => 2019,
@@ -51,8 +51,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
-        $this->assertEquals($this->genreId, $request->genre->id);
-        $this->assertEquals('name', $request->genre->name);
+        $this->assertEquals(null, $request->genre);
         $this->assertEquals('1.00', $request->price);
         $this->assertTrue($request->stocked);
         $this->assertEquals(2019, $request->yearOfPublication);
@@ -84,7 +83,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('array', $request);
 
         // new
-        $request = $this->request('/book/new', 'POST', [], [
+        $request = $this->request('/lend/new', 'POST', [], [
             'customer' => $this->customerId,
             'book' => $this->bookId
         ]);
@@ -92,7 +91,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('integer', $request->id);
         $this->assertTrue(isset($request->customer));
         $this->assertTrue(isset($request->book));
-        $this->assertInstanceOf('Date', $request->lendOn);
+        $this->assertInternalType('string', $request->lendOn);
 
         $id = $request->id;
 
@@ -102,7 +101,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('integer', $request->id);
         $this->assertTrue(isset($request->customer));
         $this->assertTrue(isset($request->book));
-        $this->assertInstanceOf('Date', $request->lendOn);
+        $this->assertInternalType('string', $request->lendOn);
 
         // delete
         $request = $this->request('/lend/' . $id, 'DELETE');
