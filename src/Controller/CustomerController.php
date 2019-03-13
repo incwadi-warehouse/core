@@ -10,10 +10,10 @@
 namespace Baldeweg\Controller;
 
 use Baldeweg\Entity\Book;
-use Baldeweg\Entity\Genre;
 use Baldeweg\Entity\Customer;
-use Baldeweg\Form\GenreType;
+use Baldeweg\Entity\Genre;
 use Baldeweg\Form\CustomerType;
+use Baldeweg\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
