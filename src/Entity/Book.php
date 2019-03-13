@@ -94,9 +94,9 @@ class Book implements \JsonSerializable
     private $premium = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Lend", mappedBy="book", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Lending", mappedBy="book", cascade={"persist", "remove"})
      */
-    private $lend;
+    private $lending;
 
 
     public function __construct()
@@ -119,7 +119,7 @@ class Book implements \JsonSerializable
             'yearOfPublication' => $this->getYearOfPublication(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
-            'lend' => $this->getLend() ? true : false
+            'lending' => $this->getLending() ? true : false
         ];
     }
 
@@ -248,17 +248,17 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getLend(): ?Lend
+    public function getLending(): ?Lending
     {
-        return $this->lend;
+        return $this->lending;
     }
 
-    public function setLend(Lend $lend): self
+    public function setLending(Lending $lending): self
     {
-        $this->lend = $lend;
+        $this->lending = $lending;
 
-        if ($this !== $lend->getBook()) {
-            $lend->setBook($this);
+        if ($this !== $lending->getBook()) {
+            $lending->setBook($this);
         }
 
         return $this;

@@ -2,12 +2,12 @@
 
 namespace Baldeweg\Form;
 
-use Baldeweg\Entity\Lend;
+use Baldeweg\Entity\Lending;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LendType extends AbstractType
+class LendingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,7 @@ class LendType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Lend::class,
+            'data_class' => Lending::class,
         ]);
     }
 }

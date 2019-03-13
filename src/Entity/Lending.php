@@ -12,9 +12,9 @@ namespace Baldeweg\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\LendRepository")
+ * @ORM\Entity(repositoryClass="Baldeweg\Repository\LendingRepository")
  */
-class Lend implements \JsonSerializable
+class Lending implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -24,13 +24,13 @@ class Lend implements \JsonSerializable
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="lends")
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="lendings")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lend")
+     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lending")
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;

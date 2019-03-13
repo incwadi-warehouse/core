@@ -11,7 +11,7 @@ namespace Baldeweg\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LendTest extends WebTestCase
+class LendingTest extends WebTestCase
 {
     protected $customerId;
 
@@ -29,7 +29,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('int', $request->lends);
+        $this->assertInternalType('int', $request->lendings);
 
         $this->customerId = $request->id;
 
@@ -57,7 +57,7 @@ class LendTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lend);
+        $this->assertFalse($request->lending);
 
         $this->bookId = $request->id;
     }
@@ -78,12 +78,12 @@ class LendTest extends WebTestCase
     public function testScenario()
     {
         // list
-        $request = $this->request('/lend/', 'GET', [], []);
+        $request = $this->request('/lending/', 'GET', [], []);
 
         $this->assertInternalType('array', $request);
 
         // new
-        $request = $this->request('/lend/new', 'POST', [], [
+        $request = $this->request('/lending/new', 'POST', [], [
             'customer' => $this->customerId,
             'book' => $this->bookId
         ]);
@@ -96,7 +96,7 @@ class LendTest extends WebTestCase
         $id = $request->id;
 
         // show
-        $request = $this->request('/lend/' . $id, 'GET');
+        $request = $this->request('/lending/' . $id, 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertTrue(isset($request->customer));
@@ -104,7 +104,7 @@ class LendTest extends WebTestCase
         $this->assertInternalType('string', $request->lendOn);
 
         // delete
-        $request = $this->request('/lend/' . $id, 'DELETE');
+        $request = $this->request('/lending/' . $id, 'DELETE');
 
         $this->assertEquals('The lending was successfully deleted.', $request->msg);
     }

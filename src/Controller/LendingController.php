@@ -12,9 +12,9 @@ namespace Baldeweg\Controller;
 use Baldeweg\Entity\Book;
 use Baldeweg\Entity\Genre;
 use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Lend;
+use Baldeweg\Entity\Lending;
 use Baldeweg\Form\GenreType;
-use Baldeweg\Form\LendType;
+use Baldeweg\Form\LendingType;
 use Baldeweg\Form\CustomerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/lend", name="lend_")
+ * @Route("/v1/lending", name="lending_")
  */
-class LendController extends AbstractController
+class LendingController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
@@ -34,7 +34,7 @@ class LendController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Lend::class)->findAll()
+            $this->getDoctrine()->getRepository(Lending::class)->findAll()
         );
     }
 
@@ -42,9 +42,9 @@ class LendController extends AbstractController
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function show(Request $request, Lend $lend): JsonResponse
+    public function show(Request $request, Lending $lending): JsonResponse
     {
-        return $this->json($lend);
+        return $this->json($lending);
     }
 
     /**
@@ -53,8 +53,8 @@ class LendController extends AbstractController
      */
     public function new(Request $request): JsonResponse
     {
-        $lend = new Lend();
-        $form = $this->createForm(LendType::class, $lend);
+        $lending = new Lending();
+        $form = $this->createForm(LendingType::class, $lending);
 
         $form->submit(
             json_decode(
@@ -64,14 +64,14 @@ class LendController extends AbstractController
         );
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($lend);
+            $em->persist($lending);
             $em->flush();
 
-            return $this->json($lend);
+            return $this->json($lending);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid lending!'
+            'msg' => 'Please enter a valid lendinging!'
         ]);
     }
 
@@ -79,10 +79,10 @@ class LendController extends AbstractController
      * @Route("/{id}", methods={"DELETE"}, name="delete")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function delete(Lend $lend): JsonResponse
+    public function delete(Lending $lending): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($lend);
+        $em->remove($lending);
         $em->flush();
 
         return $this->json([

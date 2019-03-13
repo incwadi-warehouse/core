@@ -68,7 +68,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lend);
+        $this->assertFalse($request->lending);
 
         $id = $request->id;
 
@@ -97,7 +97,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lend);
+        $this->assertFalse($request->lending);
 
         // show
         $request = $this->request('/book/' . $id, 'GET');
@@ -115,7 +115,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lend);
+        $this->assertFalse($request->lending);
 
         // find
         $request = $this->request('/book/find', 'GET', [
@@ -131,7 +131,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);
         $this->assertEquals('authors', $request->books[0]->author);
-        if ($request->books[0]->genre !== null) {
+        if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
             $this->assertEquals('name', $request->books->genre->name);
         }
@@ -140,7 +140,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->books[0]->yearOfPublication);
         $this->assertEquals('paperback', $request->books[0]->type);
         $this->assertFalse($request->books[0]->premium);
-        $this->assertFalse($request->books[0]->lend);
+        $this->assertFalse($request->books[0]->lending);
 
         // delete
         $request = $this->request('/book/' . $id, 'DELETE');

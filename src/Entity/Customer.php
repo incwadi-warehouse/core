@@ -36,14 +36,14 @@ class Customer implements \JsonSerializable
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Lend", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Lending", mappedBy="customer")
      */
-    private $lends;
+    private $lendings;
 
 
     public function __construct()
     {
-        $this->lends = new ArrayCollection();
+        $this->lendings = new ArrayCollection();
     }
 
     public function jsonSerialize()
@@ -52,7 +52,7 @@ class Customer implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'notes' => $this->getNotes(),
-            'lends' => count($this->getLends())
+            'lendings' => count($this->getLendings())
         ];
     }
 
@@ -86,29 +86,29 @@ class Customer implements \JsonSerializable
     }
 
     /**
-     * @return Collection|Lend[]
+     * @return Collection|Lending[]
      */
-    public function getLends(): Collection
+    public function getLendings(): Collection
     {
-        return $this->lends;
+        return $this->lendings;
     }
 
-    public function addLend(Lend $lend): self
+    public function addLending(Lending $lending): self
     {
-        if (!$this->lends->contains($lend)) {
-            $this->lends[] = $lend;
-            $lend->setCustomer($this);
+        if (!$this->lendings->contains($lending)) {
+            $this->lendings[] = $lending;
+            $lending->setCustomer($this);
         }
 
         return $this;
     }
 
-    public function removeLend(Lend $lend): self
+    public function removeLending(Lending $lending): self
     {
-        if ($this->lends->contains($lend)) {
-            $this->lends->removeElement($lend);
-            if ($lend->getCustomer() === $this) {
-                $lend->setCustomer(null);
+        if ($this->lendings->contains($lending)) {
+            $this->lendings->removeElement($lending);
+            if ($lending->getCustomer() === $this) {
+                $lending->setCustomer(null);
             }
         }
 
