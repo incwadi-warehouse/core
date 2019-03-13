@@ -267,3 +267,74 @@ Body
 Params
 
 - id - int
+
+### List customers
+
+`GET /v1/customer/`
+
+### Create customer
+
+`POST /v1/customer/new`
+
+Body
+
+- name - string
+- notes - text
+
+### Show customer
+
+`GET /v1/customer/[id]`
+
+Params
+
+id - int
+
+### Edit customer
+
+`PUT /v1/customer/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+- notes - text
+
+### Delete customer
+
+`DELETE /v1/customer/[id]`
+
+Params
+
+- id - int
+
+### List lendings
+
+`GET /v1/lending/`
+
+### Create lending
+
+`POST /v1/lending/new`
+
+Body
+
+- name - string
+- customer - customer id
+
+### Show lending
+
+`GET /v1/lending/[id]`
+
+Params
+
+id - int
+
+### Delete lending
+
+`DELETE /v1/lending/[id]`
+
+Params
+
+- id - int
