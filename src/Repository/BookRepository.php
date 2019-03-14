@@ -34,18 +34,24 @@ class BookRepository extends ServiceEntityRepository
     public function findDemanded(array $criteria, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
     {
         $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
-        $query = $this->getEntityManager()->createQuery('
-            SELECT b
-            FROM Baldeweg:Book b
-            WHERE b.stocked=:stocked
-            AND b.title LIKE :term
-            OR b.stocked=:stocked
-            AND b.author LIKE :term
-        ');
-        $query->setParameter('term', '%' . $criteria['term'] . '%');
-        $query->setParameter('stocked', $criteria['stocked']);
-        $query->setMaxResults($limit);
-        $query->setFirstResult($offset);
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('b');
+        $qb->from('Baldeweg:Book', 'b');
+        $qb->where(
+            $qb->expr()->andX(
+                $qb->expr()->eq('b.stocked', ':stocked'),
+                $qb->expr()->orX(
+                    $qb->expr()->like('b.title', ':term'),
+                    $qb->expr()->like('b.author', ':term')
+                )
+            )
+        );
+        $qb->setParameter('term', '%' . $criteria['term'] . '%');
+        $qb->setParameter('stocked', true);
+        $qb->setMaxResults($limit);
+        $qb->setFirstResult($offset);
+
+        $query = $qb->getQuery();
 
         return $query->getResult();
     }
