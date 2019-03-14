@@ -38,8 +38,11 @@ class BookController extends AbstractController
     public function find(Request $request): JsonResponse
     {
         $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-            $request->query->get('term'),
-            ($request->query->has('limit') ? $request->query->get('limit') : 20)
+            [
+                'term' => $request->query->get('term'),
+                'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true
+            ],
+            ($request->query->has('limit') ? $request->query->get('limit') : 20),
             ($request->query->has('offset') ? $request->query->get('offset') : 0)
         );
 

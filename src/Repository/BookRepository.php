@@ -31,16 +31,19 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(string $term, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
+    public function findDemanded(array $criteria, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
     {
-        $term = preg_replace('/[%\*]/', '', $term);
+        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
         $query = $this->getEntityManager()->createQuery('
             SELECT b
             FROM Baldeweg:Book b
-            WHERE b.title LIKE :term
-            OR b.author LIKE :term
+            WHERE b.stocked=:stocked
+            AND b.title LIKE :term
+            OR b.stocked=:stocked
+            AND b.author LIKE :term
         ');
-        $query->setParameter('term', '%' . $term . '%');
+        $query->setParameter('term', '%' . $criteria['term'] . '%');
+        $query->setParameter('stocked', $criteria['stocked']);
         $query->setMaxResults($limit);
         $query->setFirstResult($offset);
 
