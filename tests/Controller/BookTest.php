@@ -133,7 +133,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('authors', $request->books[0]->author);
         if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
-            $this->assertEquals('name', $request->books->genre->name);
+            $this->assertEquals('name', $request->books[0]->genre->name);
         }
         $this->assertEquals('2.00', $request->books[0]->price);
         $this->assertTrue($request->books[0]->stocked);
