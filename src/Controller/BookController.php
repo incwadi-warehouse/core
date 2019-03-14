@@ -40,7 +40,8 @@ class BookController extends AbstractController
         $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
             [
                 'term' => $request->query->get('term'),
-                'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true
+                'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true,
+                'branch' => $request->query->has('branch') ? explode(',', $request->query->get('branch')) : [$this->getUser()->getBranch()]
             ],
             ($request->query->has('limit') ? $request->query->get('limit') : 20),
             ($request->query->has('offset') ? $request->query->get('offset') : 0)
