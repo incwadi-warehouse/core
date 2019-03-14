@@ -29,7 +29,7 @@ class LendingController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(): JsonResponse
     {
@@ -40,7 +40,7 @@ class LendingController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and lending.getBook().getBranch() === user.getBranch()")
      */
     public function show(Request $request, Lending $lending): JsonResponse
     {
@@ -71,13 +71,13 @@ class LendingController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid lendinging!'
+            'msg' => 'Please enter a valid lending!'
         ]);
     }
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and lending.getBook().getBranch() === user.getBranch()")
      */
     public function delete(Lending $lending): JsonResponse
     {
