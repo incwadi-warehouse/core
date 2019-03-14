@@ -20,10 +20,6 @@ class GenreTest extends WebTestCase
 
         $this->assertInternalType('array', $request);
 
-        $this->assertTrue(isset($request[0]->id));
-        $this->assertInternalType('integer', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
-
         // new
         $request = $this->request('/genre/new', 'POST', [], [
             'name' => 'name'
