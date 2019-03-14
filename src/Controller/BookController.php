@@ -39,6 +39,7 @@ class BookController extends AbstractController
     {
         $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
             $request->query->get('term'),
+            ($request->query->has('limit') ? $request->query->get('limit') : 20)
             ($request->query->has('offset') ? $request->query->get('offset') : 0)
         );
 

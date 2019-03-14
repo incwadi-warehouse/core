@@ -23,13 +23,15 @@ class BookRepository extends ServiceEntityRepository
 {
     const LIMIT = 20;
 
+    const OFFSET = 0;
+
 
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(string $term, ?int $offset = 0)
+    public function findDemanded(string $term, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
     {
         $term = preg_replace('/[%\*]/', '', $term);
         $query = $this->getEntityManager()->createQuery('
@@ -39,7 +41,7 @@ class BookRepository extends ServiceEntityRepository
             OR b.author LIKE :term
         ');
         $query->setParameter('term', '%' . $term . '%');
-        $query->setMaxResults(self::LIMIT);
+        $query->setMaxResults($limit);
         $query->setFirstResult($offset);
 
         return $query->getResult();
