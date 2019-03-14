@@ -50,7 +50,7 @@ class BookController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
     public function show(Request $request, Book $book): JsonResponse
     {
