@@ -9,12 +9,8 @@
 
 namespace Baldeweg\Controller;
 
-use Baldeweg\Entity\Book;
 use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Genre;
 use Baldeweg\Entity\Lending;
-use Baldeweg\Form\CustomerType;
-use Baldeweg\Form\GenreType;
 use Baldeweg\Form\LendingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +38,7 @@ class LendingController extends AbstractController
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER') and lending.getBook().getBranch() === user.getBranch()")
      */
-    public function show(Request $request, Lending $lending): JsonResponse
+    public function show(Lending $lending): JsonResponse
     {
         return $this->json($lending);
     }

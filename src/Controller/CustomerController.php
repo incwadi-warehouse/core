@@ -9,11 +9,8 @@
 
 namespace Baldeweg\Controller;
 
-use Baldeweg\Entity\Book;
 use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Genre;
 use Baldeweg\Form\CustomerType;
-use Baldeweg\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,7 +37,7 @@ class CustomerController extends AbstractController
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function show(Request $request, Customer $customer): JsonResponse
+    public function show(Customer $customer): JsonResponse
     {
         return $this->json($customer);
     }

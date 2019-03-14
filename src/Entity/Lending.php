@@ -10,6 +10,7 @@
 namespace Baldeweg\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Baldeweg\Repository\LendingRepository")
@@ -37,6 +38,7 @@ class Lending implements \JsonSerializable
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $lendOn;
 

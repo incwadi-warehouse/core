@@ -11,9 +11,7 @@ namespace Baldeweg\Controller;
 
 use Baldeweg\Entity\Book;
 use Baldeweg\Entity\Branch;
-use Baldeweg\Entity\Genre;
 use Baldeweg\Form\BranchType;
-use Baldeweg\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,7 +38,7 @@ class BranchController extends AbstractController
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function show(Request $request, Branch $branch): JsonResponse
+    public function show(Branch $branch): JsonResponse
     {
         return $this->json($branch);
     }
