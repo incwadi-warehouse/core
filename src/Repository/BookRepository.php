@@ -44,13 +44,17 @@ class BookRepository extends ServiceEntityRepository
                     $qb->expr()->like('b.title', ':term'),
                     $qb->expr()->like('b.author', ':term')
                 ),
-                $this->branch($qb, $criteria['branch'])
+                $this->branch($qb, $criteria['branch']),
+                ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null)
             )
         );
         $qb->setParameter('term', '%' . $criteria['term'] . '%');
         $qb->setParameter('stocked', $criteria['stocked']);
         if (is_array($criteria['branch']) && $criteria['branch'][0] !== 'null' && $criteria['branch'][0] !== 'all') {
             $qb->setParameter('branch', $criteria['branch']);
+        }
+        if ($criteria['date']) {
+            $qb->setParameter('date', $criteria['date']);
         }
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);

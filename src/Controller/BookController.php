@@ -41,7 +41,8 @@ class BookController extends AbstractController
             [
                 'term' => $request->query->get('term'),
                 'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true,
-                'branch' => $request->query->has('branch') ? explode(',', $request->query->get('branch')) : [$this->getUser()->getBranch()]
+                'branch' => $request->query->has('branch') ? explode(',', $request->query->get('branch')) : [$this->getUser()->getBranch()],
+                'date' => $request->query->has('date') ? new \DateTime($request->query->get('date')) : null
             ],
             ($request->query->has('limit') ? $request->query->get('limit') : 20),
             ($request->query->has('offset') ? $request->query->get('offset') : 0)
