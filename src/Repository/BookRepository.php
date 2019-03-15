@@ -79,10 +79,10 @@ class BookRepository extends ServiceEntityRepository
             'title' => ['b.title', 'ASC'],
             'author' => ['b.author', 'ASC'],
             'price' => ['b.price', 'ASC'],
-            'stocked' => ['b.stocked', 'ASC'],
+            'stocked' => ['b.stocked', 'DESC'],
             'yearOfPublication' => ['b.yearOfPublication', 'ASC'],
             'type' => ['b.type', 'ASC'],
-            'premium' => ['b.premium', 'ASC']
+            'premium' => ['b.premium', 'DESC']
         ];
     }
 
