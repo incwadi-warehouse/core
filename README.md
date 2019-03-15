@@ -141,7 +141,9 @@ SetEnv DATABASE_URL mysql://db_user:db_password@127.0.0.1:3306/db_name
 
 Params
 
-- term (required) - string
+- criteria (required) - array
+- orderBy - string
+- limit - int
 - offset - int
 
 ### Create book
