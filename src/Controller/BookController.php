@@ -46,6 +46,7 @@ class BookController extends AbstractController
                 'genre' => $request->query->has('genre') ? explode(',', $request->query->get('genre')) : 'all',
                 'lending' => $request->query->has('lending') ? new \DateTime($request->query->get('lending')) : null
             ],
+            ($request->query->has('sort') ? $request->query->get('sort') : null),
             ($request->query->has('limit') ? $request->query->get('limit') : 20),
             ($request->query->has('offset') ? $request->query->get('offset') : 0)
         );

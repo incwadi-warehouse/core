@@ -31,7 +31,7 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(array $criteria, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
+    public function findDemanded(array $criteria, ?string $orderBy=null, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
     {
         $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -51,6 +51,7 @@ class BookRepository extends ServiceEntityRepository
                 $qb->expr()->lte('l.lendOn', ':lending')
             )
         );
+        $qb->orderBy($this->orderings()[$orderBy][0], $this->orderings()[$orderBy][1]);
         $qb->setParameter('term', '%' . $criteria['term'] . '%');
         $qb->setParameter('stocked', $criteria['stocked']);
         if (is_array($criteria['branch']) && $criteria['branch'][0] !== 'null' && $criteria['branch'][0] !== 'all') {
@@ -69,6 +70,20 @@ class BookRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
 
         return $query->getResult();
+    }
+
+    private function orderings() {
+        return [
+            'genre' => ['b.genre', 'ASC'],
+            'added' => ['b.added', 'ASC'],
+            'title' => ['b.title', 'ASC'],
+            'author' => ['b.author', 'ASC'],
+            'price' => ['b.price', 'ASC'],
+            'stocked' => ['b.stocked', 'ASC'],
+            'yearOfPublication' => ['b.yearOfPublication', 'ASC'],
+            'type' => ['b.type', 'ASC'],
+            'premium' => ['b.premium', 'ASC']
+        ];
     }
 
     private function branch($qb, $branch) {
