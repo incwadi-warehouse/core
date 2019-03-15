@@ -45,7 +45,8 @@ class BookRepository extends ServiceEntityRepository
                     $qb->expr()->like('b.author', ':term')
                 ),
                 $this->branch($qb, $criteria['branch']),
-                ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null)
+                ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null),
+                $this->genre($qb, $criteria['genre'])
             )
         );
         $qb->setParameter('term', '%' . $criteria['term'] . '%');
@@ -55,6 +56,9 @@ class BookRepository extends ServiceEntityRepository
         }
         if ($criteria['date']) {
             $qb->setParameter('date', $criteria['date']);
+        }
+        if (is_array($criteria['genre']) && $criteria['genre'][0] !== 'null' && $criteria['genre'][0] !== 'all') {
+            $qb->setParameter('genre', $criteria['genre']);
         }
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
@@ -73,6 +77,20 @@ class BookRepository extends ServiceEntityRepository
         }
         if (is_array($branch)) {
             return $qb->expr()->in('b.branch', ':branch');
+        }
+
+        return;
+    }
+
+    private function genre($qb, $genre) {
+        if ($genre[0] === 'null') {
+            return $qb->expr()->isNull('b.genre');
+        }
+        if ($genre[0] === 'all') {
+            return;
+        }
+        if (is_array($genre)) {
+            return $qb->expr()->in('b.genre', ':genre');
         }
 
         return;
