@@ -43,7 +43,8 @@ class BookController extends AbstractController
                 'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true,
                 'branch' => $request->query->has('branch') ? explode(',', $request->query->get('branch')) : [$this->getUser()->getBranch()],
                 'date' => $request->query->has('date') ? new \DateTime($request->query->get('date')) : null,
-                'genre' => $request->query->has('genre') ? explode(',', $request->query->get('genre')) : 'all'
+                'genre' => $request->query->has('genre') ? explode(',', $request->query->get('genre')) : 'all',
+                'lending' => $request->query->has('lending') ? new \DateTime($request->query->get('lending')) : null
             ],
             ($request->query->has('limit') ? $request->query->get('limit') : 20),
             ($request->query->has('offset') ? $request->query->get('offset') : 0)

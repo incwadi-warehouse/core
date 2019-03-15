@@ -37,6 +37,7 @@ class BookRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('b');
         $qb->from('Baldeweg:Book', 'b');
+        $qb->leftJoin('b.lending', 'l');
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->eq('b.stocked', ':stocked'),
@@ -46,7 +47,8 @@ class BookRepository extends ServiceEntityRepository
                 ),
                 $this->branch($qb, $criteria['branch']),
                 ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null),
-                $this->genre($qb, $criteria['genre'])
+                $this->genre($qb, $criteria['genre']),
+                $qb->expr()->lte('l.lendOn', ':lending')
             )
         );
         $qb->setParameter('term', '%' . $criteria['term'] . '%');
@@ -60,6 +62,7 @@ class BookRepository extends ServiceEntityRepository
         if (is_array($criteria['genre']) && $criteria['genre'][0] !== 'null' && $criteria['genre'][0] !== 'all') {
             $qb->setParameter('genre', $criteria['genre']);
         }
+        $qb->setParameter('lending', $criteria['lending']); // entering a date in the future results in an error
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
