@@ -31,27 +31,32 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(array $criteria, ?string $orderBy=null, ?int $limit = self::LIMIT, ?int $offset = self::OFFSET)
+    public function findDemanded(array $criteria, string $orderBy='default', int $limit = self::LIMIT, int $offset = self::OFFSET)
     {
         $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
+
         $qb = $this->getEntityManager()->createQueryBuilder();
+
         $qb->select('b');
         $qb->from('Baldeweg:Book', 'b');
-        $qb->leftJoin('b.lending', 'l');
+
+        if ($criteria['lending']) {
+            $qb->leftJoin('b.lending', 'l');
+        }
+
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->eq('b.stocked', ':stocked'),
-                $qb->expr()->orX(
-                    $qb->expr()->like('b.title', ':term'),
-                    $qb->expr()->like('b.author', ':term')
-                ),
+                $this->term($qb, $criteria['term']),
                 $this->branch($qb, $criteria['branch']),
                 ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null),
                 $this->genre($qb, $criteria['genre']),
-                $qb->expr()->lte('l.lendOn', ':lending')
+                $this->lending($qb, $criteria['lending'])
             )
         );
+
         $qb->orderBy($this->orderings()[$orderBy][0], $this->orderings()[$orderBy][1]);
+
         $qb->setParameter('term', '%' . $criteria['term'] . '%');
         $qb->setParameter('stocked', $criteria['stocked']);
         if (is_array($criteria['branch']) && $criteria['branch'][0] !== 'null' && $criteria['branch'][0] !== 'all') {
@@ -63,7 +68,9 @@ class BookRepository extends ServiceEntityRepository
         if (is_array($criteria['genre']) && $criteria['genre'][0] !== 'null' && $criteria['genre'][0] !== 'all') {
             $qb->setParameter('genre', $criteria['genre']);
         }
-        $qb->setParameter('lending', $criteria['lending']); // entering a date in the future results in an error
+        if ($criteria['lending']) {
+            $qb->setParameter('lending', $criteria['lending']); // entering a date in the future, results in an error
+        }
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
@@ -74,6 +81,7 @@ class BookRepository extends ServiceEntityRepository
 
     private function orderings() {
         return [
+            'default' => ['b.id', 'ASC'],
             'genre' => ['b.genre', 'ASC'],
             'added' => ['b.added', 'ASC'],
             'title' => ['b.title', 'ASC'],
@@ -84,6 +92,17 @@ class BookRepository extends ServiceEntityRepository
             'type' => ['b.type', 'ASC'],
             'premium' => ['b.premium', 'DESC']
         ];
+    }
+
+    private function term($qb, $term) {
+        if ($term) {
+            return $qb->expr()->orX(
+                $qb->expr()->like('b.title', ':term'),
+                $qb->expr()->like('b.author', ':term')
+            );
+        }
+
+        return;
     }
 
     private function branch($qb, $branch) {
@@ -109,6 +128,14 @@ class BookRepository extends ServiceEntityRepository
         }
         if (is_array($genre)) {
             return $qb->expr()->in('b.genre', ':genre');
+        }
+
+        return;
+    }
+
+    private function lending($qb, $lending) {
+        if ($lending) {
+            return $qb->expr()->lte('l.lendOn', ':lending');
         }
 
         return;
