@@ -122,7 +122,7 @@ class User implements UserInterface
         return $this->branch;
     }
 
-    public function setBranch(Branch $branch): self
+    public function setBranch(?Branch $branch): self
     {
         $this->branch = $branch;
 
