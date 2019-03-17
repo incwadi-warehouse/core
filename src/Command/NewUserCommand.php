@@ -60,6 +60,7 @@ class NewUserCommand extends Command
         $user->setRoles([
             $input->getArgument('role') ?: 'ROLE_USER'
         ]);
+        $user->setBranch(null);
 
         $this->em->persist($user);
         $this->em->flush();
