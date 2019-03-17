@@ -101,6 +101,7 @@ class Book implements \JsonSerializable
 
     public function __construct()
     {
+        $this->added = new \DateTime();
         $yearOfPublication = new \DateTime();
         $this->yearOfPublication = $yearOfPublication->format('Y');
     }

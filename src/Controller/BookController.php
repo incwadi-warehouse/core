@@ -76,7 +76,6 @@ class BookController extends AbstractController
         $book->setBranch(
             $this->getUser()->getBranch()
         );
-        $book->setAdded(new \DateTime());
         $form = $this->createForm(BookType::class, $book);
 
         $form->submit(
