@@ -41,8 +41,8 @@ class BookController extends AbstractController
             [
                 'term' => $request->query->get('term', null),
                 'stocked' => $request->query->get('stocked', true),
-                'branch' => $request->query->get('branch', [$this->getUser()->getBranch()]),
-                'date' => $request->query->get('date', null),
+                'branch' => $request->query->get('branch', $this->getUser()->getBranch()),
+                'added' => $request->query->get('added', null),
                 'genre' => $request->query->get('genre', 'any'),
                 'lending' => $request->query->get('lending', null)
             ],

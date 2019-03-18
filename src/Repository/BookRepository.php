@@ -31,10 +31,12 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(array $criteria, string $orderBy='default', int $limit = self::LIMIT, int $offset = self::OFFSET)
-    {
-        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
-
+    public function findDemanded(
+        array $criteria,
+        string $orderBy='default',
+        int $limit = self::LIMIT,
+        int $offset = self::OFFSET
+    ): array {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('b');
@@ -47,21 +49,22 @@ class BookRepository extends ServiceEntityRepository
                 $qb->expr()->eq('b.stocked', ':stocked'),
                 $this->term($qb, $criteria['term']),
                 $this->branch($qb, $criteria['branch']),
-                $this->added($qb, $criteria['date']),
+                $this->added($qb, $criteria['added']),
                 $this->genre($qb, $criteria['genre']),
                 $this->lending($qb, $criteria['lending'])
-            )
-        );
+                )
+            );
 
         $qb->orderBy($this->orderings()[$orderBy][0], $this->orderings()[$orderBy][1]);
 
+        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
         $criteria['term'] ? $qb->setParameter('term', '%' . $criteria['term'] . '%') : null;
         $qb->setParameter('stocked', array_key_exists($criteria['stocked']) ? $criteria['stocked'] : true);
         if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
             $qb->setParameter('branch', explode(',', trim($criteria['branch'])));
         }
-        if ($criteria['date']) {
-            $qb->setParameter('date', new \DateTime('@' . $criteria['date']));
+        if ($criteria['added']) {
+            $qb->setParameter('added', new \DateTime('@' . $criteria['added']));
         }
         if ($criteria['genre'] !== 'none' && $criteria['genre'] !== 'any') {
             $qb->setParameter('genre', explode(',', trim($criteria['genre'])));
@@ -75,28 +78,6 @@ class BookRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
 
         return $query->getResult();
-    }
-
-    private function orderings() {
-        return [
-            'default' => ['b.id', 'ASC'],
-            'genre_asc' => ['b.genre', 'ASC'],
-            'genre_desc' => ['b.genre', 'DESC'],
-            'added_asc' => ['b.added', 'ASC'],
-            'added_desc' => ['b.added', 'DESC'],
-            'title_asc' => ['b.title', 'ASC'],
-            'title_desc' => ['b.title', 'DESC'],
-            'author_asc' => ['b.author', 'ASC'],
-            'author_desc' => ['b.author', 'DESC'],
-            'price_asc' => ['b.price', 'ASC'],
-            'price_desc' => ['b.price', 'DESC'],
-            'yearOfPublication_asc' => ['b.yearOfPublication', 'ASC'],
-            'yearOfPublication_desc' => ['b.yearOfPublication', 'DESC'],
-            'type_asc' => ['b.type', 'ASC'],
-            'type_desc' => ['b.type', 'DESC'],
-            'premium_asc' => ['b.premium', 'ASC'],
-            'premium_desc' => ['b.premium', 'DESC']
-        ];
     }
 
     private function term($qb, $term) {
@@ -142,5 +123,27 @@ class BookRepository extends ServiceEntityRepository
 
     private function added($qb, $date) {
         return $date !== null ? $qb->expr()->lte('b.added', ':date') : null;
+    }
+
+    private function orderings() {
+        return [
+            'default' => ['b.id', 'ASC'],
+            'genre_asc' => ['b.genre', 'ASC'],
+            'genre_desc' => ['b.genre', 'DESC'],
+            'added_asc' => ['b.added', 'ASC'],
+            'added_desc' => ['b.added', 'DESC'],
+            'title_asc' => ['b.title', 'ASC'],
+            'title_desc' => ['b.title', 'DESC'],
+            'author_asc' => ['b.author', 'ASC'],
+            'author_desc' => ['b.author', 'DESC'],
+            'price_asc' => ['b.price', 'ASC'],
+            'price_desc' => ['b.price', 'DESC'],
+            'yearOfPublication_asc' => ['b.yearOfPublication', 'ASC'],
+            'yearOfPublication_desc' => ['b.yearOfPublication', 'DESC'],
+            'type_asc' => ['b.type', 'ASC'],
+            'type_desc' => ['b.type', 'DESC'],
+            'premium_asc' => ['b.premium', 'ASC'],
+            'premium_desc' => ['b.premium', 'DESC']
+        ];
     }
 }
