@@ -33,6 +33,7 @@ class CoreController extends AbstractController
     public function me(): JsonResponse
     {
         $user = $this->getUser();
+
         return $this->json([
             'id' => $user->getId(),
             'username' => $user->getUsername(),
