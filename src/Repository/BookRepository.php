@@ -82,15 +82,22 @@ class BookRepository extends ServiceEntityRepository
     private function orderings() {
         return [
             'default' => ['b.id', 'ASC'],
-            'genre' => ['b.genre', 'ASC'],
-            'added' => ['b.added', 'ASC'],
-            'title' => ['b.title', 'ASC'],
-            'author' => ['b.author', 'ASC'],
-            'price' => ['b.price', 'ASC'],
-            'stocked' => ['b.stocked', 'DESC'],
-            'yearOfPublication' => ['b.yearOfPublication', 'ASC'],
-            'type' => ['b.type', 'ASC'],
-            'premium' => ['b.premium', 'DESC']
+            'genre_asc' => ['b.genre', 'ASC'],
+            'genre_desc' => ['b.genre', 'DESC'],
+            'added_asc' => ['b.added', 'ASC'],
+            'added_desc' => ['b.added', 'DESC'],
+            'title_asc' => ['b.title', 'ASC'],
+            'title_desc' => ['b.title', 'DESC'],
+            'author_asc' => ['b.author', 'ASC'],
+            'author_desc' => ['b.author', 'DESC'],
+            'price_asc' => ['b.price', 'ASC'],
+            'price_desc' => ['b.price', 'DESC'],
+            'yearOfPublication_asc' => ['b.yearOfPublication', 'ASC'],
+            'yearOfPublication_desc' => ['b.yearOfPublication', 'DESC'],
+            'type_asc' => ['b.type', 'ASC'],
+            'type_desc' => ['b.type', 'DESC'],
+            'premium_asc' => ['b.premium', 'ASC'],
+            'premium_desc' => ['b.premium', 'DESC']
         ];
     }
 
