@@ -39,16 +39,16 @@ class BookController extends AbstractController
     {
         $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
             [
-                'term' => $request->query->get('term'),
-                'stocked' => $request->query->has('stocked') ? $request->query->get('stocked') : true,
-                'branch' => $request->query->has('branch') ? explode(',', $request->query->get('branch')) : [$this->getUser()->getBranch()],
-                'date' => $request->query->has('date') ? new \DateTime($request->query->get('date')) : null,
-                'genre' => $request->query->has('genre') ? explode(',', $request->query->get('genre')) : 'all',
-                'lending' => $request->query->has('lending') ? new \DateTime($request->query->get('lending')) : null
+                'term' => $request->query->get('term', null),
+                'stocked' => $request->query->get('stocked', true),
+                'branch' => $request->query->get('branch', [$this->getUser()->getBranch()]),
+                'date' => $request->query->get('date', null),
+                'genre' => $request->query->get('genre', 'any'),
+                'lending' => $request->query->get('lending', null)
             ],
-            ($request->query->has('sort') ? $request->query->get('sort') : 'default'),
-            ($request->query->has('limit') ? $request->query->get('limit') : 20),
-            ($request->query->has('offset') ? $request->query->get('offset') : 0)
+            $request->query->get('sort', 'default'),
+            $request->query->get('limit', 20),
+            $request->query->get('offset', 0)
         );
 
         return $this->json([

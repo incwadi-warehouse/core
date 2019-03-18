@@ -40,16 +40,14 @@ class BookRepository extends ServiceEntityRepository
         $qb->select('b');
         $qb->from('Baldeweg:Book', 'b');
 
-        if ($criteria['lending']) {
-            $qb->leftJoin('b.lending', 'l');
-        }
+        $criteria['lending'] ? $qb->leftJoin('b.lending', 'l') : null;
 
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->eq('b.stocked', ':stocked'),
                 $this->term($qb, $criteria['term']),
                 $this->branch($qb, $criteria['branch']),
-                ($criteria['date'] !== null ? $qb->expr()->lte('b.added', ':date') : null),
+                $this->added($qb, $criteria['date']),
                 $this->genre($qb, $criteria['genre']),
                 $this->lending($qb, $criteria['lending'])
             )
@@ -57,19 +55,19 @@ class BookRepository extends ServiceEntityRepository
 
         $qb->orderBy($this->orderings()[$orderBy][0], $this->orderings()[$orderBy][1]);
 
-        $qb->setParameter('term', '%' . $criteria['term'] . '%');
-        $qb->setParameter('stocked', $criteria['stocked']);
-        if (is_array($criteria['branch']) && $criteria['branch'][0] !== 'null' && $criteria['branch'][0] !== 'all') {
-            $qb->setParameter('branch', $criteria['branch']);
+        $criteria['term'] ? $qb->setParameter('term', '%' . $criteria['term'] . '%') : null;
+        $qb->setParameter('stocked', array_key_exists($criteria['stocked']) ? $criteria['stocked'] : true);
+        if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
+            $qb->setParameter('branch', explode(',', trim($criteria['branch'])));
         }
         if ($criteria['date']) {
-            $qb->setParameter('date', $criteria['date']);
+            $qb->setParameter('date', new \DateTime('@' . $criteria['date']));
         }
-        if (is_array($criteria['genre']) && $criteria['genre'][0] !== 'null' && $criteria['genre'][0] !== 'all') {
-            $qb->setParameter('genre', $criteria['genre']);
+        if ($criteria['genre'] !== 'none' && $criteria['genre'] !== 'any') {
+            $qb->setParameter('genre', explode(',', trim($criteria['genre'])));
         }
         if ($criteria['lending']) {
-            $qb->setParameter('lending', $criteria['lending']); // entering a date in the future, results in an error
+            $qb->setParameter('lending', new \DateTime('@', $criteria['lending']));
         }
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
@@ -113,31 +111,25 @@ class BookRepository extends ServiceEntityRepository
     }
 
     private function branch($qb, $branch) {
-        if ($branch[0] === 'null') {
+        if ($branch === 'none') {
             return $qb->expr()->isNull('b.branch');
         }
-        if ($branch[0] === 'all') {
-            return;
-        }
-        if (is_array($branch)) {
-            return $qb->expr()->in('b.branch', ':branch');
+        if ($branch === 'any') {
+            return $qb->expr()->isNotNull('b.branch');
         }
 
-        return;
+        return $qb->expr()->in('b.branch', ':branch');
     }
 
     private function genre($qb, $genre) {
-        if ($genre[0] === 'null') {
+        if ($genre === 'none') {
             return $qb->expr()->isNull('b.genre');
         }
-        if ($genre[0] === 'all') {
-            return;
-        }
-        if (is_array($genre)) {
-            return $qb->expr()->in('b.genre', ':genre');
+        if ($genre === 'any') {
+            return $qb->expr()->isNotNull('b.genre');
         }
 
-        return;
+        return $qb->expr()->in('b.genre', ':genre');
     }
 
     private function lending($qb, $lending) {
@@ -146,5 +138,9 @@ class BookRepository extends ServiceEntityRepository
         }
 
         return;
+    }
+
+    private function added($qb, $date) {
+        return $date !== null ? $qb->expr()->lte('b.added', ':date') : null;
     }
 }
