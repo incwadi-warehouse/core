@@ -80,7 +80,8 @@ class BookRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    private function term($qb, $term) {
+    private function term($qb, $term)
+    {
         if ($term) {
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
@@ -91,7 +92,8 @@ class BookRepository extends ServiceEntityRepository
         return;
     }
 
-    private function branch($qb, $branch) {
+    private function branch($qb, $branch)
+    {
         if ($branch === 'none') {
             return $qb->expr()->isNull('b.branch');
         }
@@ -102,7 +104,8 @@ class BookRepository extends ServiceEntityRepository
         return $qb->expr()->in('b.branch', ':branch');
     }
 
-    private function genre($qb, $genre) {
+    private function genre($qb, $genre)
+    {
         if ($genre === 'none') {
             return $qb->expr()->isNull('b.genre');
         }
@@ -113,7 +116,8 @@ class BookRepository extends ServiceEntityRepository
         return $qb->expr()->in('b.genre', ':genre');
     }
 
-    private function lending($qb, $lending) {
+    private function lending($qb, $lending)
+    {
         if ($lending) {
             return $qb->expr()->lte('l.lendOn', ':lending');
         }
@@ -121,11 +125,13 @@ class BookRepository extends ServiceEntityRepository
         return;
     }
 
-    private function added($qb, $date) {
+    private function added($qb, $date)
+    {
         return $date !== null ? $qb->expr()->lte('b.added', ':date') : null;
     }
 
-    private function orderings() {
+    private function orderings()
+    {
         return [
             'default' => ['b.id', 'ASC'],
             'genre_asc' => ['b.genre', 'ASC'],
