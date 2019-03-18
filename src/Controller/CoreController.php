@@ -25,4 +25,19 @@ class CoreController extends AbstractController
     {
         return $this->json([]);
     }
+
+    /**
+     * @Route("/v1/me", methods={"GET"}, name="me")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function me(): JsonResponse
+    {
+        $user = $this->getUser();
+        return $this->json([
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'roles' => $user->getRoles(),
+            'branch' => $user->getBranch()
+        ]);
+    }
 }
