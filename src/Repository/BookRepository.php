@@ -11,8 +11,8 @@ namespace Baldeweg\Repository;
 
 use Baldeweg\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
