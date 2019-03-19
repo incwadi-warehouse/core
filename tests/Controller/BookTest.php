@@ -57,7 +57,11 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        $this->assertNull($request->branch);
+        if ($request->branch)
+        {
+            $this->assertInternalType('int', $request->branch->id);
+            $this->assertInternalType('string', $request->branch->name);
+        }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
@@ -86,7 +90,11 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        $this->assertNull($request->branch);
+        if ($request->branch)
+        {
+            $this->assertInternalType('int', $request->branch->id);
+            $this->assertInternalType('string', $request->branch->name);
+        }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
@@ -104,7 +112,11 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        $this->assertNull($request->branch);
+        if ($request->branch)
+        {
+            $this->assertInternalType('int', $request->branch->id);
+            $this->assertInternalType('string', $request->branch->name);
+        }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('authors', $request->author);
@@ -126,7 +138,11 @@ class BookTest extends WebTestCase
         $this->assertInternalType('int', $request->counter);
         $this->assertInternalType('array', $request->books);
         $this->assertTrue(isset($request->books[0]->id));
-        $this->assertNull($request->books[0]->branch);
+        if ($request->books[0]->branch)
+        {
+            $this->assertInternalType('int', $request->books[0]->branch->id);
+            $this->assertInternalType('string', $request->books[0]->branch->name);
+        }
         $this->assertInternalType('integer', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);

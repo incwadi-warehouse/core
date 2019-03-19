@@ -38,7 +38,7 @@ class BookType extends AbstractType
                     return (string)$date->getTimestamp();
                 },
                 function ($date) {
-                    return new \DateTime('@' . $date);
+                    return $date ? new \DateTime('@' . $date) : new \DateTime();
                 }
             ))
         ;
