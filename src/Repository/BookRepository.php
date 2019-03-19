@@ -12,6 +12,7 @@ namespace Baldeweg\Repository;
 use Baldeweg\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -55,23 +56,9 @@ class BookRepository extends ServiceEntityRepository
                 )
             );
 
-        $qb->orderBy($this->orderings()[$orderBy][0], $this->orderings()[$orderBy][1]);
+        $qb->orderBy($this->orderings()[$orderBy]['field'], $this->orderings()[$orderBy]['direction']);
 
-        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
-        $criteria['term'] ? $qb->setParameter('term', '%' . $criteria['term'] . '%') : null;
-        $qb->setParameter('stocked', array_key_exists($criteria['stocked']) ? $criteria['stocked'] : true);
-        if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
-            $qb->setParameter('branch', explode(',', trim($criteria['branch'])));
-        }
-        if ($criteria['added']) {
-            $qb->setParameter('added', new \DateTime('@' . $criteria['added']));
-        }
-        if ($criteria['genre'] !== 'none' && $criteria['genre'] !== 'any') {
-            $qb->setParameter('genre', explode(',', trim($criteria['genre'])));
-        }
-        if ($criteria['lending']) {
-            $qb->setParameter('lending', new \DateTime('@', $criteria['lending']));
-        }
+        $this->setParams($qb, $criteria);
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
@@ -80,7 +67,48 @@ class BookRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    private function term($qb, $term)
+    private function setParams(QueryBuilder $qb, array $criteria)
+    {
+        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
+        if ($criteria['term']) {
+            $qb->setParameter('term', '%' . $criteria['term'] . '%');
+        }
+
+        $qb->setParameter(
+            'stocked',
+            array_key_exists('stocked', $criteria) ? $criteria['stocked'] : true
+        );
+
+        if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
+            $qb->setParameter(
+                'branch',
+                explode(',', trim($criteria['branch']))
+            );
+        }
+
+        if ($criteria['genre'] !== 'none' && $criteria['genre'] !== 'any') {
+            $qb->setParameter(
+                'genre',
+                explode(',', trim($criteria['genre']))
+            );
+        }
+
+        if ($criteria['lending']) {
+            $qb->setParameter(
+                'lending',
+                new \DateTime('@' . $criteria['lending'])
+            );
+        }
+
+        if ($criteria['added']) {
+            $qb->setParameter(
+                'added',
+                new \DateTime('@' . $criteria['added'])
+            );
+        }
+    }
+
+    private function term(QueryBuilder $qb, ?string $term)
     {
         if ($term) {
             return $qb->expr()->orX(
@@ -89,10 +117,10 @@ class BookRepository extends ServiceEntityRepository
             );
         }
 
-        return;
+        return null;
     }
 
-    private function branch($qb, $branch)
+    private function branch(QueryBuilder $qb, ?string $branch)
     {
         if ($branch === 'none') {
             return $qb->expr()->isNull('b.branch');
@@ -104,7 +132,7 @@ class BookRepository extends ServiceEntityRepository
         return $qb->expr()->in('b.branch', ':branch');
     }
 
-    private function genre($qb, $genre)
+    private function genre(QueryBuilder $qb, ?string $genre)
     {
         if ($genre === 'none') {
             return $qb->expr()->isNull('b.genre');
@@ -116,40 +144,99 @@ class BookRepository extends ServiceEntityRepository
         return $qb->expr()->in('b.genre', ':genre');
     }
 
-    private function lending($qb, $lending)
+    private function lending(QueryBuilder $qb, ?int $lending)
     {
         if ($lending) {
             return $qb->expr()->lte('l.lendOn', ':lending');
         }
 
-        return;
+        return null;
     }
 
-    private function added($qb, $date)
+    private function added(QueryBuilder $qb, ?int $added)
     {
-        return $date !== null ? $qb->expr()->lte('b.added', ':date') : null;
+        if ($added) {
+            return $qb->expr()->lte('b.added', ':added');
+        }
+
+        return null;
     }
 
-    private function orderings()
+    private function orderings(): array
     {
         return [
-            'default' => ['b.id', 'ASC'],
-            'genre_asc' => ['b.genre', 'ASC'],
-            'genre_desc' => ['b.genre', 'DESC'],
-            'added_asc' => ['b.added', 'ASC'],
-            'added_desc' => ['b.added', 'DESC'],
-            'title_asc' => ['b.title', 'ASC'],
-            'title_desc' => ['b.title', 'DESC'],
-            'author_asc' => ['b.author', 'ASC'],
-            'author_desc' => ['b.author', 'DESC'],
-            'price_asc' => ['b.price', 'ASC'],
-            'price_desc' => ['b.price', 'DESC'],
-            'yearOfPublication_asc' => ['b.yearOfPublication', 'ASC'],
-            'yearOfPublication_desc' => ['b.yearOfPublication', 'DESC'],
-            'type_asc' => ['b.type', 'ASC'],
-            'type_desc' => ['b.type', 'DESC'],
-            'premium_asc' => ['b.premium', 'ASC'],
-            'premium_desc' => ['b.premium', 'DESC']
+            'asc' => [
+                'field' => 'b.id',
+                'direction' => 'ASC'
+            ],
+            'desc' => [
+                'field' => 'b.id',
+                'direction' => 'DESC'
+            ],
+            'genre_asc' => [
+                'field' => 'b.genre',
+                'direction' => 'ASC'
+            ],
+            'genre_desc' => [
+                'field' => 'b.genre',
+                'direction' => 'DESC'
+            ],
+            'added_asc' => [
+                'field' => 'b.added',
+                'direction' => 'ASC'
+            ],
+            'added_desc' => [
+                'field' => 'b.added',
+                'direction' => 'DESC'
+            ],
+            'title_asc' => [
+                'field' => 'b.title',
+                'direction' => 'ASC'
+            ],
+            'title_desc' => [
+                'field' => 'b.title',
+                'direction' => 'DESC'
+            ],
+            'author_asc' => [
+                'field' => 'b.author',
+                'direction' => 'ASC'
+            ],
+            'author_desc' => [
+                'field' => 'b.author',
+                'direction' => 'DESC'
+            ],
+            'price_asc' => [
+                'field' => 'b.price',
+                'direction' => 'ASC'
+            ],
+            'price_desc' => [
+                'field' => 'b.price',
+                'direction' => 'DESC'
+            ],
+            'yearOfPublication_asc' => [
+                'field' => 'b.yearOfPublication',
+                'direction' => 'ASC'
+            ],
+            'yearOfPublication_desc' => [
+                'field' => 'b.yearOfPublication',
+                'direction' => 'DESC'
+            ],
+            'type_asc' => [
+                'field' => 'b.type',
+                'direction' => 'ASC'
+            ],
+            'type_desc' => [
+                'field' => 'b.type',
+                'direction' => 'DESC'
+            ],
+            'premium_asc' => [
+                'field' => 'b.premium',
+                'direction' => 'ASC'
+            ],
+            'premium_desc' => [
+                'field' => 'b.premium',
+                'direction' => 'DESC'
+            ]
         ];
     }
 }
