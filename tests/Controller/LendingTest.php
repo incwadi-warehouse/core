@@ -47,7 +47,10 @@ class LendingTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        $this->assertNull($request->branch);
+        if ($request->branch) {
+            $this->assertInternalType('int', $request->branch->id);
+            $this->assertInternalType('string', $request->branch->name);
+        }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('author', $request->author);
