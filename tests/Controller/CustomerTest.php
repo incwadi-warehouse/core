@@ -15,17 +15,6 @@ class CustomerTest extends WebTestCase
 {
     public function testScenario()
     {
-        // list
-        $request = $this->request('/customer/', 'GET');
-
-        $this->assertInternalType('array', $request);
-        $this->assertInternalType('int', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
-        if ($request[0]->notes) {
-            $this->assertInternalType('string', $request[0]->notes);
-        }
-        $this->assertInternalType('int', $request[0]->lendings);
-
         // new
         $request = $this->request('/customer/new', 'POST', [], [
             'name' => 'name',
@@ -38,6 +27,17 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('int', $request->lendings);
 
         $id = $request->id;
+
+        // list
+        $request = $this->request('/customer/', 'GET');
+
+        $this->assertInternalType('array', $request);
+        $this->assertInternalType('int', $request[0]->id);
+        $this->assertInternalType('string', $request[0]->name);
+        if ($request[0]->notes) {
+            $this->assertInternalType('string', $request[0]->notes);
+        }
+        $this->assertInternalType('int', $request[0]->lendings);
 
         // edit
         $request = $this->request('/customer/' . $id, 'PUT', [], [

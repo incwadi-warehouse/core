@@ -50,7 +50,7 @@ class NewBranchCommand extends Command
         $this->em->persist($branch);
         $this->em->flush();
 
-        $io->success('Branch "' . $branch->getName() . '" successfully created!');
+        $io->success('Branch "' . $branch->getName() . '" with id ' . $branch->getId() . ' successfully created!');
 
         return null;
     }

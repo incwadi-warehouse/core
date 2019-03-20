@@ -42,10 +42,16 @@ bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 ```
 
-Create your first user
+It's recommended to have at least one branch. Create it with the following command. Replace [NAME] with your desired name of the branch. For more about branches read the section "Branches".
 
 ```shell
-bin/console user:new [NAME] ROLE_ADMIN
+bin/console branch:new [NAME]
+```
+
+Create your first user. Replace [BRANCH] with the id, that was returned in the previous command.
+
+```shell
+bin/console user:new [NAME] ROLE_ADMIN [BRANCH]
 ```
 
 Replace NAME and PASSWORD with your desired data.
