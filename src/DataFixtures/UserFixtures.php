@@ -10,6 +10,7 @@
 namespace Baldeweg\DataFixtures;
 
 use Baldeweg\Entity\User;
+use Baldeweg\Entity\Branch;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -29,6 +30,10 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $branch = new Branch();
+        $branch->setName('test');
+        $manager->persist($branch);
+
         $user = new User();
         $user->setUsername('admin');
         $user->setRoles(['ROLE_ADMIN']);
@@ -38,6 +43,7 @@ class UserFixtures extends Fixture
                 'password'
             )
         );
+        $user->setBranch($branch);
         $manager->persist($user);
 
         $manager->flush();

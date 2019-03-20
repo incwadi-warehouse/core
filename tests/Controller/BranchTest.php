@@ -24,16 +24,7 @@ class BranchTest extends WebTestCase
         $this->assertInternalType('integer', $request[0]->id);
         $this->assertInternalType('string', $request[0]->name);
 
-        // new
-        $request = $this->request('/branch/new', 'POST', [], [
-            'name' => 'name'
-        ]);
-
-        $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
-        $this->assertEquals('name', $request->name);
-
-        $id = $request->id;
+        $id = $request[0]->id;
 
         // edit
         $request = $this->request('/branch/' . $id, 'PUT', [], [
@@ -50,11 +41,6 @@ class BranchTest extends WebTestCase
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
-
-        // delete
-        $request = $this->request('/branch/' . $id, 'DELETE');
-
-        $this->assertEquals('The branch was successfully deleted.', $request->msg);
     }
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])

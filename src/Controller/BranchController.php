@@ -44,36 +44,8 @@ class BranchController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function new(Request $request): JsonResponse
-    {
-        $branch = new Branch();
-        $form = $this->createForm(BranchType::class, $branch);
-
-        $form->submit(
-            json_decode(
-                $request->getContent(),
-                true
-            )
-        );
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($branch);
-            $em->flush();
-
-            return $this->json($branch);
-        }
-
-        return $this->json([
-            'msg' => 'Please enter a valid branch!'
-        ]);
-    }
-
-    /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === branch")
      */
     public function edit(Request $request, Branch $branch): JsonResponse
     {
@@ -94,29 +66,6 @@ class BranchController extends AbstractController
 
         return $this->json([
             'msg' => 'Please enter a valid branch!'
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function delete(Branch $branch): JsonResponse
-    {
-        $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findBy(
-            [
-                'branch' => $branch
-            ]
-        );
-        foreach ($books as $book) {
-            $book->setBranch(null);
-        }
-        $em->remove($branch);
-        $em->flush();
-
-        return $this->json([
-            'msg' => 'The branch was successfully deleted.'
         ]);
     }
 }
