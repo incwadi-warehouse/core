@@ -57,8 +57,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        if ($request->branch)
-        {
+        if ($request->branch) {
             $this->assertInternalType('int', $request->branch->id);
             $this->assertInternalType('string', $request->branch->name);
         }
@@ -90,8 +89,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        if ($request->branch)
-        {
+        if ($request->branch) {
             $this->assertInternalType('int', $request->branch->id);
             $this->assertInternalType('string', $request->branch->name);
         }
@@ -112,8 +110,7 @@ class BookTest extends WebTestCase
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
-        if ($request->branch)
-        {
+        if ($request->branch) {
             $this->assertInternalType('int', $request->branch->id);
             $this->assertInternalType('string', $request->branch->name);
         }
@@ -138,8 +135,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('int', $request->counter);
         $this->assertInternalType('array', $request->books);
         $this->assertTrue(isset($request->books[0]->id));
-        if ($request->books[0]->branch)
-        {
+        if ($request->books[0]->branch) {
             $this->assertInternalType('int', $request->books[0]->branch->id);
             $this->assertInternalType('string', $request->books[0]->branch->name);
         }
