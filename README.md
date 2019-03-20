@@ -56,7 +56,7 @@ bin/console user:new [NAME] ROLE_ADMIN [BRANCH]
 
 Replace NAME and PASSWORD with your desired data.
 
-For more details on how to deal with users, read the section Users Management.
+For more details on how to deal with users, read the section "Users Management".
 
 ## Dev
 
