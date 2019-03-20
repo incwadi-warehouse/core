@@ -45,10 +45,12 @@ bin/console doctrine:schema:update --force
 Create your first user
 
 ```shell
-bin/console user:new [NAME] ROLE_ADMIN [PASSWORD]
+bin/console user:new [NAME] ROLE_ADMIN
 ```
 
 Replace NAME and PASSWORD with your desired data.
+
+For more details on how to deal with users, read the section Users Management.
 
 ## Dev
 
@@ -132,6 +134,38 @@ SetEnv DATABASE_URL mysql://db_user:db_password@127.0.0.1:3306/db_name
 - bin/phpunit - Runs the PHPUnit tests
 - bin/report - Runs the PHPUnit coverage report
 - bin/lint - Checks for code standard violations and fixes them partially
+
+## Users Management
+
+Fetching a list with all users and their corresponding ID:
+
+```shell
+bin/console user:list
+```
+
+Create a new user with the role ROLE_USER. Replace [NAME] with the desired name of the user.
+
+```shell
+bin/console user:new [NAME]
+```
+
+If you want to create an admin user pass the param ROLE_ADMIN.
+
+```shell
+bin/console user:new [NAME] ROLE_ADMIN
+```
+
+You can of course delete a user. Replace [ID] with the ID of the user.
+
+```shell
+bin/console user:delete [ID]
+```
+
+If the user has forgotten the password, you can reset it with this command. Replace [ID] with the ID of the user.
+
+```shell
+bin/console user:reset-password [ID]
+```
 
 ## API
 
