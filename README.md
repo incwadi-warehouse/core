@@ -135,6 +135,22 @@ SetEnv DATABASE_URL mysql://db_user:db_password@127.0.0.1:3306/db_name
 - bin/report - Runs the PHPUnit coverage report
 - bin/lint - Checks for code standard violations and fixes them partially
 
+## Branches
+
+Branches can only be created on the command line.
+
+Find out what branches are existing and the corresponding id for a specific branch.
+
+```shell
+bin/console branch:list
+```
+
+Creating a new branch is straight forward. Replace [NAME] with your desired name.
+
+```shell
+bin/console branch:new [NAME]
+```
+
 ## Users Management
 
 Fetching a list with all users and their corresponding ID:
