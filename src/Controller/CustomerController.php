@@ -49,6 +49,9 @@ class CustomerController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $customer = new Customer();
+        $customer->setBranch(
+            $this->getUser()->getBranch()
+        );
         $form = $this->createForm(CustomerType::class, $customer);
 
         $form->submit(

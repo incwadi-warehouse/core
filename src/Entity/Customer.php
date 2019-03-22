@@ -42,6 +42,11 @@ class Customer implements \JsonSerializable
      */
     private $lendings;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
+     */
+    private $branch;
+
 
     public function __construct()
     {
@@ -54,7 +59,8 @@ class Customer implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'notes' => $this->getNotes(),
-            'lendings' => count($this->getLendings())
+            'lendings' => count($this->getLendings()),
+            'branch' => $this->getBranch()
         ];
     }
 
@@ -113,6 +119,18 @@ class Customer implements \JsonSerializable
                 $lending->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBranch(): ?Branch
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(?Branch $branch): self
+    {
+        $this->branch = $branch;
 
         return $this;
     }

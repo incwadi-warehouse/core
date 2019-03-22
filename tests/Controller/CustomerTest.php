@@ -25,6 +25,8 @@ class CustomerTest extends WebTestCase
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->lendings);
+        $this->assertInternalType('int', $request->branch->id);
+        $this->assertInternalType('string', $request->branch->name);
 
         $id = $request->id;
 
@@ -38,6 +40,10 @@ class CustomerTest extends WebTestCase
             $this->assertInternalType('string', $request[0]->notes);
         }
         $this->assertInternalType('int', $request[0]->lendings);
+        if ($request[0]->branch) {
+            $this->assertInternalType('int', $request[0]->branch->id);
+            $this->assertInternalType('string', $request[0]->branch->name);
+        }
 
         // edit
         $request = $this->request('/customer/' . $id, 'PUT', [], [
@@ -49,6 +55,8 @@ class CustomerTest extends WebTestCase
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->lendings);
+        $this->assertInternalType('int', $request->branch->id);
+        $this->assertInternalType('string', $request->branch->name);
 
         // show
         $request = $this->request('/customer/' . $id, 'GET');
@@ -57,6 +65,8 @@ class CustomerTest extends WebTestCase
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->lendings);
+        $this->assertInternalType('int', $request->branch->id);
+        $this->assertInternalType('string', $request->branch->name);
 
         // delete
         $request = $this->request('/customer/' . $id, 'DELETE');
