@@ -160,6 +160,36 @@ class BookTest extends WebTestCase
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
+    public function testDuplicate() {
+        // new
+        $request = $this->request('/book/new', 'POST', [], [
+            'title' => 'title',
+            'author' => 'author',
+            'genre' => $this->genreId,
+            'price' => '1.00',
+            'stocked' => true,
+            'yearOfPublication' => 2019,
+            'type' => 'paperback',
+            'premium' => false
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        // new
+        $request = $this->request('/book/new', 'POST', [], [
+            'title' => 'title',
+            'author' => 'author',
+            'genre' => $this->genreId,
+            'price' => '1.00',
+            'stocked' => true,
+            'yearOfPublication' => 2019,
+            'type' => 'paperback',
+            'premium' => false
+        ]);
+
+        $this->assertEquals('Book not saved, because it exists already!', $request->msg);
+    }
+
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
         $client = static::createClient([], [
