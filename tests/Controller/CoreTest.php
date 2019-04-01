@@ -49,7 +49,7 @@ class CoreTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/v1' . $url,
+            $url,
             $params,
             [],
             [],

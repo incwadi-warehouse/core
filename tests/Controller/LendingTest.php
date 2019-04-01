@@ -38,8 +38,9 @@ class LendingTest extends WebTestCase
         $this->customerId = $request->id;
 
         // new book
+        $date = new \DateTime();
         $request = $this->request('/book/new', 'POST', [], [
-            'title' => 'title',
+            'title' => 'title ' . $date->getTimestamp(),
             'author' => 'author',
             'genre' => null,
             'price' => '1.00',
@@ -56,7 +57,7 @@ class LendingTest extends WebTestCase
             $this->assertInternalType('string', $request->branch->name);
         }
         $this->assertInternalType('integer', $request->added);
-        $this->assertEquals('title', $request->title);
+        $this->assertInternalType('string', $request->title);
         $this->assertEquals('author', $request->author);
         $this->assertEquals(null, $request->genre);
         $this->assertEquals('1.00', $request->price);
