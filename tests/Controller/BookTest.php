@@ -15,9 +15,13 @@ class BookTest extends WebTestCase
 {
     protected $genreId;
 
+    protected $client;
+
 
     public function setUp()
     {
+        $this->getClient();
+
         $request = $this->request('/genre/new', 'POST', [], [
             'name' => 'name'
         ]);
@@ -190,10 +194,7 @@ class BookTest extends WebTestCase
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'password'
-        ]);
+        $client = $this->client;
 
         $crawler = $client->request(
             $method,
@@ -207,5 +208,32 @@ class BookTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
 
         return json_decode($client->getResponse()->getContent());
+    }
+
+    protected function getClient() {
+        $this->client = static::createClient();
+        $this->client->request(
+            'POST',
+            '/api/login_check',
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json'
+            ],
+            json_encode(
+                [
+                    'username' => 'admin',
+                    'password' => 'password'
+                ]
+            )
+        );
+        $data = json_decode(
+            $this->client->getResponse()->getContent(),
+            true
+        );
+        $this->client->setServerParameter(
+            'HTTP_Authorization',
+            sprintf('Bearer %s', $data['token'])
+        );
     }
 }

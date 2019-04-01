@@ -13,6 +13,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CoreTest extends WebTestCase
 {
+    protected $client;
+
+    public function setUp() {
+        $this->getClient();
+    }
+
     public function testScenario()
     {
         // index
@@ -39,14 +45,11 @@ class CoreTest extends WebTestCase
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
-        $client = static::createClient([], [
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'password'
-        ]);
+        $client = $this->client;
 
         $crawler = $client->request(
             $method,
-            $url,
+            '/v1' . $url,
             $params,
             [],
             [],
@@ -56,5 +59,32 @@ class CoreTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
 
         return json_decode($client->getResponse()->getContent());
+    }
+
+    protected function getClient() {
+        $this->client = static::createClient();
+        $this->client->request(
+            'POST',
+            '/api/login_check',
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json'
+            ],
+            json_encode(
+                [
+                    'username' => 'admin',
+                    'password' => 'password'
+                ]
+            )
+        );
+        $data = json_decode(
+            $this->client->getResponse()->getContent(),
+            true
+        );
+        $this->client->setServerParameter(
+            'HTTP_Authorization',
+            sprintf('Bearer %s', $data['token'])
+        );
     }
 }
