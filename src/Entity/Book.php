@@ -37,7 +37,6 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime(message="Please enter a date.")
      */
     private $added;
 

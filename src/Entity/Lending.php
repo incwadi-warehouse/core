@@ -38,7 +38,6 @@ class Lending implements \JsonSerializable
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime()
      */
     private $lendOn;
 
