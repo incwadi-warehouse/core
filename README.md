@@ -45,12 +45,18 @@ bin/console doctrine:schema:update --force
 To authenticate your users, you need to generate an SSH key.
 
 ```
-mkdir -p config/jwt
-openssl genrsa -out [PATH]/private.pem -aes256 4096
-openssl rsa -pubout -in [PATH]/private.pem -out [PATH]/public.pem
+mkdir -p config/jwt/
+openssl genrsa -out config/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
-Please do not use your app dir to store the keys, except you are in dev. Replace [PATH] with e.g. /home/admin.
+You also need this header for apache.
+
+```apache
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+```
+
+More info on that: https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#important-note-for-apache-users
 
 It's recommended to have at least one branch. Create it with the following command. Replace [NAME] with your desired name of the branch. For more about branches read the section "Branches".
 
