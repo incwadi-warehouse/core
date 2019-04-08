@@ -75,6 +75,7 @@ class Book implements \JsonSerializable
      * @var int
      * @ORM\Column(type="integer")
      * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
+     * @Assert\NotBlank(message="Please enter the year of publication.")
      */
     private $yearOfPublication;
 
