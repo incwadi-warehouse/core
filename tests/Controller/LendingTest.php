@@ -41,7 +41,7 @@ class LendingTest extends WebTestCase
         $date = new \DateTime();
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title ' . $date->getTimestamp(),
-            'author' => 'author',
+            'author' => 'lastname,firstname',
             'genre' => null,
             'price' => '1.00',
             'stocked' => true,
@@ -58,7 +58,8 @@ class LendingTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertInternalType('string', $request->title);
-        $this->assertEquals('author', $request->author);
+        $this->assertEquals('firstname', $request->author->firstname);
+        $this->assertEquals('lastname', $request->author->lastname);
         $this->assertEquals(null, $request->genre);
         $this->assertEquals('1.00', $request->price);
         $this->assertTrue($request->stocked);
@@ -135,7 +136,8 @@ class LendingTest extends WebTestCase
         return json_decode($client->getResponse()->getContent());
     }
 
-    protected function getClient() {
+    protected function getClient()
+    {
         $this->client = static::createClient();
         $this->client->request(
             'POST',

@@ -84,6 +84,7 @@ class BookController extends AbstractController
                 true
             )
         );
+
         $existingBook = $this->getDoctrine()->getRepository(Book::class)->findBy(
             [
                 'branch' => $book->getBranch(),

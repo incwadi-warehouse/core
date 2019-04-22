@@ -47,7 +47,7 @@ class Book implements \JsonSerializable
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Author", inversedBy="books", cascade={"persist"})
      * @Assert\NotBlank(message="Please enter an author.")
      */
     private $author;
@@ -165,12 +165,12 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
 
-    public function setAuthor(?string $author): self
+    public function setAuthor(?Author $author): self
     {
         $this->author = $author;
 

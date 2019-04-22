@@ -10,6 +10,7 @@
 namespace Baldeweg\Form;
 
 use Baldeweg\Entity\Book;
+use Baldeweg\Form\DataTransformer\AuthorToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,14 +19,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
+    private $authorToStringTransformer;
+
+
+    public function __construct(AuthorToStringTransformer $authorToStringTransformer)
+    {
+        $this->authorToStringTransformer = $authorToStringTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('added', TextType::class)
-            ->add('author')
+            ->add('title')
+            ->add('author', TextType::class)
             ->add('genre')
             ->add('price')
-            ->add('title')
             ->add('stocked')
             ->add('yearOfPublication')
             ->add('type')
@@ -42,6 +51,8 @@ class BookType extends AbstractType
                 }
             ))
         ;
+        $builder->get('author')
+            ->addModelTransformer($this->authorToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

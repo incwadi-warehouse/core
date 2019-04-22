@@ -15,7 +15,8 @@ class GenreTest extends WebTestCase
 {
     protected $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->getClient();
     }
 
@@ -73,7 +74,7 @@ class GenreTest extends WebTestCase
         // new book
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
-            'author' => 'author',
+            'author' => 'lastname,firstname',
             'genre' => $genreId,
             'price' => '1.00',
             'stocked' => true,
@@ -120,7 +121,8 @@ class GenreTest extends WebTestCase
         return json_decode($client->getResponse()->getContent());
     }
 
-    protected function getClient() {
+    protected function getClient()
+    {
         $this->client = static::createClient();
         $this->client->request(
             'POST',

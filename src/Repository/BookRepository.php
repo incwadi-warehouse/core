@@ -44,6 +44,7 @@ class BookRepository extends ServiceEntityRepository
         $qb->from('Baldeweg:Book', 'b');
 
         $criteria['lending'] ? $qb->leftJoin('b.lending', 'l') : null;
+        $qb->leftJoin('b.author', 'a');
 
         $qb->where(
             $qb->expr()->andX(
@@ -113,7 +114,8 @@ class BookRepository extends ServiceEntityRepository
         if ($term) {
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
-                $qb->expr()->like('b.author', ':term')
+                $qb->expr()->like('a.firstname', ':term'),
+                $qb->expr()->like('a.lastname', ':term')
             );
         }
 
