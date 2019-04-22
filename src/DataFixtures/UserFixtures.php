@@ -9,8 +9,8 @@
 
 namespace Baldeweg\DataFixtures;
 
-use Baldeweg\Entity\User;
 use Baldeweg\Entity\Branch;
+use Baldeweg\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

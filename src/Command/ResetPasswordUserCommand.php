@@ -9,8 +9,8 @@
 
 namespace Baldeweg\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Baldeweg\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

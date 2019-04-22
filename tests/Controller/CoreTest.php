@@ -15,7 +15,8 @@ class CoreTest extends WebTestCase
 {
     protected $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->getClient();
     }
 
@@ -61,7 +62,8 @@ class CoreTest extends WebTestCase
         return json_decode($client->getResponse()->getContent());
     }
 
-    protected function getClient() {
+    protected function getClient()
+    {
         $this->client = static::createClient();
         $this->client->request(
             'POST',
