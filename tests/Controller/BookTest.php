@@ -83,7 +83,7 @@ class BookTest extends WebTestCase
         // edit
         $request = $this->request('/book/' . $id, 'PUT', [], [
             'title' => 'book',
-            'author' => 'lastname,firstname',
+            'author' => 'lastname1,firstname1',
             'genre' => $this->genreId,
             'price' => '2.00',
             'stocked' => true,
@@ -100,8 +100,8 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
-        $this->assertEquals('firstname', $request->author->firstname);
-        $this->assertEquals('lastname', $request->author->lastname);
+        $this->assertEquals('firstname1', $request->author->firstname);
+        $this->assertEquals('lastname1', $request->author->lastname);
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
@@ -122,8 +122,8 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
-        $this->assertEquals('firstname', $request->author->firstname);
-        $this->assertEquals('lastname', $request->author->lastname);
+        $this->assertEquals('firstname1', $request->author->firstname);
+        $this->assertEquals('lastname1', $request->author->lastname);
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
@@ -149,8 +149,8 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);
-        $this->assertEquals('firstname', $request->books[0]->author->firstname);
-        $this->assertEquals('lastname', $request->books[0]->author->lastname);
+        $this->assertEquals('firstname1', $request->books[0]->author->firstname);
+        $this->assertEquals('lastname1', $request->books[0]->author->lastname);
         if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
             $this->assertEquals('name', $request->books[0]->genre->name);
