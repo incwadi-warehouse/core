@@ -200,11 +200,11 @@ class BookRepository extends ServiceEntityRepository
                 'direction' => 'DESC'
             ],
             'author_asc' => [
-                'field' => 'b.author',
+                'field' => 'a.lastname',
                 'direction' => 'ASC'
             ],
             'author_desc' => [
-                'field' => 'b.author',
+                'field' => 'a.lastname',
                 'direction' => 'DESC'
             ],
             'price_asc' => [
