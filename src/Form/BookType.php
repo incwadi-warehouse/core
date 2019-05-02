@@ -39,6 +39,8 @@ class BookType extends AbstractType
             ->add('yearOfPublication')
             ->add('type')
             ->add('premium')
+            ->add('lendTo')
+            ->add('lendOn')
         ;
 
         $builder->get('added')

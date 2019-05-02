@@ -38,9 +38,9 @@ class Customer implements \JsonSerializable
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Lending", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Book", mappedBy="lendTo")
      */
-    private $lendings;
+    private $books;
 
     /**
      * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
@@ -50,7 +50,7 @@ class Customer implements \JsonSerializable
 
     public function __construct()
     {
-        $this->lendings = new ArrayCollection();
+        $this->books = new ArrayCollection();
     }
 
     public function jsonSerialize()
@@ -59,7 +59,7 @@ class Customer implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'notes' => $this->getNotes(),
-            'lendings' => count($this->getLendings()),
+            'books' => $this->getBooks(),
             'branch' => $this->getBranch()
         ];
     }
@@ -94,29 +94,29 @@ class Customer implements \JsonSerializable
     }
 
     /**
-     * @return Collection|Lending[]
+     * @return Collection|Book[]
      */
-    public function getLendings(): Collection
+    public function getBooks(): Collection
     {
-        return $this->lendings;
+        return $this->books;
     }
 
-    public function addLending(Lending $lending): self
+    public function addBook(Book $book): self
     {
-        if (!$this->lendings->contains($lending)) {
-            $this->lendings[] = $lending;
-            $lending->setCustomer($this);
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setLendTo($this);
         }
 
         return $this;
     }
 
-    public function removeLending(Lending $lending): self
+    public function removeBook(Book $book): self
     {
-        if ($this->lendings->contains($lending)) {
-            $this->lendings->removeElement($lending);
-            if ($lending->getCustomer() === $this) {
-                $lending->setCustomer(null);
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            if ($book->getLendTo() === $this) {
+                $book->setLendTo(null);
             }
         }
 

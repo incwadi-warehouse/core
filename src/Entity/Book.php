@@ -94,9 +94,14 @@ class Book implements \JsonSerializable
     private $premium = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Lending", mappedBy="book", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="books")
      */
-    private $lending;
+    private $lendTo;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lendOn;
 
 
     public function __construct()
@@ -120,7 +125,8 @@ class Book implements \JsonSerializable
             'yearOfPublication' => $this->getYearOfPublication(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
-            'lending' => $this->getLending() ? true : false
+            'lendTo' => $this->getLendTo() ? $this->getLendTo()->getId() : null,
+            'lendOn' => $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null
         ];
     }
 
@@ -249,18 +255,26 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getLending(): ?Lending
+    public function getLendTo(): ?Customer
     {
-        return $this->lending;
+        return $this->lendTo;
     }
 
-    public function setLending(Lending $lending): self
+    public function setLendTo(?Customer $lendTo): self
     {
-        $this->lending = $lending;
+        $this->lendTo = $lendTo;
 
-        if ($this !== $lending->getBook()) {
-            $lending->setBook($this);
-        }
+        return $this;
+    }
+
+    public function getLendOn(): ?\DateTimeInterface
+    {
+        return $this->lendOn;
+    }
+
+    public function setLendOn(?\DateTimeInterface $lendOn): self
+    {
+        $this->lendOn = $lendOn;
 
         return $this;
     }
