@@ -25,13 +25,13 @@ class Lending implements \JsonSerializable
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="lendings")
+     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book", inversedBy="lending")
+     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book")
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;

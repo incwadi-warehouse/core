@@ -76,7 +76,8 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lending);
+        $this->assertNull($request->lendTo);
+        $this->assertNull($request->lendOn);
 
         $id = $request->id;
 
@@ -109,7 +110,8 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lending);
+        $this->assertNull($request->lendTo);
+        $this->assertNull($request->lendOn);
 
         // show
         $request = $this->request('/book/' . $id, 'GET');
@@ -131,7 +133,8 @@ class BookTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lending);
+        $this->assertNull($request->lendTo);
+        $this->assertNull($request->lendOn);
 
         // find
         $request = $this->request('/book/find', 'GET', [
@@ -149,18 +152,19 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);
-        $this->assertEquals('firstname1', $request->books[0]->author->firstname);
-        $this->assertEquals('lastname1', $request->books[0]->author->lastname);
+        $this->assertInternalType('string', $request->books[0]->author->firstname);
+        $this->assertInternalType('string', $request->books[0]->author->lastname);
         if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
-            $this->assertEquals('name', $request->books[0]->genre->name);
+            $this->assertInternalType('string', $request->books[0]->genre->name);
         }
         $this->assertEquals('2.00', $request->books[0]->price);
         $this->assertTrue($request->books[0]->stocked);
         $this->assertEquals(2019, $request->books[0]->yearOfPublication);
         $this->assertEquals('paperback', $request->books[0]->type);
         $this->assertFalse($request->books[0]->premium);
-        $this->assertFalse($request->books[0]->lending);
+        $this->assertNull($request->books[0]->lendTo);
+        $this->assertNull($request->books[0]->lendOn);
 
         // delete
         $request = $this->request('/book/' . $id, 'DELETE');

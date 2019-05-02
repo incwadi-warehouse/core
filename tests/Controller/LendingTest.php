@@ -33,7 +33,6 @@ class LendingTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertInternalType('int', $request->lendings);
 
         $this->customerId = $request->id;
 
@@ -66,7 +65,6 @@ class LendingTest extends WebTestCase
         $this->assertEquals(2019, $request->yearOfPublication);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
-        $this->assertFalse($request->lending);
 
         $this->bookId = $request->id;
     }
