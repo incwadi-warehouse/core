@@ -62,6 +62,7 @@ class Book implements \JsonSerializable
      * @ORM\Column(type="decimal", precision=10, scale=2)
      * @Assert\NotBlank(message="Please set a price.")
      * @Assert\Type(type="float", message="Please enter a decimal.")
+     * @Assert\GreaterThanOrEqual(0.00)
      */
     private $price;
 
