@@ -46,6 +46,9 @@ class BookType extends AbstractType
         $builder->get('added')
             ->addModelTransformer(new CallbackTransformer(
                 function ($date) {
+                    if (!$date) {
+                        return;
+                    }
                     return (string)$date->getTimestamp();
                 },
                 function ($date) {
@@ -58,9 +61,15 @@ class BookType extends AbstractType
         $builder->get('lendOn')
             ->addModelTransformer(new CallbackTransformer(
                 function ($date) {
+                    if (!$date) {
+                        return;
+                    }
                     return (string)$date->getTimestamp();
                 },
                 function ($date) {
+                    if (!$date) {
+                        return;
+                    }
                     return $date ? new \DateTime('@' . $date) : new \DateTime();
                 }
             ))
