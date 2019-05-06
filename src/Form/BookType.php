@@ -40,7 +40,7 @@ class BookType extends AbstractType
             ->add('type')
             ->add('premium')
             ->add('lendTo')
-            ->add('lendOn')
+            ->add('lendOn', TextType::class)
         ;
 
         $builder->get('added')
@@ -55,6 +55,16 @@ class BookType extends AbstractType
         ;
         $builder->get('author')
             ->addModelTransformer($this->authorToStringTransformer);
+        $builder->get('lendOn')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($date) {
+                    return (string)$date->getTimestamp();
+                },
+                function ($date) {
+                    return $date ? new \DateTime('@' . $date) : new \DateTime();
+                }
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
