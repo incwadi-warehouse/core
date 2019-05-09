@@ -30,7 +30,9 @@ class GenreController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Genre::class)->findAll()
+            [
+                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll()
+            ]
         );
     }
 

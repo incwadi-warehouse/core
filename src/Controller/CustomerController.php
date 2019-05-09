@@ -29,11 +29,13 @@ class CustomerController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Customer::class)->findBy(
-                [
-                    'branch' => $this->getUser()->getBranch()
-                ]
-            )
+            [
+                'customers' => $this->getDoctrine()->getRepository(Customer::class)->findBy(
+                    [
+                        'branch' => $this->getUser()->getBranch()
+                    ]
+                )
+            ]
         );
     }
 

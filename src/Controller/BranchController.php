@@ -30,7 +30,9 @@ class BranchController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Branch::class)->findAll()
+            [
+                'branches' => $this->getDoctrine()->getRepository(Branch::class)->findAll()
+            ]
         );
     }
 
