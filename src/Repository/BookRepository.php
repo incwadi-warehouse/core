@@ -43,7 +43,6 @@ class BookRepository extends ServiceEntityRepository
         $qb->select('b');
         $qb->from('Baldeweg:Book', 'b');
 
-        $criteria['lending'] ? $qb->leftJoin('b.lending', 'l') : null;
         $qb->leftJoin('b.author', 'a');
 
         $qb->where(
@@ -149,7 +148,7 @@ class BookRepository extends ServiceEntityRepository
     private function lending(QueryBuilder $qb, ?int $lending)
     {
         if ($lending) {
-            return $qb->expr()->lte('l.lendOn', ':lending');
+            return $qb->expr()->lte('b.lendOn', ':lending');
         }
 
         return null;
