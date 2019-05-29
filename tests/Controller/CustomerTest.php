@@ -40,16 +40,16 @@ class CustomerTest extends WebTestCase
         // list
         $request = $this->request('/customer/', 'GET');
 
-        $this->assertInternalType('array', $request);
-        $this->assertInternalType('int', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
-        if ($request[0]->notes) {
-            $this->assertInternalType('string', $request[0]->notes);
+        $this->assertInternalType('array', $request->customers);
+        $this->assertInternalType('int', $request->customers[0]->id);
+        $this->assertInternalType('string', $request->customers[0]->name);
+        if ($request->customers[0]->notes) {
+            $this->assertInternalType('string', $request->customers[0]->notes);
         }
-        $this->assertTrue(isset($request[0]->books));
-        if ($request[0]->branch) {
-            $this->assertInternalType('int', $request[0]->branch->id);
-            $this->assertInternalType('string', $request[0]->branch->name);
+        $this->assertTrue(isset($request->customers[0]->books));
+        if ($request->customers[0]->branch) {
+            $this->assertInternalType('int', $request->customers[0]->branch->id);
+            $this->assertInternalType('string', $request->customers[0]->branch->name);
         }
 
         // edit
