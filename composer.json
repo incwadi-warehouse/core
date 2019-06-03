@@ -4,12 +4,41 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "baldeweg/pack": "^1.0",
+    "php": "^7.2",
+    "doctrine/doctrine-bundle": "^1.10",
+    "doctrine/orm": "^2.6",
+    "nelmio/cors-bundle": "^1.5",
+    "sensio/framework-extra-bundle": "^5.3",
+    "symfony/asset": "^4.3",
+    "symfony/console": "^4.3",
+    "symfony/expression-language": "^4.3",
+    "symfony/form": "^4.3",
+    "symfony/monolog-bundle": "^3.3",
+    "symfony/security-bundle": "^4.3",
+    "symfony/validator": "^4.3",
     "lexik/jwt-authentication-bundle": "^2.6",
     "symfony/flex": "^1.1"
   },
   "require-dev": {
-    "baldeweg/dev-pack": "^2.0",
+    "php": "^7.2",
+    "easycorp/easy-log-handler": "^1.0",
+    "friendsofphp/php-cs-fixer": "^2.14",
+    "mikey179/vfsstream": "^1.6",
+    "phploc/phploc": "^5.0",
+    "phpstan/phpstan": "^0.11",
+    "phpstan/phpstan-doctrine": "^0.11",
+    "phpstan/phpstan-phpunit": "^0.11",
+    "phpstan/phpstan-symfony": "^0.11",
+    "rector/rector": "^0.4",
+    "symfony/browser-kit": "^4.3",
+    "symfony/debug-bundle": "^4.3",
+    "symfony/dotenv": "^4.3",
+    "symfony/maker-bundle": "^1.11",
+    "symfony/phpunit-bridge": "^4.3",
+    "symfony/stopwatch": "^4.3",
+    "symfony/var-dumper": "^4.3",
+    "symfony/web-profiler-bundle": "^4.3",
+    "symfony/web-server-bundle": "^4.3",
     "doctrine/doctrine-fixtures-bundle": "^3.1"
   },
   "config": {
@@ -53,7 +82,7 @@
     "symfony": {
       "id": "01C1Q8G530GEWSFB5YPMD92K2C",
       "allow-contrib": true,
-      "require": "~4.2"
+      "require": "~4.3"
     }
   }
 }
