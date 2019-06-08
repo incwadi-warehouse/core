@@ -89,17 +89,14 @@
             "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
         }
     },
-    "illuminate/contracts": {
-        "version": "v5.8.3"
-    },
-    "illuminate/support": {
-        "version": "v5.8.3"
-    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "jean85/pretty-package-versions": {
         "version": "1.2"
+    },
+    "jetbrains/phpstorm-stubs": {
+        "version": "v2019.1"
     },
     "lcobucci/jwt": {
         "version": "3.2.5"
@@ -134,9 +131,6 @@
             "ref": "f0436fc35fca88eada758311f8de43bfb61f1980"
         }
     },
-    "nesbot/carbon": {
-        "version": "2.14.2"
-    },
     "nette/bootstrap": {
         "version": "v2.4.6"
     },
@@ -154,6 +148,9 @@
     },
     "nette/robot-loader": {
         "version": "v3.1.1"
+    },
+    "nette/schema": {
+        "version": "v1.0.0"
     },
     "nette/utils": {
         "version": "v2.5.3"
@@ -193,9 +190,6 @@
     },
     "psr/log": {
         "version": "1.1.0"
-    },
-    "psr/simple-cache": {
-        "version": "1.0.1"
     },
     "rector/rector": {
         "version": "v0.3.40"
@@ -409,15 +403,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.3"
-    },
-    "symfony/translation": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "1fb02a6e1c8f3d4232cce485c9afa868d63b115a"
-        }
     },
     "symfony/translation-contracts": {
         "version": "v1.1.2"
