@@ -13,11 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GenreTest extends WebTestCase
 {
-    protected $client;
+    protected $clientAdmin;
 
     public function setUp()
     {
-        $this->getClient();
+        $this->buildClient();
     }
 
     public function testScenario()
@@ -105,7 +105,7 @@ class GenreTest extends WebTestCase
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
     {
-        $client = $this->client;
+        $client = $this->clientAdmin;
 
         $crawler = $client->request(
             $method,
@@ -121,10 +121,10 @@ class GenreTest extends WebTestCase
         return json_decode($client->getResponse()->getContent());
     }
 
-    protected function getClient()
+    protected function buildClient()
     {
-        $this->client = static::createClient();
-        $this->client->request(
+        $this->clientAdmin = static::createClient();
+        $this->clientAdmin->request(
             'POST',
             '/api/login_check',
             [],
@@ -140,10 +140,10 @@ class GenreTest extends WebTestCase
             )
         );
         $data = json_decode(
-            $this->client->getResponse()->getContent(),
+            $this->clientAdmin->getResponse()->getContent(),
             true
         );
-        $this->client->setServerParameter(
+        $this->clientAdmin->setServerParameter(
             'HTTP_Authorization',
             sprintf('Bearer %s', $data['token'])
         );
