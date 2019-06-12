@@ -52,7 +52,9 @@ class BookRepository extends ServiceEntityRepository
                 $this->branch($qb, $criteria['branch']),
                 $this->added($qb, $criteria['added']),
                 $this->genre($qb, $criteria['genre']),
-                $this->lending($qb, $criteria['lending'])
+                $this->lending($qb, $criteria['lending']),
+                $this->yearOfPublication($qb, $criteria['yearOfPublication']),
+                $this->type($qb, $criteria['type'])
                 )
             );
 
@@ -104,6 +106,27 @@ class BookRepository extends ServiceEntityRepository
             $qb->setParameter(
                 'added',
                 new \DateTime('@' . $criteria['added'])
+            );
+        }
+
+        if ($criteria['yearOfPublication']) {
+            $qb->setParameter(
+                'yearOfPublication',
+                (int)$criteria['yearOfPublication']
+            );
+        }
+
+        if ($criteria['type']) {
+            if (!in_array($criteria['type'], Book::TYPES)) {
+                $qb->setParameter(
+                    'type',
+                    null
+                );
+            }
+
+            $qb->setParameter(
+                'type',
+                $criteria['type']
             );
         }
     }
@@ -158,6 +181,24 @@ class BookRepository extends ServiceEntityRepository
     {
         if ($added) {
             return $qb->expr()->lte('b.added', ':added');
+        }
+
+        return null;
+    }
+
+    private function yearOfPublication(QueryBuilder $qb, ?int $yearOfPublication)
+    {
+        if ($yearOfPublication) {
+            return $qb->expr()->eq('b.yearOfPublication', ':yearOfPublication');
+        }
+
+        return null;
+    }
+
+    private function type(QueryBuilder $qb, ?string $type)
+    {
+        if ($type) {
+            return $qb->expr()->lte('b.type', ':type');
         }
 
         return null;
