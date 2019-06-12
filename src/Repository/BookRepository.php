@@ -55,8 +55,8 @@ class BookRepository extends ServiceEntityRepository
                 $this->lending($qb, $criteria['lending']),
                 $this->yearOfPublication($qb, $criteria['yearOfPublication']),
                 $this->type($qb, $criteria['type'])
-                )
-            );
+            )
+        );
 
         $qb->orderBy($this->orderings()[$orderBy]['field'], $this->orderings()[$orderBy]['direction']);
 
