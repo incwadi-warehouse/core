@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
-    "doctrine/doctrine-bundle": "^1.10",
+    "doctrine/doctrine-bundle": "^1.11",
     "doctrine/orm": "^2.6",
     "nelmio/cors-bundle": "^1.5",
     "sensio/framework-extra-bundle": "^5.3",
@@ -17,7 +17,7 @@
     "symfony/security-bundle": "^4.3",
     "symfony/validator": "^4.3",
     "lexik/jwt-authentication-bundle": "^2.6",
-    "symfony/flex": "^1.1"
+    "symfony/flex": "^1.2"
   },
   "require-dev": {
     "php": "^7.2",
@@ -39,7 +39,7 @@
     "symfony/var-dumper": "^4.3",
     "symfony/web-profiler-bundle": "^4.3",
     "symfony/web-server-bundle": "^4.3",
-    "doctrine/doctrine-fixtures-bundle": "^3.1"
+    "doctrine/doctrine-fixtures-bundle": "^3.2"
   },
   "config": {
     "preferred-install": {
