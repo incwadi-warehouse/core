@@ -149,7 +149,7 @@ class BookController extends AbstractController
             )
         );
 
-        $existingBook = $this->getDoctrine()->getRepository(Book::class)->findBy(
+        $existingBook = $this->getDoctrine()->getRepository(Book::class)->findOneBy(
             [
                 'branch' => $book->getBranch(),
                 'title' => $book->getTitle(),
@@ -163,9 +163,11 @@ class BookController extends AbstractController
             ]
         );
         if ($existingBook) {
-            return $this->json([
-            'msg' => 'Book not saved, because it exists already!'
-            ], 409);
+            if ($existingBook->getId() !== $book->getId()) {
+                return $this->json([
+                'msg' => 'Book not saved, because it exists already!'
+                ], 409);
+            }
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
