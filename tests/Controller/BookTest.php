@@ -196,12 +196,12 @@ class BookTest extends WebTestCase
             'yearOfPublication' => 2019,
             'type' => 'paperback',
             'premium' => false
-        ]);
+        ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);
     }
 
-    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
+    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [], int $statusCode = 200)
     {
         $client = $this->clientAdmin;
 
@@ -214,7 +214,7 @@ class BookTest extends WebTestCase
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertEquals($statusCode, $client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
 
         return json_decode($client->getResponse()->getContent());
     }
