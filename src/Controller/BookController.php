@@ -53,8 +53,24 @@ class BookController extends AbstractController
             $request->query->get('offset', 0)
         );
 
+        $counter = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
+            [
+                'term' => $request->query->get('term', null),
+                'stocked' => $request->query->get('stocked', true),
+                'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
+                'added' => $request->query->get('added', null),
+                'genre' => $request->query->get('genre', 'any'),
+                'lending' => $request->query->get('lending', null),
+                'yearOfPublication' => $request->query->get('yearOfPublication', null),
+                'type' => $request->query->get('type', null)
+            ],
+            $request->query->get('sort', 'asc'),
+            99999,
+            $request->query->get('offset', 0)
+        );
+
         return $this->json([
-            'counter' => count($books),
+            'counter' => count($counter),
             'books' => $books
         ]);
     }
