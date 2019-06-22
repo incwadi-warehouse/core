@@ -113,6 +113,13 @@ class BookTest extends WebTestCase
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
 
+        // toggleStocking
+        $request = $this->request('/book/toggleStocking/' . $id, 'PUT');
+        $this->assertFalse($request->stocked);
+
+        $request = $this->request('/book/toggleStocking/' . $id, 'PUT');
+        $this->assertTrue($request->stocked);
+
         // show
         $request = $this->request('/book/' . $id, 'GET');
 
