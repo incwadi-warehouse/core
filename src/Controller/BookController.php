@@ -182,6 +182,18 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/toggleStocking/{id}", methods={"PUT"}, name="toggleStocking")
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function toggleStocking(Book $book): JsonResponse
+    {
+        $book->setStocked(!$book->getStocked());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
+    }
+
+    /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */

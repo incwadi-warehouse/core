@@ -254,6 +254,14 @@ Body
 - price (required) - decimal
 - stocked (required) - bool
 
+### Toggle stocking of a book
+
+`PUT /v1/book/toggleStocking/[id]`
+
+Params
+
+- id - int
+
 ### Delete book
 
 `DELETE /v1/book/[id]`
