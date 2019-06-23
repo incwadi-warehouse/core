@@ -22,7 +22,7 @@ The first goal is to make a minimum viable product (MVP). It delivers only the f
 Clone the repository:
 
 ```shell
-git clone https://gitlab.com/a.baldeweg/incwadi_core.git
+git clone https://gitlab.com/incwadi/core.git
 ```
 
 Point the web root to the public/ dir.
