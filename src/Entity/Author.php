@@ -28,9 +28,9 @@ class Author implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter the firstname.")
+     * @Assert\NotNull(message="Please enter the firstname.")
      */
-    private $firstname;
+    private $firstname = '';
 
     /**
      * @ORM\Column(type="string", length=255)
