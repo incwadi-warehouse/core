@@ -41,7 +41,7 @@ class BookRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('b');
-        $qb->from('Baldeweg:Book', 'b');
+        $qb->from('Incwadi:Book', 'b');
 
         $qb->leftJoin('b.author', 'a');
 
