@@ -9,8 +9,8 @@
 
 namespace Incwadi\Core\Entity;
 
-use Incwadi\Core\Entity\Genre;
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

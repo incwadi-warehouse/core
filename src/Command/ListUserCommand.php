@@ -9,8 +9,8 @@
 
 namespace Incwadi\Core\Command;
 
-use Incwadi\Core\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Incwadi\Core\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

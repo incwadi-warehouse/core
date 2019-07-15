@@ -9,9 +9,9 @@
 
 namespace Incwadi\Core\Repository;
 
-use Incwadi\Core\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Incwadi\Core\Entity\Book;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

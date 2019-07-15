@@ -9,8 +9,8 @@
 
 namespace Incwadi\Core\Repository;
 
-use Incwadi\Core\Entity\Lending;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Incwadi\Core\Entity\Lending;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

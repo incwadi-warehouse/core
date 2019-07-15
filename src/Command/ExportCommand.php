@@ -9,9 +9,9 @@
 
 namespace Incwadi\Core\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Util\Export;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

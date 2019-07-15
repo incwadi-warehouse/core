@@ -61,8 +61,9 @@ class ImportTest extends TestCase
             ->getMock();
         $em->method('getRepository')
             ->will(
-                $this->returnCallback(function ($class) use ($branch, $author, $genre, $customer) {
-                    switch ($class) {
+                $this->returnCallback(
+                    function ($class) use ($branch, $author, $genre, $customer) {
+                        switch ($class) {
                         case Branch::class:
                             return $branch;
                         case Author::class:
@@ -71,9 +72,10 @@ class ImportTest extends TestCase
                             return $genre;
                         case Customer::class:
                             return $customer;
+                        }
                     }
-                }
-            ));
+                )
+            );
 
         $import = new Import($em);
         $books = $import->import($this->getData());

@@ -9,8 +9,8 @@
 
 namespace Incwadi\Core\Form\DataTransformer;
 
-use Incwadi\Core\Entity\Author;
 use Doctrine\ORM\EntityManagerInterface;
+use Incwadi\Core\Entity\Author;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class AuthorToStringTransformer implements DataTransformerInterface
