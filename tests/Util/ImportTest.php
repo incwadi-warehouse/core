@@ -87,7 +87,7 @@ class ImportTest extends TestCase
         $this->assertEquals(new \DateTime('6.10.2017'), $books[0]->getAdded());
         $this->assertEquals('The Title', $books[0]->getTitle());
         $this->assertEquals('firstname', $books[0]->getAuthor()->getFirstname());
-        $this->assertEquals('lastname', $books[0]->getAuthor()->getLastname());
+        $this->assertEquals('surname', $books[0]->getAuthor()->getSurname());
         $this->assertEquals('genre 1', $books[0]->getGenre()->getName());
         $this->assertEquals(25.00, $books[0]->getPrice());
         $this->assertTrue($books[0]->getStocked());
@@ -103,9 +103,9 @@ class ImportTest extends TestCase
     private function getData()
     {
         return <<<EOL
-branch;added;title;author.firstname;author.lastname;genre;price;stocked;yearOfPublication;type;premium;lendTo;lendOn
-branch 1;2017-10-06T00:00:00+0200;"The Title";firstname;lastname;"genre 1";25.00;1;2019;paperback;0;admin;2017-10-06T00:00:00+0200
-branch 2;2018-02-22T00:00:00+0100;"The Title";firstname;lastname;"genre 2";1.50;1;2019;paperback;0;admin;2018-02-22T00:00:00+0100
+branch;added;title;author.firstname;author.surname;genre;price;stocked;yearOfPublication;type;premium;lendTo;lendOn
+branch 1;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"genre 1";25.00;1;2019;paperback;0;admin;2017-10-06T00:00:00+0200
+branch 2;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"genre 2";1.50;1;2019;paperback;0;admin;2018-02-22T00:00:00+0100
 EOL;
     }
 }

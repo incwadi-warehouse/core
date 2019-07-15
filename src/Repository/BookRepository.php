@@ -137,7 +137,7 @@ class BookRepository extends ServiceEntityRepository
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
                 $qb->expr()->like('a.firstname', ':term'),
-                $qb->expr()->like('a.lastname', ':term')
+                $qb->expr()->like('a.surname', ':term')
             );
         }
 
@@ -240,11 +240,11 @@ class BookRepository extends ServiceEntityRepository
                 'direction' => 'DESC'
             ],
             'author_asc' => [
-                'field' => 'a.lastname',
+                'field' => 'a.surname',
                 'direction' => 'ASC'
             ],
             'author_desc' => [
-                'field' => 'a.lastname',
+                'field' => 'a.surname',
                 'direction' => 'DESC'
             ],
             'price_asc' => [

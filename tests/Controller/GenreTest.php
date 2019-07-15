@@ -74,7 +74,7 @@ class GenreTest extends WebTestCase
         // new book
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
-            'author' => 'lastname,firstname',
+            'author' => 'surname,firstname',
             'genre' => $genreId,
             'price' => '1.00',
             'stocked' => true,

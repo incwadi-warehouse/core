@@ -50,7 +50,7 @@ class BookTest extends WebTestCase
         // new
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
-            'author' => 'lastname,firstname',
+            'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
             'stocked' => true,
@@ -68,7 +68,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
         $this->assertEquals('firstname', $request->author->firstname);
-        $this->assertEquals('lastname', $request->author->lastname);
+        $this->assertEquals('surname', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('1.00', $request->price);
@@ -84,7 +84,7 @@ class BookTest extends WebTestCase
         // edit
         $request = $this->request('/book/' . $id, 'PUT', [], [
             'title' => 'book',
-            'author' => 'lastname1,firstname1',
+            'author' => 'surname1,firstname1',
             'genre' => $this->genreId,
             'price' => '2.00',
             'stocked' => true,
@@ -102,7 +102,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('firstname1', $request->author->firstname);
-        $this->assertEquals('lastname1', $request->author->lastname);
+        $this->assertEquals('surname1', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
@@ -132,7 +132,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
         $this->assertEquals('firstname1', $request->author->firstname);
-        $this->assertEquals('lastname1', $request->author->lastname);
+        $this->assertEquals('surname1', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
@@ -160,7 +160,7 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);
         $this->assertInternalType('string', $request->books[0]->author->firstname);
-        $this->assertInternalType('string', $request->books[0]->author->lastname);
+        $this->assertInternalType('string', $request->books[0]->author->surname);
         if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
             $this->assertInternalType('string', $request->books[0]->genre->name);
@@ -183,7 +183,7 @@ class BookTest extends WebTestCase
     {
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
-            'author' => 'lastname,firstname',
+            'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
             'stocked' => true,
@@ -196,7 +196,7 @@ class BookTest extends WebTestCase
 
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',
-            'author' => 'lastname,firstname',
+            'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
             'stocked' => true,

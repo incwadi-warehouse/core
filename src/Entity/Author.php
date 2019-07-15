@@ -34,9 +34,9 @@ class Author implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter the lastname.")
+     * @Assert\NotBlank(message="Please enter the surname.")
      */
-    private $lastname;
+    private $surname;
 
     /**
      * @ORM\OneToMany(targetEntity="Incwadi\Core\Entity\Book", mappedBy="author")
@@ -54,7 +54,7 @@ class Author implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'firstname' => $this->getFirstname(),
-            'lastname' => $this->getLastname(),
+            'surname' => $this->getSurname(),
             'books' => count($this->getBooks())
         ];
     }
@@ -76,14 +76,14 @@ class Author implements \JsonSerializable
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getSurname(): ?string
     {
-        return $this->lastname;
+        return $this->surname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setSurname(string $surname): self
     {
-        $this->lastname = $lastname;
+        $this->surname = $surname;
 
         return $this;
     }

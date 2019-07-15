@@ -29,7 +29,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
             return '';
         }
 
-        return $author->getLastname() . ',' . $author->getFirstname();
+        return $author->getSurname() . ',' . $author->getFirstname();
     }
 
     public function reverseTransform($data)
@@ -43,7 +43,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
         $author = $this->em->getRepository(Author::class)->findOneBy(
             [
                 'firstname' => $data[1],
-                'lastname' => $data[0]
+                'surname' => $data[0]
             ]
         );
 
@@ -53,7 +53,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
 
         $author = new Author();
         $author->setFirstname($data[1]);
-        $author->setLastname($data[0]);
+        $author->setSurname($data[0]);
 
         return $author;
     }

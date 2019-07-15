@@ -22,7 +22,7 @@ class Export implements ExportInterface
             return $object instanceof \DateTime ? $object->format(\DateTime::ISO8601) : '';
         };
         $formatAuthor = function ($object) {
-            return $object instanceof \Incwadi\Core\Entity\Author ? ['firstname' => $object->getFirstname(), 'lastname' => $object->getLastname()] : ['firstname' => null, 'lastname' => null];
+            return $object instanceof \Incwadi\Core\Entity\Author ? ['firstname' => $object->getFirstname(), 'surname' => $object->getSurname()] : ['firstname' => null, 'surname' => null];
         };
         $formatLendTo = function ($object) {
             return $object instanceof \Incwadi\Core\Entity\Customer ? $object->getName() : null;

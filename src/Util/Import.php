@@ -89,7 +89,7 @@ class Import implements ImportInterface
         $existing = $this->em->getRepository(Author::class)->findOneBy(
             [
                 'firstname' => $data['firstname'],
-                'lastname' => $data['lastname']
+                'surname' => $data['surname']
             ]
         );
         if ($existing) {
@@ -98,7 +98,7 @@ class Import implements ImportInterface
 
         $author = new Author();
         $author->setFirstname($data['firstname']);
-        $author->setLastname($data['lastname']);
+        $author->setSurname($data['surname']);
 
         $this->em->persist($author);
         $this->em->flush();
