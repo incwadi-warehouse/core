@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Entity;
+namespace Incwadi\Core\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\CustomerRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\CustomerRepository")
  */
 class Customer implements \JsonSerializable
 {
@@ -38,12 +38,12 @@ class Customer implements \JsonSerializable
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Book", mappedBy="lendTo")
+     * @ORM\OneToMany(targetEntity="Incwadi\Core\Entity\Book", mappedBy="lendTo")
      */
     private $books;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
     private $branch;
 

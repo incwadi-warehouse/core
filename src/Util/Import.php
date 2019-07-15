@@ -7,13 +7,13 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Util;
+namespace Incwadi\Core\Util;
 
-use Baldeweg\Entity\Author;
-use Baldeweg\Entity\Book;
-use Baldeweg\Entity\Branch;
-use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Genre;
+use Incwadi\Core\Entity\Author;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Genre;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

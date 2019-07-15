@@ -1,6 +1,6 @@
 <?php
 
-use Baldeweg\Kernel;
+use Incwadi\Core\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

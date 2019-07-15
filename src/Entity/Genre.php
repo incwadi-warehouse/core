@@ -7,13 +7,13 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Entity;
+namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\GenreRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\GenreRepository")
  */
 class Genre implements \JsonSerializable
 {

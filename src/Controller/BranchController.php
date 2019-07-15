@@ -7,11 +7,11 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
-use Baldeweg\Entity\Book;
-use Baldeweg\Entity\Branch;
-use Baldeweg\Form\BranchType;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Form\BranchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

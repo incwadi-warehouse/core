@@ -7,13 +7,13 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Entity;
+namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\LendingRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\LendingRepository")
  */
 class Lending implements \JsonSerializable
 {
@@ -25,13 +25,13 @@ class Lending implements \JsonSerializable
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="Baldeweg\Entity\Book")
+     * @ORM\OneToOne(targetEntity="Incwadi\Core\Entity\Book")
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;

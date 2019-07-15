@@ -7,10 +7,10 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\DataFixtures;
+namespace Incwadi\Core\DataFixtures;
 
-use Baldeweg\Entity\Branch;
-use Baldeweg\Entity\User;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

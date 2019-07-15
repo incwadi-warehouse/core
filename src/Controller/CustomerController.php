@@ -7,10 +7,10 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
-use Baldeweg\Entity\Customer;
-use Baldeweg\Form\CustomerType;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Form\CustomerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

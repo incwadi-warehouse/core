@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Command;
+namespace Incwadi\Core\Command;
 
-use Baldeweg\Entity\User;
+use Incwadi\Core\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

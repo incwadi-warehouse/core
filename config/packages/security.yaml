@@ -3,14 +3,14 @@ security:
         ROLE_ADMIN: ROLE_USER
 
     encoders:
-        Baldeweg\Entity\User:
+        Incwadi\Core\Entity\User:
             algorithm: bcrypt
             cost: 15
 
     providers:
         app_user_provider:
             entity:
-                class: Baldeweg\Entity\User
+                class: Incwadi\Core\Entity\User
                 property: username
     firewalls:
         dev:

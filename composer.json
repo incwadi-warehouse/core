@@ -1,5 +1,5 @@
 {
-  "name": "baldeweg/incwadi-core",
+  "name": "incwadi/core",
   "description": "incwadi is a book database to manage a lot of books.",
   "type": "project",
   "license": "MIT",
@@ -50,12 +50,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Baldeweg\\": "src/"
+      "Incwadi\\Core\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Baldeweg\\Tests\\": "tests/"
+      "Incwadi\\Core\\Tests\\": "tests/"
     }
   },
   "replace": {

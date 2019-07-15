@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Tests\Command;
+namespace Incwadi\Core\Tests\Command;
 
-use Baldeweg\Command\ExportCommand;
+use Incwadi\Core\Command\ExportCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 
@@ -20,7 +20,7 @@ class ExportCommandTest extends TestCase
         $em = $this->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
-        $export = $this->getMockBuilder('\\Baldeweg\\Util\\Export')
+        $export = $this->getMockBuilder('\\Incwadi\\Core\\Util\\Export')
             ->disableOriginalConstructor()
             ->getMock();
 

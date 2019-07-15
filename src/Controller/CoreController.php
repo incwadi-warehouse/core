@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

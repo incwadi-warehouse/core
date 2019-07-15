@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Form;
+namespace Incwadi\Core\Form;
 
-use Baldeweg\Entity\Branch;
+use Incwadi\Core\Entity\Branch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

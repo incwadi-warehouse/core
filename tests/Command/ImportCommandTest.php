@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Tests\Command;
+namespace Incwadi\Core\Tests\Command;
 
-use Baldeweg\Command\ImportCommand;
+use Incwadi\Core\Command\ImportCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 
@@ -17,7 +17,7 @@ class ImportCommandTest extends TestCase
 {
     public function testExecute()
     {
-        $import = $this->getMockBuilder('\\Baldeweg\\Util\\Import')
+        $import = $this->getMockBuilder('\\Incwadi\\Core\\Util\\Import')
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -7,10 +7,10 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
-use Baldeweg\Entity\Book;
-use Baldeweg\Form\BookType;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Form\BookType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

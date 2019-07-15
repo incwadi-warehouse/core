@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Repository;
+namespace Incwadi\Core\Repository;
 
-use Baldeweg\Entity\Author;
+use Incwadi\Core\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

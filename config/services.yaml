@@ -5,10 +5,10 @@ services:
         autowire: true
         autoconfigure: true
 
-    Baldeweg\:
+    Incwadi\Core\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    Baldeweg\Controller\:
+    Incwadi\Core\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']

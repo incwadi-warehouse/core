@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Util;
+namespace Incwadi\Core\Util;
 
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -22,16 +22,16 @@ class Export implements ExportInterface
             return $object instanceof \DateTime ? $object->format(\DateTime::ISO8601) : '';
         };
         $formatAuthor = function ($object) {
-            return $object instanceof \Baldeweg\Entity\Author ? ['firstname' => $object->getFirstname(), 'lastname' => $object->getLastname()] : ['firstname' => null, 'lastname' => null];
+            return $object instanceof \Incwadi\Core\Entity\Author ? ['firstname' => $object->getFirstname(), 'lastname' => $object->getLastname()] : ['firstname' => null, 'lastname' => null];
         };
         $formatLendTo = function ($object) {
-            return $object instanceof \Baldeweg\Entity\Customer ? $object->getName() : null;
+            return $object instanceof \Incwadi\Core\Entity\Customer ? $object->getName() : null;
         };
         $formatBranch = function ($object) {
-            return $object instanceof \Baldeweg\Entity\Branch ? $object->getName() : null;
+            return $object instanceof \Incwadi\Core\Entity\Branch ? $object->getName() : null;
         };
         $formatGenre = function ($object) {
-            return $object instanceof \Baldeweg\Entity\Genre ? $object->getName() : null;
+            return $object instanceof \Incwadi\Core\Entity\Genre ? $object->getName() : null;
         };
 
         $defaultContext = [

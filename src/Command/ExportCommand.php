@@ -7,10 +7,10 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Command;
+namespace Incwadi\Core\Command;
 
-use Baldeweg\Entity\Book;
-use Baldeweg\Util\Export;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Util\Export;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

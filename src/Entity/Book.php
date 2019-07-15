@@ -7,14 +7,14 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Entity;
+namespace Incwadi\Core\Entity;
 
-use Baldeweg\Entity\Genre;
+use Incwadi\Core\Entity\Genre;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\BookRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\BookRepository")
  */
 class Book implements \JsonSerializable
 {
@@ -31,7 +31,7 @@ class Book implements \JsonSerializable
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
     private $branch = null;
 
@@ -47,7 +47,7 @@ class Book implements \JsonSerializable
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Author", inversedBy="books", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Author", inversedBy="books", cascade={"persist"})
      * @Assert\NotBlank(message="Please enter an author.")
      */
     private $author;
@@ -95,7 +95,7 @@ class Book implements \JsonSerializable
     private $premium = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Baldeweg\Entity\Customer", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer", inversedBy="books")
      */
     private $lendTo;
 

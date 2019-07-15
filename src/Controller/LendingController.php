@@ -7,11 +7,11 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
-use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Lending;
-use Baldeweg\Form\LendingType;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Lending;
+use Incwadi\Core\Form\LendingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

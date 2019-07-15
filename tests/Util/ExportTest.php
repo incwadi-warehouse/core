@@ -7,14 +7,14 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Tests\Util;
+namespace Incwadi\Core\Tests\Util;
 
-use Baldeweg\Entity\Author;
-use Baldeweg\Entity\Book;
-use Baldeweg\Entity\Branch;
-use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Genre;
-use Baldeweg\Util\Export;
+use Incwadi\Core\Entity\Author;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Genre;
+use Incwadi\Core\Util\Export;
 use PHPUnit\Framework\TestCase;
 
 class ExportTest extends TestCase

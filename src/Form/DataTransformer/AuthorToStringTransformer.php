@@ -7,9 +7,9 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Form\DataTransformer;
+namespace Incwadi\Core\Form\DataTransformer;
 
-use Baldeweg\Entity\Author;
+use Incwadi\Core\Entity\Author;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 

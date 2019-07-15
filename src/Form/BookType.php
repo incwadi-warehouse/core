@@ -7,10 +7,10 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Form;
+namespace Incwadi\Core\Form;
 
-use Baldeweg\Entity\Book;
-use Baldeweg\Form\DataTransformer\AuthorToStringTransformer;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Form\DataTransformer\AuthorToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

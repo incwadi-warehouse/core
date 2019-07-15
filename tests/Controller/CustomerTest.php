@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Tests\Controller;
+namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

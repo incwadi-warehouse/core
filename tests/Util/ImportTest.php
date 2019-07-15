@@ -7,20 +7,20 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Tests\Util;
+namespace Incwadi\Core\Tests\Util;
 
-use Baldeweg\Entity\Author;
-use Baldeweg\Entity\Branch;
-use Baldeweg\Entity\Customer;
-use Baldeweg\Entity\Genre;
-use Baldeweg\Util\Import;
+use Incwadi\Core\Entity\Author;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Genre;
+use Incwadi\Core\Util\Import;
 use PHPUnit\Framework\TestCase;
 
 class ImportTest extends TestCase
 {
     public function testImport()
     {
-        $branch = $this->getMockBuilder('\\Baldeweg\\Repository\\BranchRepository')
+        $branch = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\BranchRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $branch
@@ -29,7 +29,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $author = $this->getMockBuilder('\\Baldeweg\\Repository\\AuthorRepository')
+        $author = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\AuthorRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $author
@@ -38,7 +38,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneBy'))
             ->willReturn(null);
 
-        $genre = $this->getMockBuilder('\\Baldeweg\\Repository\\GenreRepository')
+        $genre = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\GenreRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $genre
@@ -47,7 +47,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $customer = $this->getMockBuilder('\\Baldeweg\\Repository\\CustomerRepository')
+        $customer = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\CustomerRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $customer
@@ -80,7 +80,7 @@ class ImportTest extends TestCase
 
         $this->assertInternalType('array', $books);
 
-        $this->assertTrue($books[0] instanceof \Baldeweg\Entity\Book);
+        $this->assertTrue($books[0] instanceof \Incwadi\Core\Entity\Book);
         $this->assertEquals('branch 1', $books[0]->getBranch()->getName());
         $this->assertEquals(new \DateTime('6.10.2017'), $books[0]->getAdded());
         $this->assertEquals('The Title', $books[0]->getTitle());

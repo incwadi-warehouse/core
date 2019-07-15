@@ -7,11 +7,11 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Controller;
+namespace Incwadi\Core\Controller;
 
-use Baldeweg\Entity\Book;
-use Baldeweg\Entity\Genre;
-use Baldeweg\Form\GenreType;
+use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Genre;
+use Incwadi\Core\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

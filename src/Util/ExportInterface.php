@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Util;
+namespace Incwadi\Core\Util;
 
 interface ExportInterface
 {

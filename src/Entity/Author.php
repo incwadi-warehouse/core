@@ -7,7 +7,7 @@
  * MIT-licensed
  */
 
-namespace Baldeweg\Entity;
+namespace Incwadi\Core\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Baldeweg\Repository\AuthorRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\AuthorRepository")
  */
 class Author implements \JsonSerializable
 {
@@ -39,7 +39,7 @@ class Author implements \JsonSerializable
     private $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity="Baldeweg\Entity\Book", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Incwadi\Core\Entity\Book", mappedBy="author")
      */
     private $books;
 
