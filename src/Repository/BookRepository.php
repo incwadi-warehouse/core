@@ -53,7 +53,7 @@ class BookRepository extends ServiceEntityRepository
                 $this->added($qb, $criteria['added']),
                 $this->genre($qb, $criteria['genre']),
                 $this->lending($qb, $criteria['lending']),
-                $this->yearOfPublication($qb, $criteria['yearOfPublication']),
+                $this->releaseYear($qb, $criteria['releaseYear']),
                 $this->type($qb, $criteria['type'])
             )
         );
@@ -109,10 +109,10 @@ class BookRepository extends ServiceEntityRepository
             );
         }
 
-        if ($criteria['yearOfPublication']) {
+        if ($criteria['releaseYear']) {
             $qb->setParameter(
-                'yearOfPublication',
-                (int)$criteria['yearOfPublication']
+                'releaseYear',
+                (int)$criteria['releaseYear']
             );
         }
 
@@ -186,10 +186,10 @@ class BookRepository extends ServiceEntityRepository
         return null;
     }
 
-    private function yearOfPublication(QueryBuilder $qb, ?int $yearOfPublication)
+    private function releaseYear(QueryBuilder $qb, ?int $releaseYear)
     {
-        if ($yearOfPublication) {
-            return $qb->expr()->eq('b.yearOfPublication', ':yearOfPublication');
+        if ($releaseYear) {
+            return $qb->expr()->eq('b.releaseYear', ':releaseYear');
         }
 
         return null;
@@ -255,12 +255,12 @@ class BookRepository extends ServiceEntityRepository
                 'field' => 'b.price',
                 'direction' => 'DESC'
             ],
-            'yearOfPublication_asc' => [
-                'field' => 'b.yearOfPublication',
+            'releaseYear_asc' => [
+                'field' => 'b.releaseYear',
                 'direction' => 'ASC'
             ],
-            'yearOfPublication_desc' => [
-                'field' => 'b.yearOfPublication',
+            'releaseYear_desc' => [
+                'field' => 'b.releaseYear',
                 'direction' => 'DESC'
             ],
             'type_asc' => [

@@ -45,7 +45,7 @@ class BookController extends AbstractController
                 'added' => $request->query->get('added', null),
                 'genre' => $request->query->get('genre', 'any'),
                 'lending' => $request->query->get('lending', null),
-                'yearOfPublication' => $request->query->get('yearOfPublication', null),
+                'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)
             ],
             $request->query->get('sort', 'asc'),
@@ -61,7 +61,7 @@ class BookController extends AbstractController
                 'added' => $request->query->get('added', null),
                 'genre' => $request->query->get('genre', 'any'),
                 'lending' => $request->query->get('lending', null),
-                'yearOfPublication' => $request->query->get('yearOfPublication', null),
+                'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)
             ],
             $request->query->get('sort', 'asc'),
@@ -111,7 +111,7 @@ class BookController extends AbstractController
                 'genre' => $book->getGenre(),
                 'price' => $book->getPrice(),
                 'stocked' => $book->getStocked(),
-                'yearOfPublication' => $book->getYearOfPublication(),
+                'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType(),
                 'premium' => $book->getPremium()
             ]
@@ -157,7 +157,7 @@ class BookController extends AbstractController
                 'genre' => $book->getGenre(),
                 'price' => $book->getPrice(),
                 'stocked' => $book->getStocked(),
-                'yearOfPublication' => $book->getYearOfPublication(),
+                'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType(),
                 'premium' => $book->getPremium()
             ]

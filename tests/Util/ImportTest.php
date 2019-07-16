@@ -91,7 +91,7 @@ class ImportTest extends TestCase
         $this->assertEquals('genre 1', $books[0]->getGenre()->getName());
         $this->assertEquals(25.00, $books[0]->getPrice());
         $this->assertTrue($books[0]->getStocked());
-        $this->assertEquals(2019, $books[0]->getYearOfPublication());
+        $this->assertEquals(2019, $books[0]->getReleaseYear());
         $this->assertEquals('paperback', $books[0]->getType());
         $this->assertFalse($books[0]->getPremium());
         $this->assertEquals('admin', $books[0]->getLendTo()->getName());
@@ -103,7 +103,7 @@ class ImportTest extends TestCase
     private function getData()
     {
         return <<<EOL
-branch;added;title;author.firstname;author.surname;genre;price;stocked;yearOfPublication;type;premium;lendTo;lendOn
+branch;added;title;author.firstname;author.surname;genre;price;stocked;releaseYear;type;premium;lendTo;lendOn
 branch 1;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"genre 1";25.00;1;2019;paperback;0;admin;2017-10-06T00:00:00+0200
 branch 2;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"genre 2";1.50;1;2019;paperback;0;admin;2018-02-22T00:00:00+0100
 EOL;

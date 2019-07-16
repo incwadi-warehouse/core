@@ -44,7 +44,7 @@ class LendingTest extends WebTestCase
             'genre' => null,
             'price' => '1.00',
             'stocked' => true,
-            'yearOfPublication' => 2019,
+            'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false
         ]);
@@ -62,7 +62,7 @@ class LendingTest extends WebTestCase
         $this->assertEquals(null, $request->genre);
         $this->assertEquals('1.00', $request->price);
         $this->assertTrue($request->stocked);
-        $this->assertEquals(2019, $request->yearOfPublication);
+        $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
 

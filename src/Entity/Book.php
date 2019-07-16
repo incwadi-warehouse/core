@@ -78,7 +78,7 @@ class Book implements \JsonSerializable
      * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
      * @Assert\NotBlank(message="Please enter the year of publication.")
      */
-    private $yearOfPublication;
+    private $releaseYear;
 
     /**
      * @var string
@@ -108,8 +108,8 @@ class Book implements \JsonSerializable
     public function __construct()
     {
         $this->added = new \DateTime();
-        $yearOfPublication = new \DateTime();
-        $this->yearOfPublication = $yearOfPublication->format('Y');
+        $releaseYear = new \DateTime();
+        $this->releaseYear = $releaseYear->format('Y');
     }
 
     public function jsonSerialize()
@@ -123,7 +123,7 @@ class Book implements \JsonSerializable
             'genre' => $this->getGenre(),
             'price' => $this->getPrice(),
             'stocked' => $this->getStocked(),
-            'yearOfPublication' => $this->getYearOfPublication(),
+            'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
             'lendTo' => $this->getLendTo() ? $this->getLendTo()->getId() : null,
@@ -220,14 +220,14 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getYearOfPublication(): int
+    public function getReleaseYear(): int
     {
-        return $this->yearOfPublication;
+        return $this->releaseYear;
     }
 
-    public function setYearOfPublication(int $yearOfPublication): self
+    public function setReleaseYear(int $releaseYear): self
     {
-        $this->yearOfPublication = $yearOfPublication;
+        $this->releaseYear = $releaseYear;
 
         return $this;
     }
