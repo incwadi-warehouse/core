@@ -21,7 +21,6 @@
     "symfony/validator": "^4.3"
   },
   "require-dev": {
-    "php": "^7.2",
     "easycorp/easy-log-handler": "^1.0",
     "friendsofphp/php-cs-fixer": "^2.15",
     "mikey179/vfsstream": "^1.6",
