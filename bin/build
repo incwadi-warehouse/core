@@ -4,5 +4,6 @@ if [ -d build/ ]; then rm -r build/; fi
 mkdir build/
 
 vendor/bin/php-cs-fixer fix
+vendor/bin/phpstan analyse --level 7 src tests
 vendor/bin/phploc -q --log-json=build/phploc.json src/
 vendor/bin/simple-phpunit --coverage-html build/phpunit/
