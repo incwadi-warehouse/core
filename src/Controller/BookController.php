@@ -48,7 +48,7 @@ class BookController extends AbstractController
                 'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)
             ],
-            $request->query->get('sort', 'asc'),
+            $request->query->get('orderBy', 'asc'),
             $request->query->get('limit', 20),
             $request->query->get('offset', 0)
         );
@@ -64,7 +64,7 @@ class BookController extends AbstractController
                 'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)
             ],
-            $request->query->get('sort', 'asc'),
+            $request->query->get('orderBy', 'asc'),
             99999,
             $request->query->get('offset', 0)
         );
