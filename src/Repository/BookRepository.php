@@ -22,8 +22,14 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class BookRepository extends ServiceEntityRepository
 {
+    /**
+     * @var int
+     */
     const LIMIT = 20;
 
+    /**
+     * @var int
+     */
     const OFFSET = 0;
 
 
@@ -71,7 +77,7 @@ class BookRepository extends ServiceEntityRepository
 
     private function setParams(QueryBuilder $qb, array $criteria)
     {
-        $criteria['term'] = preg_replace('/[%\*]/', '', $criteria['term']);
+        $criteria['term'] = preg_replace('#[%\*]#', '', $criteria['term']);
         if ($criteria['term']) {
             $qb->setParameter('term', '%' . $criteria['term'] . '%');
         }

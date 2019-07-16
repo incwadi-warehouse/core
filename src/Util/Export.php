@@ -9,6 +9,10 @@
 
 namespace Incwadi\Core\Util;
 
+use Incwadi\Core\Entity\Author;
+use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
@@ -22,16 +26,16 @@ class Export implements ExportInterface
             return $object instanceof \DateTime ? $object->format(\DateTime::ISO8601) : '';
         };
         $formatAuthor = function ($object) {
-            return $object instanceof \Incwadi\Core\Entity\Author ? ['firstname' => $object->getFirstname(), 'surname' => $object->getSurname()] : ['firstname' => null, 'surname' => null];
+            return $object instanceof Author ? ['firstname' => $object->getFirstname(), 'surname' => $object->getSurname()] : ['firstname' => null, 'surname' => null];
         };
         $formatLendTo = function ($object) {
-            return $object instanceof \Incwadi\Core\Entity\Customer ? $object->getName() : null;
+            return $object instanceof Customer ? $object->getName() : null;
         };
         $formatBranch = function ($object) {
-            return $object instanceof \Incwadi\Core\Entity\Branch ? $object->getName() : null;
+            return $object instanceof Branch ? $object->getName() : null;
         };
         $formatGenre = function ($object) {
-            return $object instanceof \Incwadi\Core\Entity\Genre ? $object->getName() : null;
+            return $object instanceof Genre ? $object->getName() : null;
         };
 
         $defaultContext = [

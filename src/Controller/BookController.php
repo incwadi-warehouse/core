@@ -116,7 +116,7 @@ class BookController extends AbstractController
                 'premium' => $book->getPremium()
             ]
         );
-        if ($existingBook) {
+        if ($existingBook !== []) {
             return $this->json([
             'msg' => 'Book not saved, because it exists already!'
             ], 409);
@@ -162,7 +162,7 @@ class BookController extends AbstractController
                 'premium' => $book->getPremium()
             ]
         );
-        if ($existingBook) {
+        if ($existingBook !== null) {
             if ($existingBook->getId() !== $book->getId()) {
                 return $this->json([
                 'msg' => 'Book not saved, because it exists already!'
