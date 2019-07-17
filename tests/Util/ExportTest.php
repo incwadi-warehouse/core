@@ -68,9 +68,9 @@ class ExportTest extends TestCase
         $this->assertInternalType('string', $books);
 
         $expected = <<<EOF
-branch;added;title;author.firstname;author.surname;genre;price;stocked;releaseYear;type;premium;lendTo;lendOn
-Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;1;2019;paperback;0;admin;2017-07-06T00:00:00+0200
-Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;1;2019;paperback;0;;
+branch;added;title;author.firstname;author.surname;genre;price;stocked;changedStocking;releaseYear;type;premium;lendTo;lendOn
+Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;1;;2019;paperback;0;admin;2017-07-06T00:00:00+0200
+Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;1;;2019;paperback;0;;
 
 EOF;
         $this->assertEquals($expected, $books);

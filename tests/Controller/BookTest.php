@@ -73,6 +73,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('1.00', $request->price);
         $this->assertTrue($request->stocked);
+        $this->assertNull($request->changedStocking);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -107,6 +108,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
         $this->assertTrue($request->stocked);
+        $this->assertNull($request->changedStocking);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -137,6 +139,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
         $this->assertTrue($request->stocked);
+        $this->assertNotNull($request->changedStocking);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -167,6 +170,7 @@ class BookTest extends WebTestCase
         }
         $this->assertEquals('2.00', $request->books[0]->price);
         $this->assertTrue($request->books[0]->stocked);
+        $this->assertNotNull($request->books[0]->changedStocking);
         $this->assertEquals(2019, $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         $this->assertFalse($request->books[0]->premium);
