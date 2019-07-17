@@ -77,6 +77,11 @@ class Book implements \JsonSerializable
      */
     private $changedStocking = null;
 
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reasonForRemoval;
+
     /**
      * @var int
      * @ORM\Column(type="integer")
@@ -234,6 +239,18 @@ class Book implements \JsonSerializable
     public function setChangedStocking(?\DateTimeInterface $changedStocking): self
     {
         $this->changedStocking = $changedStocking;
+
+        return $this;
+    }
+
+    public function getReasonForRemoval(): ?string
+    {
+        return $this->reasonForRemoval;
+    }
+
+    public function setReasonForRemoval(?string $reasonForRemoval): self
+    {
+        $this->reasonForRemoval = $reasonForRemoval;
 
         return $this;
     }
