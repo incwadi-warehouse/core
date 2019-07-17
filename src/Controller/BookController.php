@@ -188,6 +188,7 @@ class BookController extends AbstractController
     public function toggleStocking(Book $book): JsonResponse
     {
         $book->setStocked(!$book->getStocked());
+        $book->setChangedStocking(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);

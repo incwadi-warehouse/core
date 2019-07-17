@@ -73,6 +73,11 @@ class Book implements \JsonSerializable
     private $stocked = true;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $changedStocking = null;
+
+    /**
      * @var int
      * @ORM\Column(type="integer")
      * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
@@ -123,6 +128,7 @@ class Book implements \JsonSerializable
             'genre' => $this->getGenre(),
             'price' => $this->getPrice(),
             'stocked' => $this->getStocked(),
+            'changedStocking' => $this->getChangedStocking(),
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
@@ -216,6 +222,18 @@ class Book implements \JsonSerializable
     public function setStocked(bool $stocked): self
     {
         $this->stocked = $stocked;
+
+        return $this;
+    }
+
+    public function getChangedStocking(): ?\DateTimeInterface
+    {
+        return $this->changedStocking;
+    }
+
+    public function setChangedStocking(?\DateTimeInterface $changedStocking): self
+    {
+        $this->changedStocking = $changedStocking;
 
         return $this;
     }
