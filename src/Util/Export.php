@@ -45,7 +45,8 @@ class Export implements ExportInterface
                 'author' => $formatAuthor,
                 'lendTo' => $formatLendTo,
                 'branch' => $formatBranch,
-                'genre' => $formatGenre
+                'genre' => $formatGenre,
+                'changedStocking' => $formatDate
             ],
         ];
 
