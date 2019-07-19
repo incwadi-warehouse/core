@@ -152,9 +152,9 @@ class BookTest extends WebTestCase
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
         $this->assertFalse($request->sold);
-        $this->assertNotNull($request->soldOn);
+        $this->assertNull($request->soldOn);
         $this->assertFalse($request->removed);
-        $this->assertNotNull($request->removedOn);
+        $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -185,9 +185,9 @@ class BookTest extends WebTestCase
         }
         $this->assertEquals('2.00', $request->books[0]->price);
         $this->assertFalse($request->books[0]->sold);
-        $this->assertNotNull($request->books[0]->soldOn);
+        $this->assertNull($request->books[0]->soldOn);
         $this->assertFalse($request->books[0]->removed);
-        $this->assertNotNull($request->books[0]->removedOn);
+        $this->assertNull($request->books[0]->removedOn);
         $this->assertEquals(2019, $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         $this->assertFalse($request->books[0]->premium);
