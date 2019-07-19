@@ -68,14 +68,23 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\Type(type="boolean", message="Please enter only true or false.")
      */
-    private $stocked = true;
+    private $sold = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $changedStocking = null;
+    private $soldOn = null;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $removed = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $removedOn = null;
 
     /**
      * @var int
@@ -127,8 +136,10 @@ class Book implements \JsonSerializable
             'author' => $this->getAuthor(),
             'genre' => $this->getGenre(),
             'price' => $this->getPrice(),
-            'stocked' => $this->getStocked(),
-            'changedStocking' => $this->getChangedStocking(),
+            'sold' => $this->getSold(),
+            'soldOn' => $this->getSoldOn(),
+            'removed' => $this->getRemoved(),
+            'removedOn' => $this->getRemovedOn(),
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
@@ -214,26 +225,50 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getStocked(): ?bool
+    public function getSold(): ?bool
     {
-        return $this->stocked;
+        return $this->sold;
     }
 
-    public function setStocked(bool $stocked): self
+    public function setSold(bool $sold): self
     {
-        $this->stocked = $stocked;
+        $this->sold = $sold;
 
         return $this;
     }
 
-    public function getChangedStocking(): ?\DateTimeInterface
+    public function getSoldOn(): ?\DateTimeInterface
     {
-        return $this->changedStocking;
+        return $this->soldOn;
     }
 
-    public function setChangedStocking(?\DateTimeInterface $changedStocking): self
+    public function setSoldOn(?\DateTimeInterface $soldOn): self
     {
-        $this->changedStocking = $changedStocking;
+        $this->soldOn = $soldOn;
+
+        return $this;
+    }
+
+    public function getRemoved(): ?bool
+    {
+        return $this->removed;
+    }
+
+    public function setRemoved(bool $removed): self
+    {
+        $this->removed = $removed;
+
+        return $this;
+    }
+
+    public function getRemovedOn(): ?\DateTimeInterface
+    {
+        return $this->removedOn;
+    }
+
+    public function setRemovedOn(?\DateTimeInterface $removedOn): self
+    {
+        $this->removedOn = $removedOn;
 
         return $this;
     }

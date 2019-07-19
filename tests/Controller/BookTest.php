@@ -53,7 +53,8 @@ class BookTest extends WebTestCase
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
-            'stocked' => true,
+            'sold' => false,
+            'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false
@@ -72,8 +73,10 @@ class BookTest extends WebTestCase
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('1.00', $request->price);
-        $this->assertTrue($request->stocked);
-        $this->assertNull($request->changedStocking);
+        $this->assertFalse($request->sold);
+        $this->assertNull($request->soldOn);
+        $this->assertFalse($request->removed);
+        $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -88,7 +91,8 @@ class BookTest extends WebTestCase
             'author' => 'surname1,firstname1',
             'genre' => $this->genreId,
             'price' => '2.00',
-            'stocked' => true,
+            'sold' => false,
+            'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false
@@ -107,20 +111,29 @@ class BookTest extends WebTestCase
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
-        $this->assertTrue($request->stocked);
-        $this->assertNull($request->changedStocking);
+        $this->assertFalse($request->sold);
+        $this->assertNull($request->soldOn);
+        $this->assertFalse($request->removed);
+        $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
 
-        // toggleStocking
-        $request = $this->request('/book/toggleStocking/' . $id, 'PUT');
-        $this->assertFalse($request->stocked);
+        // sell
+        $request = $this->request('/book/sell/' . $id, 'PUT');
+        $this->assertTrue($request->sold);
 
-        $request = $this->request('/book/toggleStocking/' . $id, 'PUT');
-        $this->assertTrue($request->stocked);
+        $request = $this->request('/book/sell/' . $id, 'PUT');
+        $this->assertFalse($request->sold);
+
+        // remove
+        $request = $this->request('/book/remove/' . $id, 'PUT');
+        $this->assertTrue($request->removed);
+
+        $request = $this->request('/book/remove/' . $id, 'PUT');
+        $this->assertFalse($request->removed);
 
         // show
         $request = $this->request('/book/' . $id, 'GET');
@@ -138,8 +151,10 @@ class BookTest extends WebTestCase
         $this->assertEquals($this->genreId, $request->genre->id);
         $this->assertEquals('name', $request->genre->name);
         $this->assertEquals('2.00', $request->price);
-        $this->assertTrue($request->stocked);
-        $this->assertNotNull($request->changedStocking);
+        $this->assertFalse($request->sold);
+        $this->assertNotNull($request->soldOn);
+        $this->assertFalse($request->removed);
+        $this->assertNotNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertFalse($request->premium);
@@ -169,8 +184,10 @@ class BookTest extends WebTestCase
             $this->assertInternalType('string', $request->books[0]->genre->name);
         }
         $this->assertEquals('2.00', $request->books[0]->price);
-        $this->assertTrue($request->books[0]->stocked);
-        $this->assertNotNull($request->books[0]->changedStocking);
+        $this->assertFalse($request->books[0]->sold);
+        $this->assertNotNull($request->books[0]->soldOn);
+        $this->assertFalse($request->books[0]->removed);
+        $this->assertNotNull($request->books[0]->removedOn);
         $this->assertEquals(2019, $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         $this->assertFalse($request->books[0]->premium);
@@ -190,7 +207,8 @@ class BookTest extends WebTestCase
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
-            'stocked' => true,
+            'sold' => false,
+            'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false
@@ -203,7 +221,8 @@ class BookTest extends WebTestCase
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
             'price' => '1.00',
-            'stocked' => true,
+            'sold' => false,
+            'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false

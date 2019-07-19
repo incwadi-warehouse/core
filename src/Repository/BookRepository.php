@@ -53,7 +53,7 @@ class BookRepository extends ServiceEntityRepository
 
         $qb->where(
             $qb->expr()->andX(
-                $qb->expr()->eq('b.stocked', ':stocked'),
+                $qb->expr()->eq('b.sold', ':sold'),
                 $this->term($qb, $criteria['term']),
                 $this->branch($qb, $criteria['branch']),
                 $this->added($qb, $criteria['added']),
@@ -83,8 +83,8 @@ class BookRepository extends ServiceEntityRepository
         }
 
         $qb->setParameter(
-            'stocked',
-            array_key_exists('stocked', $criteria) ? $criteria['stocked'] : true
+            'sold',
+            array_key_exists('sold', $criteria) ? $criteria['sold'] : false
         );
 
         if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {

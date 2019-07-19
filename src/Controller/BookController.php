@@ -40,7 +40,7 @@ class BookController extends AbstractController
         $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
             [
                 'term' => $request->query->get('term', null),
-                'stocked' => $request->query->get('stocked', true),
+                'sold' => $request->query->get('sold', false),
                 'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
                 'added' => $request->query->get('added', null),
                 'genre' => $request->query->get('genre', 'any'),
@@ -56,7 +56,7 @@ class BookController extends AbstractController
         $counter = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
             [
                 'term' => $request->query->get('term', null),
-                'stocked' => $request->query->get('stocked', true),
+                'sold' => $request->query->get('sold', false),
                 'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
                 'added' => $request->query->get('added', null),
                 'genre' => $request->query->get('genre', 'any'),
@@ -110,7 +110,7 @@ class BookController extends AbstractController
                 'author' => $book->getAuthor(),
                 'genre' => $book->getGenre(),
                 'price' => $book->getPrice(),
-                'stocked' => $book->getStocked(),
+                'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType(),
                 'premium' => $book->getPremium()
@@ -156,7 +156,7 @@ class BookController extends AbstractController
                 'author' => $book->getAuthor(),
                 'genre' => $book->getGenre(),
                 'price' => $book->getPrice(),
-                'stocked' => $book->getStocked(),
+                'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType(),
                 'premium' => $book->getPremium()
@@ -182,13 +182,26 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/toggleStocking/{id}", methods={"PUT"}, name="toggleStocking")
+     * @Route("/sell/{id}", methods={"PUT"}, name="sell")
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    public function toggleStocking(Book $book): JsonResponse
+    public function sell(Book $book): JsonResponse
     {
-        $book->setStocked(!$book->getStocked());
-        $book->setChangedStocking(new \DateTime());
+        $book->setSold(!$book->getSold());
+        $book->setSoldOn(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
+    }
+
+    /**
+     * @Route("/remove/{id}", methods={"PUT"}, name="remove")
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function remove(Book $book): JsonResponse
+    {
+        $book->setRemoved(!$book->getRemoved());
+        $book->setRemovedOn(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
