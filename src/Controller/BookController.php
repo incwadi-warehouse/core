@@ -170,6 +170,22 @@ class BookController extends AbstractController
             }
         }
         if ($form->isSubmitted() && $form->isValid()) {
+            // sold
+            if ($book->getSold() === true && $book->getSoldOn() === null) {
+                $book->setSoldOn(new \DateTime());
+            }
+            // revert sold
+            if ($book->getSold() === false && $book->getSoldOn() !== null) {
+                $book->setSoldOn(null);
+            }
+            // removed
+            if ($book->getRemoved() === true && $book->getRemovedOn() === null) {
+                $book->setRemovedOn(new \DateTime());
+            }
+            // revert sold
+            if ($book->getRemoved() === false && $book->getRemovedOn() !== null) {
+                $book->setRemovedOn(null);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
@@ -188,7 +204,7 @@ class BookController extends AbstractController
     public function sell(Book $book): JsonResponse
     {
         $book->setSold(!$book->getSold());
-        $book->setSoldOn(new \DateTime());
+        $book->setSoldOn($book->getSoldOn() === null ? new \DateTime(): null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
@@ -201,7 +217,7 @@ class BookController extends AbstractController
     public function remove(Book $book): JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
-        $book->setRemovedOn(new \DateTime());
+        $book->setRemovedOn($book->getRemovedOn() === null ? new \DateTime(): null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
