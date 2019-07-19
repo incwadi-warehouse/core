@@ -77,7 +77,7 @@ class GenreTest extends WebTestCase
             'author' => 'surname,firstname',
             'genre' => $genreId,
             'price' => '1.00',
-            'stocked' => true,
+            'sold' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
             'premium' => false

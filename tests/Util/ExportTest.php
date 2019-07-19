@@ -41,7 +41,8 @@ class ExportTest extends TestCase
         $book1->setAuthor($author);
         $book1->setGenre($genre);
         $book1->setPrice(25.00);
-        $book1->setStocked(true);
+        $book1->setSold(false);
+        $book1->setRemoved(false);
         $book1->setReleaseYear(2019);
         $book1->setType('paperback');
         $book1->setPremium(false);
@@ -55,7 +56,8 @@ class ExportTest extends TestCase
         $book2->setAuthor($author);
         $book2->setGenre($genre);
         $book2->setPrice(1.50);
-        $book2->setStocked(true);
+        $book2->setSold(false);
+        $book2->setRemoved(false);
         $book2->setReleaseYear(2019);
         $book2->setType('paperback');
         $book2->setPremium(false);
@@ -68,9 +70,9 @@ class ExportTest extends TestCase
         $this->assertInternalType('string', $books);
 
         $expected = <<<EOF
-branch;added;title;author.firstname;author.surname;genre;price;stocked;changedStocking;releaseYear;type;premium;lendTo;lendOn
-Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;1;;2019;paperback;0;admin;2017-07-06T00:00:00+0200
-Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;1;;2019;paperback;0;;
+branch;added;title;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;releaseYear;type;premium;lendTo;lendOn
+Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;0;;0;;2019;paperback;0;admin;2017-07-06T00:00:00+0200
+Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;0;;0;;2019;paperback;0;;
 
 EOF;
         $this->assertEquals($expected, $books);

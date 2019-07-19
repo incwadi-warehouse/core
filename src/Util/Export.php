@@ -46,7 +46,7 @@ class Export implements ExportInterface
                 'lendTo' => $formatLendTo,
                 'branch' => $formatBranch,
                 'genre' => $formatGenre,
-                'changedStocking' => $formatDate
+                'soldOn' => $formatDate
             ],
         ];
 

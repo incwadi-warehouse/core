@@ -90,8 +90,10 @@ class ImportTest extends TestCase
         $this->assertEquals('surname', $books[0]->getAuthor()->getSurname());
         $this->assertEquals('genre 1', $books[0]->getGenre()->getName());
         $this->assertEquals(25.00, $books[0]->getPrice());
-        $this->assertTrue($books[0]->getStocked());
-        $this->assertNull($books[0]->getChangedStocking());
+        $this->assertFalse($books[0]->getSold());
+        $this->assertNull($books[0]->getSoldOn());
+        $this->assertFalse($books[0]->getRemoved());
+        $this->assertNull($books[0]->getRemovedOn());
         $this->assertEquals(2019, $books[0]->getReleaseYear());
         $this->assertEquals('paperback', $books[0]->getType());
         $this->assertFalse($books[0]->getPremium());
@@ -104,9 +106,9 @@ class ImportTest extends TestCase
     private function getData()
     {
         return <<<EOL
-branch;added;title;author.firstname;author.surname;genre;price;stocked;changedStocking;releaseYear;type;premium;lendTo;lendOn
-branch 1;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"genre 1";25.00;1;;2019;paperback;0;admin;2017-10-06T00:00:00+0200
-branch 2;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"genre 2";1.50;1;;2019;paperback;0;admin;2018-02-22T00:00:00+0100
+branch;added;title;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;releaseYear;type;premium;lendTo;lendOn
+branch 1;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"genre 1";25.00;0;;0;;2019;paperback;0;admin;2017-10-06T00:00:00+0200
+branch 2;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"genre 2";1.50;0;;0;;2019;paperback;0;admin;2018-02-22T00:00:00+0100
 EOL;
     }
 }
