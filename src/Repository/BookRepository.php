@@ -54,6 +54,7 @@ class BookRepository extends ServiceEntityRepository
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->eq('b.sold', ':sold'),
+                $qb->expr()->eq('b.removed', ':removed'),
                 $this->term($qb, $criteria['term']),
                 $this->branch($qb, $criteria['branch']),
                 $this->added($qb, $criteria['added']),
@@ -85,6 +86,10 @@ class BookRepository extends ServiceEntityRepository
         $qb->setParameter(
             'sold',
             array_key_exists('sold', $criteria) ? $criteria['sold'] : false
+        );
+        $qb->setParameter(
+            'removed',
+            array_key_exists('removed', $criteria) ? $criteria['removed'] : false
         );
 
         if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
