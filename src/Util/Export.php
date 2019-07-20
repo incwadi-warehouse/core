@@ -10,8 +10,8 @@
 namespace Incwadi\Core\Util;
 
 use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Customer;
 use Incwadi\Core\Entity\Branch;
+use Incwadi\Core\Entity\Customer;
 use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
