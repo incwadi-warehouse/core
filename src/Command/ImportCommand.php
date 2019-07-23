@@ -40,6 +40,10 @@ class ImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
+        if (!is_file($input->getArgument('file'))) {
+            $io->error('The file you are about to import does not exist.');
+            return;
+        }
 
         $data = $this->import->import(
             file_get_contents(
