@@ -45,6 +45,11 @@ class ExportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
+        if (is_file($input->getArgument('file'))) {
+            $io->error('Export not possible, because the selected file already exists. Please choose a different name.');
+            return;
+        }
+
         $books = $this->em->getRepository(Book::class)->findAll();
 
         file_put_contents(
