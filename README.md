@@ -19,6 +19,10 @@ The first objective is to make a minimum viable product (MVP). It delivers only 
 
 ## Getting Started
 
+First, install PHP Composer, globally:
+
+<https://getcomposer.org/download/>
+
 Clone the repository:
 
 ```shell
@@ -29,17 +33,10 @@ Point the web root to the `public/` dir.
 
 Define env vars in your vHost. You need to set APP_ENV (set to "prod"), APP_SECRET, CORS_ALLOW_ORIGIN and DATABASE_URL. Refer to the section "Options" for more details.
 
-Then install the composer dependencies.
+Then install the composer dependencies and create the database.
 
 ```shell
-composer install
-```
-
-Now, create the database.
-
-```shell
-bin/console doctrine:database:create
-bin/console doctrine:schema:update --force
+bin/setup
 ```
 
 To authenticate your users, you need to generate an SSH key.
@@ -64,7 +61,7 @@ It's recommended to have at least one branch. Create it with the following comma
 bin/console branch:new [NAME]
 ```
 
-Create your first user. Replace [BRANCH] with the id, that was returned in the previous command.
+Create your first user. Replace `[BRANCH]` with the id, that was returned in the previous command.
 
 ```shell
 bin/console user:new [NAME] ROLE_ADMIN [BRANCH]
@@ -95,17 +92,10 @@ The content of both files could be the following. Please fit it to your needs an
 DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
 ```
 
-Then install the composer dependencies.
+Then install the composer dependencies and create the database.
 
 ```shell
-composer install
-```
-
-Now, create the database.
-
-```shell
-bin/console doctrine:database:create
-bin/console doctrine:schema:update --force
+bin/update
 ```
 
 Load the first user with the fixtures.
@@ -120,14 +110,6 @@ Pull for the new files, update dependencies with Composer and update the databas
 
 ```shell
 bin/update
-```
-
-or
-
-```shell
-git pull
-composer install
-bin/console doctrine:schema:update --force
 ```
 
 ## Options
@@ -154,8 +136,7 @@ SetEnv DATABASE_URL mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
 - bin/watch - Starts the development environment
 - bin/stop - Stops the development environment
 - bin/phpunit - Runs the PHPUnit tests
-- bin/report - Runs the PHPUnit coverage report
-- bin/lint - Checks for code standard violations and fixes them partially
+- bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially
 
 ## Branches
 
