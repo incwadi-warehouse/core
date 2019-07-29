@@ -50,6 +50,19 @@
             "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
         }
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "src/Migrations/.gitignore"
+        ]
+    },
     "doctrine/event-manager": {
         "version": "v1.0.0"
     },
@@ -61,6 +74,9 @@
     },
     "doctrine/lexer": {
         "version": "v1.0.1"
+    },
+    "doctrine/migrations": {
+        "version": "v2.1.0"
     },
     "doctrine/orm": {
         "version": "v2.6.3"
@@ -160,6 +176,9 @@
     },
     "ocramius/package-versions": {
         "version": "1.4.0"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.2.2"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -466,5 +485,11 @@
     },
     "twig/twig": {
         "version": "v2.6.2"
+    },
+    "zendframework/zend-code": {
+        "version": "3.3.1"
+    },
+    "zendframework/zend-eventmanager": {
+        "version": "3.2.1"
     }
 }
