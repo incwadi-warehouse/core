@@ -44,7 +44,7 @@ class BookController extends AbstractController
                 'removed' => $request->query->get('removed', false),
                 'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
                 'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', 'any'),
+                'genre' => $request->query->get('genre', false),
                 'lending' => $request->query->get('lending', null),
                 'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)
@@ -61,7 +61,7 @@ class BookController extends AbstractController
                 'removed' => $request->query->get('removed', false),
                 'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
                 'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', 'any'),
+                'genre' => $request->query->get('genre', false),
                 'lending' => $request->query->get('lending', null),
                 'releaseYear' => $request->query->get('releaseYear', null),
                 'type' => $request->query->get('type', null)

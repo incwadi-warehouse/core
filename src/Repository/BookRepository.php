@@ -92,14 +92,14 @@ class BookRepository extends ServiceEntityRepository
             array_key_exists('removed', $criteria) ? $criteria['removed'] : false
         );
 
-        if ($criteria['branch'] !== 'none' && $criteria['branch'] !== 'any') {
+        if ($criteria['branch']) {
             $qb->setParameter(
                 'branch',
                 explode(',', trim($criteria['branch']))
             );
         }
 
-        if ($criteria['genre'] !== 'none' && $criteria['genre'] !== 'any') {
+        if ($criteria['genre']) {
             $qb->setParameter(
                 'genre',
                 explode(',', trim($criteria['genre']))
@@ -157,10 +157,8 @@ class BookRepository extends ServiceEntityRepository
 
     private function branch(QueryBuilder $qb, ?string $branch)
     {
-        if ($branch === 'none') {
-            return $qb->expr()->isNull('b.branch');
-        }
-        if ($branch === 'any') {
+
+        if (!$branch) {
             return $qb->expr()->isNotNull('b.branch');
         }
 
@@ -169,10 +167,7 @@ class BookRepository extends ServiceEntityRepository
 
     private function genre(QueryBuilder $qb, ?string $genre)
     {
-        if ($genre === 'none') {
-            return $qb->expr()->isNull('b.genre');
-        }
-        if ($genre === 'any') {
+        if (!$genre) {
             return $qb->expr()->isNotNull('b.genre');
         }
 
