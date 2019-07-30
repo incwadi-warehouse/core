@@ -4,8 +4,7 @@ security:
 
     encoders:
         Incwadi\Core\Entity\User:
-            algorithm: bcrypt
-            cost: 15
+            algorithm: auto
 
     providers:
         app_user_provider:
