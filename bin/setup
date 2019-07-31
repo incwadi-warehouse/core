@@ -1,6 +1,7 @@
 #!/bin/bash
 
 composer install
+composer dump-env prod
 bin/console doctrine:database:create
 bin/console doctrine:schema:update --force
 chown -R www-data:www-data .

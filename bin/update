@@ -2,6 +2,7 @@
 
 git pull
 composer install
+composer dump-env prod
 bin/console doctrine:migrations:migrate -n
 bin/console cache:clear
 bin/console cache:warmup
