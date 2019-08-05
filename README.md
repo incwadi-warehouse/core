@@ -162,16 +162,10 @@ Fetching a list with all users and their corresponding id:
 bin/console user:list
 ```
 
-Create a new user with the role `ROLE_USER`. Replace `[NAME]` with the desired name of the user.
+Create a new user and replace `[NAME]` with the desired name of the user. Set `[ROLE]` that's either `ROLE_USER` or `ROLE_ADMIN`. The `[BRANCH]` is the id of the branch the user is supposed to be a part of.
 
 ```shell
-bin/console user:new [NAME]
-```
-
-If you want to create an admin user pass the argument `ROLE_ADMIN`.
-
-```shell
-bin/console user:new [NAME] ROLE_ADMIN
+bin/console user:new [NAME] [ROLE] [BRANCH]
 ```
 
 You can of course delete a user. Replace `[ID]` with the id of the user.
