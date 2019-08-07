@@ -95,7 +95,9 @@ DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
 Then install the composer dependencies and create the database.
 
 ```shell
-bin/update
+composer install
+bin/console doctrine:database:create
+bin/console doctrine:schema:update --force
 ```
 
 Load the first user with the fixtures.
