@@ -83,7 +83,6 @@
   },
   "extra": {
     "symfony": {
-      "id": "01C1Q8G530GEWSFB5YPMD92K2C",
       "allow-contrib": true,
       "require": "~4.3"
     }
