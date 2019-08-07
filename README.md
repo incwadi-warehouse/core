@@ -139,6 +139,7 @@ SetEnv DATABASE_URL mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
 - bin/stop - Stops the development environment
 - bin/phpunit - Runs the PHPUnit tests
 - bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially
+- bin/dump - Starts the Dump Server
 
 ## Branches
 
