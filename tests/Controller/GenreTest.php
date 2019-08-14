@@ -39,7 +39,7 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/genre/' . $id, 'PUT', [], [
+        $request = $this->request('/genre/'.$id, 'PUT', [], [
             'name' => 'name'
         ]);
 
@@ -48,14 +48,14 @@ class GenreTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // show
-        $request = $this->request('/genre/' . $id, 'GET');
+        $request = $this->request('/genre/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
 
         // delete
-        $request = $this->request('/genre/' . $id, 'DELETE');
+        $request = $this->request('/genre/'.$id, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
@@ -88,17 +88,17 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // delete genre
-        $request = $this->request('/genre/' . $genreId, 'DELETE');
+        $request = $this->request('/genre/'.$genreId, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
 
         // show book
-        $request = $this->request('/book/' . $id, 'GET');
+        $request = $this->request('/book/'.$id, 'GET');
 
         $this->assertEquals(null, $request->genre);
 
         // delete book
-        $request = $this->request('/book/' . $id, 'DELETE');
+        $request = $this->request('/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
@@ -109,14 +109,14 @@ class GenreTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/v1' . $url,
+            '/v1'.$url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
 
         return json_decode($client->getResponse()->getContent());
     }

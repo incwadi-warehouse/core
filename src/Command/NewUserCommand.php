@@ -71,9 +71,9 @@ class NewUserCommand extends Command
         $this->em->flush();
 
         $io->listing([
-            'Username: ' . $user->getUsername(),
-            'Password: ' . $pass,
-            'Branch: ' . $branch->getName()
+            'Username: '.$user->getUsername(),
+            'Password: '.$pass,
+            'Branch: '.$branch->getName()
         ]);
     }
 }

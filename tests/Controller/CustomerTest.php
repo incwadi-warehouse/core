@@ -53,7 +53,7 @@ class CustomerTest extends WebTestCase
         }
 
         // edit
-        $request = $this->request('/customer/' . $id, 'PUT', [], [
+        $request = $this->request('/customer/'.$id, 'PUT', [], [
             'name' => 'name',
             'notes' => 'notes'
         ]);
@@ -66,7 +66,7 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // show
-        $request = $this->request('/customer/' . $id, 'GET');
+        $request = $this->request('/customer/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
@@ -76,7 +76,7 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // delete
-        $request = $this->request('/customer/' . $id, 'DELETE');
+        $request = $this->request('/customer/'.$id, 'DELETE');
 
         $this->assertEquals('The customer was successfully deleted.', $request->msg);
     }
@@ -87,14 +87,14 @@ class CustomerTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/v1' . $url,
+            '/v1'.$url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
 
         return json_decode($client->getResponse()->getContent());
     }

@@ -79,7 +79,7 @@ class BookRepository extends ServiceEntityRepository
     {
         $criteria['term'] = preg_replace('#[%\*]#', '', $criteria['term']);
         if ($criteria['term']) {
-            $qb->setParameter('term', '%' . $criteria['term'] . '%');
+            $qb->setParameter('term', '%'.$criteria['term'].'%');
         }
 
         $qb->setParameter(
@@ -108,14 +108,14 @@ class BookRepository extends ServiceEntityRepository
         if ($criteria['lending']) {
             $qb->setParameter(
                 'lending',
-                new \DateTime('@' . $criteria['lending'])
+                new \DateTime('@'.$criteria['lending'])
             );
         }
 
         if ($criteria['added']) {
             $qb->setParameter(
                 'added',
-                new \DateTime('@' . $criteria['added'])
+                new \DateTime('@'.$criteria['added'])
             );
         }
 

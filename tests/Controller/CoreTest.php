@@ -57,7 +57,7 @@ class CoreTest extends WebTestCase
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
 
         return json_decode($client->getResponse()->getContent());
     }

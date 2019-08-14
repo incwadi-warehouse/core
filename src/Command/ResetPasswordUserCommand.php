@@ -56,6 +56,6 @@ class ResetPasswordUserCommand extends Command
         );
         $this->em->flush();
 
-        $io->success('Passwort: ' . $pass);
+        $io->success('Passwort: '.$pass);
     }
 }

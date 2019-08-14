@@ -28,7 +28,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
             return '';
         }
 
-        return $author->getSurname() . ',' . $author->getFirstname();
+        return $author->getSurname().','.$author->getFirstname();
     }
 
     public function reverseTransform($data)

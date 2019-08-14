@@ -34,7 +34,7 @@ class BranchTest extends WebTestCase
         $id = $request->branches[0]->id;
 
         // edit
-        $request = $this->request('/branch/' . $id, 'PUT', [], [
+        $request = $this->request('/branch/'.$id, 'PUT', [], [
             'name' => 'name'
         ]);
 
@@ -43,7 +43,7 @@ class BranchTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // show
-        $request = $this->request('/branch/' . $id, 'GET');
+        $request = $this->request('/branch/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
@@ -56,14 +56,14 @@ class BranchTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/v1' . $url,
+            '/v1'.$url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
 
         return json_decode($client->getResponse()->getContent());
     }

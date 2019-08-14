@@ -38,7 +38,7 @@ class LendingTest extends WebTestCase
         // new book
         $date = new \DateTime();
         $request = $this->request('/book/new', 'POST', [], [
-            'title' => 'title ' . $date->getTimestamp(),
+            'title' => 'title '.$date->getTimestamp(),
             'author' => 'surname,firstname',
             'genre' => null,
             'price' => '1.00',
@@ -71,12 +71,12 @@ class LendingTest extends WebTestCase
     public function tearDown()
     {
         // delete customer
-        $request = $this->request('/customer/' . $this->customerId, 'DELETE');
+        $request = $this->request('/customer/'.$this->customerId, 'DELETE');
 
         $this->assertEquals('The customer was successfully deleted.', $request->msg);
 
         // delete book
-        $request = $this->request('/book/' . $this->bookId, 'DELETE');
+        $request = $this->request('/book/'.$this->bookId, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
@@ -102,7 +102,7 @@ class LendingTest extends WebTestCase
         $id = $request->id;
 
         // show
-        $request = $this->request('/lending/' . $id, 'GET');
+        $request = $this->request('/lending/'.$id, 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertTrue(isset($request->customer));
@@ -110,7 +110,7 @@ class LendingTest extends WebTestCase
         $this->assertInternalType('string', $request->lendOn);
 
         // delete
-        $request = $this->request('/lending/' . $id, 'DELETE');
+        $request = $this->request('/lending/'.$id, 'DELETE');
 
         $this->assertEquals('The lending was successfully deleted.', $request->msg);
     }
@@ -121,14 +121,14 @@ class LendingTest extends WebTestCase
 
         $crawler = $client->request(
             $method,
-            '/v1' . $url,
+            '/v1'.$url,
             $params,
             [],
             [],
             json_encode($content)
         );
 
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for ' . $method . ' ' . $url . '!');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
 
         return json_decode($client->getResponse()->getContent());
     }

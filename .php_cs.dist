@@ -35,8 +35,7 @@ return Config::create()
         ],
         'ordered_class_elements' => true,
         'phpdoc_order' => true,
-        'trailing_comma_in_multiline_array' => false,
-        'concat_space' => false
+        'trailing_comma_in_multiline_array' => false
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__ . '/var/cache/.php_cs.cache')
