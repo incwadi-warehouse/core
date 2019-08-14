@@ -230,7 +230,7 @@ class BookController extends AbstractController
     public function sell(Book $book): JsonResponse
     {
         $book->setSold(!$book->getSold());
-        $book->setSoldOn($book->getSoldOn() === null ? new \DateTime(): null);
+        $book->setSoldOn($book->getSoldOn() === null ? new \DateTime() : null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
@@ -243,7 +243,7 @@ class BookController extends AbstractController
     public function remove(Book $book): JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
-        $book->setRemovedOn($book->getRemovedOn() === null ? new \DateTime(): null);
+        $book->setRemovedOn($book->getRemovedOn() === null ? new \DateTime() : null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
