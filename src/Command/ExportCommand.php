@@ -21,6 +21,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ExportCommand extends Command
 {
     protected $export;
+
     private $em;
 
     public function __construct(EntityManagerInterface $em, Export $export)

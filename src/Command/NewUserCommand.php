@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class NewUserCommand extends Command
 {
     private $em;
+
     private $encoder;
 
     public function __construct(
