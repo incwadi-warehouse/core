@@ -122,7 +122,7 @@ class BookRepository extends ServiceEntityRepository
         if ($criteria['releaseYear']) {
             $qb->setParameter(
                 'releaseYear',
-                (int)$criteria['releaseYear']
+                (int) $criteria['releaseYear']
             );
         }
 

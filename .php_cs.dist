@@ -38,8 +38,7 @@ return Config::create()
         'trailing_comma_in_multiline_array' => false,
         'class_attributes_separation' => false,
         'concat_space' => false,
-        'blank_line_before_statement' => false,
-        'cast_spaces' => false
+        'blank_line_before_statement' => false
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__ . '/var/cache/.php_cs.cache')
