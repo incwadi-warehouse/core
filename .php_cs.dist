@@ -35,10 +35,10 @@ return Config::create()
         ],
         'ordered_class_elements' => true,
         'phpdoc_order' => true,
+
         'class_attributes_separation' => false,
         'no_extra_blank_lines' => false,
         'trailing_comma_in_multiline_array' => false,
-        'no_unused_imports' => false,
         'ternary_operator_spaces' => false,
         'yoda_style' => false,
         'concat_space' => false,

@@ -9,7 +9,6 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Customer;
 use Incwadi\Core\Entity\Lending;
 use Incwadi\Core\Form\LendingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

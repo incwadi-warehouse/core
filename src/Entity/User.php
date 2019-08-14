@@ -10,7 +10,6 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Incwadi\Core\Entity\Branch;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 

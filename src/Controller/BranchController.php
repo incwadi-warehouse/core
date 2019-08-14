@@ -9,7 +9,6 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Form\BranchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
