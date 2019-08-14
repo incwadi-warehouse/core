@@ -48,7 +48,6 @@ class User implements UserInterface
      */
     private $branch = null;
 
-
     public function getId(): ?int
     {
         return $this->id;

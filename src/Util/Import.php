@@ -23,7 +23,6 @@ class Import implements ImportInterface
 {
     protected $em;
 
-
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;

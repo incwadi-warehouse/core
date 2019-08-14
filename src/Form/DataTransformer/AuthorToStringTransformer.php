@@ -17,7 +17,6 @@ class AuthorToStringTransformer implements DataTransformerInterface
 {
     private $em;
 
-
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;

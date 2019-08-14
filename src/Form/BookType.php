@@ -21,7 +21,6 @@ class BookType extends AbstractType
 {
     private $authorToStringTransformer;
 
-
     public function __construct(AuthorToStringTransformer $authorToStringTransformer)
     {
         $this->authorToStringTransformer = $authorToStringTransformer;

@@ -117,7 +117,6 @@ class Book implements \JsonSerializable
      */
     private $lendOn;
 
-
     public function __construct()
     {
         $this->added = new \DateTime();

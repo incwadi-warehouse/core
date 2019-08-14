@@ -30,7 +30,6 @@ class Genre implements \JsonSerializable
      */
     private $name;
 
-
     public function jsonSerialize()
     {
         return [

@@ -17,7 +17,6 @@ class BookTest extends WebTestCase
 
     protected $clientAdmin;
 
-
     public function setUp()
     {
         $this->buildClient();

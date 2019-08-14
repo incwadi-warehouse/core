@@ -20,7 +20,6 @@ class ImportCommand extends Command
 {
     protected $import;
 
-
     public function __construct(Import $import)
     {
         parent::__construct();

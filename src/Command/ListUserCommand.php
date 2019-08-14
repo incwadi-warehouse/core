@@ -20,13 +20,11 @@ class ListUserCommand extends Command
 {
     private $em;
 
-
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct();
         $this->em = $em;
     }
-
 
     protected function configure(): void
     {
@@ -36,7 +34,6 @@ class ListUserCommand extends Command
             ->setHelp('This command finds and shows all users.')
         ;
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {

@@ -32,7 +32,6 @@ class BookRepository extends ServiceEntityRepository
      */
     const OFFSET = 0;
 
-
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Book::class);

@@ -40,7 +40,6 @@ class Lending implements \JsonSerializable
      */
     private $lendOn;
 
-
     public function __construct()
     {
         $this->lendOn = new \DateTime();

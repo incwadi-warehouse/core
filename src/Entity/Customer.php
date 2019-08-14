@@ -47,7 +47,6 @@ class Customer implements \JsonSerializable
      */
     private $branch;
 
-
     public function __construct()
     {
         $this->books = new ArrayCollection();

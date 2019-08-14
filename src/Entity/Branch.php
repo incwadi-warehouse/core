@@ -30,7 +30,6 @@ class Branch implements \JsonSerializable
      */
     private $name;
 
-
     public function jsonSerialize()
     {
         return [

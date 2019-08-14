@@ -23,7 +23,6 @@ class ExportCommand extends Command
     protected $export;
     private $em;
 
-
     public function __construct(EntityManagerInterface $em, Export $export)
     {
         parent::__construct();

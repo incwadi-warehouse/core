@@ -43,7 +43,6 @@ class Author implements \JsonSerializable
      */
     private $books;
 
-
     public function __construct()
     {
         $this->books = new ArrayCollection();

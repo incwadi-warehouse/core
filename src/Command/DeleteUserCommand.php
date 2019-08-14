@@ -21,7 +21,6 @@ class DeleteUserCommand extends Command
 {
     private $em;
 
-
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct();

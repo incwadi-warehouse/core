@@ -23,7 +23,6 @@ class ResetPasswordUserCommand extends Command
     private $em;
     private $encoder;
 
-
     public function __construct(
         EntityManagerInterface $em,
         UserPasswordEncoderInterface $encoder
