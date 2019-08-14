@@ -41,6 +41,7 @@ class ImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         if (!is_file($input->getArgument('file'))) {
             $io->error('The file you are about to import does not exist.');
+
             return;
         }
 

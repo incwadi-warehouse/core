@@ -49,6 +49,7 @@ class BookType extends AbstractType
                     if (!$date) {
                         return;
                     }
+
                     return (string) $date->getTimestamp();
                 },
                 function ($date) {
@@ -64,12 +65,14 @@ class BookType extends AbstractType
                     if (!$date) {
                         return;
                     }
+
                     return (string) $date->getTimestamp();
                 },
                 function ($date) {
                     if (!$date) {
                         return;
                     }
+
                     return $date ? new \DateTime('@' . $date) : new \DateTime();
                 }
             ))

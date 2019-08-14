@@ -37,8 +37,7 @@ return Config::create()
         'phpdoc_order' => true,
         'trailing_comma_in_multiline_array' => false,
         'class_attributes_separation' => false,
-        'concat_space' => false,
-        'blank_line_before_statement' => false
+        'concat_space' => false
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__ . '/var/cache/.php_cs.cache')

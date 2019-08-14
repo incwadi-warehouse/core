@@ -46,6 +46,7 @@ class ExportCommand extends Command
 
         if (is_file($input->getArgument('file'))) {
             $io->error('Export not possible, because the selected file already exists. Please choose a different name.');
+
             return;
         }
 
