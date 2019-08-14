@@ -26,9 +26,9 @@ class ExportCommand extends Command
 
     public function __construct(EntityManagerInterface $em, Export $export)
     {
+        parent::__construct();
         $this->em = $em;
         $this->export = $export;
-        parent::__construct();
     }
 
     protected function configure(): void
@@ -37,7 +37,7 @@ class ExportCommand extends Command
             ->setName('incwadi:export')
             ->setDescription('Exports the data of the database to a file.')
             ->setHelp('Exports data from database to file')
-            ->addArgument('file', InputArgument::REQUIRED, 'Where should the export file being stored?')
+            ->addArgument('file', InputArgument::REQUIRED, 'Where should the export file be written?')
         ;
     }
 

@@ -24,8 +24,8 @@ class NewBranchCommand extends Command
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
         parent::__construct();
+        $this->em = $em;
     }
 
     protected function configure(): void
@@ -38,7 +38,7 @@ class NewBranchCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -51,7 +51,5 @@ class NewBranchCommand extends Command
         $this->em->flush();
 
         $io->success('Branch "' . $branch->getName() . '" with id ' . $branch->getId() . ' successfully created!');
-
-        return null;
     }
 }

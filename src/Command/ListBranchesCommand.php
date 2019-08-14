@@ -23,8 +23,8 @@ class ListBranchesCommand extends Command
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
         parent::__construct();
+        $this->em = $em;
     }
 
 
@@ -38,7 +38,7 @@ class ListBranchesCommand extends Command
     }
 
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -55,7 +55,5 @@ class ListBranchesCommand extends Command
             ['Id', 'Name'],
             $data
         );
-
-        return null;
     }
 }

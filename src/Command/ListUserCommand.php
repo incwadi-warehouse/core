@@ -23,8 +23,8 @@ class ListUserCommand extends Command
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
         parent::__construct();
+        $this->em = $em;
     }
 
 
@@ -38,7 +38,7 @@ class ListUserCommand extends Command
     }
 
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -57,7 +57,5 @@ class ListUserCommand extends Command
             ['Id', 'User', 'Roles', 'Branch'],
             $data
         );
-
-        return null;
     }
 }

@@ -23,8 +23,8 @@ class ImportCommand extends Command
 
     public function __construct(Import $import)
     {
-        $this->import = $import;
         parent::__construct();
+        $this->import = $import;
     }
 
     protected function configure(): void

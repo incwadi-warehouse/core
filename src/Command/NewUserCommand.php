@@ -22,7 +22,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class NewUserCommand extends Command
 {
     private $em;
-
     private $encoder;
 
 
@@ -30,9 +29,9 @@ class NewUserCommand extends Command
         EntityManagerInterface $em,
         UserPasswordEncoderInterface $encoder
     ) {
+        parent::__construct();
         $this->em = $em;
         $this->encoder = $encoder;
-        parent::__construct();
     }
 
     protected function configure(): void
@@ -48,7 +47,7 @@ class NewUserCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -76,7 +75,5 @@ class NewUserCommand extends Command
             'Password: ' . $pass,
             'Branch: ' . $branch->getName()
         ]);
-
-        return null;
     }
 }
