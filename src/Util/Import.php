@@ -123,7 +123,7 @@ class Import implements ImportInterface
 
     protected function customer(string $data): ?Customer
     {
-        if ($data === '') {
+        if ('' === $data) {
             return null;
         }
 

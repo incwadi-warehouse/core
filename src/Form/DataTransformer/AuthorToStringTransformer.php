@@ -24,7 +24,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
 
     public function transform($author)
     {
-        if ($author === null) {
+        if (null === $author) {
             return '';
         }
 

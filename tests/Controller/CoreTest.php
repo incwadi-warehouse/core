@@ -38,7 +38,7 @@ class CoreTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertInternalType('string', $request->username);
         $this->assertInternalType('array', $request->roles);
-        if ($request->branch !== null) {
+        if (null !== $request->branch) {
             $this->assertInternalType('int', $request->branch->id);
             $this->assertInternalType('string', $request->branch->name);
         }

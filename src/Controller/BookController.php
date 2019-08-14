@@ -188,7 +188,7 @@ class BookController extends AbstractController
                 'premium' => $book->getPremium()
             ]
         );
-        if ($existingBook !== null) {
+        if (null !== $existingBook) {
             if ($existingBook->getId() !== $book->getId()) {
                 return $this->json([
                 'msg' => 'Book not saved, because it exists already!'
@@ -197,19 +197,19 @@ class BookController extends AbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             // sold
-            if ($book->getSold() === true && $book->getSoldOn() === null) {
+            if (true === $book->getSold() && null === $book->getSoldOn()) {
                 $book->setSoldOn(new \DateTime());
             }
             // revert sold
-            if ($book->getSold() === false && $book->getSoldOn() !== null) {
+            if (false === $book->getSold() && null !== $book->getSoldOn()) {
                 $book->setSoldOn(null);
             }
             // removed
-            if ($book->getRemoved() === true && $book->getRemovedOn() === null) {
+            if (true === $book->getRemoved() && null === $book->getRemovedOn()) {
                 $book->setRemovedOn(new \DateTime());
             }
             // revert sold
-            if ($book->getRemoved() === false && $book->getRemovedOn() !== null) {
+            if (false === $book->getRemoved() && null !== $book->getRemovedOn()) {
                 $book->setRemovedOn(null);
             }
             $em = $this->getDoctrine()->getManager();
@@ -230,7 +230,7 @@ class BookController extends AbstractController
     public function sell(Book $book): JsonResponse
     {
         $book->setSold(!$book->getSold());
-        $book->setSoldOn($book->getSoldOn() === null ? new \DateTime() : null);
+        $book->setSoldOn(null === $book->getSoldOn() ? new \DateTime() : null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
@@ -243,7 +243,7 @@ class BookController extends AbstractController
     public function remove(Book $book): JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
-        $book->setRemovedOn($book->getRemovedOn() === null ? new \DateTime() : null);
+        $book->setRemovedOn(null === $book->getRemovedOn() ? new \DateTime() : null);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);

@@ -141,8 +141,8 @@ class Book implements \JsonSerializable
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'premium' => $this->getPremium(),
-            'lendTo' => $this->getLendTo() !== null ? $this->getLendTo()->getId() : null,
-            'lendOn' => $this->getLendOn() !== null ? $this->getLendOn()->getTimestamp() : null
+            'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
+            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null
         ];
     }
 
