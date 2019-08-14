@@ -40,7 +40,7 @@ class BookRepository extends ServiceEntityRepository
 
     public function findDemanded(
         array $criteria,
-        string $orderBy='default',
+        string $orderBy = 'default',
         int $limit = self::LIMIT,
         int $offset = self::OFFSET
     ): array {
