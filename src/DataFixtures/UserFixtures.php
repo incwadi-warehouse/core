@@ -46,6 +46,18 @@ class UserFixtures extends Fixture
         $user->setBranch($branch);
         $manager->persist($user);
 
+        $user = new User();
+        $user->setUsername('user');
+        $user->setRoles(['ROLE_USER']);
+        $user->setPassword(
+            $this->passwordEncoder->encodePassword(
+                $user,
+                'password'
+            )
+        );
+        $user->setBranch($branch);
+        $manager->persist($user);
+
         $manager->flush();
     }
 }
