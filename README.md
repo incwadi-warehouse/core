@@ -4,18 +4,14 @@ incwadi is a book database to manage a lot of books.
 
 ## How it was made
 
-An article can be found here <https://medium.com/@A.Baldeweg/i-was-trying-new-things-accf33792e86>
-
-## Future
-
-The first objective is to make a minimum viable product (MVP). It delivers only the features actually needed to be usable. As soon as this is done version 1.0.0 will be released. After that I will start developing new features. The development will follow the principles of lean development. Building small features, try it and decide wether it makes sense to invest more time into it.
+An article can be found here <https://medium.com/@A.Baldeweg/i-was-trying-new-things-accf33792e86>.
 
 ## Requirements
 
 - PHP 7.2
 - MySQL
 - PHP Composer
-- SSH access
+- SSH Access
 
 ## Getting Started
 
@@ -31,7 +27,23 @@ git clone https://gitlab.com/incwadi/core.git
 
 Point the web root to the `public/` dir.
 
-Define env vars in your vHost. You need to set APP_ENV (set to "prod"), APP_SECRET, CORS_ALLOW_ORIGIN and DATABASE_URL. Refer to the section "Options" for more details.
+Create the file `.env.local`.
+
+```shell
+touch .env.local
+```
+
+The content of the file could be the following. Please fit it to your needs. You find more about it in the section "Options".
+
+```shell
+APP_ENV=prod
+APP_SECRET=SECRET
+CORS_ALLOW_ORIGIN=^https?://DOMAIN:?[0-9]*$
+DATABASE_URL=mysql://DB_USER:DB_PASSWORD@localhost:3306/incwadi
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=PASSPHRASE
+```
 
 Then install the composer dependencies and create the database.
 
@@ -86,10 +98,18 @@ touch .env.local
 touch .env.test.local
 ```
 
-The content of both files could be the following. Please fit it to your needs and replace at least `DB_USER`, `DB_PASSWORD` and `DB_NAME`.
+The content of both files could be the following. Please fit it to your needs and replace at least `DB_USER` and `DB_PASSWORD`.
 
 ```shell
-DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
+DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/incwadi
+```
+
+To authenticate your users, you need to generate an SSH key.
+
+```shell
+mkdir -p config/jwt/
+openssl genrsa -out config/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
 Then install the composer dependencies and create the database.
@@ -122,24 +142,21 @@ Explanations for the env vars.
 - APP_SECRET - Contains a random string, more info at <https://symfony.com/doc/current/reference/configuration/framework.html#secret>
 - CORS_ALLOW_ORIGIN - Contains a regex including the URI to the backend.
 - DATABASE_URL - Credentials for the database.
-
-Example for Apache2:
-
-```apache
-SetEnv APP_ENV "prod"
-SetEnv APP_SECRET "YOURSECRET"
-SetEnv CORS_ALLOW_ORIGIN "^https?://localhost:?[0-9]*$"
-SetEnv DATABASE_URL mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME
-```
+- JWT_SECRET_KEY - Path to your secret key.
+- JWT_PUBLIC_KEY - Path to your public key,
+- JWT_PASSPHRASE - This is the passphrase that protects your key.
 
 ## CLI
 
 - bin/console - Symfony commands
-- bin/watch - Starts the development environment
-- bin/stop - Stops the development environment
-- bin/phpunit - Runs the PHPUnit tests
-- bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially
-- bin/dump - Starts the Dump Server
+- bin/watch - Starts the development environment.
+- bin/stop - Stops the development environment.
+- bin/phpunit - Runs the PHPUnit tests.
+- bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially.
+- bin/dump - Starts the Dump Server.
+- bin/setup - Installs the app.
+- bin/update - Stats the update process.
+- bin/backup - Makes a dump of the database.
 
 ## Branches
 
