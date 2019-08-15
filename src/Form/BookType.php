@@ -11,8 +11,8 @@ namespace Incwadi\Core\Form;
 
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Form\DataTransformer\AuthorToStringTransformer;
+use Incwadi\Core\Form\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,9 +21,12 @@ class BookType extends AbstractType
 {
     private $authorToStringTransformer;
 
-    public function __construct(AuthorToStringTransformer $authorToStringTransformer)
+    private $dateTimeToStringTransformer;
+
+    public function __construct(AuthorToStringTransformer $authorToStringTransformer, DateTimeToStringTransformer $dateTimeToStringTransformer)
     {
         $this->authorToStringTransformer = $authorToStringTransformer;
+        $this->dateTimeToStringTransformer = $dateTimeToStringTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -44,39 +47,11 @@ class BookType extends AbstractType
         ;
 
         $builder->get('added')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($date) {
-                    if (!$date) {
-                        return;
-                    }
-
-                    return (string) $date->getTimestamp();
-                },
-                function ($date) {
-                    return $date ? new \DateTime('@'.$date) : new \DateTime();
-                }
-            ))
-        ;
+            ->addModelTransformer($this->dateTimeToStringTransformer);
         $builder->get('author')
             ->addModelTransformer($this->authorToStringTransformer);
         $builder->get('lendOn')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($date) {
-                    if (!$date) {
-                        return;
-                    }
-
-                    return (string) $date->getTimestamp();
-                },
-                function ($date) {
-                    if (!$date) {
-                        return;
-                    }
-
-                    return $date ? new \DateTime('@'.$date) : new \DateTime();
-                }
-            ))
-        ;
+            ->addModelTransformer($this->dateTimeToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)
