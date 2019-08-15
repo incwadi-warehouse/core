@@ -80,7 +80,8 @@ class GenreTest extends WebTestCase
             'sold' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 2367
         ]);
 
         $this->assertTrue(isset($request->id));

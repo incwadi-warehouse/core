@@ -56,7 +56,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 859
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -94,7 +95,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 4758
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -184,7 +186,7 @@ class BookTest extends WebTestCase
         }
         $this->assertEquals('2.00', $request->books[0]->price);
         $this->assertFalse($request->books[0]->sold);
-        $this->assertNull($request->books[0]->soldOn);
+        $this->assertInternalType('string', $request->books[0]->soldOn);
         $this->assertFalse($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
         $this->assertEquals(2019, $request->books[0]->releaseYear);
@@ -210,7 +212,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 4758
         ]);
 
         $this->assertInternalType('int', $request->id);
@@ -224,7 +227,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 4758
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);

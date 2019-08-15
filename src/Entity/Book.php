@@ -115,7 +115,7 @@ class Book implements \JsonSerializable
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lendOn;
+    private $lendOn = null;
 
     public function __construct()
     {

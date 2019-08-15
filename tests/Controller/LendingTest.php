@@ -45,7 +45,8 @@ class LendingTest extends WebTestCase
             'sold' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false
+            'premium' => false,
+            'added' => 46784
         ]);
 
         $this->assertTrue(isset($request->id));
