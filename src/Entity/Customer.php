@@ -38,19 +38,9 @@ class Customer implements \JsonSerializable
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Incwadi\Core\Entity\Book", mappedBy="lendTo")
-     */
-    private $books;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
     private $branch;
-
-    public function __construct()
-    {
-        $this->books = new ArrayCollection();
-    }
 
     public function jsonSerialize()
     {
@@ -58,7 +48,6 @@ class Customer implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'notes' => $this->getNotes(),
-            'books' => $this->getBooks(),
             'branch' => $this->getBranch()
         ];
     }
@@ -88,36 +77,6 @@ class Customer implements \JsonSerializable
     public function setNotes(?string $notes): self
     {
         $this->notes = $notes;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Book[]
-     */
-    public function getBooks(): Collection
-    {
-        return $this->books;
-    }
-
-    public function addBook(Book $book): self
-    {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setLendTo($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBook(Book $book): self
-    {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
-            if ($book->getLendTo() === $this) {
-                $book->setLendTo(null);
-            }
-        }
 
         return $this;
     }

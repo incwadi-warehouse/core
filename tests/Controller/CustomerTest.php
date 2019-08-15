@@ -31,7 +31,6 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertTrue(isset($request->books));
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
@@ -46,7 +45,6 @@ class CustomerTest extends WebTestCase
         if ($request->customers[0]->notes) {
             $this->assertInternalType('string', $request->customers[0]->notes);
         }
-        $this->assertTrue(isset($request->customers[0]->books));
         if ($request->customers[0]->branch) {
             $this->assertInternalType('int', $request->customers[0]->branch->id);
             $this->assertInternalType('string', $request->customers[0]->branch->name);
@@ -61,7 +59,6 @@ class CustomerTest extends WebTestCase
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertTrue(isset($request->books));
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
@@ -71,7 +68,6 @@ class CustomerTest extends WebTestCase
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals('notes', $request->notes);
-        $this->assertTrue(isset($request->books));
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
