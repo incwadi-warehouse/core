@@ -22,7 +22,7 @@ class DateTimeToStringTransformer implements DataTransformerInterface
         return (string) $date->getTimestamp();
     }
 
-    public function reverseTransform($data): \DateTime
+    public function reverseTransform($date): \DateTime
     {
         return $date ? new \DateTime('@'.$date) : new \DateTime();
     }
