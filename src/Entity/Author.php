@@ -38,23 +38,12 @@ class Author implements \JsonSerializable
      */
     private $surname;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Incwadi\Core\Entity\Book", mappedBy="author")
-     */
-    private $books;
-
-    public function __construct()
-    {
-        $this->books = new ArrayCollection();
-    }
-
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
             'firstname' => $this->getFirstname(),
-            'surname' => $this->getSurname(),
-            'books' => count($this->getBooks())
+            'surname' => $this->getSurname()
         ];
     }
 
@@ -83,36 +72,6 @@ class Author implements \JsonSerializable
     public function setSurname(string $surname): self
     {
         $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Book[]
-     */
-    public function getBooks(): Collection
-    {
-        return $this->books;
-    }
-
-    public function addBook(Book $book): self
-    {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBook(Book $book): self
-    {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
-            if ($book->getAuthor() === $this) {
-                $book->setAuthor(null);
-            }
-        }
 
         return $this;
     }
