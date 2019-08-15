@@ -28,6 +28,7 @@ class StatsController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Book::class);
+
         $all = count($repo->findAll());
         $available = count($repo->findBy([
             'sold' => false,
