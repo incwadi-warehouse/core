@@ -46,14 +46,6 @@ class BookTest extends WebTestCase
 
         $this->assertEquals([], $request);
 
-        // stats
-        $request = $this->request('/book/stats', 'GET', [], []);
-
-        $this->assertInternalType('int', $request->all);
-        $this->assertInternalType('int', $request->available);
-        $this->assertInternalType('int', $request->sold);
-        $this->assertInternalType('int', $request->removed);
-
         // new
         $request = $this->request('/book/new', 'POST', [], [
             'title' => 'title',

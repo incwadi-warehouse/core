@@ -78,30 +78,6 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/stats", methods={"GET"}, name="stats")
-     * @Security("is_granted('ROLE_USER')")
-     */
-    public function stats(): JsonResponse
-    {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Book::class);
-        $all = count($repo->findAll());
-        $available = count($repo->findBy([
-            'sold' => false,
-            'removed' => false
-        ]));
-        $sold = count($repo->findBySold(true));
-        $removed = count($repo->findByRemoved(true));
-
-        return $this->json([
-            'all' => $all,
-            'available' => $available,
-            'sold' => $sold,
-            'removed' => $removed
-        ]);
-    }
-
-    /**
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
