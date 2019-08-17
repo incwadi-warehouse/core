@@ -51,6 +51,14 @@ class AuthorTest extends WebTestCase
         $this->assertEquals('Firstname1', $request->firstname);
         $this->assertEquals('Surname1', $request->surname);
 
+        // show
+        $request = $this->request('/author/'.$id, 'GET');
+
+        $this->assertTrue(isset($request->id));
+        $this->assertInternalType('integer', $request->id);
+        $this->assertEquals('Firstname1', $request->firstname);
+        $this->assertEquals('Surname1', $request->surname);
+
         // delete
         $request = $this->request('/author/'.$id, 'DELETE');
 

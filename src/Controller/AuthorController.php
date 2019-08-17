@@ -37,6 +37,15 @@ class AuthorController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function show(Author $author): JsonResponse
+    {
+        return $this->json($author);
+    }
+
+    /**
      * @Route("/new", methods={"POST"}, name="new")
      * @Security("is_granted('ROLE_USER')")
      */
