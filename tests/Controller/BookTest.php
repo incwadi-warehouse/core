@@ -178,8 +178,10 @@ class BookTest extends WebTestCase
         $this->assertInternalType('integer', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertEquals('book', $request->books[0]->title);
-        $this->assertInternalType('string', $request->books[0]->author->firstname);
-        $this->assertInternalType('string', $request->books[0]->author->surname);
+        if (null !== $request->books[0]->author) {
+            $this->assertInternalType('string', $request->books[0]->author->firstname);
+            $this->assertInternalType('string', $request->books[0]->author->surname);
+        }
         if ($request->books[0]->genre) {
             $this->assertInternalType('integer', $request->books[0]->genre->id);
             $this->assertInternalType('string', $request->books[0]->genre->name);
