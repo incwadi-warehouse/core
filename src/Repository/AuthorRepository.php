@@ -21,8 +21,36 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class AuthorRepository extends ServiceEntityRepository
 {
+    /**
+     * @var int
+     */
+    const LIMIT = 100;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Author::class);
+    }
+
+    public function findDemanded(string $term)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('a');
+        $qb->from('Incwadi:Author', 'a');
+
+        $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->like('a.firstname', ':term'),
+                $qb->expr()->like('a.surname', ':term')
+            )
+        );
+
+        $term = preg_replace('#[%\*]#', '', $term);
+        $qb->setParameter('term', '%'.$term.'%');
+        $qb->setMaxResults(self::LIMIT);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
     }
 }
