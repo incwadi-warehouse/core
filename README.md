@@ -1,6 +1,6 @@
 # incwadi/core
 
-incwadi is a book database to manage a lot of books.
+incwadi is a book database to manages your books.
 
 ## How it was made
 
