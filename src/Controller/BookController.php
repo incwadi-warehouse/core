@@ -120,7 +120,7 @@ class BookController extends AbstractController
         );
         if ($existingBook !== []) {
             return $this->json([
-            'msg' => 'Book not saved, because it exists already!'
+                'msg' => 'Book not saved, because it exists already!'
             ], 409);
         }
         if ($form->isSubmitted() && $form->isValid()) {
@@ -184,7 +184,7 @@ class BookController extends AbstractController
             if (true === $book->getRemoved() && null === $book->getRemovedOn()) {
                 $book->setRemovedOn(new \DateTime());
             }
-            // revert sold
+            // revert removed
             if (false === $book->getRemoved() && null !== $book->getRemovedOn()) {
                 $book->setRemovedOn(null);
             }
