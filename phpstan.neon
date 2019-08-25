@@ -3,8 +3,6 @@ parameters:
     - vendor/bin/.phpunit/phpunit-7.4/vendor/autoload.php
   symfony:
     container_xml_path: '%rootDir%/../../../var/cache/dev/srcIncwadi_Core_KernelDevDebugContainer.xml'
-  excludes_analyse:
-    - %rootDir%/../../../tests/*
 
 includes:
   - vendor/phpstan/phpstan-phpunit/extension.neon
