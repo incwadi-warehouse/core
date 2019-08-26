@@ -59,6 +59,12 @@ openssl genrsa -out config/jwt/private.pem -aes256 4096
 openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
+Test whether the login works as expected.
+
+```shell
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/api/login_check -d '{"username":"admin","password":"password"}'
+```
+
 You also need this header for apache.
 
 ```apache
@@ -102,6 +108,7 @@ The content of both files could be the following. Please fit it to your needs an
 
 ```shell
 DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/incwadi
+JWT_PASSPHRASE=PASSPHRASE
 ```
 
 To authenticate your users, you need to generate an SSH key.
