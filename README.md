@@ -97,7 +97,7 @@ Clone the repository:
 git clone https://gitlab.com/incwadi/core.git
 ```
 
-Create the file `.env.local` and `.env.test.local`.
+Create the files `.env.local` and `.env.test.local`.
 
 ```shell
 touch .env.local
@@ -124,7 +124,7 @@ Then install the composer dependencies and create the database.
 ```shell
 composer install
 bin/console doctrine:database:create
-bin/console doctrine:schema:update --force
+bin/console doctrine:migrations:migrate
 ```
 
 Load the first user with the fixtures.
@@ -150,7 +150,7 @@ Explanations for the env vars.
 - CORS_ALLOW_ORIGIN - Contains a regex including the URI to the backend.
 - DATABASE_URL - Credentials for the database.
 - JWT_SECRET_KEY - Path to your secret key.
-- JWT_PUBLIC_KEY - Path to your public key,
+- JWT_PUBLIC_KEY - Path to your public key.
 - JWT_PASSPHRASE - This is the passphrase that protects your key.
 
 ## CLI
@@ -162,7 +162,7 @@ Explanations for the env vars.
 - bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially.
 - bin/dump - Starts the Dump Server.
 - bin/setup - Installs the app.
-- bin/update - Stats the update process.
+- bin/update - Starts the update process.
 - bin/backup - Makes a dump of the database.
 
 ## Branches
