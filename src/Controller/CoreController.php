@@ -12,7 +12,10 @@ namespace Incwadi\Core\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Incwadi\Core\Form\ProfilePasswordType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CoreController extends AbstractController
 {
@@ -38,5 +41,39 @@ class CoreController extends AbstractController
             'roles' => $this->getUser()->getRoles(),
             'branch' => $this->getUser()->getBranch()
         ]);
+    }
+
+    /**
+     * @Route("/v1/password", methods={"PUT"}, name="password")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function password(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ProfilePasswordType::class, $user);
+
+        $form->submit(
+            json_decode(
+                $request->getContent(),
+                true
+            )
+        );
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $encoder->encodePassword(
+                    $user,
+                    $user->getPassword()
+                )
+            );
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->json([
+                'msg' => 'The password was successfully changed!'
+            ]);
+        }
+
+        return $this->json([
+                'msg' => 'The password could not be changed!'
+        ], 400);
     }
 }
