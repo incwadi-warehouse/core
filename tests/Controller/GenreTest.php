@@ -80,7 +80,6 @@ class GenreTest extends WebTestCase
             'sold' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false,
             'added' => 2367
         ]);
 

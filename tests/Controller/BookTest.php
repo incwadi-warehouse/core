@@ -56,7 +56,6 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false,
             'added' => 859
         ]);
 
@@ -79,7 +78,6 @@ class BookTest extends WebTestCase
         $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
-        $this->assertFalse($request->premium);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
 
@@ -95,7 +93,6 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false,
             'added' => 4758
         ]);
 
@@ -118,7 +115,6 @@ class BookTest extends WebTestCase
         $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
-        $this->assertFalse($request->premium);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
 
@@ -158,7 +154,6 @@ class BookTest extends WebTestCase
         $this->assertNull($request->removedOn);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
-        $this->assertFalse($request->premium);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
 
@@ -193,7 +188,6 @@ class BookTest extends WebTestCase
         $this->assertNull($request->books[0]->removedOn);
         $this->assertEquals(2019, $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
-        $this->assertFalse($request->books[0]->premium);
         $this->assertNull($request->books[0]->lendTo);
         $this->assertNull($request->books[0]->lendOn);
 
@@ -214,7 +208,6 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false,
             'added' => 4758
         ]);
 
@@ -229,7 +222,6 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'premium' => false,
             'added' => 4758
         ], 409);
 

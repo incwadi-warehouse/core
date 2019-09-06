@@ -41,7 +41,6 @@ class BookType extends AbstractType
             ->add('removed')
             ->add('releaseYear')
             ->add('type')
-            ->add('premium')
             ->add('lendTo')
             ->add('lendOn', TextType::class)
         ;

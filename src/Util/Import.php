@@ -54,7 +54,6 @@ class Import implements ImportInterface
             $book->setSold($item['sold']);
             $book->setReleaseYear($item['releaseYear']);
             $book->setType($item['type']);
-            $book->setPremium($item['premium']);
             $book->setLendTo($this->customer($item['lendTo']));
             $book->setLendOn(new \DateTime($item['lendOn']));
 

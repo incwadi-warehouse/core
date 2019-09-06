@@ -101,13 +101,6 @@ class Book implements \JsonSerializable
     private $type = 'paperback';
 
     /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     * @Assert\Type(type="boolean")
-     */
-    private $premium = false;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer", inversedBy="books")
      */
     private $lendTo;
@@ -140,7 +133,6 @@ class Book implements \JsonSerializable
             'removedOn' => $this->getRemovedOn(),
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
-            'premium' => $this->getPremium(),
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null
         ];
@@ -291,18 +283,6 @@ class Book implements \JsonSerializable
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getPremium(): bool
-    {
-        return $this->premium;
-    }
-
-    public function setPremium(bool $premium): self
-    {
-        $this->premium = $premium;
 
         return $this;
     }

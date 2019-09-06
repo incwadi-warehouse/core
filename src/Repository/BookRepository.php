@@ -274,14 +274,6 @@ class BookRepository extends ServiceEntityRepository
             'type_desc' => [
                 'field' => 'b.type',
                 'direction' => 'DESC'
-            ],
-            'premium_asc' => [
-                'field' => 'b.premium',
-                'direction' => 'ASC'
-            ],
-            'premium_desc' => [
-                'field' => 'b.premium',
-                'direction' => 'DESC'
             ]
         ];
     }

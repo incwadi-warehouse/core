@@ -114,8 +114,7 @@ class BookController extends AbstractController
                 'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
-                'premium' => $book->getPremium()
+                'type' => $book->getType()
             ]
         );
         if ($existingBook !== []) {
@@ -160,8 +159,7 @@ class BookController extends AbstractController
                 'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
-                'premium' => $book->getPremium()
+                'type' => $book->getType()
             ]
         );
         if (null !== $existingBook) {
