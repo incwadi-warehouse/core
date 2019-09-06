@@ -19,4 +19,4 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Incwadi\Core\Entity'
-                alias: Incwadi_Core
+                alias: Incwadi
