@@ -56,6 +56,7 @@ class Import implements ImportInterface
             $book->setType($item['type']);
             $book->setLendTo($this->customer($item['lendTo']));
             $book->setLendOn(new \DateTime($item['lendOn']));
+            $book->getLendTo() ? $book->getLendTo()->setBranch($book->getBranch()) : null;
 
             $books[] = $book;
 
