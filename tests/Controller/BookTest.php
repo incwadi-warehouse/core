@@ -172,7 +172,7 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
-        $this->assertEquals('book', $request->books[0]->title);
+        $this->assertInternalType('string', $request->books[0]->title);
         if (null !== $request->books[0]->author) {
             $this->assertInternalType('string', $request->books[0]->author->firstname);
             $this->assertInternalType('string', $request->books[0]->author->surname);
@@ -181,15 +181,21 @@ class BookTest extends WebTestCase
             $this->assertInternalType('integer', $request->books[0]->genre->id);
             $this->assertInternalType('string', $request->books[0]->genre->name);
         }
-        $this->assertEquals('2.00', $request->books[0]->price);
+        $this->assertNotEmpty($request->books[0]->price);
         $this->assertFalse($request->books[0]->sold);
-        $this->assertInternalType('string', $request->books[0]->soldOn);
+        if (null !== $request->books[0]->soldOn) {
+            $this->assertInternalType('string', $request->books[0]->soldOn);
+        }
         $this->assertFalse($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
-        $this->assertEquals(2019, $request->books[0]->releaseYear);
+        $this->assertInternalType('integer', $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
-        $this->assertNull($request->books[0]->lendTo);
-        $this->assertNull($request->books[0]->lendOn);
+        if (null !== $request->books[0]->lendTo) {
+            $this->assertNotEmpty($request->books[0]->lendTo);
+        }
+        if (null !== $request->books[0]->lendOn) {
+            $this->assertNotEmpty($request->books[0]->lendOn);
+        }
 
         // delete
         $request = $this->request('/book/'.$id, 'DELETE');
