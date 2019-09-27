@@ -202,7 +202,7 @@ class BookRepository extends ServiceEntityRepository
     private function type(QueryBuilder $qb, ?string $type)
     {
         if ($type) {
-            return $qb->expr()->lte('b.type', ':type');
+            return $qb->expr()->eq('b.type', ':type');
         }
 
         return null;
