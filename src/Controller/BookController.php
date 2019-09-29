@@ -78,6 +78,19 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/clean", methods={"DELETE"}, name="clean")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function clean()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Book::class)->deleteBooks(0);
+        $em->flush();
+
+        return $this->json(['msg' => 'Cleaned up successfully!']);
+    }
+
+    /**
      * @Route("/{id}", methods={"GET"}, name="show")
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
