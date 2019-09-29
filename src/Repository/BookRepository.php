@@ -32,9 +32,38 @@ class BookRepository extends ServiceEntityRepository
      */
     const OFFSET = 0;
 
+    /**
+     * @var int
+     */
+    const CLEAR_LIMIT = 3;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Book::class);
+    }
+
+    public function deleteBooks(int $clearLimit = self::CLEAR_LIMIT): int
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->delete('Incwadi:Book', 'b');
+        $qb->where(
+            $qb->expr()->orX(
+                $qb->expr()->lte('b.soldOn', ':date'),
+                $qb->expr()->lte('b.removedOn', ':date')
+            )
+        );
+        $date = new \DateTime();
+        $date->sub(new \DateInterval('P'.$clearLimit.'D'));
+
+        $qb->setParameter(
+            'date',
+            $date
+        );
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
     }
 
     public function findDemanded(
