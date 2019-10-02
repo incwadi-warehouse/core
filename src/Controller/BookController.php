@@ -84,7 +84,9 @@ class BookController extends AbstractController
     public function clean()
     {
         $em = $this->getDoctrine()->getManager();
-        $em->getRepository(Book::class)->deleteBooks(0);
+        $em->getRepository(Book::class)->deleteBooksByBranch(
+            $this->getUser()->getBranch()
+        );
         $em->flush();
 
         return $this->json(['msg' => 'Cleaned up successfully!']);

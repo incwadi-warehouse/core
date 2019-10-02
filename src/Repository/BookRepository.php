@@ -12,6 +12,7 @@ namespace Incwadi\Core\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -60,6 +61,29 @@ class BookRepository extends ServiceEntityRepository
             'date',
             $date
         );
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function deleteBooksByBranch(Branch $branch): int
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->delete('Incwadi:Book', 'b');
+        $qb->where(
+            $qb->expr()->andX(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('b.sold', ':state'),
+                    $qb->expr()->eq('b.removed', ':state')
+                ),
+                $qb->expr()->eq('b.branch', ':branch')
+            )
+        );
+
+        $qb->setParameter('state', true);
+        $qb->setParameter('branch', $branch);
 
         $query = $qb->getQuery();
 
