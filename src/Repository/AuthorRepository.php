@@ -36,12 +36,18 @@ class AuthorRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('a');
+        $name = $qb->expr()->concat(
+            'a.firstname',
+            $qb->expr()->concat($qb->expr()->literal(' '),
+            'a.surname')
+        );
         $qb->from('Incwadi:Author', 'a');
 
         $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->like('a.firstname', ':term'),
-                $qb->expr()->like('a.surname', ':term')
+                $qb->expr()->like('a.surname', ':term'),
+                $qb->expr()->like($name, ':term')
             )
         );
 

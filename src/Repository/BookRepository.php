@@ -197,10 +197,17 @@ class BookRepository extends ServiceEntityRepository
     private function term(QueryBuilder $qb, ?string $term)
     {
         if ($term) {
+            $name = $qb->expr()->concat(
+                'a.firstname',
+                $qb->expr()->concat($qb->expr()->literal(' '),
+                'a.surname')
+            );
+
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
                 $qb->expr()->like('a.firstname', ':term'),
-                $qb->expr()->like('a.surname', ':term')
+                $qb->expr()->like('a.surname', ':term'),
+                $qb->expr()->like($name, ':term')
             );
         }
 
