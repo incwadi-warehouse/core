@@ -89,6 +89,12 @@ Replace `[NAME]` with your desired data.
 
 For more details on how to deal with users, read the section "Users Management".
 
+Add the following script to your Cron Jobs and let it run at least daily.
+
+```shell
+bin/console book:delete -q
+```
+
 ## Dev
 
 Clone the repository:
