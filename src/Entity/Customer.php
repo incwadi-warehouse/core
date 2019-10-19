@@ -31,11 +31,6 @@ class Customer implements \JsonSerializable
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $notes;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
     private $branch;
@@ -45,7 +40,6 @@ class Customer implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'notes' => $this->getNotes(),
             'branch' => $this->getBranch()
         ];
     }
@@ -63,18 +57,6 @@ class Customer implements \JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getNotes(): ?string
-    {
-        return $this->notes;
-    }
-
-    public function setNotes(?string $notes): self
-    {
-        $this->notes = $notes;
 
         return $this;
     }
