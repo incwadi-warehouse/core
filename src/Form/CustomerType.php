@@ -20,7 +20,6 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('notes')
         ;
     }
 
