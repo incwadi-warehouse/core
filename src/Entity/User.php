@@ -40,7 +40,7 @@ class User implements UserInterface
      * @var string
      * @Assert\Length(min="12")
      * @Assert\Regex(
-     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9])(.*)/")
+     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&])(?=.*[^a-zA-Z0-9!@#\$%\^&])(.*)/")
      * @ORM\Column(type="string")
      */
     private $password;
