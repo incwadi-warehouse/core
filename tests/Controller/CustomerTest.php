@@ -24,13 +24,11 @@ class CustomerTest extends WebTestCase
     {
         // new
         $request = $this->request('/customer/new', 'POST', [], [
-            'name' => 'name',
-            'notes' => 'notes'
+            'name' => 'name'
         ]);
 
         $this->assertInternalType('int', $request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
@@ -42,9 +40,6 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('array', $request->customers);
         $this->assertInternalType('int', $request->customers[0]->id);
         $this->assertInternalType('string', $request->customers[0]->name);
-        if ($request->customers[0]->notes) {
-            $this->assertInternalType('string', $request->customers[0]->notes);
-        }
         if ($request->customers[0]->branch) {
             $this->assertInternalType('int', $request->customers[0]->branch->id);
             $this->assertInternalType('string', $request->customers[0]->branch->name);
@@ -52,13 +47,11 @@ class CustomerTest extends WebTestCase
 
         // edit
         $request = $this->request('/customer/'.$id, 'PUT', [], [
-            'name' => 'name',
-            'notes' => 'notes'
+            'name' => 'name'
         ]);
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
@@ -67,7 +60,6 @@ class CustomerTest extends WebTestCase
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertEquals('notes', $request->notes);
         $this->assertInternalType('int', $request->branch->id);
         $this->assertInternalType('string', $request->branch->name);
 
