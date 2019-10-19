@@ -70,7 +70,7 @@ class GenreController extends AbstractController
 
         return $this->json([
             'msg' => 'Please enter a valid genre!'
-        ]);
+        ], 400);
     }
 
     /**

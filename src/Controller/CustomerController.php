@@ -76,7 +76,7 @@ class CustomerController extends AbstractController
 
         return $this->json([
             'msg' => 'Please enter a valid customer!'
-        ]);
+        ], 400);
     }
 
     /**
