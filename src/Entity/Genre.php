@@ -30,11 +30,17 @@ class Genre implements \JsonSerializable
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     */
+    private $branch;
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
-            'name' => $this->getName()
+            'name' => $this->getName(),
+            'branch' => $this->getBranch()
         ];
     }
 
@@ -51,6 +57,18 @@ class Genre implements \JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBranch(): ?Branch
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(?Branch $branch): self
+    {
+        $this->branch = $branch;
 
         return $this;
     }
