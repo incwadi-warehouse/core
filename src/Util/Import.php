@@ -50,6 +50,7 @@ class Import implements ImportInterface
             $book->setTitle($item['title']);
             $book->setAuthor($this->author($item['author']));
             $book->setGenre($this->genre($item['genre']));
+            $book->getGenre() ? $book->getGenre()->setBranch($book->getBranch()) : null;
             $book->setPrice($item['price']);
             $book->setSold($item['sold']);
             $book->setReleaseYear($item['releaseYear']);
