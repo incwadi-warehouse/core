@@ -31,14 +31,16 @@ class GenreController extends AbstractController
     {
         return $this->json(
             [
-                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findAll()
+                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
+                    $this->getUser()->getBranch()
+                )
             ]
         );
     }
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
     public function show(Genre $genre): JsonResponse
     {
@@ -52,6 +54,7 @@ class GenreController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $genre = new Genre();
+        $genre->setBranch($this->getUser()->getBranch());
         $form = $this->createForm(GenreType::class, $genre);
 
         $form->submit(
@@ -75,7 +78,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     public function edit(Request $request, Genre $genre): JsonResponse
     {
@@ -101,7 +104,7 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     public function delete(Genre $genre): JsonResponse
     {
