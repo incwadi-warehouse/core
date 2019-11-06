@@ -42,6 +42,8 @@ class CoreTest extends WebTestCase
             $this->assertInternalType('int', $request->branch->id);
             $this->assertInternalType('string', $request->branch->name);
         }
+        $this->assertTrue($request->isUser);
+        $this->assertTrue($request->isAdmin);
     }
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
