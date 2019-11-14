@@ -197,7 +197,6 @@ class BookRepository extends ServiceEntityRepository
     private function term(QueryBuilder $qb, ?string $term)
     {
         if ($term) {
-            dump($term);
             $name = $qb->expr()->concat(
                 'a.surname',
                 $qb->expr()->concat($qb->expr()->literal(' '),
