@@ -41,13 +41,31 @@ class AuthorRepository extends ServiceEntityRepository
             $qb->expr()->concat($qb->expr()->literal(' '),
             'a.surname')
         );
+        $nameReverse = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(' '),
+            'a.firstname')
+        );
+        $nameCommaAndSpace = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(', '),
+            'a.firstname')
+        );
+        $name4Comma = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(','),
+            'a.firstname')
+        );
         $qb->from('Incwadi:Author', 'a');
 
         $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->like('a.firstname', ':term'),
                 $qb->expr()->like('a.surname', ':term'),
-                $qb->expr()->like($name, ':term')
+                $qb->expr()->like($name, ':term'),
+                $qb->expr()->like($nameReverse, ':term'),
+                $qb->expr()->like($nameCommaAndSpace, ':term'),
+                $qb->expr()->like($name4Comma, ':term')
             )
         );
 

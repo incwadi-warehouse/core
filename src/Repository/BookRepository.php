@@ -197,17 +197,36 @@ class BookRepository extends ServiceEntityRepository
     private function term(QueryBuilder $qb, ?string $term)
     {
         if ($term) {
+            dump($term);
             $name = $qb->expr()->concat(
-                'a.firstname',
+                'a.surname',
                 $qb->expr()->concat($qb->expr()->literal(' '),
-                'a.surname')
+                'a.firstname')
+            );
+            $nameReverse = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(' '),
+                'a.firstname')
+            );
+            $nameCommaAndSpace = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(', '),
+                'a.firstname')
+            );
+            $name4Comma = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(','),
+                'a.firstname')
             );
 
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
                 $qb->expr()->like('a.firstname', ':term'),
                 $qb->expr()->like('a.surname', ':term'),
-                $qb->expr()->like($name, ':term')
+                $qb->expr()->like($name, ':term'),
+                $qb->expr()->like($nameReverse, ':term'),
+                $qb->expr()->like($nameCommaAndSpace, ':term'),
+                $qb->expr()->like($name4Comma, ':term')
             );
         }
 
