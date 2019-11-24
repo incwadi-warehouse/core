@@ -24,15 +24,23 @@ class BranchController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->json(
+                [
+                    'branches' => $this->getDoctrine()->getRepository(Branch::class)->findAll()
+                ]
+            );
+        }
+
         return $this->json(
-            [
-                'branches' => $this->getDoctrine()->getRepository(Branch::class)->findAll()
-            ]
-        );
+                [
+                    'branches' => [$this->getDoctrine()->getRepository(Branch::class)->find($this->getUser()->getBranch()->getId())]
+                ]
+            );
     }
 
     /**
