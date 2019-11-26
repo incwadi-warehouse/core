@@ -9,7 +9,7 @@
     "doctrine/doctrine-migrations-bundle": "^2.0",
     "doctrine/orm": "^2.6",
     "lexik/jwt-authentication-bundle": "^2.6",
-    "nelmio/cors-bundle": "^1.5",
+    "nelmio/cors-bundle": "^2.0",
     "sensio/framework-extra-bundle": "^5.5",
     "symfony/asset": "^4.4",
     "symfony/console": "^4.4",
