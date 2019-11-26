@@ -2,18 +2,15 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)

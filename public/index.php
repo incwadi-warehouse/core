@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * This script is part of incwadi/core
+ */
+
 use Incwadi\Core\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;

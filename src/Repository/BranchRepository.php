@@ -2,16 +2,13 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Incwadi\Core\Entity\Branch;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Incwadi\Core\Entity\Branch;
 
 /**
  * @method Branch|null find($id, $lockMode = null, $lockVersion = null)
