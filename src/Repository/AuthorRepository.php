@@ -11,7 +11,7 @@ namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Incwadi\Core\Entity\Author;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,7 +26,7 @@ class AuthorRepository extends ServiceEntityRepository
      */
     const LIMIT = 100;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Author::class);
     }

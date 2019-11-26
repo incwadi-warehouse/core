@@ -15,7 +15,7 @@ class AuthorTest extends WebTestCase
 {
     protected $clientAdmin;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->buildClient();
     }

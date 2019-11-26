@@ -11,7 +11,7 @@ namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Incwadi\Core\Entity\Customer;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,7 +21,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CustomerRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Customer::class);
     }

@@ -13,7 +13,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,7 +38,7 @@ class BookRepository extends ServiceEntityRepository
      */
     const CLEAR_LIMIT = 3;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
     }
