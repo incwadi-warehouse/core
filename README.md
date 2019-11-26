@@ -97,6 +97,10 @@ bin/console book:delete -q
 
 ## Dev
 
+Install the Symfony binary.
+
+https://symfony.com/download
+
 Clone the repository:
 
 ```shell

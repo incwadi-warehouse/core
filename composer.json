@@ -39,7 +39,6 @@
     "symfony/phpunit-bridge": "^4.4",
     "symfony/stopwatch": "^4.4",
     "symfony/var-dumper": "^4.4",
-    "symfony/web-server-bundle": "^4.4",
     "doctrine/doctrine-fixtures-bundle": "^3.2"
   },
   "config": {
