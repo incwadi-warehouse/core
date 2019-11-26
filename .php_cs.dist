@@ -10,7 +10,7 @@ if (!is_dir(__DIR__ . '/var/cache/')) {
 $finder = Finder::create()
     ->in(__DIR__)
     ->exclude('var')
-    ->exclude('bundles.php')
+    ->notPath('config/bundles.php')
 ;
 
 $fileHeaderComment = <<<COMMENT
