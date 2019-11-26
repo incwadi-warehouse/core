@@ -34,6 +34,8 @@ class BookTest extends WebTestCase
         $request = $this->request('/genre/'.$this->genreId, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
+
+        parent::tearDown();
     }
 
     public function testScenario()
