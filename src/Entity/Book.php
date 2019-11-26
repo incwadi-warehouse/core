@@ -100,7 +100,7 @@ class Book implements \JsonSerializable
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer", inversedBy="books")
      */
-    private $lendTo;
+    private $lendTo = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
