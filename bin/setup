@@ -14,5 +14,5 @@ fi
 composer install --no-dev
 composer dump-env prod
 bin/console doctrine:database:create
-bin/console doctrine:schema:update --force
+bin/console doctrine:migrations:migrate
 chown -R www-data:www-data .
