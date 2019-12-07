@@ -1,6 +1,6 @@
 {
   "name": "incwadi/core",
-  "description": "incwadi is a book database to manage a lot of books.",
+  "description": "incwadi is a book database to manage your books.",
   "type": "project",
   "license": "MIT",
   "require": {
