@@ -216,3 +216,19 @@ If the user has forgotten the password, you can reset it with this command. Repl
 ```shell
 bin/console user:reset-password [ID]
 ```
+
+## Backup
+
+The most important thing to update is the database. One example how you can achieve that. The following commands assumes you are in the home directory of root and you have installed the core into /var/www/core, please fit the commands to your needs. Also, you need to install rsync.
+
+On the remote machine:
+
+```shell
+/var/www/core/bin/backup
+```
+
+On your local machine:
+
+```shell
+rsync -azvv -e ssh [USER]@[HOST]:/root/incwadi.sql ~/incwadi.sql
+```
