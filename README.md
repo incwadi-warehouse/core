@@ -140,7 +140,7 @@ bin/console doctrine:migrations:migrate
 Load the first user with the fixtures.
 
 ```shell
-bin/console doctrine:fixtures:load
+bin/console --env=dev doctrine:fixtures:load
 ```
 
 ## Update
