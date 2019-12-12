@@ -8,15 +8,13 @@ if (!is_dir(__DIR__ . '/var/cache/')) {
 }
 
 $finder = Finder::create()
-    ->in(__DIR__ . '/src')
-    ->in(__DIR__ . '/tests')
+    ->in(__DIR__)
+    ->exclude('var')
+    ->notPath('config/bundles.php')
 ;
 
 $fileHeaderComment = <<<COMMENT
 This script is part of incwadi/core
-
-Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
-MIT-licensed
 COMMENT;
 
 return Config::create()

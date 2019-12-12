@@ -2,16 +2,13 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Customer;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,7 +18,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CustomerRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Customer::class);
     }

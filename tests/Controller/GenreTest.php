@@ -2,9 +2,6 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Tests\Controller;
@@ -15,7 +12,7 @@ class GenreTest extends WebTestCase
 {
     protected $clientAdmin;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->buildClient();
     }

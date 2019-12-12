@@ -2,9 +2,6 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Tests\Controller;
@@ -17,7 +14,7 @@ class BookTest extends WebTestCase
 
     protected $clientAdmin;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->buildClient();
 
@@ -32,11 +29,13 @@ class BookTest extends WebTestCase
         $this->genreId = $request->id;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $request = $this->request('/genre/'.$this->genreId, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
+
+        parent::tearDown();
     }
 
     public function testScenario()

@@ -2,9 +2,6 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Controller;
@@ -24,13 +21,19 @@ class BranchController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
     {
         return $this->json(
             [
-                'branches' => $this->getDoctrine()->getRepository(Branch::class)->findAll()
+                'branches' => $this->isGranted('ROLE_ADMIN') ?
+                    $this->getDoctrine()->getRepository(Branch::class)->findAll() :
+                    [
+                        $this->getDoctrine()->getRepository(Branch::class)->find(
+                            $this->getUser()->getBranch()->getId()
+                        )
+                    ]
             ]
         );
     }

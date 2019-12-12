@@ -2,16 +2,13 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Author;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,7 +23,7 @@ class AuthorRepository extends ServiceEntityRepository
      */
     const LIMIT = 100;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Author::class);
     }
@@ -41,13 +38,31 @@ class AuthorRepository extends ServiceEntityRepository
             $qb->expr()->concat($qb->expr()->literal(' '),
             'a.surname')
         );
+        $nameReverse = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(' '),
+            'a.firstname')
+        );
+        $nameCommaAndSpace = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(', '),
+            'a.firstname')
+        );
+        $name4Comma = $qb->expr()->concat(
+            'a.surname',
+            $qb->expr()->concat($qb->expr()->literal(','),
+            'a.firstname')
+        );
         $qb->from('Incwadi:Author', 'a');
 
         $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->like('a.firstname', ':term'),
                 $qb->expr()->like('a.surname', ':term'),
-                $qb->expr()->like($name, ':term')
+                $qb->expr()->like($name, ':term'),
+                $qb->expr()->like($nameReverse, ':term'),
+                $qb->expr()->like($nameCommaAndSpace, ':term'),
+                $qb->expr()->like($name4Comma, ':term')
             )
         );
 

@@ -2,18 +2,15 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,7 +35,7 @@ class BookRepository extends ServiceEntityRepository
      */
     const CLEAR_LIMIT = 3;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
     }
@@ -198,16 +195,34 @@ class BookRepository extends ServiceEntityRepository
     {
         if ($term) {
             $name = $qb->expr()->concat(
-                'a.firstname',
+                'a.surname',
                 $qb->expr()->concat($qb->expr()->literal(' '),
-                'a.surname')
+                'a.firstname')
+            );
+            $nameReverse = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(' '),
+                'a.firstname')
+            );
+            $nameCommaAndSpace = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(', '),
+                'a.firstname')
+            );
+            $name4Comma = $qb->expr()->concat(
+                'a.surname',
+                $qb->expr()->concat($qb->expr()->literal(','),
+                'a.firstname')
             );
 
             return $qb->expr()->orX(
                 $qb->expr()->like('b.title', ':term'),
                 $qb->expr()->like('a.firstname', ':term'),
                 $qb->expr()->like('a.surname', ':term'),
-                $qb->expr()->like($name, ':term')
+                $qb->expr()->like($name, ':term'),
+                $qb->expr()->like($nameReverse, ':term'),
+                $qb->expr()->like($nameCommaAndSpace, ':term'),
+                $qb->expr()->like($name4Comma, ':term')
             );
         }
 

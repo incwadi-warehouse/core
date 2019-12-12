@@ -2,9 +2,6 @@
 
 /*
  * This script is part of incwadi/core
- *
- * Copyright 2019 André Baldeweg <kontakt@andrebaldeweg.de>
- * MIT-licensed
  */
 
 namespace Incwadi\Core\Entity;
@@ -103,7 +100,7 @@ class Book implements \JsonSerializable
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer", inversedBy="books")
      */
-    private $lendTo;
+    private $lendTo = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
