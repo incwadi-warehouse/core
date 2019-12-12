@@ -24,6 +24,7 @@
     "symfony/yaml": "~4.3"
   },
   "require-dev": {
+    "doctrine/doctrine-fixtures-bundle": "^3.3",
     "easycorp/easy-log-handler": "^1.0",
     "friendsofphp/php-cs-fixer": "^2.15",
     "mikey179/vfsstream": "^1.6",
@@ -39,8 +40,7 @@
     "symfony/phpunit-bridge": "^4.3",
     "symfony/stopwatch": "^4.3",
     "symfony/var-dumper": "^4.3",
-    "symfony/web-server-bundle": "^4.3",
-    "doctrine/doctrine-fixtures-bundle": "^3.2"
+    "symfony/web-server-bundle": "^4.3"
   },
   "config": {
     "preferred-install": {
