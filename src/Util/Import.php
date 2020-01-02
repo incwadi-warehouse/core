@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -52,7 +52,7 @@ class Import implements ImportInterface
             $book->setSold($item['sold']);
             $book->setReleaseYear($item['releaseYear']);
             $book->setType($item['type']);
-            $book->setLendTo($this->customer($item['lendTo']));
+            $book->setLendTo($this->staff($item['lendTo']));
             $book->setLendOn(new \DateTime($item['lendOn']));
             $book->getLendTo() ? $book->getLendTo()->setBranch($book->getBranch()) : null;
 
@@ -119,23 +119,23 @@ class Import implements ImportInterface
         return $genre;
     }
 
-    protected function customer(string $data): ?Customer
+    protected function staff(string $data): ?Staff
     {
         if ('' === $data) {
             return null;
         }
 
-        $existing = $this->em->getRepository(Customer::class)->findOneByName($data);
+        $existing = $this->em->getRepository(Staff::class)->findOneByName($data);
         if ($existing) {
             return $existing;
         }
 
-        $customer = new Customer();
-        $customer->setName($data);
+        $staff = new Staff();
+        $staff->setName($data);
 
-        $this->em->persist($customer);
+        $this->em->persist($staff);
         $this->em->flush();
 
-        return $customer;
+        return $staff;
     }
 }

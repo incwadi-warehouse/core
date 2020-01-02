@@ -9,7 +9,7 @@ namespace Incwadi\Core\Tests\Util;
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Entity\Genre;
 use Incwadi\Core\Util\Export;
 use PHPUnit\Framework\TestCase;
@@ -28,8 +28,8 @@ class ExportTest extends TestCase
         $genre = new Genre();
         $genre->setName('Foreign Language Books');
 
-        $customer = new Customer();
-        $customer->setName('admin');
+        $staff = new Staff();
+        $staff->setName('admin');
 
         $book1 = new Book();
         $book1->setBranch($branch);
@@ -42,7 +42,7 @@ class ExportTest extends TestCase
         $book1->setRemoved(false);
         $book1->setReleaseYear(2019);
         $book1->setType('paperback');
-        $book1->setLendTo($customer);
+        $book1->setLendTo($staff);
         $book1->setLendOn(new \DateTime('2017-07-06T00:00:00+0200'));
 
         $book2 = new Book();
