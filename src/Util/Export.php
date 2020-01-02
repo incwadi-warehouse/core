@@ -8,7 +8,7 @@ namespace Incwadi\Core\Util;
 
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Customer;
+use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -26,7 +26,7 @@ class Export implements ExportInterface
             return $object instanceof Author ? ['firstname' => $object->getFirstname(), 'surname' => $object->getSurname()] : ['firstname' => null, 'surname' => null];
         };
         $formatLendTo = function ($object) {
-            return $object instanceof Customer ? $object->getName() : null;
+            return $object instanceof Staff ? $object->getName() : null;
         };
         $formatBranch = function ($object) {
             return $object instanceof Branch ? $object->getName() : null;

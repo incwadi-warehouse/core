@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="staff")
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\CustomerRepository")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\StaffRepository")
  */
-class Customer implements \JsonSerializable
+class Staff implements \JsonSerializable
 {
     /**
      * @ORM\Id()

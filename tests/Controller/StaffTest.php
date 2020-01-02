@@ -8,7 +8,7 @@ namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CustomerTest extends WebTestCase
+class StaffTest extends WebTestCase
 {
     protected $clientAdmin;
 
@@ -20,7 +20,7 @@ class CustomerTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/customer/new', 'POST', [], [
+        $request = $this->request('/staff/new', 'POST', [], [
             'name' => 'name'
         ]);
 
@@ -32,18 +32,18 @@ class CustomerTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/customer/', 'GET');
+        $request = $this->request('/staff/', 'GET');
 
-        $this->assertInternalType('array', $request->customers);
-        $this->assertInternalType('int', $request->customers[0]->id);
-        $this->assertInternalType('string', $request->customers[0]->name);
-        if ($request->customers[0]->branch) {
-            $this->assertInternalType('int', $request->customers[0]->branch->id);
-            $this->assertInternalType('string', $request->customers[0]->branch->name);
+        $this->assertInternalType('array', $request->staff);
+        $this->assertInternalType('int', $request->staff[0]->id);
+        $this->assertInternalType('string', $request->staff[0]->name);
+        if ($request->staff[0]->branch) {
+            $this->assertInternalType('int', $request->staff[0]->branch->id);
+            $this->assertInternalType('string', $request->staff[0]->branch->name);
         }
 
         // edit
-        $request = $this->request('/customer/'.$id, 'PUT', [], [
+        $request = $this->request('/staff/'.$id, 'PUT', [], [
             'name' => 'name'
         ]);
 
@@ -53,7 +53,7 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // show
-        $request = $this->request('/customer/'.$id, 'GET');
+        $request = $this->request('/staff/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
@@ -61,9 +61,9 @@ class CustomerTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // delete
-        $request = $this->request('/customer/'.$id, 'DELETE');
+        $request = $this->request('/staff/'.$id, 'DELETE');
 
-        $this->assertEquals('The customer was successfully deleted.', $request->msg);
+        $this->assertEquals('The staff member was successfully deleted.', $request->msg);
     }
 
     protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
