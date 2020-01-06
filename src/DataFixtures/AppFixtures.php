@@ -12,7 +12,7 @@ use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture
+class AppFixtures extends Fixture
 {
     /**
      * @var UserPasswordEncoderInterface
