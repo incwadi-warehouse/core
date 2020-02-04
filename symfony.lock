@@ -1,4 +1,7 @@
 {
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.9.1"
+    },
     "php": {
         "version": "7.2"
     },
