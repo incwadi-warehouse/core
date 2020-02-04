@@ -10,15 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookTest extends WebTestCase
 {
-    protected $genreId;
+    use \Incwadi\Core\Tests\ApiTestTrait;
 
-    protected $clientAdmin;
+    protected $genreId;
 
     public function setUp(): void
     {
         $this->buildClient();
 
-        $request = $this->request('/genre/new', 'POST', [], [
+        $request = $this->request('/v1/genre/new', 'POST', [], [
             'name' => 'name'
         ]);
 
@@ -31,7 +31,7 @@ class BookTest extends WebTestCase
 
     public function tearDown(): void
     {
-        $request = $this->request('/genre/'.$this->genreId, 'DELETE');
+        $request = $this->request('/v1/genre/'.$this->genreId, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
 
@@ -41,12 +41,12 @@ class BookTest extends WebTestCase
     public function testScenario()
     {
         // index
-        $request = $this->request('/book/', 'GET', [], []);
+        $request = $this->request('/v1/book/', 'GET', [], []);
 
         $this->assertEquals([], $request);
 
         // new
-        $request = $this->request('/book/new', 'POST', [], [
+        $request = $this->request('/v1/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -83,7 +83,7 @@ class BookTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/book/'.$id, 'PUT', [], [
+        $request = $this->request('/v1/book/'.$id, 'PUT', [], [
             'title' => 'book',
             'author' => 'surname1,firstname1',
             'genre' => $this->genreId,
@@ -118,21 +118,21 @@ class BookTest extends WebTestCase
         $this->assertNull($request->lendOn);
 
         // sell
-        $request = $this->request('/book/sell/'.$id, 'PUT');
+        $request = $this->request('/v1/book/sell/'.$id, 'PUT');
         $this->assertTrue($request->sold);
 
-        $request = $this->request('/book/sell/'.$id, 'PUT');
+        $request = $this->request('/v1/book/sell/'.$id, 'PUT');
         $this->assertFalse($request->sold);
 
         // remove
-        $request = $this->request('/book/remove/'.$id, 'PUT');
+        $request = $this->request('/v1/book/remove/'.$id, 'PUT');
         $this->assertTrue($request->removed);
 
-        $request = $this->request('/book/remove/'.$id, 'PUT');
+        $request = $this->request('/v1/book/remove/'.$id, 'PUT');
         $this->assertFalse($request->removed);
 
         // show
-        $request = $this->request('/book/'.$id, 'GET');
+        $request = $this->request('/v1/book/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
@@ -157,7 +157,7 @@ class BookTest extends WebTestCase
         $this->assertNull($request->lendOn);
 
         // find
-        $request = $this->request('/book/find', 'GET', [
+        $request = $this->request('/v1/book/find', 'GET', [
             'term' => 'book',
             'offset' => '0'
         ]);
@@ -197,14 +197,14 @@ class BookTest extends WebTestCase
         }
 
         // delete
-        $request = $this->request('/book/'.$id, 'DELETE');
+        $request = $this->request('/v1/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
     public function testDuplicate()
     {
-        $request = $this->request('/book/new', 'POST', [], [
+        $request = $this->request('/v1/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -218,7 +218,7 @@ class BookTest extends WebTestCase
 
         $this->assertInternalType('int', $request->id);
 
-        $request = $this->request('/book/new', 'POST', [], [
+        $request = $this->request('/v1/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -231,51 +231,5 @@ class BookTest extends WebTestCase
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);
-    }
-
-    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [], int $statusCode = 200)
-    {
-        $client = $this->clientAdmin;
-
-        $crawler = $client->request(
-            $method,
-            '/v1'.$url,
-            $params,
-            [],
-            [],
-            json_encode($content)
-        );
-
-        $this->assertEquals($statusCode, $client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
-
-        return json_decode($client->getResponse()->getContent());
-    }
-
-    protected function buildClient()
-    {
-        $this->clientAdmin = static::createClient();
-        $this->clientAdmin->request(
-            'POST',
-            '/api/login_check',
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/json'
-            ],
-            json_encode(
-                [
-                    'username' => 'admin',
-                    'password' => 'password'
-                ]
-            )
-        );
-        $data = json_decode(
-            $this->clientAdmin->getResponse()->getContent(),
-            true
-        );
-        $this->clientAdmin->setServerParameter(
-            'HTTP_Authorization',
-            sprintf('Bearer %s', $data['token'])
-        );
     }
 }
