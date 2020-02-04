@@ -106,7 +106,7 @@ class StaffController extends AbstractController
      * @Route("/{id}", methods={"DELETE"}, name="delete")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function delete(Staff  $staff): JsonResponse
+    public function delete(Staff $staff): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($staff);

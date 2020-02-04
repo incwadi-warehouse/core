@@ -9,8 +9,8 @@ namespace Incwadi\Core\Tests\Util;
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Entity\Genre;
+use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Util\Export;
 use PHPUnit\Framework\TestCase;
 
