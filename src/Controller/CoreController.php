@@ -27,7 +27,7 @@ class CoreController extends AbstractController
     }
 
     /**
-     * @Route("/v1/me", methods={"GET"}, name="me")
+     * @Route("/api/v1/me", methods={"GET"}, name="me")
      * @Security("is_granted('ROLE_USER')")
      */
     public function me(): JsonResponse
@@ -43,7 +43,7 @@ class CoreController extends AbstractController
     }
 
     /**
-     * @Route("/v1/password", methods={"PUT"}, name="password")
+     * @Route("/api/v1/password", methods={"PUT"}, name="password")
      * @Security("is_granted('ROLE_USER')")
      */
     public function password(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
