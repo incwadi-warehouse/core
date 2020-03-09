@@ -3,6 +3,8 @@
 if [ -d build/ ]; then rm -r build/; fi
 mkdir build/
 
+bin/console lint:container
+bin/console lint:yaml config/
 vendor/bin/php-cs-fixer fix
 vendor/bin/phpstan analyse --level 7 src/
 vendor/bin/phploc -q --log-json=build/phploc.json src/

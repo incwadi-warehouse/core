@@ -1,8 +1,9 @@
 #!/bin/bash
 
-tags=${1:-"0"}
+release=${1:-"0"}
+db=${2:-"0"}
 
-if [ "$tags" == 1 ]
+if [ "$release" == 1 ]
   then
     git fetch
     tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
@@ -11,8 +12,12 @@ if [ "$tags" == 1 ]
     git pull origin master
 fi
 
-composer install --no-dev
+composer install
 composer dump-env prod
+if [ "$db" == 1 ]
+  then
+    bin/console doctrine:database:create
+fi
 bin/console doctrine:migrations:migrate -n
 bin/console cache:clear
 bin/console cache:warmup

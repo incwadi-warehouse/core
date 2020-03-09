@@ -98,7 +98,7 @@ class Book implements \JsonSerializable
     private $type = 'paperback';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Customer", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Staff", inversedBy="books")
      */
     private $lendTo = null;
 
@@ -284,12 +284,12 @@ class Book implements \JsonSerializable
         return $this;
     }
 
-    public function getLendTo(): ?Customer
+    public function getLendTo(): ?Staff
     {
         return $this->lendTo;
     }
 
-    public function setLendTo(?Customer $lendTo): self
+    public function setLendTo(?Staff $lendTo): self
     {
         $this->lendTo = $lendTo;
 

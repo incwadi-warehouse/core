@@ -10,22 +10,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GenreTest extends WebTestCase
 {
-    protected $clientAdmin;
-
-    public function setUp(): void
-    {
-        $this->buildClient();
-    }
+    use \Incwadi\Core\Tests\ApiTestTrait;
 
     public function testScenario()
     {
         // list
-        $request = $this->request('/genre/', 'GET');
+        $request = $this->request('/v1/genre/', 'GET');
 
         $this->assertInternalType('array', $request->genres);
 
         // new
-        $request = $this->request('/genre/new', 'POST', [], [
+        $request = $this->request('/v1/genre/new', 'POST', [], [
             'name' => 'name'
         ]);
 
@@ -36,7 +31,7 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/genre/'.$id, 'PUT', [], [
+        $request = $this->request('/v1/genre/'.$id, 'PUT', [], [
             'name' => 'name'
         ]);
 
@@ -45,14 +40,14 @@ class GenreTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // show
-        $request = $this->request('/genre/'.$id, 'GET');
+        $request = $this->request('/v1/genre/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
 
         // delete
-        $request = $this->request('/genre/'.$id, 'DELETE');
+        $request = $this->request('/v1/genre/'.$id, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
     }
@@ -60,7 +55,7 @@ class GenreTest extends WebTestCase
     public function testDeleteGenreWithReferringBooks()
     {
         // new genre
-        $request = $this->request('/genre/new', 'POST', [], [
+        $request = $this->request('/v1/genre/new', 'POST', [], [
             'name' => 'name'
         ]);
 
@@ -69,7 +64,7 @@ class GenreTest extends WebTestCase
         $genreId = $request->id;
 
         // new book
-        $request = $this->request('/book/new', 'POST', [], [
+        $request = $this->request('/v1/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $genreId,
@@ -85,64 +80,18 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // delete genre
-        $request = $this->request('/genre/'.$genreId, 'DELETE');
+        $request = $this->request('/v1/genre/'.$genreId, 'DELETE');
 
         $this->assertEquals('The genre was successfully deleted.', $request->msg);
 
         // show book
-        $request = $this->request('/book/'.$id, 'GET');
+        $request = $this->request('/v1/book/'.$id, 'GET');
 
         $this->assertEquals(null, $request->genre);
 
         // delete book
-        $request = $this->request('/book/'.$id, 'DELETE');
+        $request = $this->request('/v1/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
-    }
-
-    protected function request(string $url, ?string $method = 'GET', ?array $params = [], ?array $content = [])
-    {
-        $client = $this->clientAdmin;
-
-        $crawler = $client->request(
-            $method,
-            '/v1'.$url,
-            $params,
-            [],
-            [],
-            json_encode($content)
-        );
-
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Unexpected HTTP status code for '.$method.' '.$url.'!');
-
-        return json_decode($client->getResponse()->getContent());
-    }
-
-    protected function buildClient()
-    {
-        $this->clientAdmin = static::createClient();
-        $this->clientAdmin->request(
-            'POST',
-            '/api/login_check',
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/json'
-            ],
-            json_encode(
-                [
-                    'username' => 'admin',
-                    'password' => 'password'
-                ]
-            )
-        );
-        $data = json_decode(
-            $this->clientAdmin->getResponse()->getContent(),
-            true
-        );
-        $this->clientAdmin->setServerParameter(
-            'HTTP_Authorization',
-            sprintf('Bearer %s', $data['token'])
-        );
     }
 }

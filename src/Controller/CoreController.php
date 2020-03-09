@@ -27,7 +27,7 @@ class CoreController extends AbstractController
     }
 
     /**
-     * @Route("/v1/me", methods={"GET"}, name="me")
+     * @Route("/api/v1/me", methods={"GET"}, name="me")
      * @Security("is_granted('ROLE_USER')")
      */
     public function me(): JsonResponse
@@ -36,12 +36,14 @@ class CoreController extends AbstractController
             'id' => $this->getUser()->getId(),
             'username' => $this->getUser()->getUsername(),
             'roles' => $this->getUser()->getRoles(),
-            'branch' => $this->getUser()->getBranch()
+            'branch' => $this->getUser()->getBranch(),
+            'isUser' => $this->isGranted('ROLE_USER'),
+            'isAdmin' => $this->isGranted('ROLE_ADMIN')
         ]);
     }
 
     /**
-     * @Route("/v1/password", methods={"PUT"}, name="password")
+     * @Route("/api/v1/password", methods={"PUT"}, name="password")
      * @Security("is_granted('ROLE_USER')")
      */
     public function password(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse

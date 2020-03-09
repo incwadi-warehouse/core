@@ -8,8 +8,8 @@ namespace Incwadi\Core\Tests\Util;
 
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Customer;
 use Incwadi\Core\Entity\Genre;
+use Incwadi\Core\Entity\Staff;
 use Incwadi\Core\Util\Import;
 use PHPUnit\Framework\TestCase;
 
@@ -44,10 +44,10 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $customer = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\CustomerRepository')
+        $staff = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\StaffRepository')
             ->disableOriginalConstructor()
             ->getMock();
-        $customer
+        $staff
             ->expects($this->any())
             ->method('__call')
             ->with($this->equalTo('findOneByName'))
@@ -59,7 +59,7 @@ class ImportTest extends TestCase
         $em->method('getRepository')
             ->will(
                 $this->returnCallback(
-                    function ($class) use ($branch, $author, $genre, $customer) {
+                    function ($class) use ($branch, $author, $genre, $staff) {
                         switch ($class) {
                         case Branch::class:
                             return $branch;
@@ -67,8 +67,8 @@ class ImportTest extends TestCase
                             return $author;
                         case Genre::class:
                             return $genre;
-                        case Customer::class:
-                            return $customer;
+                        case Staff::class:
+                            return $staff;
                         }
                     }
                 )
