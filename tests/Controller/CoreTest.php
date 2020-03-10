@@ -25,7 +25,7 @@ class CoreTest extends WebTestCase
         $this->assertInternalType('array', $request);
 
         // user
-        $request = $this->request('/v1/me', 'GET', [], []);
+        $request = $this->request('/api/v1/me', 'GET', [], []);
 
         $this->assertInternalType('int', $request->id);
         $this->assertInternalType('string', $request->username);
