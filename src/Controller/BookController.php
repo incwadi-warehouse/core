@@ -47,8 +47,7 @@ class BookController extends AbstractController
                 'type' => $request->query->get('type', null)
             ],
             $request->query->get('orderBy', 'asc'),
-            $request->query->get('limit', 20),
-            $request->query->get('offset', 0)
+            $request->query->get('limit', 20)
         );
 
         $counter = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
@@ -64,8 +63,7 @@ class BookController extends AbstractController
                 'type' => $request->query->get('type', null)
             ],
             $request->query->get('orderBy', 'asc'),
-            99999,
-            $request->query->get('offset', 0)
+            99999
         );
 
         return $this->json([

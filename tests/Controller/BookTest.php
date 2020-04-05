@@ -158,8 +158,7 @@ class BookTest extends WebTestCase
 
         // find
         $request = $this->request('/v1/book/find', 'GET', [
-            'term' => 'book',
-            'offset' => '0'
+            'term' => 'book'
         ]);
 
         $this->assertInternalType('int', $request->counter);

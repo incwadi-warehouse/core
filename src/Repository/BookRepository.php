@@ -28,11 +28,6 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    const OFFSET = 0;
-
-    /**
-     * @var int
-     */
     const CLEAR_LIMIT = 3;
 
     public function __construct(ManagerRegistry $registry)
@@ -90,8 +85,7 @@ class BookRepository extends ServiceEntityRepository
     public function findDemanded(
         array $criteria,
         string $orderBy = 'default',
-        int $limit = self::LIMIT,
-        int $offset = self::OFFSET
+        int $limit = self::LIMIT
     ): array {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -118,7 +112,6 @@ class BookRepository extends ServiceEntityRepository
 
         $this->setParams($qb, $criteria);
         $qb->setMaxResults($limit);
-        $qb->setFirstResult($offset);
 
         $query = $qb->getQuery();
 
