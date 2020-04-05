@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- refactor: remove offset
+
 ## 1.1.0
 
 - feature: add info whether the user has role user and admin
