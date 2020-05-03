@@ -107,6 +107,12 @@ class Book implements \JsonSerializable
      */
     private $lendOn = null;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Condition")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cond = null;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -131,7 +137,8 @@ class Book implements \JsonSerializable
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
-            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null
+            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
+            'condition' => $this->getCond()
         ];
     }
 
@@ -304,6 +311,18 @@ class Book implements \JsonSerializable
     public function setLendOn(?\DateTimeInterface $lendOn): self
     {
         $this->lendOn = $lendOn;
+
+        return $this;
+    }
+
+    public function getCond(): ?Condition
+    {
+        return $this->cond;
+    }
+
+    public function setCond(?Condition $cond): self
+    {
+        $this->cond = $cond;
 
         return $this;
     }

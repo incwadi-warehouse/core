@@ -252,3 +252,43 @@ Params
 Body
 
 - password - string
+
+## List conditions
+
+`GET /v1/condition/`
+
+## Create condition
+
+`POST /v1/condition/new`
+
+Body
+
+- name - string
+
+## Show condition
+
+`GET /v1/condition/[id]`
+
+Params
+
+id - int
+
+## Edit condition
+
+`PUT /v1/condition/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+## Delete condition
+
+`DELETE /v1/condition/[id]`
+
+Params
+
+- id - int
