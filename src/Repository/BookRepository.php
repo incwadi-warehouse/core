@@ -233,6 +233,7 @@ class BookRepository extends ServiceEntityRepository
 
     private function genre(QueryBuilder $qb, ?string $genre)
     {
+        $qb->leftJoin('b.genre', 'g');
         if (!$genre) {
             return $qb->expr()->isNotNull('b.genre');
         }
@@ -288,11 +289,11 @@ class BookRepository extends ServiceEntityRepository
                 'direction' => 'DESC'
             ],
             'genre_asc' => [
-                'field' => 'b.genre',
+                'field' => 'g.name',
                 'direction' => 'ASC'
             ],
             'genre_desc' => [
-                'field' => 'b.genre',
+                'field' => 'g.name',
                 'direction' => 'DESC'
             ],
             'added_asc' => [
