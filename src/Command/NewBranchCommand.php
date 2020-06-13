@@ -34,6 +34,18 @@ class NewBranchCommand extends Command
         ;
     }
 
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        if (null === $input->getArgument('name')) {
+            $input->setArgument(
+                'name',
+                $io->ask('What\'s the name of the new branch?')
+            );
+        }
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
