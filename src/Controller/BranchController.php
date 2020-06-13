@@ -26,15 +26,13 @@ class BranchController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            [
-                'branches' => $this->isGranted('ROLE_ADMIN') ?
-                    $this->getDoctrine()->getRepository(Branch::class)->findAll() :
-                    [
-                        $this->getDoctrine()->getRepository(Branch::class)->find(
-                            $this->getUser()->getBranch()->getId()
-                        )
-                    ]
-            ]
+            $this->isGranted('ROLE_ADMIN') ?
+                $this->getDoctrine()->getRepository(Branch::class)->findAll() :
+                [
+                    $this->getDoctrine()->getRepository(Branch::class)->find(
+                        $this->getUser()->getBranch()->getId()
+                    )
+                ]
         );
     }
 
