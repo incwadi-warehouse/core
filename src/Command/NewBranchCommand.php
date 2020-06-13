@@ -16,6 +16,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class NewBranchCommand extends Command
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $em;
 
     public function __construct(EntityManagerInterface $em)
