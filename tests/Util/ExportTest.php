@@ -44,6 +44,7 @@ class ExportTest extends TestCase
         $book1->setType('paperback');
         $book1->setLendTo($staff);
         $book1->setLendOn(new \DateTime('2017-07-06T00:00:00+0200'));
+        $book1->setCond(null);
 
         $book2 = new Book();
         $book2->setBranch($branch);
@@ -58,6 +59,7 @@ class ExportTest extends TestCase
         $book2->setType('paperback');
         $book2->setLendTo(null);
         $book2->setLendOn(null);
+        $book2->setCond(null);
 
         $export = new Export();
         $books = $export->export([$book1, $book2]);
@@ -65,9 +67,9 @@ class ExportTest extends TestCase
         $this->assertInternalType('string', $books);
 
         $expected = <<<EOF
-branch;added;title;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;releaseYear;type;lendTo;lendOn
-Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;0;;0;;2019;paperback;admin;2017-07-06T00:00:00+0200
-Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;0;;0;;2019;paperback;;
+branch;added;title;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;releaseYear;type;lendTo;lendOn;cond
+Branch;2017-10-06T00:00:00+0200;"The Title";firstname;surname;"Foreign Language Books";25;0;;0;;2019;paperback;admin;2017-07-06T00:00:00+0200;
+Branch;2018-02-22T00:00:00+0100;"The Title";firstname;surname;"Foreign Language Books";1.5;0;;0;;2019;paperback;;;
 
 EOF;
         $this->assertEquals($expected, $books);
