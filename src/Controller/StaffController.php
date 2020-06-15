@@ -26,13 +26,11 @@ class StaffController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            [
-                'staff' => $this->getDoctrine()->getRepository(Staff::class)->findBy(
-                    [
-                        'branch' => $this->getUser()->getBranch()
-                    ]
-                )
-            ]
+            $this->getDoctrine()->getRepository(Staff::class)->findBy(
+                [
+                    'branch' => $this->getUser()->getBranch()
+                ]
+            )
         );
     }
 
