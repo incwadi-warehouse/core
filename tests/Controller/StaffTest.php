@@ -58,6 +58,6 @@ class StaffTest extends WebTestCase
         // delete
         $request = $this->request('/v1/staff/'.$id, 'DELETE');
 
-        $this->assertEquals('The staff member was successfully deleted.', $request->msg);
+        $this->assertEquals('The staff member was deleted successfully.', $request->msg);
     }
 }

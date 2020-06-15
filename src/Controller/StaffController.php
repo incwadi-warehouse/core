@@ -111,7 +111,7 @@ class StaffController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The staff member was successfully deleted.'
+            'msg' => 'The staff member was deleted successfully.'
         ]);
     }
 }
