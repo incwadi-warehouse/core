@@ -27,9 +27,7 @@ class AuthorController extends AbstractController
     public function find(Request $request): JsonResponse
     {
         return $this->json(
-            [
-                'authors' => $this->getDoctrine()->getRepository(Author::class)->findDemanded($request->get('term'))
-            ]
+            $this->getDoctrine()->getRepository(Author::class)->findDemanded($request->get('term'))
         );
     }
 
@@ -115,7 +113,7 @@ class AuthorController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The author was successfully deleted.'
+            'msg' => 'The author was deleted successfully.'
         ]);
     }
 }
