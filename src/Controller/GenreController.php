@@ -27,11 +27,9 @@ class GenreController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            [
-                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
-                    $this->getUser()->getBranch()
-                )
-            ]
+            $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
+                $this->getUser()->getBranch()
+            )
         );
     }
 
@@ -118,7 +116,7 @@ class GenreController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The genre was successfully deleted.'
+            'msg' => 'The genre was deleted successfully.'
         ]);
     }
 }

@@ -23,7 +23,7 @@ class Genre implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter a name.")
+     * @Assert\NotBlank()
      */
     private $name;
 
