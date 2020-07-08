@@ -127,7 +127,7 @@ class BookController extends AbstractController
                 'type' => $book->getType()
             ]
         );
-        if ($existingBook !== []) {
+        if ([] !== $existingBook) {
             return $this->json([
                 'msg' => 'Book not saved, because it exists already!'
             ], 409);
