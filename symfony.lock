@@ -5,8 +5,11 @@
     "gesdinet/jwt-refresh-token-bundle": {
         "version": "v0.9.1"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "php": {
-        "version": "7.2"
+        "version": "7.4"
     },
     "symfony/error-handler": {
         "version": "v4.4.1"
@@ -19,5 +22,8 @@
     },
     "symplify/smart-file-system": {
         "version": "v7.1.0"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     }
 }
