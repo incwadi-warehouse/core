@@ -9,7 +9,7 @@
         "version": "1.0.4"
     },
     "php": {
-        "version": "7.4"
+        "version": "7.2"
     },
     "symfony/error-handler": {
         "version": "v4.4.1"
