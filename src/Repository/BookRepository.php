@@ -28,7 +28,7 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    const CLEAR_LIMIT = 3;
+    const CLEAR_LIMIT = 28;
 
     public function __construct(ManagerRegistry $registry)
     {
