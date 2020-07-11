@@ -354,3 +354,43 @@ Body
 Params
 
 - id - int
+
+## List tags
+
+`GET /v1/tag/`
+
+## Create tag
+
+`POST /v1/tag/new`
+
+Body
+
+- name - string
+
+## Show tag
+
+`GET /v1/tag/[id]`
+
+Params
+
+id - int
+
+## Edit tag
+
+`PUT /v1/tag/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+## Delete tag
+
+`DELETE /v1/tag/[id]`
+
+Params
+
+- id - int
