@@ -188,9 +188,9 @@ class BookRepository extends ServiceEntityRepository
     {
         if ($term) {
             $name = $qb->expr()->concat(
-                'a.surname',
+                'a.firstname',
                 $qb->expr()->concat($qb->expr()->literal(' '),
-                'a.firstname')
+                'a.surname')
             );
             $nameReverse = $qb->expr()->concat(
                 'a.surname',
