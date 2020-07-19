@@ -52,7 +52,7 @@ class TagController extends AbstractController
             true
         );
         $tag = $this->getDoctrine()->getRepository(Tag::class)
-            ->findByName($content['name']);
+            ->findOneByName($content['name']);
         if ($tag) {
             return $this->json($tag);
         }
