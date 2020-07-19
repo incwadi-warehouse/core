@@ -8,9 +8,8 @@ An article can be found here <https://medium.com/@A.Baldeweg/i-was-trying-new-th
 
 ## Requirements
 
-- PHP 7.2
+- PHP 7.4
 - MySQL
-- PHP Composer
 - SSH Access
 
 ## Getting Started
@@ -25,44 +24,22 @@ Clone the repository:
 git clone https://gitlab.com/incwadi/core.git
 ```
 
-Point the web root to the `public/` dir.
+Point the web root to the `public` dir.
 
-Create the file `.env.local`.
-
-```shell
-touch .env.local
-```
-
-The content of the file could be the following. Please fit it to your needs. You find more about it in the section "Options".
+Create the file `.env.local` with the following content. Please fit it to your needs.
 
 ```shell
-APP_ENV=prod
 APP_SECRET=SECRET
-CORS_ALLOW_ORIGIN=^https?://DOMAIN:?[0-9]*$
-DATABASE_URL=mysql://DB_USER:DB_PASSWORD@localhost:3306/incwadi
-JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
-JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+DATABASE_URL=mysql://DB_USER:DB_PASSWORD@localhost:3306/DB_NAME
 JWT_PASSPHRASE=PASSPHRASE
+CORS_ALLOW_ORIGIN=^https?://DOMAIN(:[0-9]+)?$
 ```
 
-Then install the composer dependencies and create the database.
+To authenticate your users, you need to generate the SSL keys.
 
 ```shell
-bin/setup
-```
-
-To authenticate your users, you need to generate an SSH key.
-
-```shell
-mkdir -p config/jwt/
 openssl genrsa -out config/jwt/private.pem -aes256 4096
 openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
-```
-
-Test whether the login works as expected.
-
-```shell
-curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/api/login_check -d '{"username":"admin","password":"password"}'
 ```
 
 You also need this header for apache.
@@ -72,6 +49,12 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 ```
 
 More info on that: <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#important-note-for-apache-users>
+
+Then install the composer dependencies and create the database.
+
+```shell
+bin/setup
+```
 
 It's recommended to have at least one branch. Create it with the following command. Replace `[NAME]` with your desired name of the branch. For more about branches read the section "Branches".
 
@@ -99,7 +82,7 @@ bin/console book:delete -q
 
 Install the Symfony binary.
 
-https://symfony.com/download
+<https://symfony.com/download>
 
 Clone the repository:
 
@@ -107,24 +90,15 @@ Clone the repository:
 git clone https://gitlab.com/incwadi/core.git
 ```
 
-Create the files `.env.local` and `.env.test.local`.
+Create the file `.env.local` with the following content. Please fit it to your needs.
 
 ```shell
-touch .env.local
-touch .env.test.local
+DATABASE_URL=mysql://DB_USER:DB_PASSWORD@localhost:3306/DB_NAME
 ```
 
-The content of both files could be the following. Please fit it to your needs and replace at least `DB_USER` and `DB_PASSWORD`.
+To authenticate your users, you need to generate the SSL keys.
 
 ```shell
-DATABASE_URL=mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/incwadi
-JWT_PASSPHRASE=PASSPHRASE
-```
-
-To authenticate your users, you need to generate an SSH key.
-
-```shell
-mkdir -p config/jwt/
 openssl genrsa -out config/jwt/private.pem -aes256 4096
 openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
@@ -134,46 +108,29 @@ Then install the composer dependencies and create the database.
 ```shell
 composer install
 bin/console doctrine:database:create
-bin/console doctrine:migrations:migrate
+bin/console doctrine:migrations:migrate -n
 ```
 
 Load the first user with the fixtures.
 
 ```shell
-bin/console --env=dev doctrine:fixtures:load
+bin/console doctrine:fixtures:load
 ```
 
 ## Update
 
-Pull for the new files, update dependencies with Composer and update the database.
+Just call the following command.
 
 ```shell
 bin/update
 ```
 
-## Options
-
-Explanations for the env vars.
-
-- APP_ENV - The environment, should be prod, dev or test.
-- APP_SECRET - Contains a random string, more info at <https://symfony.com/doc/current/reference/configuration/framework.html#secret>
-- CORS_ALLOW_ORIGIN - Contains a regex including the URI to the backend.
-- DATABASE_URL - Credentials for the database.
-- JWT_SECRET_KEY - Path to your secret key.
-- JWT_PUBLIC_KEY - Path to your public key.
-- JWT_PASSPHRASE - This is the passphrase that protects your key.
-
 ## CLI
 
 - bin/console - Symfony commands
-- bin/watch - Starts the development environment.
-- bin/stop - Stops the development environment.
 - bin/phpunit - Runs the PHPUnit tests.
 - bin/build - Runs the PHPUnit coverage report, generates stats and checks for code standard violations and fixes them partially.
-- bin/dump - Starts the Dump Server.
-- bin/setup - Installs the app.
-- bin/update - Starts the update process.
-- bin/backup - Makes a dump of the database.
+- bin/setup - Updates the app and creates the database.
 
 ## Branches
 
@@ -215,20 +172,4 @@ If the user has forgotten the password, you can reset it with this command. Repl
 
 ```shell
 bin/console user:reset-password [ID]
-```
-
-## Backup
-
-The most important thing to update is the database. One example how you can achieve that. The following commands assumes you are in the home directory of root and you have installed the core into /var/www/core, please fit the commands to your needs. Also, you need to install rsync.
-
-On the remote machine:
-
-```shell
-/var/www/core/bin/backup
-```
-
-On your local machine:
-
-```shell
-rsync -azvv -e ssh [USER]@[HOST]:/root/incwadi.sql ~/incwadi.sql
 ```
