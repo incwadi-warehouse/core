@@ -19,73 +19,73 @@ class Report implements \JsonSerializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Branch::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $branch;
+    private Branch $branch;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name = '';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $searchTerm;
+    private ?string $searchTerm = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $limitTo = 50;
+    private int $limitTo = 50;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $sold = false;
+    private bool $sold = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $removed = false;
+    private bool $removed = false;
 
     /**
      * @ORM\Column(name="older_then_x_months", type="integer", nullable=true)
      */
-    private $olderThenXMonths = null;
+    private ?int $olderThenXMonths = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $branches = null;
+    private ?string $branches = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $genres = null;
+    private ?string $genres = null;
 
     /**
      * @ORM\Column(name="lend_more_then_x_months", type="integer", nullable=true)
      */
-    private $lendMoreThenXMonths = null;
+    private ?int $lendMoreThenXMonths = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $orderBy = null;
+    private ?string $orderBy = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $releaseYear = null;
+    private ?int $releaseYear = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $type = null;
+    private ?string $type = null;
 
     public function jsonSerialize()
     {

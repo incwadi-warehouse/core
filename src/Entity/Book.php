@@ -26,35 +26,35 @@ class Book implements \JsonSerializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
-    private $branch = null;
+    private ?Branch $branch = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $added;
+    private \DateTime $added;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Please enter a title.")
      */
-    private $title;
+    private string $title = '';
 
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Author", inversedBy="books", cascade={"persist"})
      * @Assert\NotBlank(message="Please enter an author.")
      */
-    private $author;
+    private ?Author $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Genre")
      * Assert\NotBlank(message="Please enter a genre.")
      */
-    private $genre;
+    private ?Genre $genre = null;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
@@ -62,58 +62,56 @@ class Book implements \JsonSerializable
      * @Assert\Type(type="float", message="Please enter a decimal.")
      * @Assert\GreaterThanOrEqual(0.00)
      */
-    private $price;
+    private float $price = 0.00;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $sold = false;
+    private bool $sold = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $soldOn = null;
+    private ?\DateTime $soldOn = null;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $removed = false;
+    private bool $removed = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $removedOn = null;
+    private ?\DateTime $removedOn = null;
 
     /**
-     * @var int
      * @ORM\Column(type="integer")
      * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
      * @Assert\NotBlank(message="Please enter the year of publication.")
      */
-    private $releaseYear;
+    private int $releaseYear;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\Choice(choices=Book::TYPES, message="This type is not allowed.")
      */
-    private $type = 'paperback';
+    private string $type = 'paperback';
 
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Staff", inversedBy="books")
      */
-    private $lendTo = null;
+    private ?Staff $lendTo = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lendOn = null;
+    private ?\DateTime $lendOn = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Condition")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $cond = null;
+    private ? Condition $cond = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="books")

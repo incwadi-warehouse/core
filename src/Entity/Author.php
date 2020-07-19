@@ -19,19 +19,19 @@ class Author implements \JsonSerializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
      */
-    private $firstname = '';
+    private string $firstname = '';
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $surname;
+    private string $surname = '';
 
     public function jsonSerialize()
     {

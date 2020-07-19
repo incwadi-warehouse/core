@@ -13,10 +13,7 @@ use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 
 class LoginSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

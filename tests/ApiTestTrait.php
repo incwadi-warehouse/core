@@ -6,9 +6,11 @@
 
 namespace Incwadi\Core\Tests;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+
 trait ApiTestTrait
 {
-    protected $clientAdmin;
+    protected KernelBrowser $clientAdmin;
 
     public function setUp(): void
     {

@@ -12,11 +12,11 @@ class BookTest extends WebTestCase
 {
     use \Incwadi\Core\Tests\ApiTestTrait;
 
-    protected $genreId;
+    protected int $genreId;
 
-    protected $conditionId;
+    protected int $conditionId;
 
-    private $tags = [];
+    private array $tags = [];
 
     public function setUp(): void
     {

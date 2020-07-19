@@ -12,7 +12,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class AuthorToStringTransformer implements DataTransformerInterface
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

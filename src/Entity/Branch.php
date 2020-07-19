@@ -19,13 +19,13 @@ class Branch implements \JsonSerializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $name;
+    private string $name = '';
 
     public function jsonSerialize()
     {

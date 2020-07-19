@@ -12,10 +12,10 @@ class TagTest extends WebTestCase
 {
     use \Incwadi\Core\Tests\ApiTestTrait;
 
-    protected $genreId;
+    protected int $genreId;
 
-    protected $conditionId;
-    private $bookId;
+    protected int $conditionId;
+    private int $bookId;
 
     public function setUp(): void
     {

@@ -20,38 +20,34 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Please enter a username.")
      */
-    private $username;
+    private string $username = '';
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
-     * @var string
-     * @Assert\Length(min="12")
-     * @Assert\Regex(
-     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&])(?=.*[^a-zA-Z0-9!@#\$%\^&])(.*)/")
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
-    private $password;
+    private string $password;
 
     /**
-     * @var Branch
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
      */
-    private $branch = null;
+    private ?Branch $branch = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastLogin = null;
+    private ?\DateTime $lastLogin = null;
 
     public function getId(): ?int
     {
