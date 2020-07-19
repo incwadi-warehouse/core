@@ -17,9 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportCommand extends Command
 {
-    protected $export;
-
-    private $em;
+    private EntityManagerInterface $em;
+    private Export $export;
 
     public function __construct(EntityManagerInterface $em, Export $export)
     {
@@ -38,14 +37,14 @@ class ExportCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         if (is_file($input->getArgument('file'))) {
             $io->error('Export not possible, because the selected file already exists. Please choose a different name.');
 
-            return;
+            return Command::FAILURE;
         }
 
         $books = $this->em->getRepository(Book::class)->findAll();
@@ -56,5 +55,7 @@ class ExportCommand extends Command
         );
 
         $io->success('The export was successful!');
+
+        return Command::SUCCESS;
     }
 }

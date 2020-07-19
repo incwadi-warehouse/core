@@ -16,10 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class NewBranchCommand extends Command
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -37,7 +34,7 @@ class NewBranchCommand extends Command
         ;
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -49,7 +46,7 @@ class NewBranchCommand extends Command
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -62,5 +59,7 @@ class NewBranchCommand extends Command
         $this->em->flush();
 
         $io->success('Branch "'.$branch->getName().'" with id '.$branch->getId().' successfully created!');
+
+        return Command::SUCCESS;
     }
 }

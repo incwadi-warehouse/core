@@ -7,7 +7,6 @@
 namespace Incwadi\Core\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,9 +17,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class NewUserCommand extends Command
 {
-    private $em;
-
-    private $encoder;
+    private EntityManagerInterface $em;
+    private UserPasswordEncoderInterface $encoder;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -39,12 +37,11 @@ class NewUserCommand extends Command
             ->setHelp('This command creates a new user.')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the user')
             ->addArgument('role', InputArgument::OPTIONAL, 'The role of the user')
-            ->addArgument('branch', InputArgument::OPTIONAL, 'The branch id of the user')
             ->addArgument('password', InputArgument::OPTIONAL, 'The password of the user')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -59,10 +56,6 @@ class NewUserCommand extends Command
         $user->setRoles([
             $input->getArgument('role') ?: 'ROLE_USER',
         ]);
-        $branch = $this->em->getRepository(Branch::class)->find(
-            $input->getArgument('branch')
-        );
-        $user->setBranch($branch);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -70,7 +63,8 @@ class NewUserCommand extends Command
         $io->listing([
             'Username: '.$user->getUsername(),
             'Password: '.$pass,
-            'Branch: '.$branch->getName(),
         ]);
+
+        return Command::SUCCESS;
     }
 }

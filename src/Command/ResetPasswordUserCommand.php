@@ -17,9 +17,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ResetPasswordUserCommand extends Command
 {
-    private $em;
-
-    private $encoder;
+    private EntityManagerInterface $em;
+    private UserPasswordEncoderInterface $encoder;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -40,7 +39,7 @@ class ResetPasswordUserCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -54,5 +53,7 @@ class ResetPasswordUserCommand extends Command
         $this->em->flush();
 
         $io->success('Passwort: '.$pass);
+
+        return Command::SUCCESS;
     }
 }

@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ListUserCommand extends Command
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -32,7 +32,7 @@ class ListUserCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -43,7 +43,6 @@ class ListUserCommand extends Command
                 $user->getId(),
                 $user->getUsername(),
                 implode(', ', $user->getRoles()),
-                ($user->getBranch() ? $user->getBranch()->getName() : null),
             ];
         }
 
@@ -51,5 +50,7 @@ class ListUserCommand extends Command
             ['Id', 'User', 'Roles', 'Branch'],
             $data
         );
+
+        return Command::SUCCESS;
     }
 }

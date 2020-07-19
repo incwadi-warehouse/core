@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ImportCommand extends Command
 {
-    protected $import;
+    protected Import $import;
 
     public function __construct(Import $import)
     {
@@ -33,13 +33,13 @@ class ImportCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         if (!is_file($input->getArgument('file'))) {
             $io->error('The file you are about to import does not exist.');
 
-            return;
+            return Command::FAILURE;
         }
 
         $data = $this->import->import(
@@ -49,5 +49,7 @@ class ImportCommand extends Command
         );
 
         $io->success('The import was successful!');
+
+        return Command::SUCCESS;
     }
 }

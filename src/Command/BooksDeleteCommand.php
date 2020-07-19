@@ -15,9 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class BooksDeleteCommand extends Command
 {
-    protected static $defaultName = 'books:delete';
-
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -25,19 +23,23 @@ class BooksDeleteCommand extends Command
         $this->em = $em;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
-            ->setDescription('This command deletes books sold or removed.')
+            ->setName('book:delete')
+            ->setDescription('Deletes the book from the database.')
+            ->setHelp('Deletes a book')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         $this->em->getRepository(Book::class)->deleteBooks();
 
         $io->success('Cleaned up successfully!');
+
+        return Command::SUCCESS;
     }
 }

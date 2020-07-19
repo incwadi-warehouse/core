@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DeleteUserCommand extends Command
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -34,7 +34,7 @@ class DeleteUserCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -46,5 +46,7 @@ class DeleteUserCommand extends Command
         $this->em->flush();
 
         $io->success('The user was deleted!');
+
+        return Command::SUCCESS;
     }
 }

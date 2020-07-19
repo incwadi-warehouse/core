@@ -15,10 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ListBranchesCommand extends Command
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -35,7 +32,7 @@ class ListBranchesCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -52,5 +49,7 @@ class ListBranchesCommand extends Command
             ['Id', 'Name'],
             $data
         );
+
+        return Command::SUCCESS;
     }
 }
