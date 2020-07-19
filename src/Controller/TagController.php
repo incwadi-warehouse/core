@@ -6,8 +6,8 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Form\StaffType;
+use Incwadi\Core\Entity\Tag;
+use Incwadi\Core\Form\TagType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/staff", name="staff_")
+ * @Route("/v1/tag", name="tag_")
  */
-class StaffController extends AbstractController
+class TagController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
@@ -26,34 +26,40 @@ class StaffController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Staff::class)->findBy(
-                [
-                    'branch' => $this->getUser()->getBranch()
-                ]
+            $this->getDoctrine()->getRepository(Tag::class)->findByBranch(
+                $this->getUser()->getBranch()
             )
         );
     }
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER') and tag.getBranch() === user.getBranch()")
      */
-    public function show(Staff $staff): JsonResponse
+    public function show(Tag $tag): JsonResponse
     {
-        return $this->json($staff);
+        return $this->json($tag);
     }
 
     /**
      * @Route("/new", methods={"POST"}, name="new")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
     {
-        $staff = new Staff();
-        $staff->setBranch(
-            $this->getUser()->getBranch()
+        $content = json_decode(
+            $request->getContent(),
+            true
         );
-        $form = $this->createForm(StaffType::class, $staff);
+        $tag = $this->getDoctrine()->getRepository(Tag::class)
+            ->findByName($content['name']);
+        if ($tag) {
+            return $this->json($tag);
+        }
+
+        $tag = new Tag();
+        $tag->setBranch($this->getUser()->getBranch());
+        $form = $this->createForm(TagType::class, $tag);
 
         $form->submit(
             json_decode(
@@ -63,24 +69,24 @@ class StaffController extends AbstractController
         );
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($staff);
+            $em->persist($tag);
             $em->flush();
 
-            return $this->json($staff);
+            return $this->json($tag);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid staff member!'
+            'msg' => 'Please enter a valid tag!'
         ], 400);
     }
 
     /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    public function edit(Request $request, Staff $staff): JsonResponse
+    public function edit(Request $request, Tag $tag): JsonResponse
     {
-        $form = $this->createForm(StaffType::class, $staff);
+        $form = $this->createForm(TagType::class, $tag);
 
         $form->submit(
             json_decode(
@@ -92,26 +98,29 @@ class StaffController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->json($staff);
+            return $this->json($tag);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid staff member!'
+            'msg' => 'Please enter a valid tag!'
         ]);
     }
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    public function delete(Staff $staff): JsonResponse
+    public function delete(Tag $tag): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($staff);
+        foreach ($tag->getBooks() as $book) {
+            $tag->removeBook($book);
+        }
+        $em->remove($tag);
         $em->flush();
 
         return $this->json([
-            'msg' => 'The staff member was deleted successfully.'
+            'msg' => 'The tag was deleted successfully.'
         ]);
     }
 }

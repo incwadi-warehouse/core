@@ -40,6 +40,8 @@ class BookType extends AbstractType
             ->add('type')
             ->add('lendTo')
             ->add('lendOn', TextType::class)
+            ->add('cond')
+            ->add('tags')
         ;
 
         $builder->get('added')

@@ -119,7 +119,7 @@ class GenreController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The genre was successfully deleted.'
+            'msg' => 'The genre was deleted successfully.'
         ]);
     }
 }

@@ -9,7 +9,7 @@ if [ "$release" == 1 ]
     tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
     git checkout "$tag"
   else
-    git pull origin master
+    git pull origin main
 fi
 
 composer install

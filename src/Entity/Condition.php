@@ -10,9 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\StaffRepository")
+ * @ORM\Table(name="cond")
+ * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\ConditionRepository")
  */
-class Staff implements \JsonSerializable
+class Condition implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -29,6 +30,7 @@ class Staff implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $branch;
 

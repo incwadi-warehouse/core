@@ -17,7 +17,7 @@ class AuthorTest extends WebTestCase
         // find
         $request = $this->request('/v1/author/find', 'GET', ['term' => 'name']);
 
-        $this->assertInternalType('array', $request->authors);
+        $this->assertInternalType('array', $request);
 
         // new
         $request = $this->request('/v1/author/new', 'POST', [], [
@@ -25,7 +25,6 @@ class AuthorTest extends WebTestCase
             'surname' => 'Surname'
         ]);
 
-        $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('Firstname', $request->firstname);
         $this->assertEquals('Surname', $request->surname);
@@ -38,7 +37,6 @@ class AuthorTest extends WebTestCase
             'surname' => 'Surname1'
         ]);
 
-        $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('Firstname1', $request->firstname);
         $this->assertEquals('Surname1', $request->surname);
@@ -46,7 +44,6 @@ class AuthorTest extends WebTestCase
         // show
         $request = $this->request('/v1/author/'.$id, 'GET');
 
-        $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('Firstname1', $request->firstname);
         $this->assertEquals('Surname1', $request->surname);
@@ -54,6 +51,6 @@ class AuthorTest extends WebTestCase
         // delete
         $request = $this->request('/v1/author/'.$id, 'DELETE');
 
-        $this->assertEquals('The author was successfully deleted.', $request->msg);
+        $this->assertEquals('The author was deleted successfully.', $request->msg);
     }
 }

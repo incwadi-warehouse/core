@@ -17,7 +17,7 @@ class GenreTest extends WebTestCase
         // list
         $request = $this->request('/v1/genre/', 'GET');
 
-        $this->assertInternalType('array', $request->genres);
+        $this->assertInternalType('array', $request);
 
         // new
         $request = $this->request('/v1/genre/new', 'POST', [], [
@@ -49,7 +49,7 @@ class GenreTest extends WebTestCase
         // delete
         $request = $this->request('/v1/genre/'.$id, 'DELETE');
 
-        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+        $this->assertEquals('The genre was deleted successfully.', $request->msg);
     }
 
     public function testDeleteGenreWithReferringBooks()
@@ -82,7 +82,7 @@ class GenreTest extends WebTestCase
         // delete genre
         $request = $this->request('/v1/genre/'.$genreId, 'DELETE');
 
-        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+        $this->assertEquals('The genre was deleted successfully.', $request->msg);
 
         // show book
         $request = $this->request('/v1/book/'.$id, 'GET');
