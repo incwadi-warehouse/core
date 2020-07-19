@@ -49,7 +49,7 @@ class Tag implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'branch' => $this->getBranch(),
-            'books' => count($this->getBooks())
+            'books' => count($this->getBooks()),
         ];
     }
 

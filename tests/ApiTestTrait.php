@@ -42,12 +42,12 @@ trait ApiTestTrait
             [],
             [],
             [
-                'CONTENT_TYPE' => 'application/json'
+                'CONTENT_TYPE' => 'application/json',
             ],
             json_encode(
                 [
                     'username' => 'admin',
-                    'password' => 'password'
+                    'password' => 'password',
                 ]
             )
         );

@@ -44,7 +44,7 @@ class BookController extends AbstractController
                 'genre' => $request->query->get('genre', false),
                 'lending' => $request->query->get('lending', null),
                 'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null)
+                'type' => $request->query->get('type', null),
             ],
             $request->query->get('orderBy', 'asc'),
             $request->query->get('limit', 20)
@@ -60,7 +60,7 @@ class BookController extends AbstractController
                 'genre' => $request->query->get('genre', false),
                 'lending' => $request->query->get('lending', null),
                 'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null)
+                'type' => $request->query->get('type', null),
             ],
             $request->query->get('orderBy', 'asc'),
             99999
@@ -68,7 +68,7 @@ class BookController extends AbstractController
 
         return $this->json([
             'counter' => count($counter),
-            'books' => $books
+            'books' => $books,
         ]);
     }
 
@@ -124,12 +124,12 @@ class BookController extends AbstractController
                 'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType()
+                'type' => $book->getType(),
             ]
         );
         if ([] !== $existingBook) {
             return $this->json([
-                'msg' => 'Book not saved, because it exists already!'
+                'msg' => 'Book not saved, because it exists already!',
             ], 409);
         }
         if ($form->isSubmitted() && $form->isValid()) {
@@ -141,7 +141,7 @@ class BookController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid book!'
+            'msg' => 'Please enter a valid book!',
         ], 400);
     }
 
@@ -169,13 +169,13 @@ class BookController extends AbstractController
                 'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType()
+                'type' => $book->getType(),
             ]
         );
         if (null !== $existingBook) {
             if ($existingBook->getId() !== $book->getId()) {
                 return $this->json([
-                'msg' => 'Book not saved, because it exists already!'
+                'msg' => 'Book not saved, because it exists already!',
                 ], 409);
             }
         }
@@ -203,7 +203,7 @@ class BookController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid book!'
+            'msg' => 'Please enter a valid book!',
         ]);
     }
 
@@ -244,7 +244,7 @@ class BookController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The book was successfully deleted.'
+            'msg' => 'The book was successfully deleted.',
         ]);
     }
 }

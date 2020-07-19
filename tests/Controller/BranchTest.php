@@ -26,7 +26,7 @@ class BranchTest extends WebTestCase
 
         // edit
         $request = $this->request('/v1/branch/'.$branch->id, 'PUT', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertInternalType('integer', $request->id);

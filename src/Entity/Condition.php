@@ -39,7 +39,7 @@ class Condition implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'branch' => $this->getBranch()
+            'branch' => $this->getBranch(),
         ];
     }
 

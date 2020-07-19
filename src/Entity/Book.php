@@ -147,7 +147,7 @@ class Book implements \JsonSerializable
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
-            'tags' => $this->getTags()
+            'tags' => $this->getTags(),
         ];
     }
 

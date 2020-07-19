@@ -31,7 +31,7 @@ class BranchController extends AbstractController
             [
                 $this->getDoctrine()->getRepository(Branch::class)->find(
                     $this->getUser()->getBranch()->getId()
-                )
+                ),
             ]
         );
     }
@@ -67,7 +67,7 @@ class BranchController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid branch!'
+            'msg' => 'Please enter a valid branch!',
         ]);
     }
 }

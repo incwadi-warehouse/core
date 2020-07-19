@@ -39,7 +39,7 @@ class CoreController extends AbstractController
             'branch' => $this->getUser()->getBranch(),
             'isUser' => $this->isGranted('ROLE_USER'),
             'isAdmin' => $this->isGranted('ROLE_ADMIN'),
-            'lastLogin' => $this->getUser()->getLastLogin()
+            'lastLogin' => $this->getUser()->getLastLogin(),
         ]);
     }
 
@@ -68,12 +68,12 @@ class CoreController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json([
-                'msg' => 'The password was successfully changed!'
+                'msg' => 'The password was successfully changed!',
             ]);
         }
 
         return $this->json([
-                'msg' => 'The password could not be changed!'
+                'msg' => 'The password could not be changed!',
         ], 400);
     }
 }

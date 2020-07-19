@@ -29,7 +29,7 @@ class StatsController extends AbstractController
         $all = count($repo->findAll());
         $available = count($repo->findBy([
             'sold' => false,
-            'removed' => false
+            'removed' => false,
         ]));
         $sold = count($repo->findBySold(true));
         $removed = count($repo->findByRemoved(true));
@@ -38,7 +38,7 @@ class StatsController extends AbstractController
             'all' => $all,
             'available' => $available,
             'sold' => $sold,
-            'removed' => $removed
+            'removed' => $removed,
         ]);
     }
 }

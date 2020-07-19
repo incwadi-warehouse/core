@@ -31,7 +31,7 @@ class Branch implements \JsonSerializable
     {
         return [
             'id' => $this->getId(),
-            'name' => $this->getName()
+            'name' => $this->getName(),
         ];
     }
 

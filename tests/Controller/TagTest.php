@@ -22,7 +22,7 @@ class TagTest extends WebTestCase
         $this->buildClient();
 
         $request = $this->request('/v1/genre/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -32,7 +32,7 @@ class TagTest extends WebTestCase
         $this->genreId = $request->id;
 
         $request = $this->request('/v1/condition/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -52,7 +52,7 @@ class TagTest extends WebTestCase
             'releaseYear' => 2019,
             'type' => 'paperback',
             'added' => 859,
-            'cond' => $this->conditionId
+            'cond' => $this->conditionId,
         ]);
 
         $this->bookId = $request->id;
@@ -82,7 +82,7 @@ class TagTest extends WebTestCase
 
         // new
         $request = $this->request('/v1/tag/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -94,7 +94,7 @@ class TagTest extends WebTestCase
 
         // edit
         $request = $this->request('/v1/tag/'.$id, 'PUT', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -124,7 +124,7 @@ class TagTest extends WebTestCase
             'type' => 'paperback',
             'added' => 859,
             'cond' => $this->conditionId,
-            'tags' => [$id]
+            'tags' => [$id],
         ]);
 
         // show book

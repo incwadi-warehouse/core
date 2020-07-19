@@ -64,7 +64,7 @@ class AuthorController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid author!'
+            'msg' => 'Please enter a valid author!',
         ]);
     }
 
@@ -90,7 +90,7 @@ class AuthorController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid author!'
+            'msg' => 'Please enter a valid author!',
         ]);
     }
 
@@ -103,7 +103,7 @@ class AuthorController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $books = $em->getRepository(Book::class)->findBy(
             [
-                'author' => $author
+                'author' => $author,
             ]
         );
         foreach ($books as $book) {
@@ -113,7 +113,7 @@ class AuthorController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The author was deleted successfully.'
+            'msg' => 'The author was deleted successfully.',
         ]);
     }
 }

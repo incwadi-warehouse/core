@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+You have to rename the table `migration_versions` to `doctrine_migration_versions` manually.
+
 ## 1.2.0
 
 - refactor: remove offset

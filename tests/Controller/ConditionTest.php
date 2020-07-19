@@ -16,7 +16,7 @@ class ConditionTest extends WebTestCase
     {
         // new
         $request = $this->request('/v1/condition/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -43,7 +43,7 @@ class ConditionTest extends WebTestCase
 
         // edit
         $request = $this->request('/v1/condition/'.$id, 'PUT', [], [
-            'name' => 'name1'
+            'name' => 'name1',
         ]);
 
         $this->assertTrue(isset($request->id));

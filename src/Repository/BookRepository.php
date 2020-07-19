@@ -282,68 +282,68 @@ class BookRepository extends ServiceEntityRepository
         return [
             'asc' => [
                 'field' => 'b.id',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'desc' => [
                 'field' => 'b.id',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'genre_asc' => [
                 'field' => 'g.name',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'genre_desc' => [
                 'field' => 'g.name',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'added_asc' => [
                 'field' => 'b.added',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'added_desc' => [
                 'field' => 'b.added',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'title_asc' => [
                 'field' => 'b.title',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'title_desc' => [
                 'field' => 'b.title',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'author_asc' => [
                 'field' => 'a.surname',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'author_desc' => [
                 'field' => 'a.surname',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'price_asc' => [
                 'field' => 'b.price',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'price_desc' => [
                 'field' => 'b.price',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'releaseYear_asc' => [
                 'field' => 'b.releaseYear',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'releaseYear_desc' => [
                 'field' => 'b.releaseYear',
-                'direction' => 'DESC'
+                'direction' => 'DESC',
             ],
             'type_asc' => [
                 'field' => 'b.type',
-                'direction' => 'ASC'
+                'direction' => 'ASC',
             ],
             'type_desc' => [
                 'field' => 'b.type',
-                'direction' => 'DESC'
-            ]
+                'direction' => 'DESC',
+            ],
         ];
     }
 }

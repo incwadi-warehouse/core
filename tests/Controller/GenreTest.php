@@ -21,7 +21,7 @@ class GenreTest extends WebTestCase
 
         // new
         $request = $this->request('/v1/genre/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -32,7 +32,7 @@ class GenreTest extends WebTestCase
 
         // edit
         $request = $this->request('/v1/genre/'.$id, 'PUT', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -56,7 +56,7 @@ class GenreTest extends WebTestCase
     {
         // new genre
         $request = $this->request('/v1/genre/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -72,7 +72,7 @@ class GenreTest extends WebTestCase
             'sold' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'added' => 2367
+            'added' => 2367,
         ]);
 
         $this->assertTrue(isset($request->id));

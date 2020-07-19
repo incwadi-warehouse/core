@@ -39,7 +39,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
         $author = $this->em->getRepository(Author::class)->findOneBy(
             [
                 'firstname' => $data[1],
-                'surname' => $data[0]
+                'surname' => $data[0],
             ]
         );
 

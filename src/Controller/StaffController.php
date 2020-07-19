@@ -28,7 +28,7 @@ class StaffController extends AbstractController
         return $this->json(
             $this->getDoctrine()->getRepository(Staff::class)->findBy(
                 [
-                    'branch' => $this->getUser()->getBranch()
+                    'branch' => $this->getUser()->getBranch(),
                 ]
             )
         );
@@ -70,7 +70,7 @@ class StaffController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid staff member!'
+            'msg' => 'Please enter a valid staff member!',
         ], 400);
     }
 
@@ -96,7 +96,7 @@ class StaffController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid staff member!'
+            'msg' => 'Please enter a valid staff member!',
         ]);
     }
 
@@ -111,7 +111,7 @@ class StaffController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The staff member was deleted successfully.'
+            'msg' => 'The staff member was deleted successfully.',
         ]);
     }
 }

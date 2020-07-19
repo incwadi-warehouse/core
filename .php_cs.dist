@@ -1,10 +1,14 @@
 <?php
 
-use PhpCsFixer\Finder;
-use PhpCsFixer\Config;
+/*
+ * This script is part of incwadi/core
+ */
 
-if (!is_dir(__DIR__ . '/var/cache/')) {
-    mkdir(__DIR__ . '/var/cache/', 0755, true);
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+if (!is_dir(__DIR__.'/var/cache/')) {
+    mkdir(__DIR__.'/var/cache/', 0755, true);
 }
 
 $finder = Finder::create()
@@ -21,20 +25,20 @@ return Config::create()
     ->setRules([
         '@Symfony' => true,
         'array_syntax' => [
-          'syntax' => 'short'
+          'syntax' => 'short',
         ],
         'header_comment' => [
             'header' => $fileHeaderComment,
-            'separate' => 'both'
+            'separate' => 'both',
         ],
         'linebreak_after_opening_tag' => true,
         'ordered_imports' => [
-          'sortAlgorithm' => 'alpha'
+          'sortAlgorithm' => 'alpha',
         ],
         'ordered_class_elements' => true,
         'phpdoc_order' => true,
-        'trailing_comma_in_multiline_array' => false
+        'trailing_comma_in_multiline_array' => true,
     ])
     ->setFinder($finder)
-    ->setCacheFile(__DIR__ . '/var/cache/.php_cs.cache')
+    ->setCacheFile(__DIR__.'/var/cache/.php_cs.cache')
 ;

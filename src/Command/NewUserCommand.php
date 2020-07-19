@@ -57,7 +57,7 @@ class NewUserCommand extends Command
             $this->encoder->encodePassword($user, $pass)
         );
         $user->setRoles([
-            $input->getArgument('role') ?: 'ROLE_USER'
+            $input->getArgument('role') ?: 'ROLE_USER',
         ]);
         $branch = $this->em->getRepository(Branch::class)->find(
             $input->getArgument('branch')
@@ -70,7 +70,7 @@ class NewUserCommand extends Command
         $io->listing([
             'Username: '.$user->getUsername(),
             'Password: '.$pass,
-            'Branch: '.$branch->getName()
+            'Branch: '.$branch->getName(),
         ]);
     }
 }

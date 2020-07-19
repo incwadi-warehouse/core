@@ -56,7 +56,7 @@ class ConditionController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid condition!'
+            'msg' => 'Please enter a valid condition!',
         ], 400);
     }
 
@@ -91,7 +91,7 @@ class ConditionController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid condition!'
+            'msg' => 'Please enter a valid condition!',
         ], 400);
     }
 
@@ -110,7 +110,7 @@ class ConditionController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The condition was successfully deleted.'
+            'msg' => 'The condition was successfully deleted.',
         ]);
     }
 }

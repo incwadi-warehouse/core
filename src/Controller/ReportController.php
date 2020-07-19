@@ -28,7 +28,7 @@ class ReportController extends AbstractController
         return $this->json(
             $this->getDoctrine()->getRepository(Report::class)->findBy(
                 [
-                    'branch' => $this->getUser()->getBranch()
+                    'branch' => $this->getUser()->getBranch(),
                 ]
             )
         );
@@ -69,7 +69,7 @@ class ReportController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid report!'
+            'msg' => 'Please enter a valid report!',
         ], 400);
     }
 
@@ -95,7 +95,7 @@ class ReportController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid report!'
+            'msg' => 'Please enter a valid report!',
         ], 400);
     }
 
@@ -110,7 +110,7 @@ class ReportController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The report was deleted successfully.'
+            'msg' => 'The report was deleted successfully.',
         ]);
     }
 }

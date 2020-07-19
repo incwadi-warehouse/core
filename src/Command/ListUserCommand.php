@@ -43,7 +43,7 @@ class ListUserCommand extends Command
                 $user->getId(),
                 $user->getUsername(),
                 implode(', ', $user->getRoles()),
-                ($user->getBranch() ? $user->getBranch()->getName() : null)
+                ($user->getBranch() ? $user->getBranch()->getName() : null),
             ];
         }
 

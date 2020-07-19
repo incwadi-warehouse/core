@@ -76,7 +76,7 @@ class TagController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid tag!'
+            'msg' => 'Please enter a valid tag!',
         ], 400);
     }
 
@@ -102,7 +102,7 @@ class TagController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid tag!'
+            'msg' => 'Please enter a valid tag!',
         ]);
     }
 
@@ -120,7 +120,7 @@ class TagController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The tag was deleted successfully.'
+            'msg' => 'The tag was deleted successfully.',
         ]);
     }
 }

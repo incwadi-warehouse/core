@@ -23,7 +23,7 @@ class BookTest extends WebTestCase
         $this->buildClient();
 
         $request = $this->request('/v1/genre/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -33,7 +33,7 @@ class BookTest extends WebTestCase
         $this->genreId = $request->id;
 
         $request = $this->request('/v1/condition/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -43,12 +43,12 @@ class BookTest extends WebTestCase
         $this->conditionId = $request->id;
 
         $request = $this->request('/v1/tag/new', 'POST', [], [
-            'name' => 'tag1'
+            'name' => 'tag1',
         ]);
         $this->tags[] = $request->id;
 
         $request = $this->request('/v1/tag/new', 'POST', [], [
-            'name' => 'tag2'
+            'name' => 'tag2',
         ]);
         $this->tags[] = $request->id;
     }
@@ -91,7 +91,7 @@ class BookTest extends WebTestCase
             'type' => 'paperback',
             'added' => 859,
             'cond' => $this->conditionId,
-            'tags' => $this->tags
+            'tags' => $this->tags,
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -134,7 +134,7 @@ class BookTest extends WebTestCase
             'type' => 'paperback',
             'added' => 4758,
             'cond' => $this->conditionId,
-            'tags' => $this->tags
+            'tags' => $this->tags,
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -208,7 +208,7 @@ class BookTest extends WebTestCase
 
         // find
         $request = $this->request('/v1/book/find', 'GET', [
-            'term' => 'book'
+            'term' => 'book',
         ]);
 
         $this->assertInternalType('int', $request->counter);
@@ -267,7 +267,7 @@ class BookTest extends WebTestCase
             'releaseYear' => 2019,
             'type' => 'paperback',
             'added' => 4758,
-            'cond' => $this->conditionId
+            'cond' => $this->conditionId,
         ]);
 
         $this->assertInternalType('int', $request->id);
@@ -282,7 +282,7 @@ class BookTest extends WebTestCase
             'releaseYear' => 2019,
             'type' => 'paperback',
             'added' => 4758,
-            'cond' => $this->conditionId
+            'cond' => $this->conditionId,
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);

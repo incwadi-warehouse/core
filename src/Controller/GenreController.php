@@ -31,7 +31,7 @@ class GenreController extends AbstractController
                 'genres' => $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
                     $this->getUser()->getBranch(),
                     ['name' => 'ASC']
-                )
+                ),
             ]
         );
     }
@@ -70,7 +70,7 @@ class GenreController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
+            'msg' => 'Please enter a valid genre!',
         ], 400);
     }
 
@@ -96,7 +96,7 @@ class GenreController extends AbstractController
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
+            'msg' => 'Please enter a valid genre!',
         ]);
     }
 
@@ -109,7 +109,7 @@ class GenreController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $books = $em->getRepository(Book::class)->findBy(
             [
-                'genre' => $genre
+                'genre' => $genre,
             ]
         );
         foreach ($books as $book) {
@@ -119,7 +119,7 @@ class GenreController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'msg' => 'The genre was deleted successfully.'
+            'msg' => 'The genre was deleted successfully.',
         ]);
     }
 }

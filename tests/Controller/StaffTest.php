@@ -16,7 +16,7 @@ class StaffTest extends WebTestCase
     {
         // new
         $request = $this->request('/v1/staff/new', 'POST', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertInternalType('int', $request->id);
@@ -39,7 +39,7 @@ class StaffTest extends WebTestCase
 
         // edit
         $request = $this->request('/v1/staff/'.$id, 'PUT', [], [
-            'name' => 'name'
+            'name' => 'name',
         ]);
 
         $this->assertEquals($id, $request->id);

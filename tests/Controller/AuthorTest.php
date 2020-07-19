@@ -22,7 +22,7 @@ class AuthorTest extends WebTestCase
         // new
         $request = $this->request('/v1/author/new', 'POST', [], [
             'firstname' => 'Firstname',
-            'surname' => 'Surname'
+            'surname' => 'Surname',
         ]);
 
         $this->assertInternalType('integer', $request->id);
@@ -34,7 +34,7 @@ class AuthorTest extends WebTestCase
         // edit
         $request = $this->request('/v1/author/'.$id, 'PUT', [], [
             'firstname' => 'Firstname1',
-            'surname' => 'Surname1'
+            'surname' => 'Surname1',
         ]);
 
         $this->assertInternalType('integer', $request->id);

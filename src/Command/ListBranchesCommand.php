@@ -44,7 +44,7 @@ class ListBranchesCommand extends Command
         foreach ($branches as $branch) {
             $data[] = [
                 $branch->getId(),
-                $branch->getName()
+                $branch->getName(),
             ];
         }
 

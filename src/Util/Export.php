@@ -43,7 +43,7 @@ class Export implements ExportInterface
                 'lendTo' => $formatLendTo,
                 'branch' => $formatBranch,
                 'genre' => $formatGenre,
-                'soldOn' => $formatDate
+                'soldOn' => $formatDate,
             ],
         ];
 
@@ -54,7 +54,7 @@ class Export implements ExportInterface
 
         return $serializer->serialize($data, 'csv', [
             'csv_delimiter' => ';',
-            'ignored_attributes' => ['id']
+            'ignored_attributes' => ['id'],
         ]);
     }
 }

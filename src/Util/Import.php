@@ -38,7 +38,7 @@ class Import implements ImportInterface
             $data,
             'csv',
             [
-                'csv_delimiter' => ';'
+                'csv_delimiter' => ';',
             ]
         );
 
@@ -89,7 +89,7 @@ class Import implements ImportInterface
         $existing = $this->em->getRepository(Author::class)->findOneBy(
             [
                 'firstname' => $data['firstname'],
-                'surname' => $data['surname']
+                'surname' => $data['surname'],
             ]
         );
         if ($existing) {

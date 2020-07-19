@@ -17,7 +17,7 @@ class ReportTest extends WebTestCase
         // new
         $request = $this->request('/v1/report/new', 'POST', [], [
             'name' => 'name',
-            'limitTo' => 50
+            'limitTo' => 50,
         ]);
 
         $this->assertInternalType('int', $request->id);

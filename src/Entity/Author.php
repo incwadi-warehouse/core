@@ -38,7 +38,7 @@ class Author implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'firstname' => $this->getFirstname(),
-            'surname' => $this->getSurname()
+            'surname' => $this->getSurname(),
         ];
     }
 
