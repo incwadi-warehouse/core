@@ -14,14 +14,11 @@
     "symfony/error-handler": {
         "version": "v4.4.1"
     },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.18.0"
+    },
     "symfony/polyfill-php80": {
         "version": "v1.17.1"
-    },
-    "symplify/set-config-resolver": {
-        "version": "v7.1.0"
-    },
-    "symplify/smart-file-system": {
-        "version": "v7.1.0"
     },
     "webimpress/safe-writer": {
         "version": "2.0.1"
