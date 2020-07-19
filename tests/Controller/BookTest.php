@@ -57,7 +57,7 @@ class BookTest extends WebTestCase
     {
         $request = $this->request('/v1/genre/'.$this->genreId, 'DELETE');
 
-        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+        $this->assertEquals('The genre was deleted successfully.', $request->msg);
 
         $request = $this->request('/v1/condition/'.$this->conditionId, 'DELETE');
 
