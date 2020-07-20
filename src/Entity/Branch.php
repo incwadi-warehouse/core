@@ -28,11 +28,20 @@ class Branch implements \JsonSerializable
      */
     private string $name = '';
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="float")
+     * @Assert\GreaterThanOrEqual(0.00)
+     */
+    private float $steps = 0.00;
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
+            'steps' => $this->getSteps(),
         ];
     }
 
@@ -49,6 +58,18 @@ class Branch implements \JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSteps(): ?string
+    {
+        return $this->steps;
+    }
+
+    public function setSteps(string $steps): self
+    {
+        $this->steps = $steps;
 
         return $this;
     }

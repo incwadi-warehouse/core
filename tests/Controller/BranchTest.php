@@ -21,27 +21,32 @@ class BranchTest extends WebTestCase
 
         $this->assertInternalType('integer', $request[0]->id);
         $this->assertInternalType('string', $request[0]->name);
+        $this->assertTrue(isset($request[0]->steps));
 
         $branch = $request[0];
 
         // edit
         $request = $this->request('/v1/branch/'.$branch->id, 'PUT', [], [
             'name' => 'name',
+            'steps' => 0.01,
         ]);
 
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
+        $this->assertEquals(0.01, $request->steps);
 
         // my
         $request = $this->request('/v1/branch/my', 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
+        $this->assertTrue(isset($request->steps));
 
         // show
         $request = $this->request('/v1/branch/'.$branch->id, 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
+        $this->assertEquals(0.01, $request->steps);
     }
 }

@@ -142,6 +142,7 @@ Params
 Body
 
 - name - string
+- steps - float
 
 ## List staff members
 
