@@ -119,13 +119,9 @@ Params
 
 `GET /v1/branch/`
 
-## Create branch
+## My branch
 
-`POST /v1/branch/new`
-
-Body
-
-- name - string
+`GET /v1/branch/my`
 
 ## Show branch
 
@@ -146,14 +142,6 @@ Params
 Body
 
 - name - string
-
-## Delete branch
-
-`DELETE /v1/branch/[id]`
-
-Params
-
-- id - int
 
 ## List staff members
 
