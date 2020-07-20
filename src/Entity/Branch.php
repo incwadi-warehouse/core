@@ -7,10 +7,11 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\BranchRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\BranchRepository")
+ * @ORM\Entity(repositoryClass=BranchRepository::class)
  */
 class Branch implements \JsonSerializable
 {

@@ -7,10 +7,11 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\AuthorRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\AuthorRepository")
+ * @ORM\Entity(repositoryClass=AuthorRepository::class)
  */
 class Author implements \JsonSerializable
 {

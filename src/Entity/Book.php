@@ -9,10 +9,11 @@ namespace Incwadi\Core\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\BookRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\BookRepository")
+ * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 class Book implements \JsonSerializable
 {
@@ -29,7 +30,7 @@ class Book implements \JsonSerializable
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity=Branch::class)
      */
     private ?Branch $branch = null;
 
@@ -40,26 +41,26 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter a title.")
+     * @Assert\NotBlank()
      */
     private string $title = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Author", inversedBy="books", cascade={"persist"})
-     * @Assert\NotBlank(message="Please enter an author.")
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books", cascade={"persist"})
+     * @Assert\NotBlank()
      */
     private ?Author $author = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Genre")
-     * Assert\NotBlank(message="Please enter a genre.")
+     * @ORM\ManyToOne(targetEntity=Genre::class)
+     * Assert\NotBlank()
      */
     private ?Genre $genre = null;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
-     * @Assert\NotBlank(message="Please set a price.")
-     * @Assert\Type(type="float", message="Please enter a decimal.")
+     * @Assert\NotBlank()
+     * @Assert\Type(type="float")
      * @Assert\GreaterThanOrEqual(0.00)
      */
     private float $price = 0.00;
@@ -86,19 +87,19 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Length(min=4, max=4, minMessage="The Year of publication must have four digits.", maxMessage="The Year of publication must have four digits.")
-     * @Assert\NotBlank(message="Please enter the year of publication.")
+     * @Assert\Length(min=4, max=4)
+     * @Assert\NotBlank()
      */
     private int $releaseYear;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Choice(choices=Book::TYPES, message="This type is not allowed.")
+     * @Assert\Choice(choices=Book::TYPES)
      */
     private string $type = 'paperback';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Staff", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Staff::class, inversedBy="books")
      */
     private ?Staff $lendTo = null;
 
@@ -108,7 +109,7 @@ class Book implements \JsonSerializable
     private ?\DateTime $lendOn = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Condition")
+     * @ORM\ManyToOne(targetEntity=Condition::class)
      * @ORM\JoinColumn(nullable=true)
      */
     private ? Condition $cond = null;

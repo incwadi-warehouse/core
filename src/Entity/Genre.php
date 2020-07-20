@@ -7,10 +7,11 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\GenreRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\GenreRepository")
+ * @ORM\Entity(repositoryClass=GenreRepository::class)
  */
 class Genre implements \JsonSerializable
 {
@@ -28,7 +29,7 @@ class Genre implements \JsonSerializable
     private string $name = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity=Branch::class)
      */
     private $branch;
 

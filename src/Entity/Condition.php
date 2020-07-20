@@ -7,11 +7,12 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\ConditionRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="cond")
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\ConditionRepository")
+ * @ORM\Entity(repositoryClass=ConditionRepository::class)
  */
 class Condition implements \JsonSerializable
 {
@@ -29,7 +30,7 @@ class Condition implements \JsonSerializable
     private string $name = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity=Branch::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $branch;

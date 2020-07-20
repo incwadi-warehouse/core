@@ -7,11 +7,12 @@
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Incwadi\Core\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Incwadi\Core\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
 {
@@ -24,7 +25,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Please enter a username.")
+     * @Assert\NotBlank()
      */
     private string $username = '';
 
@@ -40,7 +41,7 @@ class User implements UserInterface
     private string $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Branch")
+     * @ORM\ManyToOne(targetEntity=Branch::class)
      */
     private ?Branch $branch = null;
 
