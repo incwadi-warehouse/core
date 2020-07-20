@@ -112,7 +112,7 @@ class Book implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity=Condition::class)
      * @ORM\JoinColumn(nullable=true)
      */
-    private ? Condition $cond = null;
+    private ?Condition $cond = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="books")
