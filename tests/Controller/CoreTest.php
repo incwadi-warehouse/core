@@ -14,16 +14,6 @@ class CoreTest extends WebTestCase
 
     public function testScenario()
     {
-        // index
-        $request = $this->request('/', 'GET', [], []);
-
-        $this->assertInternalType('array', $request);
-
-        // index2
-        $request = $this->request('/v1', 'GET', [], []);
-
-        $this->assertInternalType('array', $request);
-
         // user
         $request = $this->request('/api/v1/me', 'GET', [], []);
 

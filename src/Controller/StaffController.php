@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/staff", name="staff_")
+ * @Route("/api/v1/staff")
  */
 class StaffController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
@@ -35,7 +35,7 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function show(Staff $staff): JsonResponse
@@ -44,7 +44,7 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): JsonResponse
@@ -75,7 +75,7 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Staff $staff): JsonResponse
@@ -101,7 +101,7 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Staff $staff): JsonResponse

@@ -15,7 +15,7 @@ class ConditionTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/v1/condition/new', 'POST', [], [
+        $request = $this->request('/api/v1/condition/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -26,7 +26,7 @@ class ConditionTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/v1/condition/', 'GET');
+        $request = $this->request('/api/v1/condition/', 'GET');
 
         $this->assertInternalType('array', $request);
 
@@ -35,14 +35,14 @@ class ConditionTest extends WebTestCase
         $this->assertInternalType('int', $request[0]->branch->id);
 
         // show
-        $request = $this->request('/v1/condition/'.$id, 'GET');
+        $request = $this->request('/api/v1/condition/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('string', $request->name);
         $this->assertInternalType('int', $request->branch->id);
 
         // edit
-        $request = $this->request('/v1/condition/'.$id, 'PUT', [], [
+        $request = $this->request('/api/v1/condition/'.$id, 'PUT', [], [
             'name' => 'name1',
         ]);
 
@@ -51,7 +51,7 @@ class ConditionTest extends WebTestCase
         $this->assertInternalType('int', $request->branch->id);
 
         // delete
-        $request = $this->request('/v1/condition/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/condition/'.$id, 'DELETE');
 
         $this->assertEquals(
             'The condition was successfully deleted.',

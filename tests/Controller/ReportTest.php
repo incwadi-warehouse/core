@@ -15,7 +15,7 @@ class ReportTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/v1/report/new', 'POST', [], [
+        $request = $this->request('/api/v1/report/new', 'POST', [], [
             'name' => 'name',
             'limitTo' => 50,
         ]);
@@ -28,7 +28,7 @@ class ReportTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/v1/report/', 'GET');
+        $request = $this->request('/api/v1/report/', 'GET');
 
         $this->assertInternalType('array', $request);
         $this->assertInternalType('int', $request[0]->id);
@@ -39,7 +39,7 @@ class ReportTest extends WebTestCase
         $this->assertInternalType('string', $request[0]->name);
 
         // edit
-        $request = $this->request('/v1/report/'.$id, 'PUT', [], [
+        $request = $this->request('/api/v1/report/'.$id, 'PUT', [], [
             'name' => 'name',
             'searchTerm' => null,
             'limitTo' => 50,
@@ -71,7 +71,7 @@ class ReportTest extends WebTestCase
         $this->assertEquals(null, $request->type);
 
         // show
-        $request = $this->request('/v1/report/'.$id, 'GET');
+        $request = $this->request('/api/v1/report/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertInternalType('int', $request->branch->id);
@@ -79,7 +79,7 @@ class ReportTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // delete
-        $request = $this->request('/v1/report/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/report/'.$id, 'DELETE');
 
         $this->assertEquals('The report was deleted successfully.', $request->msg);
     }

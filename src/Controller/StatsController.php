@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/stats", name="stats_")
+ * @Route("/api/v1/stats")
  */
 class StatsController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="stats")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function stats(): JsonResponse

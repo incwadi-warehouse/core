@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/tag", name="tag_")
+ * @Route("/api/v1/tag")
  */
 class TagController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
@@ -33,7 +33,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER') and tag.getBranch() === user.getBranch()")
      */
     public function show(Tag $tag): JsonResponse
@@ -42,7 +42,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
@@ -81,7 +81,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     public function edit(Request $request, Tag $tag): JsonResponse
@@ -107,7 +107,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     public function delete(Tag $tag): JsonResponse

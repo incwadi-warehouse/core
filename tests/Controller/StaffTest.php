@@ -15,7 +15,7 @@ class StaffTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/v1/staff/new', 'POST', [], [
+        $request = $this->request('/api/v1/staff/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -27,7 +27,7 @@ class StaffTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/v1/staff/', 'GET');
+        $request = $this->request('/api/v1/staff/', 'GET');
 
         $this->assertInternalType('array', $request);
         $this->assertInternalType('int', $request[0]->id);
@@ -38,7 +38,7 @@ class StaffTest extends WebTestCase
         }
 
         // edit
-        $request = $this->request('/v1/staff/'.$id, 'PUT', [], [
+        $request = $this->request('/api/v1/staff/'.$id, 'PUT', [], [
             'name' => 'name',
         ]);
 
@@ -48,7 +48,7 @@ class StaffTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // show
-        $request = $this->request('/v1/staff/'.$id, 'GET');
+        $request = $this->request('/api/v1/staff/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
@@ -56,7 +56,7 @@ class StaffTest extends WebTestCase
         $this->assertInternalType('string', $request->branch->name);
 
         // delete
-        $request = $this->request('/v1/staff/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/staff/'.$id, 'DELETE');
 
         $this->assertEquals(
             'The staff member was deleted successfully.',

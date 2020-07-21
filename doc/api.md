@@ -2,7 +2,7 @@
 
 ## Find books
 
-`GET /v1/book/find`
+`GET /api/v1/book/find`
 
 Params
 
@@ -13,7 +13,7 @@ Params
 
 ## Create book
 
-`POST /v1/book/new`
+`POST /api/v1/book/new`
 
 Body
 
@@ -25,7 +25,7 @@ Body
 
 ## Show book
 
-`GET /v1/book/[id]`
+`GET /api/v1/book/[id]`
 
 Params
 
@@ -33,7 +33,7 @@ Params
 
 ## Edit book
 
-`PUT /v1/book/[id]`
+`PUT /api/v1/book/[id]`
 
 Params
 
@@ -49,7 +49,7 @@ Body
 
 ## Sell a book
 
-`PUT /v1/book/sell/[id]`
+`PUT /api/v1/book/sell/[id]`
 
 Params
 
@@ -57,7 +57,7 @@ Params
 
 ## Remove a book
 
-`PUT /v1/book/remove/[id]`
+`PUT /api/v1/book/remove/[id]`
 
 Params
 
@@ -65,7 +65,7 @@ Params
 
 ## Delete book
 
-`DELETE /v1/book/[id]`
+`DELETE /api/v1/book/[id]`
 
 Params
 
@@ -73,15 +73,15 @@ Params
 
 ## Show stats
 
-`GET /v1/stats`
+`GET /api/v1/stats`
 
 ## List genres
 
-`GET /v1/genre/`
+`GET /api/v1/genre/`
 
 ## Create genre
 
-`POST /v1/genre/new`
+`POST /api/v1/genre/new`
 
 Body
 
@@ -89,7 +89,7 @@ Body
 
 ## Show genre
 
-`GET /v1/genre/[id]`
+`GET /api/v1/genre/[id]`
 
 Params
 
@@ -97,7 +97,7 @@ id - int
 
 ## Edit genre
 
-`PUT /v1/genre/[id]`
+`PUT /api/v1/genre/[id]`
 
 Params
 
@@ -109,7 +109,7 @@ Body
 
 ## Delete genre
 
-`DELETE /v1/genre/[id]`
+`DELETE /api/v1/genre/[id]`
 
 Params
 
@@ -117,15 +117,15 @@ Params
 
 ## List branches
 
-`GET /v1/branch/`
+`GET /api/v1/branch/`
 
 ## My branch
 
-`GET /v1/branch/my`
+`GET /api/v1/branch/my`
 
 ## Show branch
 
-`GET /v1/branch/[id]`
+`GET /api/v1/branch/[id]`
 
 Params
 
@@ -133,7 +133,7 @@ id - int
 
 ## Edit branch
 
-`PUT /v1/branch/[id]`
+`PUT /api/v1/branch/[id]`
 
 Params
 
@@ -147,11 +147,11 @@ Body
 
 ## List staff members
 
-`GET /v1/staff/`
+`GET /api/v1/staff/`
 
 ## Create staff
 
-`POST /v1/staff/new`
+`POST /api/v1/staff/new`
 
 Body
 
@@ -160,7 +160,7 @@ Body
 
 ## Show staff
 
-`GET /v1/staff/[id]`
+`GET /api/v1/staff/[id]`
 
 Params
 
@@ -168,7 +168,7 @@ id - int
 
 ## Edit staff
 
-`PUT /v1/staff/[id]`
+`PUT /api/v1/staff/[id]`
 
 Params
 
@@ -181,7 +181,7 @@ Body
 
 ## Delete staff
 
-`DELETE /v1/staff/[id]`
+`DELETE /api/v1/staff/[id]`
 
 Params
 
@@ -189,7 +189,7 @@ Params
 
 ## Find authors
 
-`GET /v1/author/find`
+`GET /api/v1/author/find`
 
 Params:
 
@@ -197,7 +197,7 @@ Params:
 
 ## Create author
 
-`POST /v1/author/new`
+`POST /api/v1/author/new`
 
 Body
 
@@ -205,7 +205,7 @@ Body
 
 ## Edit author
 
-`PUT /v1/author/[id]`
+`PUT /api/v1/author/[id]`
 
 Params
 
@@ -217,7 +217,7 @@ Body
 
 ## Show author
 
-`GET /v1/author/[id]`
+`GET /api/v1/author/[id]`
 
 Params
 
@@ -225,7 +225,7 @@ id - int
 
 ## Delete author
 
-`DELETE /v1/author/[id]`
+`DELETE /api/v1/author/[id]`
 
 Params
 
@@ -233,11 +233,11 @@ Params
 
 ## Me
 
-`GET /v1/me`
+`GET /api/v1/me`
 
 ## Change Password
 
-`PUT /v1/password`
+`PUT /api/v1/password`
 
 Body
 
@@ -245,11 +245,11 @@ Body
 
 ## List conditions
 
-`GET /v1/condition/`
+`GET /api/v1/condition/`
 
 ## Create condition
 
-`POST /v1/condition/new`
+`POST /api/v1/condition/new`
 
 Body
 
@@ -257,7 +257,7 @@ Body
 
 ## Show condition
 
-`GET /v1/condition/[id]`
+`GET /api/v1/condition/[id]`
 
 Params
 
@@ -265,7 +265,7 @@ id - int
 
 ## Edit condition
 
-`PUT /v1/condition/[id]`
+`PUT /api/v1/condition/[id]`
 
 Params
 
@@ -277,7 +277,7 @@ Body
 
 ## Delete condition
 
-`DELETE /v1/condition/[id]`
+`DELETE /api/v1/condition/[id]`
 
 Params
 
@@ -285,11 +285,11 @@ Params
 
 ## List report
 
-`GET /v1/report/`
+`GET /api/v1/report/`
 
 ## Create report
 
-`POST /v1/report/new`
+`POST /api/v1/report/new`
 
 Body
 
@@ -308,7 +308,7 @@ Body
 
 ## Show report
 
-`GET /v1/report/[id]`
+`GET /api/v1/report/[id]`
 
 Params
 
@@ -316,7 +316,7 @@ id - int
 
 ## Edit report
 
-`PUT /v1/report/[id]`
+`PUT /api/v1/report/[id]`
 
 Params
 
@@ -339,7 +339,7 @@ Body
 
 ## Delete report
 
-`DELETE /v1/report/[id]`
+`DELETE /api/v1/report/[id]`
 
 Params
 
@@ -347,11 +347,11 @@ Params
 
 ## List tags
 
-`GET /v1/tag/`
+`GET /api/v1/tag/`
 
 ## Create tag
 
-`POST /v1/tag/new`
+`POST /api/v1/tag/new`
 
 Body
 
@@ -359,7 +359,7 @@ Body
 
 ## Show tag
 
-`GET /v1/tag/[id]`
+`GET /api/v1/tag/[id]`
 
 Params
 
@@ -367,7 +367,7 @@ id - int
 
 ## Edit tag
 
-`PUT /v1/tag/[id]`
+`PUT /api/v1/tag/[id]`
 
 Params
 
@@ -379,7 +379,7 @@ Body
 
 ## Delete tag
 
-`DELETE /v1/tag/[id]`
+`DELETE /api/v1/tag/[id]`
 
 Params
 

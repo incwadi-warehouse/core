@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/report", name="report_")
+ * @Route("/api/v1/report")
  */
 class ReportController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
@@ -35,7 +35,7 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function show(Report $report): JsonResponse
@@ -44,7 +44,7 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): JsonResponse
@@ -74,7 +74,7 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Report $report): JsonResponse
@@ -100,7 +100,7 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Report $report): JsonResponse

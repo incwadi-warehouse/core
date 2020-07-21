@@ -15,7 +15,7 @@ class BranchTest extends WebTestCase
     public function testScenario()
     {
         // list
-        $request = $this->request('/v1/branch/', 'GET');
+        $request = $this->request('/api/v1/branch/', 'GET');
 
         $this->assertInternalType('array', $request);
 
@@ -27,7 +27,7 @@ class BranchTest extends WebTestCase
         $branch = $request[0];
 
         // edit
-        $request = $this->request('/v1/branch/'.$branch->id, 'PUT', [], [
+        $request = $this->request('/api/v1/branch/'.$branch->id, 'PUT', [], [
             'name' => 'name',
             'steps' => 0.01,
             'currency' => 'EUR'
@@ -39,7 +39,7 @@ class BranchTest extends WebTestCase
         $this->assertEquals('EUR', $request->currency);
 
         // my
-        $request = $this->request('/v1/branch/my', 'GET');
+        $request = $this->request('/api/v1/branch/my', 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
@@ -47,7 +47,7 @@ class BranchTest extends WebTestCase
         $this->assertInternalType('string', $request->currency);
 
         // show
-        $request = $this->request('/v1/branch/'.$branch->id, 'GET');
+        $request = $this->request('/api/v1/branch/'.$branch->id, 'GET');
 
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);

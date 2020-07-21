@@ -14,7 +14,7 @@ class StatsTest extends WebTestCase
 
     public function testScenario()
     {
-        $request = $this->request('/v1/stats/', 'GET', [], []);
+        $request = $this->request('/api/v1/stats/', 'GET', [], []);
 
         $this->assertInternalType('int', $request->all);
         $this->assertInternalType('int', $request->available);

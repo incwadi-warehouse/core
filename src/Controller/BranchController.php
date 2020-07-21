@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/branch", name="branch_")
+ * @Route("/api/v1/branch")
  */
 class BranchController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
@@ -28,16 +28,14 @@ class BranchController extends AbstractController
         return $this->json(
             $this->isGranted('ROLE_ADMIN') ?
             $this->getDoctrine()->getRepository(Branch::class)->findAll() :
-            [
-                $this->getDoctrine()->getRepository(Branch::class)->find(
-                    $this->getUser()->getBranch()->getId()
-                ),
-            ]
+            $this->getDoctrine()->getRepository(Branch::class)->find(
+                $this->getUser()->getBranch()->getId()
+            ),
         );
     }
 
     /**
-     * @Route("/my", methods={"GET"}, name="my")
+     * @Route("/my", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function my(): JsonResponse
@@ -48,7 +46,7 @@ class BranchController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function show(Branch $branch): JsonResponse
@@ -57,7 +55,7 @@ class BranchController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === branch")
      */
     public function edit(Request $request, Branch $branch): JsonResponse

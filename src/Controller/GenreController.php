@@ -16,28 +16,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/genre", name="genre_")
+ * @Route("/api/v1/genre")
  */
 class GenreController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
+     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function index(): JsonResponse
     {
         return $this->json(
-            [
-                'genres' => $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
-                    $this->getUser()->getBranch(),
-                    ['name' => 'ASC']
-                ),
-            ]
+            $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
+                $this->getUser()->getBranch(),
+                ['name' => 'ASC']
+            ),
         );
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
     public function show(Genre $genre): JsonResponse
@@ -46,7 +44,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): JsonResponse
@@ -75,7 +73,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     public function edit(Request $request, Genre $genre): JsonResponse
@@ -101,7 +99,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     public function delete(Genre $genre): JsonResponse

@@ -15,21 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/book", name="book_")
+ * @Route("/api/v1/book")
  */
 class BookController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="index")
-     * @Security("is_granted('ROLE_USER')")
-     */
-    public function index()
-    {
-        return $this->json([]);
-    }
-
-    /**
-     * @Route("/find", methods={"GET"}, name="find")
+     * @Route("/find", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function find(Request $request): JsonResponse
@@ -66,14 +57,11 @@ class BookController extends AbstractController
             99999
         );
 
-        return $this->json([
-            'counter' => count($counter),
-            'books' => $books,
-        ]);
+        return $this->json($books);
     }
 
     /**
-     * @Route("/clean", methods={"DELETE"}, name="clean")
+     * @Route("/clean", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function clean()
@@ -88,7 +76,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
     public function show(Request $request, Book $book): JsonResponse
@@ -97,7 +85,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
@@ -146,7 +134,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     public function edit(Request $request, Book $book): JsonResponse
@@ -208,7 +196,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/sell/{id}", methods={"PUT"}, name="sell")
+     * @Route("/sell/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     public function sell(Book $book): JsonResponse
@@ -221,7 +209,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/remove/{id}", methods={"PUT"}, name="remove")
+     * @Route("/remove/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     public function remove(Book $book): JsonResponse
@@ -234,7 +222,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
     public function delete(Book $book): JsonResponse

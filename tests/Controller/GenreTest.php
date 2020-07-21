@@ -15,12 +15,12 @@ class GenreTest extends WebTestCase
     public function testScenario()
     {
         // list
-        $request = $this->request('/v1/genre/', 'GET');
+        $request = $this->request('/api/v1/genre/', 'GET');
 
         $this->assertTrue(isset($request));
 
         // new
-        $request = $this->request('/v1/genre/new', 'POST', [], [
+        $request = $this->request('/api/v1/genre/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -31,7 +31,7 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/v1/genre/'.$id, 'PUT', [], [
+        $request = $this->request('/api/v1/genre/'.$id, 'PUT', [], [
             'name' => 'name',
         ]);
 
@@ -40,14 +40,14 @@ class GenreTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         // show
-        $request = $this->request('/v1/genre/'.$id, 'GET');
+        $request = $this->request('/api/v1/genre/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
         $this->assertEquals('name', $request->name);
 
         // delete
-        $request = $this->request('/v1/genre/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/genre/'.$id, 'DELETE');
 
         $this->assertEquals('The genre was deleted successfully.', $request->msg);
     }
@@ -55,7 +55,7 @@ class GenreTest extends WebTestCase
     public function testDeleteGenreWithReferringBooks()
     {
         // new genre
-        $request = $this->request('/v1/genre/new', 'POST', [], [
+        $request = $this->request('/api/v1/genre/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -64,7 +64,7 @@ class GenreTest extends WebTestCase
         $genreId = $request->id;
 
         // new book
-        $request = $this->request('/v1/book/new', 'POST', [], [
+        $request = $this->request('/api/v1/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $genreId,
@@ -80,17 +80,17 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // delete genre
-        $request = $this->request('/v1/genre/'.$genreId, 'DELETE');
+        $request = $this->request('/api/v1/genre/'.$genreId, 'DELETE');
 
         $this->assertEquals('The genre was deleted successfully.', $request->msg);
 
         // show book
-        $request = $this->request('/v1/book/'.$id, 'GET');
+        $request = $this->request('/api/v1/book/'.$id, 'GET');
 
         $this->assertEquals(null, $request->genre);
 
         // delete book
-        $request = $this->request('/v1/book/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }

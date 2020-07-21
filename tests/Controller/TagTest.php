@@ -21,7 +21,7 @@ class TagTest extends WebTestCase
     {
         $this->buildClient();
 
-        $request = $this->request('/v1/genre/new', 'POST', [], [
+        $request = $this->request('/api/v1/genre/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -31,7 +31,7 @@ class TagTest extends WebTestCase
 
         $this->genreId = $request->id;
 
-        $request = $this->request('/v1/condition/new', 'POST', [], [
+        $request = $this->request('/api/v1/condition/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -42,7 +42,7 @@ class TagTest extends WebTestCase
         $this->conditionId = $request->id;
 
         $time = new \DateTime();
-        $request = $this->request('/v1/book/new', 'POST', [], [
+        $request = $this->request('/api/v1/book/new', 'POST', [], [
             'title' => 'title'.$time->getTimestamp(),
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -60,13 +60,13 @@ class TagTest extends WebTestCase
 
     public function tearDown(): void
     {
-        $request = $this->request('/v1/book/'.$this->bookId, 'DELETE');
+        $request = $this->request('/api/v1/book/'.$this->bookId, 'DELETE');
 
-        $request = $this->request('/v1/genre/'.$this->genreId, 'DELETE');
+        $request = $this->request('/api/v1/genre/'.$this->genreId, 'DELETE');
 
         $this->assertEquals('The genre was deleted successfully.', $request->msg);
 
-        $request = $this->request('/v1/condition/'.$this->conditionId, 'DELETE');
+        $request = $this->request('/api/v1/condition/'.$this->conditionId, 'DELETE');
 
         $this->assertEquals('The condition was successfully deleted.', $request->msg);
 
@@ -76,12 +76,12 @@ class TagTest extends WebTestCase
     public function testScenario()
     {
         // list
-        $request = $this->request('/v1/tag/', 'GET');
+        $request = $this->request('/api/v1/tag/', 'GET');
 
         $this->assertInternalType('array', $request);
 
         // new
-        $request = $this->request('/v1/tag/new', 'POST', [], [
+        $request = $this->request('/api/v1/tag/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -93,7 +93,7 @@ class TagTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/v1/tag/'.$id, 'PUT', [], [
+        $request = $this->request('/api/v1/tag/'.$id, 'PUT', [], [
             'name' => 'name',
         ]);
 
@@ -103,7 +103,7 @@ class TagTest extends WebTestCase
         $this->assertInternalType('integer', $request->books);
 
         // show
-        $request = $this->request('/v1/tag/'.$id, 'GET');
+        $request = $this->request('/api/v1/tag/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertInternalType('integer', $request->id);
@@ -113,7 +113,7 @@ class TagTest extends WebTestCase
         // edit book
         $time = new \DateTime();
 
-        $book = $this->request('/v1/book/'.$this->bookId, 'PUT', [], [
+        $book = $this->request('/api/v1/book/'.$this->bookId, 'PUT', [], [
             'title' => 'title'.$time->getTimestamp(),
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -128,12 +128,12 @@ class TagTest extends WebTestCase
         ]);
 
         // show book
-        $request = $this->request('/v1/book/'.$book->id, 'GET');
+        $request = $this->request('/api/v1/book/'.$book->id, 'GET');
 
         $this->assertEquals(1, count($request->tags));
 
         // delete
-        $request = $this->request('/v1/tag/'.$id, 'DELETE');
+        $request = $this->request('/api/v1/tag/'.$id, 'DELETE');
 
         $this->assertEquals('The tag was deleted successfully.', $request->msg);
     }

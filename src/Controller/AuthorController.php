@@ -16,12 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/author", name="author_")
+ * @Route("/api/v1/author")
  */
 class AuthorController extends AbstractController
 {
     /**
-     * @Route("/find", methods={"GET"}, name="index")
+     * @Route("/find", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function find(Request $request): JsonResponse
@@ -32,7 +32,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function show(Author $author): JsonResponse
@@ -41,7 +41,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/new", methods={"POST"}, name="new")
+     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
@@ -69,7 +69,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, Author $author): JsonResponse
@@ -95,7 +95,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"}, name="delete")
+     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Author $author): JsonResponse
