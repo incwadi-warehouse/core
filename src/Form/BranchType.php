@@ -18,6 +18,7 @@ class BranchType extends AbstractType
         $builder
             ->add('name')
             ->add('steps')
+            ->add('currency')
         ;
     }
 

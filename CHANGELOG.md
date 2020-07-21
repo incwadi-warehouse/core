@@ -2,7 +2,10 @@
 
 ## 2.0.0
 
-You have to rename the table `migration_versions` to `doctrine_migration_versions` manually.
+Breaking Changes
+
+- You have to rename the table `migration_versions` to `doctrine_migration_versions` manually.
+- Adjust the settings for your branch.
 
 ## 1.2.0
 

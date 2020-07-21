@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Branch implements \JsonSerializable
 {
+    const CURRENCIES = ['EUR', 'USD'];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,12 +38,20 @@ class Branch implements \JsonSerializable
      */
     private float $steps = 0.00;
 
+    /**
+     * @ORM\Column(type="string", length=3)
+     * @Assert\Choice(choices=Branch::CURRENCIES)
+     * @Assert\NotBlank()
+     */
+    private $currency = 'EUR';
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
             'steps' => $this->getSteps(),
+            'currency' => $this->getCurrency(),
         ];
     }
 
@@ -70,6 +80,18 @@ class Branch implements \JsonSerializable
     public function setSteps(string $steps): self
     {
         $this->steps = $steps;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
 
         return $this;
     }

@@ -143,6 +143,7 @@ Body
 
 - name - string
 - steps - float
+- currency - string
 
 ## List staff members
 
