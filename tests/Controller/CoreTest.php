@@ -26,11 +26,5 @@ class CoreTest extends WebTestCase
         }
         $this->assertTrue($request->isUser);
         $this->assertTrue($request->isAdmin);
-        if (null !== $request->lastLogin) {
-            $this->assertInstanceOf(
-                \DateTime::class,
-                new \DateTime($request->lastLogin)
-            );
-        }
     }
 }
