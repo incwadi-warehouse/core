@@ -93,6 +93,7 @@ class BookRepository extends ServiceEntityRepository
         $qb->from('Incwadi:Book', 'b');
 
         $qb->leftJoin('b.author', 'a');
+        $qb->leftJoin('b.tags', 't');
 
         $qb->where(
             $qb->expr()->andX(
@@ -215,7 +216,8 @@ class BookRepository extends ServiceEntityRepository
                 $qb->expr()->like($name, ':term'),
                 $qb->expr()->like($nameReverse, ':term'),
                 $qb->expr()->like($nameCommaAndSpace, ':term'),
-                $qb->expr()->like($name4Comma, ':term')
+                $qb->expr()->like($name4Comma, ':term'),
+                $qb->expr()->like('t.name', ':term')
             );
         }
 
