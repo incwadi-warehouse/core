@@ -25,39 +25,17 @@ class BookController extends AbstractController
      */
     public function find(Request $request): JsonResponse
     {
-        $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-            [
-                'term' => $request->query->get('term', null),
-                'sold' => $request->query->get('sold', false),
-                'removed' => $request->query->get('removed', false),
-                'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
-                'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', false),
-                'lending' => $request->query->get('lending', null),
-                'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null),
-            ],
-            $request->query->get('orderBy', 'asc'),
-            $request->query->get('limit', 20)
+        return $this->json(
+            $this
+                ->getDoctrine()
+                ->getRepository(Book::class)
+                ->findDemanded(
+                    json_decode(
+                        $request->query->get('options'),
+                        true
+                    )
+                )
         );
-
-        $counter = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-            [
-                'term' => $request->query->get('term', null),
-                'sold' => $request->query->get('sold', false),
-                'removed' => $request->query->get('removed', false),
-                'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
-                'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', false),
-                'lending' => $request->query->get('lending', null),
-                'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null),
-            ],
-            $request->query->get('orderBy', 'asc'),
-            99999
-        );
-
-        return $this->json($books);
     }
 
     /**
