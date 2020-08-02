@@ -203,7 +203,7 @@ class BookTest extends WebTestCase
 
         // find
         $request = $this->request('/api/v1/book/find', 'GET', [
-            'term' => 'book',
+            'options' => json_encode(['term' => 'book']),
         ]);
 
         $this->assertInternalType('array', $request);
