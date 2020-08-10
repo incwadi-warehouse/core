@@ -52,7 +52,7 @@ class Book implements \JsonSerializable
     private ?Author $author = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Genre::class)
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="books")
      * Assert\NotBlank()
      */
     private ?Genre $genre = null;
