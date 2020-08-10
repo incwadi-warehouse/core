@@ -64,7 +64,7 @@ class BookController extends AbstractController
      * @Route("/clean", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function clean()
+    public function clean(): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->getRepository(Book::class)->deleteBooksByBranch(
