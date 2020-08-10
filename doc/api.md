@@ -1,6 +1,10 @@
 # API
 
-## Find books
+## Books
+
+### Find books
+
+Request
 
 `GET /api/v1/book/find`
 
@@ -11,7 +15,51 @@ Params
 - limit - int
 - offset - int
 
-## Create book
+Response
+
+- array of books
+
+### Clean books
+
+Request
+
+`POST /api/v1/book/clean`
+
+Response
+
+- msg - string
+
+### Show book
+
+`GET /api/v1/book/[id]`
+
+Params
+
+- id - int
+
+Response
+
+- id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
+
+### Create book
+
+Request
 
 `POST /api/v1/book/new`
 
@@ -23,15 +71,33 @@ Body
 - price (required) - decimal
 - stocked (required) - bool
 
-## Show book
+Response
 
-`GET /api/v1/book/[id]`
+- msg - string
 
-Params
+or
 
 - id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
 
-## Edit book
+### Edit book
+
+Request
 
 `PUT /api/v1/book/[id]`
 
@@ -47,7 +113,33 @@ Body
 - price (required) - decimal
 - stocked (required) - bool
 
-## Sell a book
+Response
+
+- msg - string
+
+or
+
+- id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
+
+### Sell a book
+
+Request
 
 `PUT /api/v1/book/sell/[id]`
 
@@ -55,7 +147,29 @@ Params
 
 - id - int
 
-## Remove a book
+Response
+
+- id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
+
+### Remove a book
+
+Request
 
 `PUT /api/v1/book/remove/[id]`
 
@@ -63,7 +177,29 @@ Params
 
 - id - int
 
-## Delete book
+Response
+
+- id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
+
+### Delete book
+
+Request
 
 `DELETE /api/v1/book/[id]`
 
@@ -71,23 +207,40 @@ Params
 
 - id - int
 
-## Show stats
+Response
+
+- msg - string
+
+## Stats
+
+### Show stats
+
+Request
 
 `GET /api/v1/stats`
 
-## List genres
+Response
+
+- all - int
+- available - int
+- sold - int
+- removed - int
+
+## Genres
+
+### List genres
+
+Request
 
 `GET /api/v1/genre/`
 
-## Create genre
+Response
 
-`POST /api/v1/genre/new`
+- object with genres
 
-Body
+### Show genre
 
-- name - string
-
-## Show genre
+Request
 
 `GET /api/v1/genre/[id]`
 
@@ -95,7 +248,35 @@ Params
 
 id - int
 
-## Edit genre
+Response
+
+- id - int
+- name - string
+- branch - Branch
+
+### Create genre
+
+Request
+
+`POST /api/v1/genre/new`
+
+Body
+
+- name - string
+
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+
+### Edit genre
+
+Request
 
 `PUT /api/v1/genre/[id]`
 
@@ -107,7 +288,19 @@ Body
 
 - name - string
 
-## Delete genre
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+
+### Delete genre
+
+Request
 
 `DELETE /api/v1/genre/[id]`
 
@@ -115,15 +308,38 @@ Params
 
 - id - int
 
-## List branches
+Response
+
+- msg - string
+
+## Branches
+
+### List branches
+
+Request
 
 `GET /api/v1/branch/`
 
-## My branch
+Response
+
+- array with branches
+
+### My branch
+
+Request
 
 `GET /api/v1/branch/my`
 
-## Show branch
+Response
+
+- id - int
+- name - string
+- steps - float
+- currency - string
+
+### Show branch
+
+Request
 
 `GET /api/v1/branch/[id]`
 
@@ -131,7 +347,16 @@ Params
 
 id - int
 
-## Edit branch
+Response
+
+- id - int
+- name - string
+- steps - float
+- currency - string
+
+### Edit branch
+
+Request
 
 `PUT /api/v1/branch/[id]`
 
@@ -145,11 +370,48 @@ Body
 - steps - float
 - currency - string
 
-## List staff members
+Response
+
+- msg -string
+
+or
+
+- id - int
+- name - string
+- steps - float
+- currency - string
+
+## Staff Members
+
+### List staff members
+
+Request
 
 `GET /api/v1/staff/`
 
-## Create staff
+Response
+
+- array of staff members
+
+### Show staff
+
+Request
+
+`GET /api/v1/staff/[id]`
+
+Params
+
+id - int
+
+Response
+
+- id - int
+- name - string
+- branch - Branch
+
+### Create staff
+
+Request
 
 `POST /api/v1/staff/new`
 
@@ -158,15 +420,19 @@ Body
 - name - string
 - notes - text
 
-## Show staff
+Response
 
-`GET /api/v1/staff/[id]`
+- msg -string
 
-Params
+or
 
-id - int
+- id - int
+- name - string
+- branch - Branch
 
-## Edit staff
+### Edit staff
+
+Request
 
 `PUT /api/v1/staff/[id]`
 
@@ -179,7 +445,19 @@ Body
 - name - string
 - notes - text
 
-## Delete staff
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+
+### Delete staff
+
+Request
 
 `DELETE /api/v1/staff/[id]`
 
@@ -187,7 +465,15 @@ Params
 
 - id - int
 
-## Find authors
+Response
+
+- msg - string
+
+## Authors
+
+Request
+
+### Find authors
 
 `GET /api/v1/author/find`
 
@@ -195,7 +481,29 @@ Params:
 
 - term - string
 
-## Create author
+Response
+
+- array of authors
+
+### Show author
+
+Request
+
+`GET /api/v1/author/[id]`
+
+Params
+
+id - int
+
+Response
+
+- id - int
+- firstname - string
+- surname - string
+
+### Create author
+
+Request
 
 `POST /api/v1/author/new`
 
@@ -203,7 +511,19 @@ Body
 
 - name - string
 
-## Edit author
+Response
+
+- msg - string
+
+or
+
+- id - int
+- firstname - string
+- surname - string
+
+### Edit author
+
+Request
 
 `PUT /api/v1/author/[id]`
 
@@ -215,15 +535,19 @@ Body
 
 - name - string
 
-## Show author
+Response
 
-`GET /api/v1/author/[id]`
+- msg - string
 
-Params
+or
 
-id - int
+- id - int
+- firstname - string
+- surname - string
 
-## Delete author
+### Delete author
+
+Request
 
 `DELETE /api/v1/author/[id]`
 
@@ -231,11 +555,30 @@ Params
 
 - id - int
 
-## Me
+Response
+
+- msg - string
+
+## Profile
+
+### Me
+
+Request
 
 `GET /api/v1/me`
 
-## Change Password
+Response
+
+- id - int
+- username - string
+- roles - array
+- branch - Branch
+- isUser - bool
+- isAdmin - bool
+
+### Change Password
+
+Request
 
 `PUT /api/v1/password`
 
@@ -243,11 +586,25 @@ Body
 
 - password - string
 
-## List conditions
+Response
+
+- msg -string
+
+## Condition
+
+### List conditions
+
+Request
 
 `GET /api/v1/condition/`
 
-## Create condition
+Response
+
+- array of conditions
+
+### Create condition
+
+Request
 
 `POST /api/v1/condition/new`
 
@@ -255,7 +612,15 @@ Body
 
 - name - string
 
-## Show condition
+Response
+
+- id - int
+- name - string
+- branch - Branch
+
+### Show condition
+
+Request
 
 `GET /api/v1/condition/[id]`
 
@@ -263,7 +628,15 @@ Params
 
 id - int
 
-## Edit condition
+Response
+
+- id - int
+- name - string
+- branch - Branch
+
+### Edit condition
+
+Request
 
 `PUT /api/v1/condition/[id]`
 
@@ -275,7 +648,19 @@ Body
 
 - name - string
 
-## Delete condition
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+
+### Delete condition
+
+Request
 
 `DELETE /api/v1/condition/[id]`
 
@@ -283,11 +668,50 @@ Params
 
 - id - int
 
-## List report
+Response
+
+- msg - string
+
+## Reports
+
+### List report
+
+Request
 
 `GET /api/v1/report/`
 
-## Create report
+Response
+
+- array of reports
+
+### Show report
+
+Request
+
+`GET /api/v1/report/[id]`
+
+Params
+
+id - int
+
+Response
+
+- name - string
+- searchTerm - string
+- limitTo - int
+- sold - bool
+- removed - bool
+- olderThenXMonths - int
+- branches - string
+- genres - string
+- lendMoreThenXMonths - int
+- orderBy - string
+- releaseYear - int
+- type - string
+
+### Create report
+
+Request
 
 `POST /api/v1/report/new`
 
@@ -306,15 +730,28 @@ Body
 - releaseYear - int
 - type - string
 
-## Show report
+Response
 
-`GET /api/v1/report/[id]`
+- msg - string
 
-Params
+or
 
-id - int
+- name - string
+- searchTerm - string
+- limitTo - int
+- sold - bool
+- removed - bool
+- olderThenXMonths - int
+- branches - string
+- genres - string
+- lendMoreThenXMonths - int
+- orderBy - string
+- releaseYear - int
+- type - string
 
-## Edit report
+### Edit report
+
+Request
 
 `PUT /api/v1/report/[id]`
 
@@ -337,7 +774,28 @@ Body
 - releaseYear - int
 - type - string
 
-## Delete report
+Response
+
+- msg - string
+
+or
+
+- name - string
+- searchTerm - string
+- limitTo - int
+- sold - bool
+- removed - bool
+- olderThenXMonths - int
+- branches - string
+- genres - string
+- lendMoreThenXMonths - int
+- orderBy - string
+- releaseYear - int
+- type - string
+
+### Delete report
+
+Request
 
 `DELETE /api/v1/report/[id]`
 
@@ -345,19 +803,25 @@ Params
 
 - id - int
 
-## List tags
+Response
+
+- msg - string
+
+## Tags
+
+### List tags
+
+Request
 
 `GET /api/v1/tag/`
 
-## Create tag
+Response
 
-`POST /api/v1/tag/new`
+- array of tags
 
-Body
+### Show tag
 
-- name - string
-
-## Show tag
+Request
 
 `GET /api/v1/tag/[id]`
 
@@ -365,7 +829,37 @@ Params
 
 id - int
 
-## Edit tag
+Response
+
+- id - int
+- name - string
+- branch - Branch
+- books - Book
+
+### Create tag
+
+Request
+
+`POST /api/v1/tag/new`
+
+Body
+
+- name - string
+
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+- books - Book
+
+### Edit tag
+
+Request
 
 `PUT /api/v1/tag/[id]`
 
@@ -377,10 +871,27 @@ Body
 
 - name - string
 
-## Delete tag
+Response
+
+- msg - string
+
+or
+
+- id - int
+- name - string
+- branch - Branch
+- books - Book
+
+### Delete tag
+
+Request
 
 `DELETE /api/v1/tag/[id]`
 
 Params
 
 - id - int
+
+Response
+
+- msg - string
