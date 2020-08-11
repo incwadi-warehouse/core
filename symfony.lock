@@ -2,20 +2,92 @@
     "doctrine/sql-formatter": {
         "version": "1.1.0"
     },
+    "easycorp/easy-log-handler": {
+        "version": "v1.0.9"
+    },
     "gesdinet/jwt-refresh-token-bundle": {
         "version": "v0.9.1"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "jean85/pretty-package-versions": {
+        "version": "1.2"
+    },
+    "nette/bootstrap": {
+        "version": "v3.0.2"
+    },
+    "nette/di": {
+        "version": "v3.0.4"
+    },
+    "nette/finder": {
+        "version": "v2.5.2"
+    },
+    "nette/neon": {
+        "version": "v3.1.2"
+    },
+    "nette/php-generator": {
+        "version": "v3.4.1"
+    },
+    "nette/robot-loader": {
+        "version": "v3.2.3"
+    },
+    "nette/schema": {
+        "version": "v1.0.2"
+    },
+    "nette/utils": {
+        "version": "v3.1.2"
+    },
+    "ondram/ci-detector": {
+        "version": "3.4.0"
+    },
     "php": {
         "version": "7.2"
+    },
+    "phpstan/phpdoc-parser": {
+        "version": "0.3.5"
+    },
+    "phpstan/phpstan": {
+        "version": "0.11.19"
+    },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.11.6"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.11.2"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.11.6"
+    },
+    "rector/rector": {
+        "version": "v0.6.0"
+    },
+    "sebastian/diff": {
+        "version": "3.0.2"
+    },
+    "symfony/debug": {
+        "version": "v4.4.10"
     },
     "symfony/error-handler": {
         "version": "v4.4.1"
     },
+    "symfony/inflector": {
+        "version": "v4.4.10"
+    },
+    "symfony/mime": {
+        "version": "v4.4.10"
+    },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.17.1"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.18.1"
+    },
     "symfony/polyfill-php80": {
         "version": "v1.17.1"
+    },
+    "symplify/package-builder": {
+        "version": "v7.3.18"
     },
     "symplify/set-config-resolver": {
         "version": "v7.1.0"
