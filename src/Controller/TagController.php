@@ -6,9 +6,8 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Form\GenreType;
+use Incwadi\Core\Entity\Tag;
+use Incwadi\Core\Form\TagType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,9 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/genre", name="genre_")
+ * @Route("/v1/tag", name="tag_")
  */
-class GenreController extends AbstractController
+class TagController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
@@ -27,7 +26,7 @@ class GenreController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
+            $this->getDoctrine()->getRepository(Tag::class)->findByBranch(
                 $this->getUser()->getBranch()
             )
         );
@@ -35,22 +34,32 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER') and tag.getBranch() === user.getBranch()")
      */
-    public function show(Genre $genre): JsonResponse
+    public function show(Tag $tag): JsonResponse
     {
-        return $this->json($genre);
+        return $this->json($tag);
     }
 
     /**
      * @Route("/new", methods={"POST"}, name="new")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): JsonResponse
     {
-        $genre = new Genre();
-        $genre->setBranch($this->getUser()->getBranch());
-        $form = $this->createForm(GenreType::class, $genre);
+        $content = json_decode(
+            $request->getContent(),
+            true
+        );
+        $tag = $this->getDoctrine()->getRepository(Tag::class)
+            ->findOneByName($content['name']);
+        if ($tag) {
+            return $this->json($tag);
+        }
+
+        $tag = new Tag();
+        $tag->setBranch($this->getUser()->getBranch());
+        $form = $this->createForm(TagType::class, $tag);
 
         $form->submit(
             json_decode(
@@ -60,24 +69,24 @@ class GenreController extends AbstractController
         );
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($genre);
+            $em->persist($tag);
             $em->flush();
 
-            return $this->json($genre);
+            return $this->json($tag);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
+            'msg' => 'Please enter a valid tag!'
         ], 400);
     }
 
     /**
      * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
+     * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    public function edit(Request $request, Genre $genre): JsonResponse
+    public function edit(Request $request, Tag $tag): JsonResponse
     {
-        $form = $this->createForm(GenreType::class, $genre);
+        $form = $this->createForm(TagType::class, $tag);
 
         $form->submit(
             json_decode(
@@ -89,34 +98,29 @@ class GenreController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->json($genre);
+            return $this->json($tag);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
+            'msg' => 'Please enter a valid tag!'
         ]);
     }
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
+     * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    public function delete(Genre $genre): JsonResponse
+    public function delete(Tag $tag): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findBy(
-            [
-                'genre' => $genre
-            ]
-        );
-        foreach ($books as $book) {
-            $book->setGenre(null);
+        foreach ($tag->getBooks() as $book) {
+            $tag->removeBook($book);
         }
-        $em->remove($genre);
+        $em->remove($tag);
         $em->flush();
 
         return $this->json([
-            'msg' => 'The genre was deleted successfully.'
+            'msg' => 'The tag was deleted successfully.'
         ]);
     }
 }

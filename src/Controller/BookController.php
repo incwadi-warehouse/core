@@ -142,7 +142,7 @@ class BookController extends AbstractController
 
         return $this->json([
             'msg' => 'Please enter a valid book!'
-        ]);
+        ], 400);
     }
 
     /**

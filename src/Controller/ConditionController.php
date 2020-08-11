@@ -7,8 +7,8 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Form\GenreType;
+use Incwadi\Core\Entity\Condition;
+use Incwadi\Core\Form\ConditionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/genre", name="genre_")
+ * @Route("/v1/condition", name="condition_")
  */
-class GenreController extends AbstractController
+class ConditionController extends AbstractController
 {
     /**
      * @Route("/", methods={"GET"}, name="index")
@@ -27,19 +27,8 @@ class GenreController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
-                $this->getUser()->getBranch()
-            )
+            $this->getDoctrine()->getRepository(Condition::class)->findByBranch($this->getUser()->getBranch())
         );
-    }
-
-    /**
-     * @Route("/{id}", methods={"GET"}, name="show")
-     * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
-     */
-    public function show(Genre $genre): JsonResponse
-    {
-        return $this->json($genre);
     }
 
     /**
@@ -48,9 +37,9 @@ class GenreController extends AbstractController
      */
     public function new(Request $request): JsonResponse
     {
-        $genre = new Genre();
-        $genre->setBranch($this->getUser()->getBranch());
-        $form = $this->createForm(GenreType::class, $genre);
+        $condition = new Condition();
+        $condition->setBranch($this->getUser()->getBranch());
+        $form = $this->createForm(ConditionType::class, $condition);
 
         $form->submit(
             json_decode(
@@ -60,24 +49,33 @@ class GenreController extends AbstractController
         );
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($genre);
+            $em->persist($condition);
             $em->flush();
 
-            return $this->json($genre);
+            return $this->json($condition);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
+            'msg' => 'Please enter a valid condition!'
         ], 400);
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"}, name="edit")
-     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
+     * @Route("/{id}", methods={"GET"}, name="show")
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === condition.getBranch()")
      */
-    public function edit(Request $request, Genre $genre): JsonResponse
+    public function show(Condition $condition): JsonResponse
     {
-        $form = $this->createForm(GenreType::class, $genre);
+        return $this->json($condition);
+    }
+
+    /**
+     * @Route("/{id}", methods={"PUT"}, name="edit")
+     * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
+     */
+    public function edit(Request $request, Condition $condition): JsonResponse
+    {
+        $form = $this->createForm(ConditionType::class, $condition);
 
         $form->submit(
             json_decode(
@@ -89,34 +87,30 @@ class GenreController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->json($genre);
+            return $this->json($condition);
         }
 
         return $this->json([
-            'msg' => 'Please enter a valid genre!'
-        ]);
+            'msg' => 'Please enter a valid condition!'
+        ], 400);
     }
 
     /**
      * @Route("/{id}", methods={"DELETE"}, name="delete")
-     * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
+     * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
      */
-    public function delete(Genre $genre): JsonResponse
+    public function delete(Condition $condition): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findBy(
-            [
-                'genre' => $genre
-            ]
-        );
+        $books = $em->getRepository(Book::class)->findByCond($condition);
         foreach ($books as $book) {
-            $book->setGenre(null);
+            $book->setCond(null);
         }
-        $em->remove($genre);
+        $em->remove($condition);
         $em->flush();
 
         return $this->json([
-            'msg' => 'The genre was deleted successfully.'
+            'msg' => 'The condition was successfully deleted.'
         ]);
     }
 }

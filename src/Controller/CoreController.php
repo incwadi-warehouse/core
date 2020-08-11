@@ -38,7 +38,8 @@ class CoreController extends AbstractController
             'roles' => $this->getUser()->getRoles(),
             'branch' => $this->getUser()->getBranch(),
             'isUser' => $this->isGranted('ROLE_USER'),
-            'isAdmin' => $this->isGranted('ROLE_ADMIN')
+            'isAdmin' => $this->isGranted('ROLE_ADMIN'),
+            'lastLogin' => $this->getUser()->getLastLogin()
         ]);
     }
 

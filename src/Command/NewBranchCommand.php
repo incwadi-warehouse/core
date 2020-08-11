@@ -16,6 +16,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class NewBranchCommand extends Command
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -32,6 +35,18 @@ class NewBranchCommand extends Command
             ->setHelp('This command creates a new branch.')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the branch')
         ;
+    }
+
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        if (null === $input->getArgument('name')) {
+            $input->setArgument(
+                'name',
+                $io->ask('What\'s the name of the new branch?')
+            );
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void

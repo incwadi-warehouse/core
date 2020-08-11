@@ -14,6 +14,10 @@ class BookTest extends WebTestCase
 
     protected $genreId;
 
+    protected $conditionId;
+
+    private $tags = [];
+
     public function setUp(): void
     {
         $this->buildClient();
@@ -27,13 +31,43 @@ class BookTest extends WebTestCase
         $this->assertEquals('name', $request->name);
 
         $this->genreId = $request->id;
+
+        $request = $this->request('/v1/condition/new', 'POST', [], [
+            'name' => 'name'
+        ]);
+
+        $this->assertTrue(isset($request->id));
+        $this->assertInternalType('integer', $request->id);
+        $this->assertEquals('name', $request->name);
+
+        $this->conditionId = $request->id;
+
+        $request = $this->request('/v1/tag/new', 'POST', [], [
+            'name' => 'tag1'
+        ]);
+        $this->tags[] = $request->id;
+
+        $request = $this->request('/v1/tag/new', 'POST', [], [
+            'name' => 'tag2'
+        ]);
+        $this->tags[] = $request->id;
     }
 
     public function tearDown(): void
     {
         $request = $this->request('/v1/genre/'.$this->genreId, 'DELETE');
 
-        $this->assertEquals('The genre was successfully deleted.', $request->msg);
+        $this->assertEquals('The genre was deleted successfully.', $request->msg);
+
+        $request = $this->request('/v1/condition/'.$this->conditionId, 'DELETE');
+
+        $this->assertEquals('The condition was successfully deleted.', $request->msg);
+
+        foreach ($this->tags as $tag) {
+            $request = $this->request('/v1/tag/'.$tag, 'DELETE');
+
+            $this->assertEquals('The tag was deleted successfully.', $request->msg);
+        }
 
         parent::tearDown();
     }
@@ -55,7 +89,9 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'added' => 859
+            'added' => 859,
+            'cond' => $this->conditionId,
+            'tags' => $this->tags
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -79,6 +115,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
+        $this->assertInternalType('int', $request->condition->id);
+        $this->assertEquals(2, count($request->tags));
+        $this->assertInternalType('int', $request->tags[0]->id);
+        $this->assertInternalType('string', $request->tags[0]->name);
 
         $id = $request->id;
 
@@ -92,7 +132,9 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'added' => 4758
+            'added' => 4758,
+            'cond' => $this->conditionId,
+            'tags' => $this->tags
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -116,6 +158,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
+        $this->assertInternalType('int', $request->condition->id);
+        $this->assertEquals(2, count($request->tags));
+        $this->assertInternalType('int', $request->tags[0]->id);
+        $this->assertInternalType('string', $request->tags[0]->name);
 
         // sell
         $request = $this->request('/v1/book/sell/'.$id, 'PUT');
@@ -155,6 +201,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
+        $this->assertInternalType('int', $request->condition->id);
+        $this->assertEquals(2, count($request->tags));
+        $this->assertInternalType('int', $request->tags[0]->id);
+        $this->assertInternalType('string', $request->tags[0]->name);
 
         // find
         $request = $this->request('/v1/book/find', 'GET', [
@@ -194,6 +244,10 @@ class BookTest extends WebTestCase
         if (null !== $request->books[0]->lendOn) {
             $this->assertNotEmpty($request->books[0]->lendOn);
         }
+        $this->assertInternalType('int', $request->books[0]->condition->id);
+        $this->assertEquals(2, count($request->books[0]->tags));
+        $this->assertInternalType('int', $request->books[0]->tags[0]->id);
+        $this->assertInternalType('string', $request->books[0]->tags[0]->name);
 
         // delete
         $request = $this->request('/v1/book/'.$id, 'DELETE');
@@ -212,7 +266,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'added' => 4758
+            'added' => 4758,
+            'cond' => $this->conditionId
         ]);
 
         $this->assertInternalType('int', $request->id);
@@ -226,7 +281,8 @@ class BookTest extends WebTestCase
             'removed' => false,
             'releaseYear' => 2019,
             'type' => 'paperback',
-            'added' => 4758
+            'added' => 4758,
+            'cond' => $this->conditionId
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);

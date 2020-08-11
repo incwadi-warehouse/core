@@ -18,6 +18,9 @@ use Symfony\Component\Serializer\Serializer;
 
 class Import implements ImportInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
     protected $em;
 
     public function __construct(EntityManagerInterface $em)

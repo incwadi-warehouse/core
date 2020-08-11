@@ -6,6 +6,8 @@
 
 namespace Incwadi\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -107,11 +109,23 @@ class Book implements \JsonSerializable
      */
     private $lendOn = null;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Incwadi\Core\Entity\Condition")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cond = null;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="books")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->added = new \DateTime();
         $releaseYear = new \DateTime();
         $this->releaseYear = $releaseYear->format('Y');
+        $this->tags = new ArrayCollection();
     }
 
     public function jsonSerialize()
@@ -131,7 +145,9 @@ class Book implements \JsonSerializable
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
-            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null
+            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
+            'condition' => $this->getCond(),
+            'tags' => $this->getTags()
         ];
     }
 
@@ -304,6 +320,44 @@ class Book implements \JsonSerializable
     public function setLendOn(?\DateTimeInterface $lendOn): self
     {
         $this->lendOn = $lendOn;
+
+        return $this;
+    }
+
+    public function getCond(): ?Condition
+    {
+        return $this->cond;
+    }
+
+    public function setCond(?Condition $cond): self
+    {
+        $this->cond = $cond;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
 
         return $this;
     }

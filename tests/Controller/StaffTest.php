@@ -29,12 +29,12 @@ class StaffTest extends WebTestCase
         // list
         $request = $this->request('/v1/staff/', 'GET');
 
-        $this->assertInternalType('array', $request->staff);
-        $this->assertInternalType('int', $request->staff[0]->id);
-        $this->assertInternalType('string', $request->staff[0]->name);
-        if ($request->staff[0]->branch) {
-            $this->assertInternalType('int', $request->staff[0]->branch->id);
-            $this->assertInternalType('string', $request->staff[0]->branch->name);
+        $this->assertInternalType('array', $request);
+        $this->assertInternalType('int', $request[0]->id);
+        $this->assertInternalType('string', $request[0]->name);
+        if ($request[0]->branch) {
+            $this->assertInternalType('int', $request[0]->branch->id);
+            $this->assertInternalType('string', $request[0]->branch->name);
         }
 
         // edit
@@ -58,6 +58,9 @@ class StaffTest extends WebTestCase
         // delete
         $request = $this->request('/v1/staff/'.$id, 'DELETE');
 
-        $this->assertEquals('The staff member was successfully deleted.', $request->msg);
+        $this->assertEquals(
+            'The staff member was deleted successfully.',
+            $request->msg
+        );
     }
 }

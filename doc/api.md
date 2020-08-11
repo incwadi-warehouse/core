@@ -252,3 +252,145 @@ Params
 Body
 
 - password - string
+
+## List conditions
+
+`GET /v1/condition/`
+
+## Create condition
+
+`POST /v1/condition/new`
+
+Body
+
+- name - string
+
+## Show condition
+
+`GET /v1/condition/[id]`
+
+Params
+
+id - int
+
+## Edit condition
+
+`PUT /v1/condition/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+## Delete condition
+
+`DELETE /v1/condition/[id]`
+
+Params
+
+- id - int
+
+## List report
+
+`GET /v1/report/`
+
+## Create report
+
+`POST /v1/report/new`
+
+Body
+
+- name - string
+- searchTerm - string
+- limitTo - int
+- sold - bool
+- removed - bool
+- olderThenXMonths - int
+- branches - string
+- genres - string
+- lendMoreThenXMonths - int
+- orderBy - string
+- releaseYear - int
+- type - string
+
+## Show report
+
+`GET /v1/report/[id]`
+
+Params
+
+id - int
+
+## Edit report
+
+`PUT /v1/report/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+- searchTerm - string
+- limitTo - int
+- sold - bool
+- removed - bool
+- olderThenXMonths - int
+- branches - string
+- genres - string
+- lendMoreThenXMonths - int
+- orderBy - string
+- releaseYear - int
+- type - string
+
+## Delete report
+
+`DELETE /v1/report/[id]`
+
+Params
+
+- id - int
+
+## List tags
+
+`GET /v1/tag/`
+
+## Create tag
+
+`POST /v1/tag/new`
+
+Body
+
+- name - string
+
+## Show tag
+
+`GET /v1/tag/[id]`
+
+Params
+
+id - int
+
+## Edit tag
+
+`PUT /v1/tag/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+
+## Delete tag
+
+`DELETE /v1/tag/[id]`
+
+Params
+
+- id - int
