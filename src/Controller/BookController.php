@@ -123,6 +123,7 @@ class BookController extends AbstractController
                 'genre' => $book->getGenre(),
                 'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
+                'removed' => $book->getRemoved(),
                 'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType()
             ]
@@ -160,25 +161,25 @@ class BookController extends AbstractController
             )
         );
 
-        $existingBook = $this->getDoctrine()->getRepository(Book::class)->findOneBy(
-            [
-                'branch' => $book->getBranch(),
-                'title' => $book->getTitle(),
-                'author' => $book->getAuthor(),
-                'genre' => $book->getGenre(),
-                'price' => $book->getPrice(),
-                'sold' => $book->getSold(),
-                'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType()
-            ]
-        );
-        if (null !== $existingBook) {
-            if ($existingBook->getId() !== $book->getId()) {
-                return $this->json([
-                'msg' => 'Book not saved, because it exists already!'
-                ], 409);
-            }
-        }
+        // $existingBook = $this->getDoctrine()->getRepository(Book::class)->findOneBy(
+        //     [
+        //         'branch' => $book->getBranch(),
+        //         'title' => $book->getTitle(),
+        //         'author' => $book->getAuthor(),
+        //         'genre' => $book->getGenre(),
+        //         'price' => $book->getPrice(),
+        //         'sold' => $book->getSold(),
+        //         'releaseYear' => $book->getReleaseYear(),
+        //         'type' => $book->getType()
+        //     ]
+        // );
+        // if (null !== $existingBook) {
+        //     if ($existingBook->getId() !== $book->getId()) {
+        //         return $this->json([
+        //         'msg' => 'Book not saved, because it exists already!'
+        //         ], 409);
+        //     }
+        // }
         if ($form->isSubmitted() && $form->isValid()) {
             // sold
             if (true === $book->getSold() && null === $book->getSoldOn()) {
