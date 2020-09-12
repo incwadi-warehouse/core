@@ -345,6 +345,22 @@ class BookRepository extends ServiceEntityRepository
             'type_desc' => [
                 'field' => 'b.type',
                 'direction' => 'DESC'
+            ],
+            'sold_asc' => [
+                'field' => 'b.soldOn',
+                'direction' => 'ASC'
+            ],
+            'sold_desc' => [
+                'field' => 'b.soldOn',
+                'direction' => 'DESC'
+            ],
+            'removed_asc' => [
+                'field' => 'b.removedOn',
+                'direction' => 'ASC'
+            ],
+            'removed_desc' => [
+                'field' => 'b.removedOn',
+                'direction' => 'DESC'
             ]
         ];
     }
