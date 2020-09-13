@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -49,6 +49,15 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTime $lastLogin = null;
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'roles' => $this->getRoles(),
+        ];
+    }
 
     public function getId(): ?int
     {
