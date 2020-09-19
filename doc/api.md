@@ -384,3 +384,45 @@ Body
 Params
 
 - id - int
+
+## List saved searches
+
+`GET /api/v1/savedsearch/`
+
+## Create saved search
+
+`POST /api/v1/savedsearch/new`
+
+Body
+
+- name - string
+- query - array
+
+## Show saved search
+
+`GET /api/v1/savedsearch/[id]`
+
+Params
+
+id - int
+
+## Edit saved search
+
+`PUT /api/v1/savedsearch/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- name - string
+- query - array
+
+## Delete saved search
+
+`DELETE /api/v1/savedsearch/[id]`
+
+Params
+
+- id - int
