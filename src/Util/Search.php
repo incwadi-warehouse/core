@@ -42,8 +42,16 @@ class Search
         );
 
         $query = $this->qb->getQuery();
+        $books = $query->getResult();
 
-        return $query->getResult();
+        $this->qb->setMaxResults(null);
+        $query = $this->qb->getQuery();
+        $counter = count($query->getResult());
+
+        return [
+            'books' => $books,
+            'counter' => $counter
+        ];
     }
 
     private function parseOptions(?array $options): ?Andx
