@@ -6,6 +6,8 @@
 
 namespace Incwadi\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Incwadi\Core\Repository\GenreRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,12 +35,23 @@ class Genre implements \JsonSerializable
      */
     private $branch;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="genre")
+     */
+    private $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
             'branch' => $this->getBranch(),
+            'books' => count($this->getBooks()),
         ];
     }
 
@@ -67,6 +80,36 @@ class Genre implements \JsonSerializable
     public function setBranch(?Branch $branch): self
     {
         $this->branch = $branch;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            if ($book->getGenre() === $this) {
+                $book->setGenre(null);
+            }
+        }
 
         return $this;
     }

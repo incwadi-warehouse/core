@@ -253,6 +253,7 @@ Response
 - id - int
 - name - string
 - branch - Branch
+- books - int
 
 ### Create genre
 
@@ -273,6 +274,7 @@ or
 - id - int
 - name - string
 - branch - Branch
+- books - int
 
 ### Edit genre
 
@@ -297,6 +299,7 @@ or
 - id - int
 - name - string
 - branch - Branch
+- books - int
 
 ### Delete genre
 
