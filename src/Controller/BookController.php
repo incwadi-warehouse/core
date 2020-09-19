@@ -25,39 +25,17 @@ class BookController extends AbstractController
      */
     public function find(Request $request): JsonResponse
     {
-        $books = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-            [
-                'term' => $request->query->get('term', null),
-                'sold' => $request->query->get('sold', false),
-                'removed' => $request->query->get('removed', false),
-                'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
-                'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', false),
-                'lending' => $request->query->get('lending', null),
-                'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null),
-            ],
-            $request->query->get('orderBy', 'asc'),
-            $request->query->get('limit', 20)
+        return $this->json(
+            $this
+                ->getDoctrine()
+                ->getRepository(Book::class)
+                ->findDemanded(
+                    json_decode(
+                        $request->query->get('options'),
+                        true
+                    )
+                )
         );
-
-        $counter = $this->getDoctrine()->getRepository(Book::class)->findDemanded(
-            [
-                'term' => $request->query->get('term', null),
-                'sold' => $request->query->get('sold', false),
-                'removed' => $request->query->get('removed', false),
-                'branch' => $request->query->get('branch', $this->getUser()->getBranch()->getId()),
-                'added' => $request->query->get('added', null),
-                'genre' => $request->query->get('genre', false),
-                'lending' => $request->query->get('lending', null),
-                'releaseYear' => $request->query->get('releaseYear', null),
-                'type' => $request->query->get('type', null),
-            ],
-            $request->query->get('orderBy', 'asc'),
-            99999
-        );
-
-        return $this->json($books);
     }
 
     /**
@@ -90,6 +68,8 @@ class BookController extends AbstractController
      */
     public function new(Request $request): JsonResponse
     {
+        $em = $this->getDoctrine()->getManager();
+
         $book = new Book();
         $book->setBranch(
             $this->getUser()->getBranch()
@@ -103,25 +83,13 @@ class BookController extends AbstractController
             )
         );
 
-        $existingBook = $this->getDoctrine()->getRepository(Book::class)->findBy(
-            [
-                'branch' => $book->getBranch(),
-                'title' => $book->getTitle(),
-                'author' => $book->getAuthor(),
-                'genre' => $book->getGenre(),
-                'price' => $book->getPrice(),
-                'sold' => $book->getSold(),
-                'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
-            ]
-        );
-        if ([] !== $existingBook) {
+        $existingBook = $em->getRepository(Book::class)->findDuplicate($book);
+        if (null !== $existingBook) {
             return $this->json([
                 'msg' => 'Book not saved, because it exists already!',
             ], 409);
         }
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($book);
             $em->flush();
 
@@ -139,6 +107,7 @@ class BookController extends AbstractController
      */
     public function edit(Request $request, Book $book): JsonResponse
     {
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(BookType::class, $book);
 
         $form->submit(
@@ -148,18 +117,7 @@ class BookController extends AbstractController
             )
         );
 
-        $existingBook = $this->getDoctrine()->getRepository(Book::class)->findOneBy(
-            [
-                'branch' => $book->getBranch(),
-                'title' => $book->getTitle(),
-                'author' => $book->getAuthor(),
-                'genre' => $book->getGenre(),
-                'price' => $book->getPrice(),
-                'sold' => $book->getSold(),
-                'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
-            ]
-        );
+        $existingBook = $em->getRepository(Book::class)->findDuplicate($book);
         if (null !== $existingBook) {
             if ($existingBook->getId() !== $book->getId()) {
                 return $this->json([
@@ -184,7 +142,6 @@ class BookController extends AbstractController
             if (false === $book->getRemoved() && null !== $book->getRemovedOn()) {
                 $book->setRemovedOn(null);
             }
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
 
             return $this->json($book);
@@ -215,7 +172,9 @@ class BookController extends AbstractController
     public function remove(Book $book): JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
-        $book->setRemovedOn(null === $book->getRemovedOn() ? new \DateTime() : null);
+        $book->setRemovedOn(
+            null === $book->getRemovedOn() ? new \DateTime() : null
+        );
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
