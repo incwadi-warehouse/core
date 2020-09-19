@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
-    "doctrine/doctrine-bundle": "^2.1",
+    "doctrine/doctrine-bundle": "2.0.10",
     "doctrine/doctrine-migrations-bundle": "^3.0",
     "doctrine/orm": "^2.7",
     "gesdinet/jwt-refresh-token-bundle": "^0.9",
