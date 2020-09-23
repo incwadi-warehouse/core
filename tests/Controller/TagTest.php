@@ -15,7 +15,7 @@ class TagTest extends WebTestCase
     protected int $genreId;
 
     protected int $conditionId;
-    private int $bookId;
+    private string $bookId;
 
     public function setUp(): void
     {

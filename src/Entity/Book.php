@@ -24,10 +24,10 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="guid")
      */
-    private int $id;
+    private string $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Branch::class)
@@ -150,7 +150,7 @@ class Book implements \JsonSerializable
         ];
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

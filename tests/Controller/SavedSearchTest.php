@@ -35,7 +35,7 @@ class SavedSearchTest extends WebTestCase
         $this->assertInternalType('int', $request[0]->id);
         $this->assertIsObject($request[0]->branch);
         $this->assertInternalType('string', $request[0]->name);
-        $this->assertInternalType('array', $request[0]->query);
+        $this->assertIsObject($request[0]->query);
 
         // edit
         $request = $this->request('/api/v1/savedsearch/'.$id, 'PUT', [], [
