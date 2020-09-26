@@ -1,23 +1,23 @@
 #!/bin/bash
 
-release=${1:-"0"}
-db=${2:-"0"}
+release=${1:-"tag"}
 
-if [ "$release" == 1 ]
+if [ "$release" == "tag" ]
   then
     git fetch
     tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
     git checkout "$tag"
-  else
-    git pull origin main
+fi
+
+if [ "$release" != "tag" ]
+  then
+    git fetch
+    git checkout "$release"
 fi
 
 composer install
 composer dump-env prod
-if [ "$db" == 1 ]
-  then
-    bin/console doctrine:database:create
-fi
+bin/console doctrine:database:create --if-not-exists
 bin/console doctrine:migrations:migrate -n
 bin/console cache:clear
 bin/console cache:warmup
