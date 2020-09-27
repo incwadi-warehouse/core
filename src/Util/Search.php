@@ -34,8 +34,8 @@ class Search
                 $this->parseOptions($options)
             );
         }
-        if (isset($options['orderBy'][0])) {
-            $this->setOrderBy($options['orderBy'][0]);
+        if (isset($options['orderBy']['book'][0])) {
+            $this->setOrderBy($options['orderBy']['book'][0]);
         }
         $this->qb->setMaxResults(
             isset($options['limit']) ? $options['limit'] : self::LIMIT
@@ -50,7 +50,7 @@ class Search
 
         return [
             'books' => $books,
-            'counter' => $counter
+            'counter' => $counter,
         ];
     }
 
