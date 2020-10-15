@@ -80,7 +80,8 @@ class BookRepository extends ServiceEntityRepository
         return $search->find($options);
     }
 
-    public function findDuplicate(Book $book) {
+    public function findDuplicate(Book $book)
+    {
         return $this->findOneBy(
             [
                 'branch' => $book->getBranch(),

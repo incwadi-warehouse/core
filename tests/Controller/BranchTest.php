@@ -30,7 +30,7 @@ class BranchTest extends WebTestCase
         $request = $this->request('/api/v1/branch/'.$branch->id, 'PUT', [], [
             'name' => 'name',
             'steps' => 0.01,
-            'currency' => 'EUR'
+            'currency' => 'EUR',
         ]);
 
         $this->assertInternalType('integer', $request->id);

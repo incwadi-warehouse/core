@@ -7,7 +7,6 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\SavedSearch;
-use Incwadi\Core\Form\SavedSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
