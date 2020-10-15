@@ -7,12 +7,14 @@ if [ "$release" == "tag" ]
     git fetch
     tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
     git checkout "$tag"
+    git pull
 fi
 
 if [ "$release" != "tag" ]
   then
     git fetch
     git checkout "$release"
+    git pull
 fi
 
 composer install
