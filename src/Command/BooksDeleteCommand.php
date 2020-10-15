@@ -26,9 +26,9 @@ class BooksDeleteCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('book:delete')
-            ->setDescription('Deletes the book from the database.')
-            ->setHelp('Deletes a book')
+            ->setName('books:delete')
+            ->setDescription('Deletes the books from the database.')
+            ->setHelp('Deletes books')
         ;
     }
 
