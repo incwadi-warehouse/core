@@ -28,7 +28,7 @@
     "doctrine/doctrine-fixtures-bundle": "^3.3",
     "friendsofphp/php-cs-fixer": "^2.16",
     "mikey179/vfsstream": "^1.6",
-    "phploc/phploc": "^6.0",
+    "phploc/phploc": "^7.0",
     "symfony/browser-kit": "^5.1",
     "symfony/debug-bundle": "^5.1",
     "symfony/maker-bundle": "^1.20",
