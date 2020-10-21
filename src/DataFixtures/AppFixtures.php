@@ -7,7 +7,7 @@
 namespace Incwadi\Core\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
