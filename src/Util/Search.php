@@ -73,7 +73,7 @@ class Search
 
     private function createQuery(array $filter)
     {
-        if (!$this->isFieldNameValid($filter['field']) || !$filter['value']) {
+        if (!$this->isFieldNameValid($filter['field']) || !isset($filter['value'])) {
             return null;
         }
 
