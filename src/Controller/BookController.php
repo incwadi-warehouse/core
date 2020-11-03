@@ -89,6 +89,7 @@ class BookController extends AbstractController
                 'msg' => 'Book not saved, because it exists already!',
             ], 409);
         }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($book);
             $em->flush();
@@ -125,6 +126,7 @@ class BookController extends AbstractController
                 ], 409);
             }
         }
+
         if ($form->isSubmitted() && $form->isValid()) {
             // sold
             if (true === $book->getSold() && null === $book->getSoldOn()) {
