@@ -27,6 +27,15 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function findDemanded(array $options): array
+    {
+        $search = new Search(
+            $this->getEntityManager()->createQueryBuilder()
+        );
+
+        return $search->find($options);
+    }
+
     public function deleteBooks(int $clearLimit = self::KEEP_REMOVED_DAYS): int
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -69,15 +78,6 @@ class BookRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
 
         return $query->getResult();
-    }
-
-    public function findDemanded(array $options): array
-    {
-        $search = new Search(
-            $this->getEntityManager()->createQueryBuilder()
-        );
-
-        return $search->find($options);
     }
 
     public function findDuplicate(Book $book)
