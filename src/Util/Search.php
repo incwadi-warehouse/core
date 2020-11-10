@@ -28,6 +28,7 @@ class Search
         $this->qb->from('Incwadi:Book', 'b');
         $this->qb->leftJoin('b.author', 'a');
         $this->qb->leftJoin('b.tags', 't');
+        $this->qb->leftJoin('b.genre', 'g');
 
         if (isset($options['term']) || isset($options['filter'])) {
             $this->qb->where(
@@ -73,7 +74,7 @@ class Search
 
     private function createQuery(array $filter)
     {
-        if (!$this->isFieldNameValid($filter['field']) || !$filter['value']) {
+        if (!$this->isFieldNameValid($filter['field']) || !isset($filter['value'])) {
             return null;
         }
 
