@@ -234,10 +234,10 @@ class Search
         if (!in_array($operator, ['in', 'eq', 'gte', 'gt', 'lte', 'lt'])) {
             $operator = 'eq';
         }
-        if (in_array($fieldName, ['branch', 'sold', 'removed', 'type'])) {
+        if (in_array($fieldName, ['sold', 'removed', 'type'])) {
             $operator = 'eq';
         }
-        if ('in' === $operator && 'genre' !== $fieldName) {
+        if ('in' === $operator && !in_array($fieldName, ['genre', 'branch'])) {
             $operator = 'eq';
         }
 
