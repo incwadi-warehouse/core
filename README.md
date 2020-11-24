@@ -114,7 +114,7 @@ bin/console doctrine:migrations:migrate -n
 Load the first user with the fixtures.
 
 ```shell
-bin/console doctrine:fixtures:load
+bin/console doctrine:fixtures:load -n
 ```
 
 ## Update
