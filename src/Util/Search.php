@@ -27,7 +27,9 @@ class Search
         $this->qb->select('b');
         $this->qb->from('Incwadi:Book', 'b');
         $this->qb->leftJoin('b.author', 'a');
-        $this->qb->leftJoin('b.tags', 't');
+        if (isset($options['term'])) {
+            $this->qb->leftJoin('b.tags', 't');
+        }
         $this->qb->leftJoin('b.genre', 'g');
 
         if (isset($options['term']) || isset($options['filter'])) {
