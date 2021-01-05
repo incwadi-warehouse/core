@@ -96,6 +96,9 @@
     "doctrine/reflection": {
         "version": "1.2.2"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -107,6 +110,9 @@
         "files": [
             ".php_cs.dist"
         ]
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.2"
     },
     "gesdinet/jwt-refresh-token-bundle": {
         "version": "v0.9.1"
@@ -122,6 +128,9 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "lcobucci/clock": {
+        "version": "2.0.0"
     },
     "lcobucci/jwt": {
         "version": "3.3.3"

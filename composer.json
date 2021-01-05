@@ -5,10 +5,10 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
-    "doctrine/doctrine-bundle": "2.0.10",
+    "doctrine/doctrine-bundle": "^2.2",
     "doctrine/doctrine-migrations-bundle": "^3.0",
     "doctrine/orm": "^2.7",
-    "gesdinet/jwt-refresh-token-bundle": "^0.9",
+    "gesdinet/jwt-refresh-token-bundle": "^0.10",
     "lexik/jwt-authentication-bundle": "^2.8",
     "nelmio/cors-bundle": "^2.0",
     "sensio/framework-extra-bundle": "^5.5",
