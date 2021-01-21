@@ -27,10 +27,11 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findDemanded(array $options): array
+    public function findDemanded(array $options, bool $isPublic = false): array
     {
         $search = new Search(
-            $this->getEntityManager()->createQueryBuilder()
+            $this->getEntityManager()->createQueryBuilder(),
+            $isPublic
         );
 
         return $search->find($options);

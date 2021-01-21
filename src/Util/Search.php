@@ -17,9 +17,13 @@ class Search
 
     private QueryBuilder $qb;
 
-    public function __construct(QueryBuilder $qb)
+    // @fix make it easier to set this value
+    private bool $isPublic = false;
+
+    public function __construct(QueryBuilder $qb, bool $isPublic = false)
     {
         $this->qb = $qb;
+        $this->isPublic = $isPublic;
     }
 
     public function find(array $options): array
@@ -122,6 +126,11 @@ class Search
     {
         $term = preg_replace('#[%\*]#', '', $term);
         if (!$term) {
+            // @fix: fail gracefully, dont return something if term does not contain at least one letter or number
+            if ($this->isPublic) {
+                throw new \Exception('There is no term!');
+            }
+
             return null;
         }
 
