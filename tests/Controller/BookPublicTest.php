@@ -20,15 +20,15 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertIsObject($request);
-        $this->assertEquals(9, count($request));
-        $this->assertInternalType('string', $request->id);
-        $this->assertInternalType('string', $request->currency);
-        $this->assertInternalType('string', $request->title);
-        $this->assertInternalType('string', $request->authorFirstname);
-        $this->assertInternalType('string', $request->authorLastname);
-        $this->assertInternalType('string', $request->genre);
-        $this->assertNotEmpty($request->price);
-        $this->assertInternalType('int', $request->releaseYear);
-        $this->assertInternalType('string', $request->type);
+        $this->assertEquals(9, count((array)$request->books[0]));
+        $this->assertInternalType('string', $request->books[0]->id);
+        $this->assertInternalType('string', $request->books[0]->currency);
+        $this->assertInternalType('string', $request->books[0]->title);
+        $this->assertInternalType('string', $request->books[0]->authorFirstname);
+        $this->assertInternalType('string', $request->books[0]->authorSurname);
+        $this->assertInternalType('string', $request->books[0]->genre);
+        $this->assertNotEmpty($request->books[0]->price);
+        $this->assertInternalType('int', $request->books[0]->releaseYear);
+        $this->assertInternalType('string', $request->books[0]->type);
     }
 }

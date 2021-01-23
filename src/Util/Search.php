@@ -76,10 +76,37 @@ class Search
         $query = $this->qb->getQuery();
         $counter = count($query->getResult());
 
+        if ($this->isPublic) {
+            return [
+                'books' => $this->getBook($books),
+                'counter' => $counter,
+            ];
+        }
+
         return [
             'books' => $books,
             'counter' => $counter,
         ];
+    }
+
+    private function getBook(array $books): array
+    {
+        $processed = [];
+        foreach ($books as $book) {
+            $processed[] = [
+                'id' => $book->getId(),
+                'currency' => $book->getBranch()->getCurrency(),
+                'title' => $book->getTitle(),
+                'authorFirstname' => $book->getAuthor()->getFirstname(),
+                'authorSurname' => $book->getAuthor()->getSurname(),
+                'genre' => $book->getGenre()->getName(),
+                'price' => $book->getPrice(),
+                'releaseYear' => $book->getReleaseYear(),
+                'type' => $book->getType(),
+            ];
+        }
+
+        return $processed;
     }
 
     private function parseOptions(?array $options): ?Andx
