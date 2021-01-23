@@ -36,6 +36,20 @@ class Search
         }
         $this->qb->leftJoin('b.genre', 'g');
 
+        if ($this->isPublic) {
+            $options['filter'] = [
+                [
+                    'field' => 'sold',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'removed',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+            ];
+        }
         if (isset($options['term']) || isset($options['filter'])) {
             $this->qb->where(
                 $this->parseOptions($options)
