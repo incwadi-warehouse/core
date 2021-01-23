@@ -37,6 +37,9 @@ class Search
         $this->qb->leftJoin('b.genre', 'g');
 
         if ($this->isPublic) {
+            $options['filter'] = [];
+            $options['orderBy'] = [];
+
             $options['filter'] = [
                 [
                     'field' => 'sold',
