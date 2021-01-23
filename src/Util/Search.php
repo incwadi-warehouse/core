@@ -77,10 +77,7 @@ class Search
         $counter = count($query->getResult());
 
         if ($this->isPublic) {
-            return [
-                'books' => $this->getBook($books),
-                'counter' => $counter,
-            ];
+            return $this->getBook($books);
         }
 
         return [

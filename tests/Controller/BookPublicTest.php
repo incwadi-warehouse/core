@@ -19,16 +19,16 @@ class BookTest extends WebTestCase
             'options' => json_encode(['term' => 'book']),
         ]);
 
-        $this->assertIsObject($request);
-        $this->assertEquals(9, count((array)$request->books[0]));
-        $this->assertInternalType('string', $request->books[0]->id);
-        $this->assertInternalType('string', $request->books[0]->currency);
-        $this->assertInternalType('string', $request->books[0]->title);
-        $this->assertInternalType('string', $request->books[0]->authorFirstname);
-        $this->assertInternalType('string', $request->books[0]->authorSurname);
-        $this->assertInternalType('string', $request->books[0]->genre);
-        $this->assertNotEmpty($request->books[0]->price);
-        $this->assertInternalType('int', $request->books[0]->releaseYear);
-        $this->assertInternalType('string', $request->books[0]->type);
+        $this->assertIsArray($request);
+        $this->assertEquals(9, count((array)$request[0]));
+        $this->assertInternalType('string', $request[0]->id);
+        $this->assertInternalType('string', $request[0]->currency);
+        $this->assertInternalType('string', $request[0]->title);
+        $this->assertInternalType('string', $request[0]->authorFirstname);
+        $this->assertInternalType('string', $request[0]->authorSurname);
+        $this->assertInternalType('string', $request[0]->genre);
+        $this->assertNotEmpty($request[0]->price);
+        $this->assertInternalType('int', $request[0]->releaseYear);
+        $this->assertInternalType('string', $request[0]->type);
     }
 }
