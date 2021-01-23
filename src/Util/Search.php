@@ -52,6 +52,10 @@ class Search
                     'value' => '0',
                 ],
             ];
+
+            if (!preg_match('#([a-z]+|[0-9]+)#', $options['term'])) {
+                throw new \Exception('There is no term!');
+            }
         }
         if (isset($options['term']) || isset($options['filter'])) {
             $this->qb->where(
@@ -143,11 +147,6 @@ class Search
     {
         $term = preg_replace('#[%\*]#', '', $term);
         if (!$term) {
-            // @fix: fail gracefully, dont return something if term does not contain at least one letter or number
-            if ($this->isPublic) {
-                throw new \Exception('There is no term!');
-            }
-
             return null;
         }
 
