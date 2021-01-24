@@ -32,7 +32,7 @@ class BookRepository extends ServiceEntityRepository
         $search = new Search(
             $this->getEntityManager()->createQueryBuilder(),
         );
-        $search->setPublic(true);
+        $search->setPublic($isPublic);
 
         return $search->find($options);
     }

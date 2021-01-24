@@ -8,7 +8,7 @@ namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class BookTest extends WebTestCase
+class BookPublicTest extends WebTestCase
 {
     use \Incwadi\Core\Tests\ApiTestTrait;
 
