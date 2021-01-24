@@ -17,12 +17,15 @@ class Search
 
     private QueryBuilder $qb;
 
-    // @fix make it easier to set this value
     private bool $isPublic = false;
 
-    public function __construct(QueryBuilder $qb, bool $isPublic = false)
+    public function __construct(QueryBuilder $qb)
     {
         $this->qb = $qb;
+    }
+
+    public function setPublic(bool $isPublic): void
+    {
         $this->isPublic = $isPublic;
     }
 
