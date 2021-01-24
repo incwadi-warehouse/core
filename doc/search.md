@@ -3,7 +3,7 @@
 ## Query
 
 - term - string , Operator: like
-- filters - array\<filter\>
+- filter - array\<filter\>
 - orderBy - array
   - book - array\<order\>
   - author - array\<order\>
