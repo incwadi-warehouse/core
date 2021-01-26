@@ -19,6 +19,7 @@ class BranchType extends AbstractType
             ->add('name')
             ->add('steps')
             ->add('currency')
+            ->add('ordering')
         ;
     }
 

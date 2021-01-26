@@ -104,6 +104,8 @@ class Search
                 'price' => $book->getPrice(),
                 'releaseYear' => $book->getReleaseYear(),
                 'type' => $book->getType(),
+                'branchName' => $book->getBranch()->getName(),
+                'branchOrdering' => $book->getBranch()->getOrdering(),
             ];
         }
 

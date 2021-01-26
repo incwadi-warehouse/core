@@ -45,6 +45,11 @@ class Branch implements \JsonSerializable
      */
     private $currency = 'EUR';
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $ordering;
+
     public function jsonSerialize()
     {
         return [
@@ -52,6 +57,7 @@ class Branch implements \JsonSerializable
             'name' => $this->getName(),
             'steps' => $this->getSteps(),
             'currency' => $this->getCurrency(),
+            'ordering' => $this->getOrdering(),
         ];
     }
 
@@ -92,6 +98,18 @@ class Branch implements \JsonSerializable
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getOrdering(): ?string
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(?string $ordering): self
+    {
+        $this->ordering = $ordering;
 
         return $this;
     }
