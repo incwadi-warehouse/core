@@ -97,6 +97,9 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('title', $request->title);
+        if (null !== $request->shortDescription) {
+            $this->assertTrue(isset($request->shortDescription));
+        }
         $this->assertEquals('firstname', $request->author->firstname);
         $this->assertEquals('surname', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
@@ -140,6 +143,9 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
+        if (null !== $request->shortDescription) {
+            $this->assertTrue(isset($request->shortDescription));
+        }
         $this->assertEquals('firstname1', $request->author->firstname);
         $this->assertEquals('surname1', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
@@ -183,6 +189,9 @@ class BookTest extends WebTestCase
         }
         $this->assertInternalType('integer', $request->added);
         $this->assertEquals('book', $request->title);
+        if (null !== $request->shortDescription) {
+            $this->assertTrue(isset($request->shortDescription));
+        }
         $this->assertEquals('firstname1', $request->author->firstname);
         $this->assertEquals('surname1', $request->author->surname);
         $this->assertEquals($this->genreId, $request->genre->id);
@@ -215,6 +224,9 @@ class BookTest extends WebTestCase
         $this->assertInternalType('string', $request->books[0]->id);
         $this->assertInternalType('integer', $request->books[0]->added);
         $this->assertInternalType('string', $request->books[0]->title);
+        if (null !== $request->books[0]->shortDescription) {
+            $this->assertTrue(isset($request->books[0]->shortDescription));
+        }
         if (null !== $request->books[0]->author) {
             $this->assertInternalType('string', $request->books[0]->author->firstname);
             $this->assertInternalType('string', $request->books[0]->author->surname);

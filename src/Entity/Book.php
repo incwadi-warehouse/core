@@ -43,6 +43,11 @@ class Book implements \JsonSerializable
     private string $title = '';
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $shortDescription;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books", cascade={"persist"})
      * @Assert\NotBlank()
      */
@@ -131,6 +136,7 @@ class Book implements \JsonSerializable
             'branch' => $this->getBranch(),
             'added' => $this->getAdded()->getTimestamp(),
             'title' => $this->getTitle(),
+            'shortDescription' => $this->getShortDescription(),
             'author' => $this->getAuthor(),
             'genre' => $this->getGenre(),
             'price' => $this->getPrice(),
@@ -184,6 +190,18 @@ class Book implements \JsonSerializable
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(?string $shortDescription): self
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }

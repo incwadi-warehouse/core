@@ -31,6 +31,7 @@ class BookType extends AbstractType
         $builder
             ->add('added', TextType::class)
             ->add('title')
+            ->add('shortDescription')
             ->add('author', TextType::class)
             ->add('genre')
             ->add('price')

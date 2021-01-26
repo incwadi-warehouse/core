@@ -97,6 +97,7 @@ class Search
                 'id' => $book->getId(),
                 'currency' => $book->getBranch()->getCurrency(),
                 'title' => $book->getTitle(),
+                'shortDescription' => $book->getShortDescription(),
                 'authorFirstname' => $book->getAuthor()->getFirstname(),
                 'authorSurname' => $book->getAuthor()->getSurname(),
                 'genre' => $book->getGenre()->getName(),

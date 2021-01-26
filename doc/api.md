@@ -43,6 +43,7 @@ Response
 - branch - Branch|null
 - added - DateTime
 - title - string
+- shortDescription - string|null
 - author - Author|null
 - genre - Genre|null
 - price - float

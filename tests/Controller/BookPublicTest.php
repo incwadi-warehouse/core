@@ -20,10 +20,13 @@ class BookPublicTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request);
-        $this->assertEquals(9, count((array)$request[0]));
+        $this->assertEquals(10, count((array) $request[0]));
         $this->assertInternalType('string', $request[0]->id);
         $this->assertInternalType('string', $request[0]->currency);
         $this->assertInternalType('string', $request[0]->title);
+        if (null !== $request[0]->shortDescription) {
+            $this->assertTrue(isset($request[0]->shortDescription));
+        }
         $this->assertInternalType('string', $request[0]->authorFirstname);
         $this->assertInternalType('string', $request[0]->authorSurname);
         $this->assertInternalType('string', $request[0]->genre);
