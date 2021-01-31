@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Util\Search;
+use Incwadi\Core\Service\CoverRemove;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,9 +23,12 @@ class BookRepository extends ServiceEntityRepository
 {
     const KEEP_REMOVED_DAYS = 28;
 
-    public function __construct(ManagerRegistry $registry)
+    private $cover;
+
+    public function __construct(ManagerRegistry $registry, CoverRemove $cover)
     {
         parent::__construct($registry, Book::class);
+        $this->cover = $cover;
     }
 
     public function findDemanded(array $options, bool $isPublic = false): array
@@ -37,11 +41,13 @@ class BookRepository extends ServiceEntityRepository
         return $search->find($options);
     }
 
-    public function deleteBooks(int $clearLimit = self::KEEP_REMOVED_DAYS): int
+    public function deleteBooks(int $clearLimit = self::KEEP_REMOVED_DAYS): void
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        $qb->delete('Incwadi:Book', 'b');
+        // $qb->delete('Incwadi:Book', 'b');
+        $qb->select('b');
+        $qb->from('Incwadi:Book', 'b');
         $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->lte('b.soldOn', ':date'),
@@ -54,15 +60,22 @@ class BookRepository extends ServiceEntityRepository
         $qb->setParameter('date', $date);
 
         $query = $qb->getQuery();
+        $books = $query->getResult();
 
-        return $query->getResult();
+        foreach($books as $item) {
+            $this->deleteBook($item);
+        }
+
+        $this->getEntityManager()->flush();
     }
 
-    public function deleteBooksByBranch(Branch $branch): int
+    public function deleteBooksByBranch(Branch $branch): void
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        $qb->delete('Incwadi:Book', 'b');
+        // $qb->delete('Incwadi:Book', 'b');
+        $qb->select('b');
+        $qb->from('Incwadi:Book', 'b');
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->orX(
@@ -77,8 +90,19 @@ class BookRepository extends ServiceEntityRepository
         $qb->setParameter('branch', $branch);
 
         $query = $qb->getQuery();
+        $books = $query->getResult();
 
-        return $query->getResult();
+        foreach($books as $item) {
+            $this->deleteBook($item);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    private function deleteBook(Book $book):void
+    {
+        $this->cover->remove($book);
+        $this->getEntityManager()->remove($book);
     }
 
     public function findDuplicate(Book $book)

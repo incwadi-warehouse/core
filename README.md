@@ -173,3 +173,7 @@ If the user has forgotten the password, you can reset it with this command. Repl
 ```shell
 bin/console user:reset-password [ID]
 ```
+
+## Uploading Images
+
+You can upload JPEG and PNG images up to 1024KB. All images are saved as JPEG with quality of 75%. The source file is only saved temporarily.

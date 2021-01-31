@@ -1,5 +1,6 @@
 build/
 .php-version
+data/
 
 ###> symfony/framework-bundle ###
 /.env.local

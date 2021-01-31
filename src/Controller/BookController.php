@@ -7,7 +7,11 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Form\BookCoverType;
 use Incwadi\Core\Form\BookType;
+use Incwadi\Core\Service\CoverUpload;
+use Incwadi\Core\Service\CoverRemove;
+use Incwadi\Core\Service\CoverShow;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -155,6 +159,45 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/cover/{id}", methods={"GET"})
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function showCover(Request $request, Book $book, CoverShow $cover): JsonResponse
+    {
+        return $this->json($cover->show($book));
+    }
+
+    /**
+     * @Route("/cover/{id}", methods={"POST"})
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function cover(Request $request, Book $book, CoverUpload $coverUpload): JsonResponse
+    {
+        $form = $this->createForm(BookCoverType::class, $book);
+        $form->submit(['cover' => $request->files->get('cover')]);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('cover')->getData();
+            $coverUpload->upload($book, $file);
+
+            return $this->json($book);
+        }
+
+        return $this->json(['msg' => 'Could not upload image.'], 500);
+    }
+
+    /**
+     * @Route("/cover/{id}", methods={"DELETE"})
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function deleteCover(Request $request, Book $book, CoverRemove $cover): JsonResponse
+    {
+        $cover->remove($book);
+
+        return $this->json(['msg' => 'Cover was deleted.']);
+    }
+
+    /**
      * @Route("/sell/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
@@ -186,8 +229,10 @@ class BookController extends AbstractController
      * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
-    public function delete(Book $book): JsonResponse
+    public function delete(Book $book, CoverRemove $cover): JsonResponse
     {
+        $cover->remove($book);
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($book);
         $em->flush();

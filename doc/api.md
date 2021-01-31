@@ -138,6 +138,40 @@ or
 - condition - Condition|null
 - tags - array\<Tag\>
 
+### Show Cover
+
+Request
+
+`GET /api/v1/book/cover/[id]`
+
+Params
+
+- id - int
+
+### Upload Cover
+
+Request
+
+`POST /api/v1/book/cover/[id]`
+
+Params
+
+- id - int
+
+Body
+
+- cover - binary
+
+### Remove Cover
+
+Request
+
+`DELETE /api/v1/book/cover/[id]`
+
+Params
+
+- id - int
+
 ### Sell a book
 
 Request

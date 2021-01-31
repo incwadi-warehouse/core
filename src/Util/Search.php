@@ -10,6 +10,7 @@ use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Service\CoverShow;
 
 class Search
 {
@@ -93,20 +94,24 @@ class Search
     {
         $processed = [];
         foreach ($books as $book) {
-            $processed[] = [
-                'id' => $book->getId(),
-                'currency' => $book->getBranch()->getCurrency(),
-                'title' => $book->getTitle(),
-                'shortDescription' => $book->getShortDescription(),
-                'authorFirstname' => $book->getAuthor()->getFirstname(),
-                'authorSurname' => $book->getAuthor()->getSurname(),
-                'genre' => $book->getGenre()->getName(),
-                'price' => $book->getPrice(),
-                'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
-                'branchName' => $book->getBranch()->getName(),
-                'branchOrdering' => $book->getBranch()->getOrdering(),
-            ];
+            $cover = new CoverShow();
+            $processed[] = array_merge(
+                [
+                    'id' => $book->getId(),
+                    'currency' => $book->getBranch()->getCurrency(),
+                    'title' => $book->getTitle(),
+                    'shortDescription' => $book->getShortDescription(),
+                    'authorFirstname' => $book->getAuthor()->getFirstname(),
+                    'authorSurname' => $book->getAuthor()->getSurname(),
+                    'genre' => $book->getGenre()->getName(),
+                    'price' => $book->getPrice(),
+                    'releaseYear' => $book->getReleaseYear(),
+                    'type' => $book->getType(),
+                    'branchName' => $book->getBranch()->getName(),
+                    'branchOrdering' => $book->getBranch()->getOrdering(),
+                ],
+                $cover->show($book)
+            );
         }
 
         return $processed;
