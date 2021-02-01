@@ -20,7 +20,7 @@ class BookPublicTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request);
-        $this->assertEquals(12, count((array) $request[0]));
+        $this->assertEquals(15, count((array) $request[0]));
         $this->assertInternalType('string', $request[0]->id);
         $this->assertInternalType('string', $request[0]->currency);
         $this->assertInternalType('string', $request[0]->title);
@@ -37,5 +37,8 @@ class BookPublicTest extends WebTestCase
         if (null !== $request[0]->branchOrdering) {
             $this->assertInternalType('string', $request[0]->branchOrdering);
         }
+        $this->assertInternalType('string', $request[0]->cover_s);
+        $this->assertInternalType('string', $request[0]->cover_m);
+        $this->assertInternalType('string', $request[0]->cover_l);
     }
 }
