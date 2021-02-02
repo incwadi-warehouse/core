@@ -26,6 +26,7 @@ class BookCoverType extends AbstractType
                             'image/jpeg',
                             'image/jpg',
                             'image/png',
+                            'image/webp',
                         ],
                     ]),
                 ],

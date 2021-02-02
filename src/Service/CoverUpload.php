@@ -39,12 +39,15 @@ class CoverUpload
         if ('image/png' === $mimeType) {
             return imagecreatefrompng($file);
         }
+        if ('image/webp' === $mimeType) {
+            return imagecreatefromwebp($file);
+        }
     }
 
     private function resize($image, int $width, string $suffix, string $id): void
     {
-        $filename = $this->path . $id.'-'.$suffix.'.jpg';
-        if(file_exists($filename)) {
+        $filename = $this->path.$id.'-'.$suffix.'.jpg';
+        if (file_exists($filename)) {
             throw new \Exception('File does exist already.');
         }
         $quality = imagejpeg(
