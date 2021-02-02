@@ -21,7 +21,7 @@ class BookCoverType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '5120k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/jpg',
