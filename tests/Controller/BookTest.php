@@ -109,6 +109,8 @@ class BookTest extends WebTestCase
         $this->assertNull($request->soldOn);
         $this->assertFalse($request->removed);
         $this->assertNull($request->removedOn);
+        $this->assertFalse($request->reserved);
+        $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
@@ -155,6 +157,8 @@ class BookTest extends WebTestCase
         $this->assertNull($request->soldOn);
         $this->assertFalse($request->removed);
         $this->assertNull($request->removedOn);
+        $this->assertFalse($request->reserved);
+        $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
@@ -177,6 +181,13 @@ class BookTest extends WebTestCase
 
         $request = $this->request('/api/v1/book/remove/'.$id, 'PUT');
         $this->assertFalse($request->removed);
+
+        // reserve
+        $request = $this->request('/api/v1/book/reserve/'.$id, 'PUT');
+        $this->assertTrue($request->reserved);
+
+        $request = $this->request('/api/v1/book/reserve/'.$id, 'PUT');
+        $this->assertFalse($request->reserved);
 
         // show
         $request = $this->request('/api/v1/book/'.$id, 'GET');
@@ -201,6 +212,8 @@ class BookTest extends WebTestCase
         $this->assertNull($request->soldOn);
         $this->assertFalse($request->removed);
         $this->assertNull($request->removedOn);
+        $this->assertFalse($request->reserved);
+        $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
@@ -242,6 +255,8 @@ class BookTest extends WebTestCase
         }
         $this->assertFalse($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
+        $this->assertFalse($request->books[0]->reserved);
+        $this->assertNull($request->books[0]->reservedAt);
         $this->assertInternalType('integer', $request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         if (null !== $request->books[0]->lendTo) {

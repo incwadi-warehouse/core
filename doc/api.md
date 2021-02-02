@@ -232,6 +232,36 @@ Response
 - condition - Condition|null
 - tags - array\<Tag\>
 
+### Reserve a book
+
+Request
+
+`PUT /api/v1/book/reserve/[id]`
+
+Params
+
+- id - int
+
+Response
+
+- id - int
+- branch - Branch|null
+- added - DateTime
+- title - string
+- author - Author|null
+- genre - Genre|null
+- price - float
+- sold - bool
+- soldOn - DateTime|null
+- removed - bool
+- removedOn - DateTime|null
+- releaseYear - int
+- type - string
+- lendTo - Staff|null
+- lendOn - DateTime|null
+- condition - Condition|null
+- tags - array\<Tag\>
+
 ### Delete book
 
 Request

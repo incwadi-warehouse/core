@@ -9,9 +9,9 @@ namespace Incwadi\Core\Controller;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Form\BookCoverType;
 use Incwadi\Core\Form\BookType;
-use Incwadi\Core\Service\CoverUpload;
 use Incwadi\Core\Service\CoverRemove;
 use Incwadi\Core\Service\CoverShow;
+use Incwadi\Core\Service\CoverUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -148,6 +148,14 @@ class BookController extends AbstractController
             if (false === $book->getRemoved() && null !== $book->getRemovedOn()) {
                 $book->setRemovedOn(null);
             }
+            // reserved
+            if (true === $book->getReserved() && null === $book->getReservedAt()) {
+                $book->setReservedAt(new \DateTime());
+            }
+            // revert reserved
+            if (false === $book->getReserved() && null !== $book->getReservedAt()) {
+                $book->setReservedAt(null);
+            }
             $em->flush();
 
             return $this->json($book);
@@ -219,6 +227,21 @@ class BookController extends AbstractController
         $book->setRemoved(!$book->getRemoved());
         $book->setRemovedOn(
             null === $book->getRemovedOn() ? new \DateTime() : null
+        );
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
+    }
+
+    /**
+     * @Route("/reserve/{id}", methods={"PUT"})
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
+     */
+    public function reserve(Book $book): JsonResponse
+    {
+        $book->setReserved(!$book->getReserved());
+        $book->setReservedAt(
+            null === $book->getReservedAt() ? new \DateTime() : null
         );
         $this->getDoctrine()->getManager()->flush();
 

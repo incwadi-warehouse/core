@@ -55,6 +55,11 @@ class Search
                     'operator' => 'eq',
                     'value' => '0',
                 ],
+                [
+                    'field' => 'reserved',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
             ];
 
             if (!preg_match('#([a-z]+|[0-9]+)#', $options['term'])) {

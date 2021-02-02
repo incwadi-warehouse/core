@@ -88,6 +88,16 @@ class Book implements \JsonSerializable
     private ?\DateTime $removedOn = null;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $reserved = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTime $reservedAt = null;
+
+    /**
      * @ORM\Column(type="integer")
      * @Assert\Length(min=4, max=4)
      * @Assert\NotBlank()
@@ -144,6 +154,8 @@ class Book implements \JsonSerializable
             'soldOn' => $this->getSoldOn() ? $this->getSoldOn()->getTimestamp() : null,
             'removed' => $this->getRemoved(),
             'removedOn' => $this->getRemovedOn() ? $this->getRemovedOn()->getTimestamp() : null,
+            'reserved' => $this->getReserved(),
+            'reservedAt' => $this->getReservedAt() ? $this->getReservedAt()->getTimestamp() : null,
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
@@ -286,6 +298,30 @@ class Book implements \JsonSerializable
     public function setRemovedOn(?\DateTimeInterface $removedOn): self
     {
         $this->removedOn = $removedOn;
+
+        return $this;
+    }
+
+    public function getReserved(): ?bool
+    {
+        return $this->reserved;
+    }
+
+    public function setReserved(bool $reserved): self
+    {
+        $this->reserved = $reserved;
+
+        return $this;
+    }
+
+    public function getReservedAt(): ?\DateTimeInterface
+    {
+        return $this->reservedAt;
+    }
+
+    public function setReservedAt(?\DateTimeInterface $reservedAt): self
+    {
+        $this->reservedAt = $reservedAt;
 
         return $this;
     }

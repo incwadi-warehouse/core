@@ -37,6 +37,7 @@ class BookType extends AbstractType
             ->add('price')
             ->add('sold')
             ->add('removed')
+            ->add('reserved')
             ->add('releaseYear')
             ->add('type')
             ->add('lendTo')
