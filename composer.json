@@ -7,35 +7,35 @@
     "php": ">=7.4",
     "doctrine/doctrine-bundle": "^2.2",
     "doctrine/doctrine-migrations-bundle": "^3.0",
-    "doctrine/orm": "^2.7",
+    "doctrine/orm": "^2.8",
     "gesdinet/jwt-refresh-token-bundle": "^0.10",
-    "lexik/jwt-authentication-bundle": "^2.8",
-    "nelmio/cors-bundle": "^2.0",
-    "sensio/framework-extra-bundle": "^5.5",
-    "symfony/asset": "^5.1",
-    "symfony/console": "^5.1",
-    "symfony/dotenv": "^5.1",
-    "symfony/expression-language": "^5.1",
-    "symfony/flex": "^1.9",
-    "symfony/form": "^5.1",
-    "symfony/mime": "5.1.*",
-    "symfony/monolog-bundle": "^3.5",
-    "symfony/security-bundle": "^5.1",
-    "symfony/serializer": "^5.1",
-    "symfony/validator": "^5.1",
-    "symfony/yaml": "^5.1"
+    "lexik/jwt-authentication-bundle": "^2.10",
+    "nelmio/cors-bundle": "^2.1",
+    "sensio/framework-extra-bundle": "^6.0",
+    "symfony/asset": "^5.2",
+    "symfony/console": "^5.2",
+    "symfony/dotenv": "^5.2",
+    "symfony/expression-language": "^5.2",
+    "symfony/flex": "^1.12",
+    "symfony/form": "^5.2",
+    "symfony/mime": "5.2.*",
+    "symfony/monolog-bundle": "^3.6",
+    "symfony/security-bundle": "^5.2",
+    "symfony/serializer": "^5.2",
+    "symfony/validator": "^5.2",
+    "symfony/yaml": "^5.2"
   },
   "require-dev": {
-    "doctrine/doctrine-fixtures-bundle": "^3.3",
-    "friendsofphp/php-cs-fixer": "^2.16",
+    "doctrine/doctrine-fixtures-bundle": "^3.4",
+    "friendsofphp/php-cs-fixer": "^2.18",
     "mikey179/vfsstream": "^1.6",
     "phploc/phploc": "^7.0",
-    "symfony/browser-kit": "^5.1",
-    "symfony/debug-bundle": "^5.1",
-    "symfony/maker-bundle": "^1.20",
-    "symfony/phpunit-bridge": "^5.1",
-    "symfony/stopwatch": "^5.1",
-    "symfony/var-dumper": "^5.1"
+    "symfony/browser-kit": "^5.2",
+    "symfony/debug-bundle": "^5.2",
+    "symfony/maker-bundle": "^1.28",
+    "symfony/phpunit-bridge": "^5.2",
+    "symfony/stopwatch": "^5.2",
+    "symfony/var-dumper": "^5.2"
   },
   "config": {
     "preferred-install": {
@@ -76,7 +76,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": true,
-      "require": "5.1.*"
+      "require": "5.2.*"
     }
   }
 }
