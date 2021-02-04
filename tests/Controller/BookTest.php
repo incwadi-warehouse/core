@@ -27,7 +27,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         $this->genreId = $request->id;
@@ -37,7 +37,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         $this->conditionId = $request->id;
@@ -90,12 +90,12 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->id);
+        $this->assertIsString($request->id);
         if ($request->branch) {
-            $this->assertInternalType('int', $request->branch->id);
-            $this->assertInternalType('string', $request->branch->name);
+            $this->assertIsInt($request->branch->id);
+            $this->assertIsString($request->branch->name);
         }
-        $this->assertInternalType('integer', $request->added);
+        $this->assertIsInt($request->added);
         $this->assertEquals('title', $request->title);
         if (null !== $request->shortDescription) {
             $this->assertTrue(isset($request->shortDescription));
@@ -115,10 +115,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
-        $this->assertInternalType('int', $request->condition->id);
+        $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
-        $this->assertInternalType('int', $request->tags[0]->id);
-        $this->assertInternalType('string', $request->tags[0]->name);
+        $this->assertIsInt($request->tags[0]->id);
+        $this->assertIsString($request->tags[0]->name);
 
         $id = $request->id;
 
@@ -138,12 +138,12 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->id);
+        $this->assertIsString($request->id);
         if ($request->branch) {
-            $this->assertInternalType('int', $request->branch->id);
-            $this->assertInternalType('string', $request->branch->name);
+            $this->assertIsInt($request->branch->id);
+            $this->assertIsString($request->branch->name);
         }
-        $this->assertInternalType('integer', $request->added);
+        $this->assertIsInt($request->added);
         $this->assertEquals('book', $request->title);
         if (null !== $request->shortDescription) {
             $this->assertTrue(isset($request->shortDescription));
@@ -163,10 +163,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
-        $this->assertInternalType('int', $request->condition->id);
+        $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
-        $this->assertInternalType('int', $request->tags[0]->id);
-        $this->assertInternalType('string', $request->tags[0]->name);
+        $this->assertIsInt($request->tags[0]->id);
+        $this->assertIsString($request->tags[0]->name);
 
         // sell
         $request = $this->request('/api/v1/book/sell/'.$id, 'PUT');
@@ -193,12 +193,12 @@ class BookTest extends WebTestCase
         $request = $this->request('/api/v1/book/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->id);
+        $this->assertIsString($request->id);
         if ($request->branch) {
-            $this->assertInternalType('int', $request->branch->id);
-            $this->assertInternalType('string', $request->branch->name);
+            $this->assertIsInt($request->branch->id);
+            $this->assertIsString($request->branch->name);
         }
-        $this->assertInternalType('integer', $request->added);
+        $this->assertIsInt($request->added);
         $this->assertEquals('book', $request->title);
         if (null !== $request->shortDescription) {
             $this->assertTrue(isset($request->shortDescription));
@@ -218,10 +218,10 @@ class BookTest extends WebTestCase
         $this->assertEquals('paperback', $request->type);
         $this->assertNull($request->lendTo);
         $this->assertNull($request->lendOn);
-        $this->assertInternalType('int', $request->condition->id);
+        $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
-        $this->assertInternalType('int', $request->tags[0]->id);
-        $this->assertInternalType('string', $request->tags[0]->name);
+        $this->assertIsInt($request->tags[0]->id);
+        $this->assertIsString($request->tags[0]->name);
 
         // find
         $request = $this->request('/api/v1/book/find', 'GET', [
@@ -231,33 +231,33 @@ class BookTest extends WebTestCase
         $this->assertIsObject($request);
         $this->assertTrue(isset($request->books[0]->id));
         if ($request->books[0]->branch) {
-            $this->assertInternalType('int', $request->books[0]->branch->id);
-            $this->assertInternalType('string', $request->books[0]->branch->name);
+            $this->assertIsInt($request->books[0]->branch->id);
+            $this->assertIsString($request->books[0]->branch->name);
         }
-        $this->assertInternalType('string', $request->books[0]->id);
-        $this->assertInternalType('integer', $request->books[0]->added);
-        $this->assertInternalType('string', $request->books[0]->title);
+        $this->assertIsString($request->books[0]->id);
+        $this->assertIsInt($request->books[0]->added);
+        $this->assertIsString($request->books[0]->title);
         if (null !== $request->books[0]->shortDescription) {
             $this->assertTrue(isset($request->books[0]->shortDescription));
         }
         if (null !== $request->books[0]->author) {
-            $this->assertInternalType('string', $request->books[0]->author->firstname);
-            $this->assertInternalType('string', $request->books[0]->author->surname);
+            $this->assertIsString($request->books[0]->author->firstname);
+            $this->assertIsString($request->books[0]->author->surname);
         }
         if ($request->books[0]->genre) {
-            $this->assertInternalType('integer', $request->books[0]->genre->id);
-            $this->assertInternalType('string', $request->books[0]->genre->name);
+            $this->assertIsInt($request->books[0]->genre->id);
+            $this->assertIsString($request->books[0]->genre->name);
         }
         $this->assertNotEmpty($request->books[0]->price);
         $this->assertFalse($request->books[0]->sold);
         if (null !== $request->books[0]->soldOn) {
-            $this->assertInternalType('string', $request->books[0]->soldOn);
+            $this->assertIsString($request->books[0]->soldOn);
         }
         $this->assertFalse($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
         $this->assertFalse($request->books[0]->reserved);
         $this->assertNull($request->books[0]->reservedAt);
-        $this->assertInternalType('integer', $request->books[0]->releaseYear);
+        $this->assertIsInt($request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         if (null !== $request->books[0]->lendTo) {
             $this->assertNotEmpty($request->books[0]->lendTo);
@@ -266,11 +266,11 @@ class BookTest extends WebTestCase
             $this->assertNotEmpty($request->books[0]->lendOn);
         }
         if (null !== $request->books[0]->condition) {
-            $this->assertInternalType('int', $request->books[0]->condition->id);
+            $this->assertIsInt($request->books[0]->condition->id);
         }
         if (count($request->books[0]->tags) >= 1) {
-            $this->assertInternalType('int', $request->books[0]->tags[0]->id);
-            $this->assertInternalType('string', $request->books[0]->tags[0]->name);
+            $this->assertIsInt($request->books[0]->tags[0]->id);
+            $this->assertIsString($request->books[0]->tags[0]->name);
         }
 
         // delete
@@ -294,7 +294,7 @@ class BookTest extends WebTestCase
             'cond' => $this->conditionId,
         ]);
 
-        $this->assertInternalType('string', $request->id);
+        $this->assertIsString($request->id);
 
         $request = $this->request('/api/v1/book/new', 'POST', [], [
             'title' => 'title',

@@ -17,12 +17,12 @@ class CoreTest extends WebTestCase
         // user
         $request = $this->request('/api/v1/me', 'GET', [], []);
 
-        $this->assertInternalType('int', $request->id);
-        $this->assertInternalType('string', $request->username);
-        $this->assertInternalType('array', $request->roles);
+        $this->assertIsInt($request->id);
+        $this->assertIsString($request->username);
+        $this->assertIsArray($request->roles);
         if (null !== $request->branch) {
-            $this->assertInternalType('int', $request->branch->id);
-            $this->assertInternalType('string', $request->branch->name);
+            $this->assertIsInt($request->branch->id);
+            $this->assertIsString($request->branch->name);
         }
         $this->assertTrue($request->isUser);
         $this->assertTrue($request->isAdmin);

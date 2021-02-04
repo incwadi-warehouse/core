@@ -20,26 +20,26 @@ class ConditionTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
+        $this->assertIsString($request->name);
+        $this->assertIsInt($request->branch->id);
 
         $id = $request->id;
 
         // list
         $request = $this->request('/api/v1/condition/', 'GET');
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
 
         $this->assertTrue(isset($request[0]->id));
-        $this->assertInternalType('string', $request[0]->name);
-        $this->assertInternalType('int', $request[0]->branch->id);
+        $this->assertIsString($request[0]->name);
+        $this->assertIsInt($request[0]->branch->id);
 
         // show
         $request = $this->request('/api/v1/condition/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
+        $this->assertIsString($request->name);
+        $this->assertIsInt($request->branch->id);
 
         // edit
         $request = $this->request('/api/v1/condition/'.$id, 'PUT', [], [
@@ -47,8 +47,8 @@ class ConditionTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('string', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
+        $this->assertIsString($request->name);
+        $this->assertIsInt($request->branch->id);
 
         // delete
         $request = $this->request('/api/v1/condition/'.$id, 'DELETE');

@@ -17,7 +17,7 @@ class AuthorTest extends WebTestCase
         // find
         $request = $this->request('/api/v1/author/find', 'GET', ['term' => 'name']);
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
 
         // new
         $request = $this->request('/api/v1/author/new', 'POST', [], [
@@ -25,7 +25,7 @@ class AuthorTest extends WebTestCase
             'surname' => 'Surname',
         ]);
 
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('Firstname', $request->firstname);
         $this->assertEquals('Surname', $request->surname);
 
@@ -37,14 +37,14 @@ class AuthorTest extends WebTestCase
             'surname' => 'Surname1',
         ]);
 
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('Firstname1', $request->firstname);
         $this->assertEquals('Surname1', $request->surname);
 
         // show
         $request = $this->request('/api/v1/author/'.$id, 'GET');
 
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('Firstname1', $request->firstname);
         $this->assertEquals('Surname1', $request->surname);
 

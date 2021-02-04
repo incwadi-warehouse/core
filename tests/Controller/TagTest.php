@@ -26,7 +26,7 @@ class TagTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         $this->genreId = $request->id;
@@ -36,7 +36,7 @@ class TagTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         $this->conditionId = $request->id;
@@ -78,7 +78,7 @@ class TagTest extends WebTestCase
         // list
         $request = $this->request('/api/v1/tag/', 'GET');
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
 
         // new
         $request = $this->request('/api/v1/tag/new', 'POST', [], [
@@ -86,9 +86,9 @@ class TagTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('integer', $request->books);
+        $this->assertIsInt($request->books);
 
         $id = $request->id;
 
@@ -98,17 +98,17 @@ class TagTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('integer', $request->books);
+        $this->assertIsInt($request->books);
 
         // show
         $request = $this->request('/api/v1/tag/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('integer', $request->books);
+        $this->assertIsInt($request->books);
 
         // edit book
         $time = new \DateTime();

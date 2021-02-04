@@ -25,7 +25,7 @@ class GenreTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         $id = $request->id;
@@ -36,14 +36,14 @@ class GenreTest extends WebTestCase
         ]);
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         // show
         $request = $this->request('/api/v1/genre/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
-        $this->assertInternalType('integer', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
 
         // delete

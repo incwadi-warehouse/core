@@ -20,7 +20,7 @@ class SavedSearchTest extends WebTestCase
             'query' => ['term' => 'term', 'filter' => []],
         ]);
 
-        $this->assertInternalType('int', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertIsObject($request->branch);
         $this->assertEquals('name', $request->name);
         $this->assertIsObject($request->query);
@@ -31,10 +31,10 @@ class SavedSearchTest extends WebTestCase
         // list
         $request = $this->request('/api/v1/savedsearch/', 'GET');
 
-        $this->assertInternalType('array', $request);
-        $this->assertInternalType('int', $request[0]->id);
+        $this->assertIsArray($request);
+        $this->assertIsInt($request[0]->id);
         $this->assertIsObject($request[0]->branch);
-        $this->assertInternalType('string', $request[0]->name);
+        $this->assertIsString($request[0]->name);
         $this->assertIsObject($request[0]->query);
 
         // edit

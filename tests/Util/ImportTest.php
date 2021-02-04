@@ -77,7 +77,7 @@ class ImportTest extends TestCase
         $import = new Import($em);
         $books = $import->import($this->getData());
 
-        $this->assertInternalType('array', $books);
+        $this->assertIsArray($books);
 
         $this->assertTrue($books[0] instanceof \Incwadi\Core\Entity\Book);
         $this->assertEquals('branch 1', $books[0]->getBranch()->getName());

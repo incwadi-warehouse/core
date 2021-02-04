@@ -64,7 +64,7 @@ class ExportTest extends TestCase
         $export = new Export();
         $books = $export->export([$book1, $book2]);
 
-        $this->assertInternalType('string', $books);
+        $this->assertIsString($books);
 
         $expected = <<<EOF
 branch;added;title;shortDescription;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;reserved;reservedAt;releaseYear;type;lendTo;lendOn;cond

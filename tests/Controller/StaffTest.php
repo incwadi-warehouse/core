@@ -19,22 +19,22 @@ class StaffTest extends WebTestCase
             'name' => 'name',
         ]);
 
-        $this->assertInternalType('int', $request->id);
+        $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
-        $this->assertInternalType('string', $request->branch->name);
+        $this->assertIsInt($request->branch->id);
+        $this->assertIsString($request->branch->name);
 
         $id = $request->id;
 
         // list
         $request = $this->request('/api/v1/staff/', 'GET');
 
-        $this->assertInternalType('array', $request);
-        $this->assertInternalType('int', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->name);
+        $this->assertIsArray($request);
+        $this->assertIsInt($request[0]->id);
+        $this->assertIsString($request[0]->name);
         if ($request[0]->branch) {
-            $this->assertInternalType('int', $request[0]->branch->id);
-            $this->assertInternalType('string', $request[0]->branch->name);
+            $this->assertIsInt($request[0]->branch->id);
+            $this->assertIsString($request[0]->branch->name);
         }
 
         // edit
@@ -44,16 +44,16 @@ class StaffTest extends WebTestCase
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
-        $this->assertInternalType('string', $request->branch->name);
+        $this->assertIsInt($request->branch->id);
+        $this->assertIsString($request->branch->name);
 
         // show
         $request = $this->request('/api/v1/staff/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertEquals('name', $request->name);
-        $this->assertInternalType('int', $request->branch->id);
-        $this->assertInternalType('string', $request->branch->name);
+        $this->assertIsInt($request->branch->id);
+        $this->assertIsString($request->branch->name);
 
         // delete
         $request = $this->request('/api/v1/staff/'.$id, 'DELETE');

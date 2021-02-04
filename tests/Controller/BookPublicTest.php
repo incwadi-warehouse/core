@@ -21,24 +21,24 @@ class BookPublicTest extends WebTestCase
 
         $this->assertIsArray($request);
         $this->assertEquals(15, count((array) $request[0]));
-        $this->assertInternalType('string', $request[0]->id);
-        $this->assertInternalType('string', $request[0]->currency);
-        $this->assertInternalType('string', $request[0]->title);
+        $this->assertIsString($request[0]->id);
+        $this->assertIsString($request[0]->currency);
+        $this->assertIsString($request[0]->title);
         if (null !== $request[0]->shortDescription) {
             $this->assertTrue(isset($request[0]->shortDescription));
         }
-        $this->assertInternalType('string', $request[0]->authorFirstname);
-        $this->assertInternalType('string', $request[0]->authorSurname);
-        $this->assertInternalType('string', $request[0]->genre);
+        $this->assertIsString($request[0]->authorFirstname);
+        $this->assertIsString($request[0]->authorSurname);
+        $this->assertIsString($request[0]->genre);
         $this->assertNotEmpty($request[0]->price);
-        $this->assertInternalType('int', $request[0]->releaseYear);
-        $this->assertInternalType('string', $request[0]->type);
-        $this->assertInternalType('string', $request[0]->branchName);
+        $this->assertIsInt($request[0]->releaseYear);
+        $this->assertIsString($request[0]->type);
+        $this->assertIsString($request[0]->branchName);
         if (null !== $request[0]->branchOrdering) {
-            $this->assertInternalType('string', $request[0]->branchOrdering);
+            $this->assertIsString($request[0]->branchOrdering);
         }
-        $this->assertInternalType('string', $request[0]->cover_s);
-        $this->assertInternalType('string', $request[0]->cover_m);
-        $this->assertInternalType('string', $request[0]->cover_l);
+        $this->assertIsString($request[0]->cover_s);
+        $this->assertIsString($request[0]->cover_m);
+        $this->assertIsString($request[0]->cover_l);
     }
 }
