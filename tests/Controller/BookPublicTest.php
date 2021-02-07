@@ -37,9 +37,15 @@ class BookPublicTest extends WebTestCase
         if (null !== $request[0]->branchOrdering) {
             $this->assertIsString($request[0]->branchOrdering);
         }
-        $this->assertIsString($request[0]->cover_s);
-        $this->assertIsString($request[0]->cover_m);
-        $this->assertIsString($request[0]->cover_l);
+        if(null !== $request[0]->cover_s) {
+            $this->assertIsString($request[0]->cover_s);
+        }
+        if(null !== $request[0]->cover_m) {
+            $this->assertIsString($request[0]->cover_m);
+        }
+        if(null !== $request[0]->cover_l) {
+            $this->assertIsString($request[0]->cover_l);
+        }
         if (null !== $request[0]->cond) {
             $this->assertIsString($request[0]->cond);
         }
