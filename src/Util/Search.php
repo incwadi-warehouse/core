@@ -114,6 +114,7 @@ class Search
                     'type' => $book->getType(),
                     'branchName' => $book->getBranch()->getName(),
                     'branchOrdering' => $book->getBranch()->getOrdering(),
+                    'cond' => $book->getCond() ? $book->getCond()->getName() : null,
                 ],
                 $cover->show($book)
             );

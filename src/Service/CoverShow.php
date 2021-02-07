@@ -10,7 +10,7 @@ use Incwadi\Core\Entity\Book;
 
 class CoverShow
 {
-    private $path = __DIR__. '/../../data/';
+    private $path = __DIR__.'/../../data/';
 
     public function setPath(string $path): void
     {
@@ -29,7 +29,7 @@ class CoverShow
     private function getCover(string $size, string $id): ?string
     {
         $filename = $this->path.$id.'-'.$size.'.jpg';
-        if(is_file($filename)) {
+        if (is_file($filename)) {
             return 'data:image/jpeg;base64,'.base64_encode(
                 file_get_contents($filename)
             );

@@ -10,8 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Util\Search;
 use Incwadi\Core\Service\CoverRemove;
+use Incwadi\Core\Util\Search;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -62,7 +62,7 @@ class BookRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
         $books = $query->getResult();
 
-        foreach($books as $item) {
+        foreach ($books as $item) {
             $this->deleteBook($item);
         }
 
@@ -92,17 +92,11 @@ class BookRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
         $books = $query->getResult();
 
-        foreach($books as $item) {
+        foreach ($books as $item) {
             $this->deleteBook($item);
         }
 
         $this->getEntityManager()->flush();
-    }
-
-    private function deleteBook(Book $book):void
-    {
-        $this->cover->remove($book);
-        $this->getEntityManager()->remove($book);
     }
 
     public function findDuplicate(Book $book)
@@ -120,5 +114,11 @@ class BookRepository extends ServiceEntityRepository
                 'type' => $book->getType(),
             ]
         );
+    }
+
+    private function deleteBook(Book $book): void
+    {
+        $this->cover->remove($book);
+        $this->getEntityManager()->remove($book);
     }
 }

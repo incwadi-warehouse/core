@@ -12,7 +12,7 @@ class CoverRemove
 {
     private const SIZES = ['s', 'm', 'l'];
 
-    private $path = __DIR__. '/../../data/';
+    private $path = __DIR__.'/../../data/';
 
     public function setPath(string $path): void
     {
@@ -21,7 +21,7 @@ class CoverRemove
 
     public function remove(Book $book): void
     {
-        foreach(self::SIZES as $size) {
+        foreach (self::SIZES as $size) {
             $filename = $this->path.$book->getId().'-'.$size.'.jpg';
             if (is_file($filename)) {
                 unlink($filename);
