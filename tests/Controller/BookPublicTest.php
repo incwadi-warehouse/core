@@ -20,7 +20,7 @@ class BookPublicTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request);
-        $this->assertEquals(15, count((array) $request[0]));
+        $this->assertEquals(16, count((array) $request[0]));
         $this->assertIsString($request[0]->id);
         $this->assertIsString($request[0]->currency);
         $this->assertIsString($request[0]->title);
@@ -40,5 +40,8 @@ class BookPublicTest extends WebTestCase
         $this->assertIsString($request[0]->cover_s);
         $this->assertIsString($request[0]->cover_m);
         $this->assertIsString($request[0]->cover_l);
+        if (null !== $request[0]->cond) {
+            $this->assertIsString($request[0]->cond);
+        }
     }
 }
