@@ -17,6 +17,13 @@ class CoverUpload
 
     private $path = __DIR__.'/../../data/';
 
+    public function __construct()
+    {
+        if (!is_dir($this->path)) {
+            mkdir($this->path);
+        }
+    }
+
     public function setPath(string $path): void
     {
         $this->path = $path;
