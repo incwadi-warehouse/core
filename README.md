@@ -50,6 +50,21 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 More info on that: <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#important-note-for-apache-users>
 
+Configure your webserver to redirect all requests to the `index.php` file.
+
+Example for Apache
+
+```apache
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+    RewriteRule ^ %{ENV:BASE}/index.php [L]
+</IfModule>
+```
+
 Then install the composer dependencies and create the database.
 
 ```shell
