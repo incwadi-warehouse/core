@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
-    "baldeweg/extra-bundle": "^0.1.0",
+    "baldeweg/extra-bundle": "^0.2.0",
     "doctrine/doctrine-bundle": "^2.2",
     "doctrine/doctrine-migrations-bundle": "^3.0",
     "doctrine/orm": "^2.8",
