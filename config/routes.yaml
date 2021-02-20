@@ -8,3 +8,13 @@ api_login_check:
 gesdinet_jwt_refresh_token:
     path:       /api/token/refresh
     controller: gesdinet.jwtrefreshtoken::refresh
+
+# me:
+#   path: /api/me
+#   controller: Baldeweg\Bundle\ExtraBundle\Service\MeUser::me
+#   methods: GET
+
+password:
+  path: /api/password
+  controller: Baldeweg\Bundle\ExtraBundle\Service\PasswordUser::password
+  methods: PUT
