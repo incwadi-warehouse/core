@@ -31,6 +31,7 @@ class BranchTest extends WebTestCase
             'name' => 'name',
             'steps' => 0.01,
             'currency' => 'EUR',
+            'ordering' => 'ordering',
         ]);
 
         $this->assertIsInt($request->id);
