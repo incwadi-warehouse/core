@@ -191,4 +191,4 @@ bin/console user:reset-password [ID]
 
 ## Uploading Images
 
-You can upload JPEG and PNG images up to 5120KB. All images are saved as JPEG with quality of 75%. The source file is only saved temporarily.
+You can upload JPEG and PNG images up to 10240KB. All images are saved as JPEG with quality of 75%. The source file is only saved temporarily.
