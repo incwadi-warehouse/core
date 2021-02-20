@@ -15,7 +15,7 @@ class CoreTest extends WebTestCase
     public function testScenario()
     {
         // user
-        $request = $this->request('/api/v1/me', 'GET', [], []);
+        $request = $this->request('/api/me', 'GET', [], []);
 
         $this->assertIsInt($request->id);
         $this->assertIsString($request->username);
