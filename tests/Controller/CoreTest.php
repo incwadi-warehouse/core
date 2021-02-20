@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CoreTest extends WebTestCase
 {
-    use \Incwadi\Core\Tests\ApiTestTrait;
+    use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
 
     public function testScenario()
     {

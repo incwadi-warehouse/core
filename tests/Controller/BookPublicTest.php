@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookPublicTest extends WebTestCase
 {
-    use \Incwadi\Core\Tests\ApiTestTrait;
+    use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
 
     public function testScenario()
     {
@@ -37,13 +37,13 @@ class BookPublicTest extends WebTestCase
         if (null !== $request[0]->branchOrdering) {
             $this->assertIsString($request[0]->branchOrdering);
         }
-        if(null !== $request[0]->cover_s) {
+        if (null !== $request[0]->cover_s) {
             $this->assertIsString($request[0]->cover_s);
         }
-        if(null !== $request[0]->cover_m) {
+        if (null !== $request[0]->cover_m) {
             $this->assertIsString($request[0]->cover_m);
         }
-        if(null !== $request[0]->cover_l) {
+        if (null !== $request[0]->cover_l) {
             $this->assertIsString($request[0]->cover_l);
         }
         if (null !== $request[0]->cond) {

@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookTest extends WebTestCase
 {
-    use \Incwadi\Core\Tests\ApiTestTrait;
+    use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
 
     protected int $genreId;
 
