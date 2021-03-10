@@ -27,9 +27,8 @@ class GenreController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Genre::class)->findByBranch(
+            $this->getDoctrine()->getRepository(Genre::class)->findDemanded(
                 $this->getUser()->getBranch(),
-                ['name' => 'ASC']
             ),
         );
     }

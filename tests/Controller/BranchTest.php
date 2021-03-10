@@ -23,6 +23,7 @@ class BranchTest extends WebTestCase
         $this->assertIsString($request[0]->name);
         $this->assertTrue(isset($request[0]->steps));
         $this->assertIsString($request[0]->currency);
+        $this->assertIsString($request[0]->orderBy);
 
         $branch = $request[0];
 
@@ -32,12 +33,14 @@ class BranchTest extends WebTestCase
             'steps' => 0.01,
             'currency' => 'EUR',
             'ordering' => 'ordering',
+            'orderBy' => 'name'
         ]);
 
         $this->assertIsInt($request->id);
         $this->assertEquals('name', $request->name);
         $this->assertEquals(0.01, $request->steps);
         $this->assertEquals('EUR', $request->currency);
+        $this->assertIsString($request->orderBy);
 
         // my
         $request = $this->request('/api/v1/branch/my', 'GET');
@@ -46,6 +49,7 @@ class BranchTest extends WebTestCase
         $this->assertEquals('name', $request->name);
         $this->assertTrue(isset($request->steps));
         $this->assertIsString($request->currency);
+        $this->assertIsString($request->orderBy);
 
         // show
         $request = $this->request('/api/v1/branch/'.$branch->id, 'GET');
@@ -54,5 +58,6 @@ class BranchTest extends WebTestCase
         $this->assertEquals('name', $request->name);
         $this->assertEquals(0.01, $request->steps);
         $this->assertEquals('EUR', $request->currency);
+        $this->assertIsString($request->orderBy);
     }
 }

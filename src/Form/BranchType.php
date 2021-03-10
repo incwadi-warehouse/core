@@ -20,6 +20,7 @@ class BranchType extends AbstractType
             ->add('steps')
             ->add('currency')
             ->add('ordering')
+            ->add('orderBy')
         ;
     }
 
