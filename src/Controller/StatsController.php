@@ -30,13 +30,16 @@ class StatsController extends AbstractController
         $available = count($repo->findBy([
             'sold' => false,
             'removed' => false,
+            'reserved' => false,
         ]));
+        $reserved = count($repo->findByReserved(true));
         $sold = count($repo->findBySold(true));
         $removed = count($repo->findByRemoved(true));
 
         return $this->json([
             'all' => $all,
             'available' => $available,
+            'reserved' => $reserved,
             'sold' => $sold,
             'removed' => $removed,
         ]);

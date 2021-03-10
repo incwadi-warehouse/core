@@ -288,6 +288,7 @@ Response
 
 - all - int
 - available - int
+- reserved - int
 - sold - int
 - removed - int
 
