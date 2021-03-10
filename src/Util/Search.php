@@ -222,7 +222,8 @@ class Search
             $this->qb->expr()->like($nameReverse, ':term'),
             $this->qb->expr()->like($nameWithCommaAndSpace, ':term'),
             $this->qb->expr()->like($nameWithComma, ':term'),
-            $this->qb->expr()->like('t.name', ':term')
+            $this->qb->expr()->like('t.name', ':term'),
+            $this->qb->expr()->like('g.name', ':term')
         );
     }
 
