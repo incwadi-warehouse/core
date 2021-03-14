@@ -21,6 +21,9 @@ use Incwadi\Core\Util\Search;
  */
 class BookRepository extends ServiceEntityRepository
 {
+    /**
+     * @var int
+     */
     const KEEP_REMOVED_DAYS = 28;
 
     private $cover;

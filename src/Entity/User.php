@@ -45,11 +45,6 @@ class User implements UserInterface, \JsonSerializable
      */
     private ?Branch $branch = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private ?\DateTime $lastLogin = null;
-
     public function jsonSerialize(): array
     {
         return [
@@ -69,7 +64,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function setUsername(string $username): self
@@ -102,7 +97,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -115,14 +110,14 @@ class User implements UserInterface, \JsonSerializable
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): void
     {
     }
 
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 
@@ -134,18 +129,6 @@ class User implements UserInterface, \JsonSerializable
     public function setBranch(?Branch $branch): self
     {
         $this->branch = $branch;
-
-        return $this;
-    }
-
-    public function getLastLogin(): ?\DateTimeInterface
-    {
-        return $this->lastLogin;
-    }
-
-    public function setLastLogin(?\DateTimeInterface $lastLogin): self
-    {
-        $this->lastLogin = $lastLogin;
 
         return $this;
     }

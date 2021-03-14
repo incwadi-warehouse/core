@@ -51,6 +51,7 @@ class GenreController extends AbstractController
     {
         $genre = new Genre();
         $genre->setBranch($this->getUser()->getBranch());
+
         $form = $this->createForm(GenreType::class, $genre);
 
         $form->submit(

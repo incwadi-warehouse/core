@@ -11,8 +11,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CoverUpload
 {
+    /**
+     * @var array<string, int>
+     */
     private const SIZES = ['l' => 400, 'm' => 200, 's' => 100];
 
+    /**
+     * @var int
+     */
     private const QUALITY = 75;
 
     private $path = __DIR__.'/../../data/';

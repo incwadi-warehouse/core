@@ -59,6 +59,7 @@ class TagController extends AbstractController
 
         $tag = new Tag();
         $tag->setBranch($this->getUser()->getBranch());
+
         $form = $this->createForm(TagType::class, $tag);
 
         $form->submit(

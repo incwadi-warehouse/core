@@ -26,7 +26,7 @@ class BookType extends AbstractType
         $this->dateTimeToStringTransformer = $dateTimeToStringTransformer;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('added', TextType::class)
@@ -54,7 +54,7 @@ class BookType extends AbstractType
             ->addModelTransformer($this->dateTimeToStringTransformer);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Book::class,

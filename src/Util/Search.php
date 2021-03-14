@@ -14,6 +14,9 @@ use Incwadi\Core\Service\CoverShow;
 
 class Search
 {
+    /**
+     * @var int
+     */
     const LIMIT = 20;
 
     private QueryBuilder $qb;
@@ -62,7 +65,7 @@ class Search
                 ],
             ];
 
-            if (!preg_match('#([a-z]+|[0-9]+)#', $options['term'])) {
+            if (!preg_match('#([a-z]+|\d+)#', $options['term'])) {
                 throw new \Exception('There is no term!');
             }
         }
@@ -175,7 +178,7 @@ class Search
             break;
         }
 
-        if (!$query) {
+        if ($query === null) {
             return null;
         }
 
@@ -288,7 +291,7 @@ class Search
                 if ('bool' === $type) {
                     return (bool) $value;
                 }
-                if ('DateTime' === $type) {
+                if (\DateTime::class === $type) {
                     return new \DateTime('@'.$value);
                 }
             }

@@ -47,14 +47,14 @@ class Import implements ImportInterface
             $book->setTitle($item['title']);
             $book->setAuthor($this->author($item['author']));
             $book->setGenre($this->genre($item['genre']));
-            $book->getGenre() ? $book->getGenre()->setBranch($book->getBranch()) : null;
+            $book->getGenre() !== null ? $book->getGenre()->setBranch($book->getBranch()) : null;
             $book->setPrice($item['price']);
             $book->setSold($item['sold']);
             $book->setReleaseYear($item['releaseYear']);
             $book->setType($item['type']);
             $book->setLendTo($this->staff($item['lendTo']));
             $book->setLendOn(new \DateTime($item['lendOn']));
-            $book->getLendTo() ? $book->getLendTo()->setBranch($book->getBranch()) : null;
+            $book->getLendTo() !== null ? $book->getLendTo()->setBranch($book->getBranch()) : null;
 
             $books[] = $book;
 
@@ -89,7 +89,7 @@ class Import implements ImportInterface
                 'surname' => $data['surname'],
             ]
         );
-        if ($existing) {
+        if ($existing !== null) {
             return $existing;
         }
 

@@ -41,7 +41,7 @@ class NewBranchCommand extends Command
         if (null === $input->getArgument('name')) {
             $input->setArgument(
                 'name',
-                $io->ask('What\'s the name of the new branch?')
+                $io->ask("What's the name of the new branch?")
             );
         }
     }

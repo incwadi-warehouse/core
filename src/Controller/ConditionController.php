@@ -39,6 +39,7 @@ class ConditionController extends AbstractController
     {
         $condition = new Condition();
         $condition->setBranch($this->getUser()->getBranch());
+
         $form = $this->createForm(ConditionType::class, $condition);
 
         $form->submit(

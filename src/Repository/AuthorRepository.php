@@ -33,6 +33,7 @@ class AuthorRepository extends ServiceEntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('a');
+
         $name = $qb->expr()->concat(
             'a.firstname',
             $qb->expr()->concat(
@@ -76,6 +77,7 @@ class AuthorRepository extends ServiceEntityRepository
 
         $term = preg_replace('#[%\*]#', '', $term);
         $qb->setParameter('term', '%'.$term.'%');
+
         $qb->setMaxResults(self::LIMIT);
 
         $query = $qb->getQuery();

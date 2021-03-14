@@ -24,10 +24,11 @@ class AppFixtures extends Fixture
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $branch = new Branch();
         $branch->setName('test');
+
         $manager->persist($branch);
 
         $user = new User();

@@ -10,6 +10,9 @@ use Incwadi\Core\Entity\Book;
 
 class CoverRemove
 {
+    /**
+     * @var string[]
+     */
     private const SIZES = ['s', 'm', 'l'];
 
     private $path = __DIR__.'/../../data/';
