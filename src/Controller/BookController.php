@@ -191,6 +191,8 @@ class BookController extends AbstractController
             return $this->json($book);
         }
 
+        throw new \Error('Could not upload image ('.$form->get('cover')->getData()->getErrorMessage().').');
+
         return $this->json(['msg' => 'Could not upload image.'], 500);
     }
 
