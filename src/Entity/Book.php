@@ -131,6 +131,11 @@ class Book implements \JsonSerializable
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="books")
+     */
+    private $reservation;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -162,6 +167,7 @@ class Book implements \JsonSerializable
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
+            'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null
         ];
     }
 
@@ -408,6 +414,18 @@ class Book implements \JsonSerializable
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
 
         return $this;
     }

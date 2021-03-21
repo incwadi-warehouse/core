@@ -155,6 +155,7 @@ class BookController extends AbstractController
             // revert reserved
             if (false === $book->getReserved() && null !== $book->getReservedAt()) {
                 $book->setReservedAt(null);
+                $book->setReservation(null);
             }
             $em->flush();
 
@@ -239,6 +240,9 @@ class BookController extends AbstractController
      */
     public function reserve(Book $book): JsonResponse
     {
+        if ($book->getReserved() && $book->getReservation()) {
+            throw new \Error('Can not reserve an already reserved book!', 500);
+        }
         $book->setReserved(!$book->getReserved());
         $book->setReservedAt(
             null === $book->getReservedAt() ? new \DateTime() : null
