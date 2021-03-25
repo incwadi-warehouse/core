@@ -12,7 +12,7 @@
     "gesdinet/jwt-refresh-token-bundle": "0.11.1",
     "lexik/jwt-authentication-bundle": "2.11.2",
     "nelmio/cors-bundle": "2.1.0",
-    "sensio/framework-extra-bundle": "6.1.0",
+    "sensio/framework-extra-bundle": "6.1.1",
     "symfony/asset": "5.2.3",
     "symfony/console": "5.2.3",
     "symfony/dotenv": "5.2.3",
