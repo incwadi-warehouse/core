@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "3.4.0",
-    "friendsofphp/php-cs-fixer": "2.18.2",
+    "friendsofphp/php-cs-fixer": "2.18.4",
     "mikey179/vfsstream": "1.6.8",
     "phploc/phploc": "7.0.2",
     "symfony/browser-kit": "5.2.3",
