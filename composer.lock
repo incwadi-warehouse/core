@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7722e1f338961001016ae3029d800679",
+    "content-hash": "fc6519cf7bc320f1538cfe3786948116",
     "packages": [
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
-                "reference": "5c7de3581026e30f82f37d9128221dd068bbfcd5"
+                "reference": "d840618cc7846360d7aac7fe71e642f71a8d71f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/5c7de3581026e30f82f37d9128221dd068bbfcd5",
-                "reference": "5c7de3581026e30f82f37d9128221dd068bbfcd5",
+                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/d840618cc7846360d7aac7fe71e642f71a8d71f1",
+                "reference": "d840618cc7846360d7aac7fe71e642f71a8d71f1",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.8",
-                "php": ">=7.4",
+                "php": ">=8.0",
                 "symfony/config": "^5.2",
                 "symfony/console": "^5.2",
                 "symfony/dependency-injection": "^5.2",
@@ -37,6 +37,8 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.18",
                 "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.9.31",
+                "symfony/browser-kit": "^5.2",
                 "symfony/var-dumper": "^5.2"
             },
             "type": "symfony-bundle",
@@ -58,9 +60,9 @@
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
                 "issues": "https://github.com/abaldeweg/extra-bundle/issues",
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.2.0"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.2.1"
             },
-            "time": "2021-02-20T17:51:06+00:00"
+            "time": "2021-03-23T17:36:58+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
