@@ -65,32 +65,17 @@ class AppFixtures extends Fixture
         $genre->setBranch($branch);
         $manager->persist($genre);
 
-        $book = new Book();
-        $book->setBranch($branch);
-        $book->setTitle('Demo Book 1');
-        $book->setAuthor($author);
-        $book->setGenre($genre);
-        $book->setPrice(1.00);
-        $book->setReleaseYear(2020);
-        $manager->persist($book);
-
-        $book = new Book();
-        $book->setBranch($branch);
-        $book->setTitle('Demo Book 2');
-        $book->setAuthor($author);
-        $book->setGenre($genre);
-        $book->setPrice(2.00);
-        $book->setReleaseYear(2020);
-        $manager->persist($book);
-
-        $book = new Book();
-        $book->setBranch($branch);
-        $book->setTitle('Demo Book 3');
-        $book->setAuthor($author);
-        $book->setGenre($genre);
-        $book->setPrice(3.00);
-        $book->setReleaseYear(2020);
-        $manager->persist($book);
+        $books = 50;
+        for ($i = 1; $i <= $books; ++$i) {
+            $book = new Book();
+            $book->setBranch($branch);
+            $book->setTitle('Demo Book '.$i);
+            $book->setAuthor($author);
+            $book->setGenre($genre);
+            $book->setPrice($i);
+            $book->setReleaseYear(2020);
+            $manager->persist($book);
+        }
 
         $manager->flush();
     }
