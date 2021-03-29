@@ -253,7 +253,7 @@ class BookTest extends WebTestCase
         if (null !== $request->books[0]->soldOn) {
             $this->assertIsString($request->books[0]->soldOn);
         }
-        $this->assertFalse($request->books[0]->removed);
+        $this->assertIsBool($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
         $this->assertFalse($request->books[0]->reserved);
         $this->assertNull($request->books[0]->reservedAt);

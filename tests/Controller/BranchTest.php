@@ -23,7 +23,9 @@ class BranchTest extends WebTestCase
         $this->assertIsString($request[0]->name);
         $this->assertTrue(isset($request[0]->steps));
         $this->assertIsString($request[0]->currency);
-        $this->assertIsString($request[0]->ordering);
+        if (null !== $request[0]->ordering) {
+            $this->assertIsString($request[0]->ordering);
+        }
         $this->assertIsString($request[0]->orderBy);
 
         $branch = $request[0];
@@ -34,7 +36,7 @@ class BranchTest extends WebTestCase
             'steps' => 0.01,
             'currency' => 'EUR',
             'ordering' => 'ordering',
-            'orderBy' => 'name'
+            'orderBy' => 'name',
         ]);
 
         $this->assertIsInt($request->id);
