@@ -80,16 +80,23 @@ class Search
         $this->qb->setMaxResults(
             isset($options['limit']) ? $options['limit'] : self::LIMIT
         );
+        if (isset($options['offset'])) {
+            $this->qb->setFirstResult($options['offset']);
+        }
 
         $query = $this->qb->getQuery();
         $books = $query->getResult();
 
         $this->qb->setMaxResults(null);
+        $this->qb->setFirstResult(null);
         $query = $this->qb->getQuery();
         $counter = count($query->getResult());
 
         if ($this->isPublic) {
-            return $this->getBook($books);
+            return [
+                'books' => $this->getBook($books),
+                'counter' => $counter,
+            ];
         }
 
         return [
@@ -225,7 +232,8 @@ class Search
             $this->qb->expr()->like($nameReverse, ':term'),
             $this->qb->expr()->like($nameWithCommaAndSpace, ':term'),
             $this->qb->expr()->like($nameWithComma, ':term'),
-            $this->qb->expr()->like('t.name', ':term')
+            $this->qb->expr()->like('t.name', ':term'),
+            $this->qb->expr()->like('g.name', ':term')
         );
     }
 

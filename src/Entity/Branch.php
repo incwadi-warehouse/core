@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Branch implements \JsonSerializable
 {
     const CURRENCIES = ['EUR', 'USD'];
+    const ORDER_BY = ['name', 'books'];
 
     /**
      * @ORM\Id()
@@ -50,6 +51,13 @@ class Branch implements \JsonSerializable
      */
     private $ordering;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices=Branch::ORDER_BY)
+     * @Assert\NotBlank()
+     */
+    private $orderBy = 'name';
+
     public function jsonSerialize()
     {
         return [
@@ -58,6 +66,7 @@ class Branch implements \JsonSerializable
             'steps' => $this->getSteps(),
             'currency' => $this->getCurrency(),
             'ordering' => $this->getOrdering(),
+            'orderBy' => $this->getOrderBy(),
         ];
     }
 
@@ -110,6 +119,18 @@ class Branch implements \JsonSerializable
     public function setOrdering(?string $ordering): self
     {
         $this->ordering = $ordering;
+
+        return $this;
+    }
+
+    public function getOrderBy(): string
+    {
+        return $this->orderBy;
+    }
+
+    public function setOrderBy(string $orderBy): self
+    {
+        $this->orderBy = $orderBy;
 
         return $this;
     }

@@ -18,6 +18,7 @@ class StatsTest extends WebTestCase
 
         $this->assertIsInt($request->all);
         $this->assertIsInt($request->available);
+        $this->assertIsInt($request->reserved);
         $this->assertIsInt($request->sold);
         $this->assertIsInt($request->removed);
     }

@@ -8,6 +8,7 @@
   - book - array\<order\>
   - author - array\<order\>
 - limit - integer
+- offset - integer
 
 ## Filter
 
