@@ -19,35 +19,35 @@ class BookPublicTest extends WebTestCase
             'options' => json_encode(['term' => 'book']),
         ]);
 
-        $this->assertIsArray($request);
-        $this->assertEquals(16, count((array) $request[0]));
-        $this->assertIsString($request[0]->id);
-        $this->assertIsString($request[0]->currency);
-        $this->assertIsString($request[0]->title);
-        if (null !== $request[0]->shortDescription) {
-            $this->assertTrue(isset($request[0]->shortDescription));
+        $this->assertIsArray($request->books);
+        $this->assertEquals(16, count((array) $request->books[0]));
+        $this->assertIsString($request->books[0]->id);
+        $this->assertIsString($request->books[0]->currency);
+        $this->assertIsString($request->books[0]->title);
+        if (null !== $request->books[0]->shortDescription) {
+            $this->assertTrue(isset($request->books[0]->shortDescription));
         }
-        $this->assertIsString($request[0]->authorFirstname);
-        $this->assertIsString($request[0]->authorSurname);
-        $this->assertIsString($request[0]->genre);
-        $this->assertNotEmpty($request[0]->price);
-        $this->assertIsInt($request[0]->releaseYear);
-        $this->assertIsString($request[0]->type);
-        $this->assertIsString($request[0]->branchName);
-        if (null !== $request[0]->branchOrdering) {
-            $this->assertIsString($request[0]->branchOrdering);
+        $this->assertIsString($request->books[0]->authorFirstname);
+        $this->assertIsString($request->books[0]->authorSurname);
+        $this->assertIsString($request->books[0]->genre);
+        $this->assertNotEmpty($request->books[0]->price);
+        $this->assertIsInt($request->books[0]->releaseYear);
+        $this->assertIsString($request->books[0]->type);
+        $this->assertIsString($request->books[0]->branchName);
+        if (null !== $request->books[0]->branchOrdering) {
+            $this->assertIsString($request->books[0]->branchOrdering);
         }
-        if (null !== $request[0]->cover_s) {
-            $this->assertIsString($request[0]->cover_s);
+        if (null !== $request->books[0]->cover_s) {
+            $this->assertIsString($request->books[0]->cover_s);
         }
-        if (null !== $request[0]->cover_m) {
-            $this->assertIsString($request[0]->cover_m);
+        if (null !== $request->books[0]->cover_m) {
+            $this->assertIsString($request->books[0]->cover_m);
         }
-        if (null !== $request[0]->cover_l) {
-            $this->assertIsString($request[0]->cover_l);
+        if (null !== $request->books[0]->cover_l) {
+            $this->assertIsString($request->books[0]->cover_l);
         }
-        if (null !== $request[0]->cond) {
-            $this->assertIsString($request[0]->cond);
+        if (null !== $request->books[0]->cond) {
+            $this->assertIsString($request->books[0]->cond);
         }
     }
 }
