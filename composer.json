@@ -14,16 +14,16 @@
     "nelmio/cors-bundle": "2.1.0",
     "sensio/framework-extra-bundle": "6.1.1",
     "symfony/asset": "5.2.4",
-    "symfony/console": "5.2.5",
+    "symfony/console": "5.2.6",
     "symfony/dotenv": "5.2.4",
     "symfony/expression-language": "5.2.4",
     "symfony/flex": "1.12.2",
-    "symfony/form": "5.2.5",
-    "symfony/mime": "5.2.5",
+    "symfony/form": "5.2.6",
+    "symfony/mime": "5.2.6",
     "symfony/monolog-bundle": "3.6.0",
-    "symfony/security-bundle": "5.2.5",
+    "symfony/security-bundle": "5.2.6",
     "symfony/serializer": "5.2.4",
-    "symfony/validator": "5.2.5",
+    "symfony/validator": "5.2.6",
     "symfony/yaml": "5.2.5"
   },
   "require-dev": {
@@ -34,9 +34,9 @@
     "symfony/browser-kit": "5.2.4",
     "symfony/debug-bundle": "5.2.4",
     "symfony/maker-bundle": "1.30.2",
-    "symfony/phpunit-bridge": "5.2.4",
+    "symfony/phpunit-bridge": "5.2.6",
     "symfony/stopwatch": "5.2.4",
-    "symfony/var-dumper": "5.2.5"
+    "symfony/var-dumper": "5.2.6"
   },
   "config": {
     "preferred-install": {
