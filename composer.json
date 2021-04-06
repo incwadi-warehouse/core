@@ -8,7 +8,7 @@
     "baldeweg/extra-bundle": "0.2.1",
     "doctrine/doctrine-bundle": "2.3.1",
     "doctrine/doctrine-migrations-bundle": "3.0.2",
-    "doctrine/orm": "2.8.3",
+    "doctrine/orm": "2.8.4",
     "gesdinet/jwt-refresh-token-bundle": "0.11.1",
     "lexik/jwt-authentication-bundle": "2.11.2",
     "nelmio/cors-bundle": "2.1.0",
