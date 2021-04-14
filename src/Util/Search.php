@@ -65,7 +65,7 @@ class Search
                 ],
             ];
 
-            if (!preg_match('#([a-z]+|\d+)#', $options['term'])) {
+            if (strlen($options['term']) < 1) {
                 throw new \Exception('There is no term!');
             }
         }
@@ -185,7 +185,7 @@ class Search
             break;
         }
 
-        if ($query === null) {
+        if (null === $query) {
             return null;
         }
 
