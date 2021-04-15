@@ -216,6 +216,10 @@ class BookController extends AbstractController
     {
         $book->setSold(!$book->getSold());
         $book->setSoldOn(null === $book->getSoldOn() ? new \DateTime() : null);
+
+        $book->setReserved(false);
+        $book->setReservedAt(null);
+
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
@@ -231,6 +235,10 @@ class BookController extends AbstractController
         $book->setRemovedOn(
             null === $book->getRemovedOn() ? new \DateTime() : null
         );
+
+        $book->setReserved(false);
+        $book->setReservedAt(null);
+
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json($book);
