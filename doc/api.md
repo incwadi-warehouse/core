@@ -870,3 +870,25 @@ Body
 Params
 
 - id - int
+
+## Reservation
+
+### List
+
+`GET /api/reservation/list`
+
+### Show
+
+`GET /api/reservation/[id]`
+
+### New
+
+`POST /api/reservation/new`
+
+### Edit
+
+`PUT /api/reservation/[id]`
+
+### Delete
+
+`DELETE /api/reservation/[id]`
