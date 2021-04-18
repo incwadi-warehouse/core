@@ -43,7 +43,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
             ]
         );
 
-        if ($author !== null) {
+        if (null !== $author) {
             return $author;
         }
 

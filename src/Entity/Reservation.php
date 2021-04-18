@@ -63,7 +63,7 @@ class Reservation implements \JsonSerializable
             'createdAt' => $this->getCreatedAt() ? $this->getCreatedAt()->getTimestamp() : null,
             'collection' => $this->getCollection() ? $this->getCollection()->getTimestamp() : null,
             'notes' => $this->getNotes(),
-            'books' => $this->getBooks()
+            'books' => $this->getBooks(),
         ];
     }
 

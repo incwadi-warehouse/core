@@ -1,10 +1,14 @@
 <?php
 
+/*
+ * This script is part of incwadi/core
+ */
+
 namespace Incwadi\Core\Repository;
 
-use Incwadi\Core\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Incwadi\Core\Entity\Reservation;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)

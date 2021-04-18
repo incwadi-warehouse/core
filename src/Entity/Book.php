@@ -156,18 +156,18 @@ class Book implements \JsonSerializable
             'genre' => $this->getGenre(),
             'price' => $this->getPrice(),
             'sold' => $this->getSold(),
-            'soldOn' => $this->getSoldOn() !== null ? $this->getSoldOn()->getTimestamp() : null,
+            'soldOn' => null !== $this->getSoldOn() ? $this->getSoldOn()->getTimestamp() : null,
             'removed' => $this->getRemoved(),
-            'removedOn' => $this->getRemovedOn() !== null ? $this->getRemovedOn()->getTimestamp() : null,
+            'removedOn' => null !== $this->getRemovedOn() ? $this->getRemovedOn()->getTimestamp() : null,
             'reserved' => $this->getReserved(),
-            'reservedAt' => $this->getReservedAt() !== null ? $this->getReservedAt()->getTimestamp() : null,
+            'reservedAt' => null !== $this->getReservedAt() ? $this->getReservedAt()->getTimestamp() : null,
             'releaseYear' => $this->getReleaseYear(),
             'type' => $this->getType(),
             'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
-            'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null
+            'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null,
         ];
     }
 
