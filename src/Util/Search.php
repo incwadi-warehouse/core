@@ -63,6 +63,11 @@ class Search
                     'operator' => 'eq',
                     'value' => '0',
                 ],
+                [
+                    'field' => 'lendOn',
+                    'operator' => 'null',
+                    'value' => '0',
+                ],
             ];
 
             if (strlen($options['term']) < 1) {
@@ -179,6 +184,11 @@ class Search
             break;
             case 'in':
                 $query = $this->qb->expr()->in('b.'.$fieldName, ':'.$fieldId);
+            break;
+            case 'null':
+                $query = $this->qb->expr()->isNull('b.'.$fieldName);
+
+                return $query;
             break;
             default:
                 $query = null;
@@ -310,7 +320,7 @@ class Search
 
     private function getOperator(string $operator, string $fieldName): string
     {
-        if (!in_array($operator, ['in', 'eq', 'gte', 'gt', 'lte', 'lt'])) {
+        if (!in_array($operator, ['in', 'eq', 'gte', 'gt', 'lte', 'lt', 'null'])) {
             $operator = 'eq';
         }
         if (in_array($fieldName, ['sold', 'removed', 'type'])) {

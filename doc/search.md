@@ -13,13 +13,13 @@
 ## Filter
 
 - genre - array\<integer\>, Operator: in
-- lendOn - integer, Operators: eq, gte, gt, lte, lt
+- lendOn - integer, Operators: eq, gte, gt, lte, lt, null
 - branches - integer, Operator: eq
-- releaseYear - integer, Operator: eq, gte, gt, lte, lt
+- releaseYear - integer, Operator: eq, gte, gt, lte, lt, null
 - sold - bool, Operator: eq
 - removed - bool, Operator: eq
 - type - string, Operator: eq
-- added - integer, Operator: eq, gte, gt, lte, lt
+- added - integer, Operator: eq, gte, gt, lte, lt, null
 
 ## Order
 
