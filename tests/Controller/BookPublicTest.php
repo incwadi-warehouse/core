@@ -49,5 +49,11 @@ class BookPublicTest extends WebTestCase
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);
         }
+
+        // recommendation
+        $request = $this->request('/api/public/book/recommendation', 'GET');
+
+        $this->assertIsArray($request->books);
+        $this->assertIsInt($request->counter);
     }
 }
