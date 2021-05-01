@@ -7,6 +7,7 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,5 +35,27 @@ class BookPublicController extends AbstractController
                     true
                 )
         );
+    }
+
+    /**
+     * @Route("/branch", methods={"GET"})
+     */
+    public function branch(): JsonResponse
+    {
+        $branches = $this
+                ->getDoctrine()
+                ->getRepository(Branch::class)
+                ->findAll();
+        $processed = [];
+        foreach ($branches as $branch) {
+            $processed[] = [
+                'id' => $branch->getId(),
+                'name' => $branch->getName(),
+            ];
+        }
+
+        return $this->json([
+            'branches' => $processed,
+        ]);
     }
 }

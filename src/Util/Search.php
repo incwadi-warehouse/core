@@ -44,27 +44,6 @@ class Search
         $this->qb->leftJoin('b.genre', 'g');
 
         if ($this->isPublic) {
-            $options['filter'] = [];
-            $options['orderBy'] = [];
-
-            $options['filter'] = [
-                [
-                    'field' => 'sold',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-                [
-                    'field' => 'removed',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-                [
-                    'field' => 'reserved',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-            ];
-
             if (strlen($options['term']) < 1) {
                 throw new \Exception('There is no term!');
             }
@@ -135,6 +114,40 @@ class Search
 
     private function parseOptions(?array $options): ?Andx
     {
+        if ($this->isPublic) {
+            $branch = false;
+            foreach ($options['filter'] as $filter) {
+                if ('branch' === $filter['field']) {
+                    $branch = $filter['value'];
+                }
+            }
+            $options['filter'] = [];
+            $options['filter'] = [
+                [
+                    'field' => 'sold',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'removed',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'reserved',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+            ];
+            if ($branch) {
+                $options['filter'][] = [
+                    'field' => 'branch',
+                    'operator' => 'eq',
+                    'value' => $branch,
+                ];
+            }
+        }
+
         $query = $this->qb->expr()->andX();
         if (isset($options['term'])) {
             $query->add($this->term($options['term']));
@@ -239,6 +252,9 @@ class Search
 
     private function setOrderBy(array $orderBy): void
     {
+        if ($this->isPublic) {
+            $options['orderBy'] = [];
+        }
         if (!isset($orderBy['field'])) {
             return;
         }

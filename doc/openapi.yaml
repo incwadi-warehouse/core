@@ -1,205 +1,239 @@
 openapi: 3.0.0
 
 info:
-  version: 1.0.0
-  title: incwadi API
-  description: incwadi is a book database to manage your books.
+    version: 1.0.0
+    title: incwadi API
+    description: incwadi is a book database to manage your books.
 
 externalDocs:
-  description: More
-  url: https://github.com/abaldeweg
+    description: More
+    url: https://github.com/abaldeweg
 
 servers:
-  - url: http://localhost:8000/api
+    - url: http://localhost:8000/api
 
 tags:
-  - name: user
-    description: User
+    - name: user
+      description: User
+    - name: public
+      description: Public
 
 paths:
-  # User
-  /me:
-    get:
-      tags:
-        - user
-      description: Shows the current User
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserResponse"
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    # User
+    /me:
+        get:
+            tags:
+                - user
+            description: Shows the current User
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/UserResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /password:
-    put:
-      tags:
-        - user
-      description: Updates the password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - password
-              properties:
-                password:
-                  type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserResponse"
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    /password:
+        put:
+            tags:
+                - user
+            description: Updates the password
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - password
+                            properties:
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/UserResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /login_check:
-    post:
-      tags:
-        - user
-      description: Authenticates the user
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - username
-                - password
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-      responses:
-        '200':
-          description: Returns a new token
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - token
-                  - refresh_token
-                properties:
-                  token:
-                    type: string
-                  refresh_token:
-                    type: string
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    /login_check:
+        post:
+            tags:
+                - user
+            description: Authenticates the user
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - username
+                                - password
+                            properties:
+                                username:
+                                    type: string
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: Returns a new token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - token
+                                    - refresh_token
+                                properties:
+                                    token:
+                                        type: string
+                                    refresh_token:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /token/refresh:
-    post:
-      tags:
-        - user
-      description: Returns a new token
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - refresh_token
-              properties:
-                refresh_token:
-                  type: string
-      responses:
-        '200':
-          description: Returns the token
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - token
-                  - refresh_token
-                properties:
-                  token:
-                    type: string
-                  refresh_token:
-                    type: string
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    /token/refresh:
+        post:
+            tags:
+                - user
+            description: Returns a new token
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - refresh_token
+                            properties:
+                                refresh_token:
+                                    type: string
+            responses:
+                "200":
+                    description: Returns the token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - token
+                                    - refresh_token
+                                properties:
+                                    token:
+                                        type: string
+                                    refresh_token:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # Public
+    /public/book/branch:
+        get:
+            tags:
+                - public
+            description: Shows available branches
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BranchBookResponse"
 
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
 
-  schemas:
-    UserResponse:
-      type: object
-      required:
-        - id
-        - username
-        - roles
-        - branch
-        - isUser
-        - isAdmin
-      properties:
-        id:
-          type: integer
-        username:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        branch:
-          type: object
-          properties:
-            id:
-                type: string
-            name:
-                type: string
-            steps:
-                type: string
-            currency:
-                type: string
-            ordering:
-                type: string
-        isUser:
-          type: boolean
-        isAdmin:
-          type: boolean
+    schemas:
+        UserResponse:
+            type: object
+            required:
+                - id
+                - username
+                - roles
+                - branch
+                - isUser
+                - isAdmin
+            properties:
+                id:
+                    type: integer
+                username:
+                    type: string
+                roles:
+                    type: array
+                    items:
+                        type: string
+                branch:
+                    type: object
+                    properties:
+                        id:
+                            type: string
+                        name:
+                            type: string
+                        steps:
+                            type: string
+                        currency:
+                            type: string
+                        ordering:
+                            type: string
+                isUser:
+                    type: boolean
+                isAdmin:
+                    type: boolean
 
-    ErrorResponse:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
+        BranchBookResponse:
+            type: object
+            required:
+                - branches
+            properties:
+                branches:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - name
+                        properties:
+                            id:
+                                type: integer
+                            name:
+                                type: string
+
+        ErrorResponse:
+            type: object
+            required:
+                - code
+                - message
+            properties:
+                code:
+                    type: integer
+                message:
+                    type: string
 
 security:
-  - bearerAuth: []
+    - bearerAuth: []
