@@ -61,14 +61,19 @@ class BookPublicController extends AbstractController
     }
 
     /**
-     * @Route("/recommendation", methods={"GET"})
+     * @Route("/recommendation/{branch}", methods={"GET"})
      */
-    public function recommendation(CoverShow $cover): JsonResponse
+    public function recommendation(Branch $branch, CoverShow $cover): JsonResponse
     {
+        if (!$branch->getPublic()) {
+            return $this->json(['books' => [], 'counter' => 0]);
+        }
+
         $books = $this
             ->getDoctrine()
             ->getRepository(Book::class)
             ->findBy([
+                'branch' => $branch,
                 'sold' => false,
                 'removed' => false,
                 'lendOn' => null,

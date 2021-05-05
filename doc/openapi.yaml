@@ -176,10 +176,17 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
 
-    /public/book/recommendation:
+    /public/book/recommendation/{branch}:
         get:
             tags:
                 - public
+            parameters:
+                - name: branch
+                  in: path
+                  required: true
+                  description: Id of the branch
+                  schema:
+                    type: integer
             description: Shows Recommendations
             responses:
                 "200":
@@ -188,6 +195,12 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/RecommendationBookResponse"
+                "404":
+                    description: Branch not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
     /public/book/branch:
         get:
