@@ -6,10 +6,12 @@
 
 namespace Incwadi\Core\Util;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Service\CoverShow;
 
 class Search
@@ -21,11 +23,14 @@ class Search
 
     private QueryBuilder $qb;
 
+    private EntityManagerInterface $em;
+
     private bool $isPublic = false;
 
-    public function __construct(QueryBuilder $qb)
+    public function __construct(QueryBuilder $qb, EntityManagerInterface $em)
     {
         $this->qb = $qb;
+        $this->em = $em;
     }
 
     public function setPublic(bool $isPublic): void
@@ -140,11 +145,15 @@ class Search
                 ],
             ];
             if ($branch) {
+                $branchObj = $this->em->getRepository(Branch::class)->find($branch);
+                if (!$branchObj->getPublic()) {
+                    throw new \Exception('No valid branch chosen!');
+                }
                 $options['filter'][] = [
-                    'field' => 'branch',
-                    'operator' => 'eq',
-                    'value' => $branch,
-                ];
+                        'field' => 'branch',
+                        'operator' => 'eq',
+                        'value' => $branch,
+                    ];
             }
         }
 

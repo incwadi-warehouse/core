@@ -46,7 +46,7 @@ class BookPublicController extends AbstractController
         $branches = $this
                 ->getDoctrine()
                 ->getRepository(Branch::class)
-                ->findAll();
+                ->findByPublic(true);
         $processed = [];
         foreach ($branches as $branch) {
             $processed[] = [

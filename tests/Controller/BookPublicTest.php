@@ -16,7 +16,7 @@ class BookPublicTest extends WebTestCase
     {
         // find
         $request = $this->request('/api/public/book/find', 'GET', [
-            'options' => json_encode(['term' => 'book']),
+            'options' => json_encode(['term' => 'book', 'filter' => []]),
         ]);
 
         $this->assertIsArray($request->books);

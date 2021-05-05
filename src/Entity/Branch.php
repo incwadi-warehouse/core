@@ -58,6 +58,11 @@ class Branch implements \JsonSerializable
      */
     private $orderBy = 'name';
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $public = false;
+
     public function jsonSerialize()
     {
         return [
@@ -67,6 +72,7 @@ class Branch implements \JsonSerializable
             'currency' => $this->getCurrency(),
             'ordering' => $this->getOrdering(),
             'orderBy' => $this->getOrderBy(),
+            'public' => $this->getPublic(),
         ];
     }
 
@@ -131,6 +137,18 @@ class Branch implements \JsonSerializable
     public function setOrderBy(string $orderBy): self
     {
         $this->orderBy = $orderBy;
+
+        return $this;
+    }
+
+    public function getPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
 
         return $this;
     }
