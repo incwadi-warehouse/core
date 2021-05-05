@@ -63,7 +63,7 @@ class BookPublicController extends AbstractController
     /**
      * @Route("/recommendation", methods={"GET"})
      */
-    public function recommendation(CoverSHow $cover): JsonResponse
+    public function recommendation(CoverShow $cover): JsonResponse
     {
         $books = $this
             ->getDoctrine()
