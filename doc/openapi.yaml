@@ -7,7 +7,7 @@ info:
 
 externalDocs:
     description: More
-    url: https://github.com/abaldeweg
+    url: https://github.com/incwadi-warehouse
 
 servers:
     - url: http://localhost:8000/api
@@ -149,6 +149,46 @@ paths:
                                 $ref: "#/components/schemas/ErrorResponse"
 
     # Public
+    /public/book/find:
+        get:
+            tags:
+                - public
+            description: Shows Books by the Result of a Search Query
+            parameters:
+                - name: options
+                  in: query
+                  description: Options Object
+                  schema:
+                      type: string
+                      example: { "term": "term", "offset": 0 }
+                  required: true
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FindBookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /public/book/recommendation:
+        get:
+            tags:
+                - public
+            description: Shows Recommendations
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RecommendationBookResponse"
+
     /public/book/branch:
         get:
             tags:
@@ -205,6 +245,132 @@ components:
                     type: boolean
                 isAdmin:
                     type: boolean
+
+        FindBookResponse:
+            type: object
+            required:
+                - books
+                - counter
+            properties:
+                books:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - currency
+                            - title
+                            - shortDescription
+                            - authorFirstname
+                            - authorSurname
+                            - genre
+                            - price
+                            - releaseYear
+                            - type
+                            - branchName
+                            - branchOrdering
+                            - cond
+                            - cover_s
+                            - cover_m
+                            - cover_l
+                        properties:
+                            id:
+                                type: string
+                            currency:
+                                type: string
+                            title:
+                                type: string
+                            shortDescription:
+                                type: string
+                            authorFirstname:
+                                type: string
+                            authorSurname:
+                                type: string
+                            genre:
+                                type: string
+                            price:
+                                type: integer
+                            releaseYear:
+                                type: integer
+                            type:
+                                type: string
+                            branchName:
+                                type: string
+                            branchOrdering:
+                                type: string
+                            cond:
+                                type: string
+                            cover_s:
+                                type: string
+                            cover_m:
+                                type: string
+                            cover_l:
+                                type: string
+                counter:
+                    type: integer
+
+        RecommendationBookResponse:
+            type: object
+            required:
+                - books
+                - counter
+            properties:
+                books:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - currency
+                            - title
+                            - shortDescription
+                            - authorFirstname
+                            - authorSurname
+                            - genre
+                            - price
+                            - releaseYear
+                            - type
+                            - branchName
+                            - branchOrdering
+                            - cond
+                            - cover_s
+                            - cover_m
+                            - cover_l
+                        properties:
+                            id:
+                                type: string
+                            currency:
+                                type: string
+                            title:
+                                type: string
+                            shortDescription:
+                                type: string
+                            authorFirstname:
+                                type: string
+                            authorSurname:
+                                type: string
+                            genre:
+                                type: string
+                            price:
+                                type: integer
+                            releaseYear:
+                                type: integer
+                            type:
+                                type: string
+                            branchName:
+                                type: string
+                            branchOrdering:
+                                type: string
+                            cond:
+                                type: string
+                            cover_s:
+                                type: string
+                            cover_m:
+                                type: string
+                            cover_l:
+                                type: string
+                counter:
+                    type: integer
 
         BranchBookResponse:
             type: object

@@ -67,9 +67,9 @@ class ExportTest extends TestCase
         $this->assertIsString($books);
 
         $expected = <<<EOF
-branch;added;title;shortDescription;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;reserved;reservedAt;releaseYear;type;lendTo;lendOn;cond;reservation
-Branch;2017-10-06T00:00:00+0200;"The Title";;firstname;surname;"Foreign Language Books";25;0;;0;;0;;2019;paperback;admin;2017-07-06T00:00:00+0200;;
-Branch;2018-02-22T00:00:00+0100;"The Title";;firstname;surname;"Foreign Language Books";1.5;0;;0;;0;;2019;paperback;;;;
+branch;added;title;shortDescription;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;reserved;reservedAt;releaseYear;type;lendTo;lendOn;cond;reservation;recommendation
+Branch;2017-10-06T00:00:00+0200;"The Title";;firstname;surname;"Foreign Language Books";25;0;;0;;0;;2019;paperback;admin;2017-07-06T00:00:00+0200;;;0
+Branch;2018-02-22T00:00:00+0100;"The Title";;firstname;surname;"Foreign Language Books";1.5;0;;0;;0;;2019;paperback;;;;;0
 
 EOF;
         $this->assertEquals($expected, $books);

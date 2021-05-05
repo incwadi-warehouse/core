@@ -57,5 +57,11 @@ class BookPublicTest extends WebTestCase
         $this->assertEquals(2, count((array) $request->branches[0]));
         $this->assertIsInt($request->branches[0]->id);
         $this->assertIsString($request->branches[0]->name);
+
+        // recommendation
+        $request = $this->request('/api/public/book/recommendation', 'GET');
+
+        $this->assertIsArray($request->books);
+        $this->assertIsInt($request->counter);
     }
 }
