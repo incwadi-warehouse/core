@@ -160,7 +160,7 @@ paths:
                   description: Options Object
                   schema:
                       type: string
-                      example: { "term": "term", "offset": 0 }
+                      example: { "term": "term", "filter": [{ "field": "branch", "operator": "in", "value": 1 }], "offset": 0 }
                   required: true
             responses:
                 "200":
