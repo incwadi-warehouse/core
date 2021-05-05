@@ -159,8 +159,8 @@ paths:
                   in: query
                   description: Options Object
                   schema:
-                    type: string
-                    example: {"term":"term","offset":0}
+                      type: string
+                      example: { "term": "term", "offset": 0 }
                   required: true
             responses:
                 "200":
@@ -188,6 +188,19 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/RecommendationBookResponse"
+
+    /public/book/branch:
+        get:
+            tags:
+                - public
+            description: Shows available branches
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BranchBookResponse"
 
 components:
     securitySchemes:
@@ -358,6 +371,24 @@ components:
                                 type: string
                 counter:
                     type: integer
+
+        BranchBookResponse:
+            type: object
+            required:
+                - branches
+            properties:
+                branches:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - name
+                        properties:
+                            id:
+                                type: integer
+                            name:
+                                type: string
 
         ErrorResponse:
             type: object

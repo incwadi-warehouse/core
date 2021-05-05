@@ -16,7 +16,7 @@ class BookPublicTest extends WebTestCase
     {
         // find
         $request = $this->request('/api/public/book/find', 'GET', [
-            'options' => json_encode(['term' => 'book']),
+            'options' => json_encode(['term' => 'book', 'filter' => []]),
         ]);
 
         $this->assertIsArray($request->books);
@@ -49,6 +49,14 @@ class BookPublicTest extends WebTestCase
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);
         }
+
+        // branch
+        $request = $this->request('/api/public/book/branch', 'GET');
+
+        $this->assertIsArray($request->branches);
+        $this->assertEquals(2, count((array) $request->branches[0]));
+        $this->assertIsInt($request->branches[0]->id);
+        $this->assertIsString($request->branches[0]->name);
 
         // recommendation
         $request = $this->request('/api/public/book/recommendation', 'GET');

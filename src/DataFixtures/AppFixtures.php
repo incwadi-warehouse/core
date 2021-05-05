@@ -28,6 +28,7 @@ class AppFixtures extends Fixture
     {
         $branch = new Branch();
         $branch->setName('test');
+        $branch->setPublic(true);
 
         $manager->persist($branch);
 

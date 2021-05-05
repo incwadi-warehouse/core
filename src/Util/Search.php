@@ -6,10 +6,12 @@
 
 namespace Incwadi\Core\Util;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Service\CoverShow;
 
 class Search
@@ -21,11 +23,14 @@ class Search
 
     private QueryBuilder $qb;
 
+    private EntityManagerInterface $em;
+
     private bool $isPublic = false;
 
-    public function __construct(QueryBuilder $qb)
+    public function __construct(QueryBuilder $qb, EntityManagerInterface $em)
     {
         $this->qb = $qb;
+        $this->em = $em;
     }
 
     public function setPublic(bool $isPublic): void
@@ -44,27 +49,6 @@ class Search
         $this->qb->leftJoin('b.genre', 'g');
 
         if ($this->isPublic) {
-            $options['filter'] = [];
-            $options['orderBy'] = [];
-
-            $options['filter'] = [
-                [
-                    'field' => 'sold',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-                [
-                    'field' => 'removed',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-                [
-                    'field' => 'reserved',
-                    'operator' => 'eq',
-                    'value' => '0',
-                ],
-            ];
-
             if (strlen($options['term']) < 1) {
                 throw new \Exception('There is no term!');
             }
@@ -135,6 +119,44 @@ class Search
 
     private function parseOptions(?array $options): ?Andx
     {
+        if ($this->isPublic) {
+            $branch = false;
+            foreach ($options['filter'] as $filter) {
+                if ('branch' === $filter['field']) {
+                    $branch = $filter['value'];
+                }
+            }
+            $options['filter'] = [];
+            $options['filter'] = [
+                [
+                    'field' => 'sold',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'removed',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'reserved',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+            ];
+            if ($branch) {
+                $branchObj = $this->em->getRepository(Branch::class)->find($branch);
+                if (!$branchObj->getPublic()) {
+                    throw new \Exception('No valid branch chosen!');
+                }
+                $options['filter'][] = [
+                        'field' => 'branch',
+                        'operator' => 'eq',
+                        'value' => $branch,
+                    ];
+            }
+        }
+
         $query = $this->qb->expr()->andX();
         if (isset($options['term'])) {
             $query->add($this->term($options['term']));
@@ -239,6 +261,9 @@ class Search
 
     private function setOrderBy(array $orderBy): void
     {
+        if ($this->isPublic) {
+            $options['orderBy'] = [];
+        }
         if (!isset($orderBy['field'])) {
             return;
         }

@@ -21,6 +21,7 @@ class BranchType extends AbstractType
             ->add('currency')
             ->add('ordering')
             ->add('orderBy')
+            ->add('public')
         ;
     }
 
