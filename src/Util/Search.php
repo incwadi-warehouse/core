@@ -49,6 +49,32 @@ class Search
         $this->qb->leftJoin('b.genre', 'g');
 
         if ($this->isPublic) {
+            $options['filter'] = [];
+            $options['orderBy'] = [];
+
+            $options['filter'] = [
+                [
+                    'field' => 'sold',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'removed',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'reserved',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'lendOn',
+                    'operator' => 'null',
+                    'value' => '0',
+                ],
+            ];
+
             if (strlen($options['term']) < 1) {
                 throw new \Exception('There is no term!');
             }
@@ -202,6 +228,11 @@ class Search
             case 'in':
                 $query = $this->qb->expr()->in('b.'.$fieldName, ':'.$fieldId);
             break;
+            case 'null':
+                $query = $this->qb->expr()->isNull('b.'.$fieldName);
+
+                return $query;
+            break;
             default:
                 $query = null;
             break;
@@ -335,7 +366,7 @@ class Search
 
     private function getOperator(string $operator, string $fieldName): string
     {
-        if (!in_array($operator, ['in', 'eq', 'gte', 'gt', 'lte', 'lt'])) {
+        if (!in_array($operator, ['in', 'eq', 'gte', 'gt', 'lte', 'lt', 'null'])) {
             $operator = 'eq';
         }
         if (in_array($fieldName, ['sold', 'removed', 'type'])) {
