@@ -10,8 +10,10 @@ use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Service\CoverShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -107,5 +109,31 @@ class BookPublicController extends AbstractController
             'books' => $processed,
             'counter' => count($processed),
         ]);
+    }
+
+    /**
+     * @Route("/cover/{book}_{dimensions}.jpg", methods={"GET"})
+     */
+    public function image(Book $book, string $dimensions): BinaryFileResponse
+    {
+        $width = (int) explode('x', $dimensions)[0];
+        $filename = $book->getId().'-l.jpg';
+        if ($width < 400) {
+            $filename = $book->getId().'-m.jpg';
+        }
+        if ($width < 200) {
+            $filename = $book->getId().'-s.jpg';
+        }
+        $path = __DIR__.'/../../data/'.$filename;
+
+        if (!is_file($path)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->file(
+            $path,
+            $filename,
+            ResponseHeaderBag::DISPOSITION_INLINE
+        );
     }
 }

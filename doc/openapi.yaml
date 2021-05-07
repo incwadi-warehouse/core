@@ -215,6 +215,40 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/BranchBookResponse"
 
+    /public/book/cover/{book}_{dimensions}.jpg:
+        get:
+            tags:
+                - public
+            parameters:
+                - name: book
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+                - name: dimensions
+                  in: path
+                  required: true
+                  description: Dimensions of the cover
+                  schema:
+                    type: string
+                  example: 100x100
+            description: Returns the chosen cover
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        image/jpeg:
+                            schema:
+                                type: string
+                                format: binary
+                "404":
+                    description: Book not found
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+
 components:
     securitySchemes:
         bearerAuth:
