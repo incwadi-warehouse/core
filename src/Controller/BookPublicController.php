@@ -127,7 +127,7 @@ class BookPublicController extends AbstractController
         $path = __DIR__.'/../../data/'.$filename;
 
         if (!is_file($path)) {
-            throw $this->createNotFoundException();
+            $path = __DIR__.'/../Service/none.jpg';
         }
 
         return $this->file(
