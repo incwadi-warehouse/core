@@ -9,7 +9,7 @@ trim_trailing_whitespace = true
 end_of_line = lf
 insert_final_newline = true
 
-[*.{php,php_cs.dist,yaml,htaccess,xml.dist}]
+[*.{php,yaml,htaccess,xml.dist}]
 indent_size = 4
 
 [bin/console]
