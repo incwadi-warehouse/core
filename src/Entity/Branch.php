@@ -15,8 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Branch implements \JsonSerializable
 {
-    const CURRENCIES = ['EUR', 'USD'];
-    const ORDER_BY = ['name', 'books'];
+    public const CURRENCIES = ['EUR', 'USD'];
+    public const ORDER_BY = ['name', 'books'];
 
     /**
      * @ORM\Id()

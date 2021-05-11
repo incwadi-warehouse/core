@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Book implements \JsonSerializable
 {
-    const TYPES = ['paperback', 'hardcover'];
+    public const TYPES = ['paperback', 'hardcover'];
 
     /**
      * @ORM\Id()

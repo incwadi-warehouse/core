@@ -19,7 +19,7 @@ class Search
     /**
      * @var int
      */
-    const LIMIT = 20;
+    public const LIMIT = 20;
 
     private QueryBuilder $qb;
 
