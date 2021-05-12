@@ -12,11 +12,22 @@ class BookPublicTest extends WebTestCase
 {
     use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
 
+    private int $branch;
+
+    public function setUp(): void
+    {
+        $this->buildClient();
+
+        $request = $this->request('/api/v1/branch/my', 'GET');
+
+        $this->branch = $request->id;
+    }
+
     public function testScenario()
     {
         // find
         $request = $this->request('/api/public/book/find', 'GET', [
-            'options' => json_encode(['term' => 'book']),
+            'options' => json_encode(['term' => 'book', 'filter' => []]),
         ]);
 
         $this->assertIsArray($request->books);
@@ -49,5 +60,19 @@ class BookPublicTest extends WebTestCase
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);
         }
+
+        // branch
+        $request = $this->request('/api/public/book/branch', 'GET');
+
+        $this->assertIsArray($request->branches);
+        $this->assertEquals(2, count((array) $request->branches[0]));
+        $this->assertIsInt($request->branches[0]->id);
+        $this->assertIsString($request->branches[0]->name);
+
+        // recommendation
+        $request = $this->request('/api/public/book/recommendation/' . $this->branch, 'GET');
+
+        $this->assertIsArray($request->books);
+        $this->assertIsInt($request->counter);
     }
 }

@@ -136,6 +136,11 @@ class Book implements \JsonSerializable
      */
     private $reservation;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $recommendation = false;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -168,6 +173,7 @@ class Book implements \JsonSerializable
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
             'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null,
+            'recommendation' => $this->getRecommendation(),
         ];
     }
 
@@ -426,6 +432,18 @@ class Book implements \JsonSerializable
     public function setReservation(?Reservation $reservation): self
     {
         $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    public function getRecommendation(): ?bool
+    {
+        return $this->recommendation;
+    }
+
+    public function setRecommendation(bool $recommendation): self
+    {
+        $this->recommendation = $recommendation;
 
         return $this;
     }

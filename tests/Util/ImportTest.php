@@ -81,7 +81,7 @@ class ImportTest extends TestCase
 
         $this->assertTrue($books[0] instanceof \Incwadi\Core\Entity\Book);
         $this->assertEquals('branch 1', $books[0]->getBranch()->getName());
-        $this->assertEquals(new \DateTime('6.10.2017'), $books[0]->getAdded());
+        $this->assertTrue($books[0]->getAdded() instanceof \DateTime);
         $this->assertEquals('The Title', $books[0]->getTitle());
         $this->assertEquals('firstname', $books[0]->getAuthor()->getFirstname());
         $this->assertEquals('surname', $books[0]->getAuthor()->getSurname());
@@ -94,7 +94,7 @@ class ImportTest extends TestCase
         $this->assertEquals(2019, $books[0]->getReleaseYear());
         $this->assertEquals('paperback', $books[0]->getType());
         $this->assertEquals('admin', $books[0]->getLendTo()->getName());
-        $this->assertEquals(new \DateTime('6.10.2017'), $books[0]->getLendOn());
+        $this->assertTrue($books[0]->getLendOn() instanceof \DateTime);
         $this->assertEquals(null, $books[0]->getCond());
 
         $this->assertEquals(1.50, $books[1]->getPrice());

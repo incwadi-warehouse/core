@@ -1,205 +1,452 @@
 openapi: 3.0.0
 
 info:
-  version: 1.0.0
-  title: incwadi API
-  description: incwadi is a book database to manage your books.
+    version: 1.0.0
+    title: incwadi API
+    description: incwadi is a book database to manage your books.
 
 externalDocs:
-  description: More
-  url: https://github.com/abaldeweg
+    description: More
+    url: https://github.com/incwadi-warehouse
 
 servers:
-  - url: http://localhost:8000/api
+    - url: http://localhost:8000/api
 
 tags:
-  - name: user
-    description: User
+    - name: user
+      description: User
+    - name: public
+      description: Public
 
 paths:
-  # User
-  /me:
-    get:
-      tags:
-        - user
-      description: Shows the current User
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserResponse"
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    # User
+    /me:
+        get:
+            tags:
+                - user
+            description: Shows the current User
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/UserResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /password:
-    put:
-      tags:
-        - user
-      description: Updates the password
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - password
-              properties:
-                password:
-                  type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserResponse"
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    /password:
+        put:
+            tags:
+                - user
+            description: Updates the password
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - password
+                            properties:
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/UserResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /login_check:
-    post:
-      tags:
-        - user
-      description: Authenticates the user
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - username
-                - password
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-      responses:
-        '200':
-          description: Returns a new token
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - token
-                  - refresh_token
-                properties:
-                  token:
-                    type: string
-                  refresh_token:
-                    type: string
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+    /login_check:
+        post:
+            tags:
+                - user
+            description: Authenticates the user
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - username
+                                - password
+                            properties:
+                                username:
+                                    type: string
+                                password:
+                                    type: string
+            responses:
+                "200":
+                    description: Returns a new token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - token
+                                    - refresh_token
+                                properties:
+                                    token:
+                                        type: string
+                                    refresh_token:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
-  /token/refresh:
-    post:
-      tags:
-        - user
-      description: Returns a new token
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - refresh_token
-              properties:
-                refresh_token:
-                  type: string
-      responses:
-        '200':
-          description: Returns the token
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - token
-                  - refresh_token
-                properties:
-                  token:
+    /token/refresh:
+        post:
+            tags:
+                - user
+            description: Returns a new token
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - refresh_token
+                            properties:
+                                refresh_token:
+                                    type: string
+            responses:
+                "200":
+                    description: Returns the token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - token
+                                    - refresh_token
+                                properties:
+                                    token:
+                                        type: string
+                                    refresh_token:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # Public
+    /public/book/find:
+        get:
+            tags:
+                - public
+            description: Shows Books by the Result of a Search Query
+            parameters:
+                - name: options
+                  in: query
+                  description: Options Object
+                  schema:
+                      type: string
+                      example: { "term": "term", "filter": [{ "field": "branch", "operator": "in", "value": 1 }], "offset": 0 }
+                  required: true
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FindBookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /public/book/recommendation/{branch}:
+        get:
+            tags:
+                - public
+            parameters:
+                - name: branch
+                  in: path
+                  required: true
+                  description: Id of the branch
+                  schema:
+                    type: integer
+            description: Shows Recommendations
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RecommendationBookResponse"
+                "404":
+                    description: Branch not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /public/book/branch:
+        get:
+            tags:
+                - public
+            description: Shows available branches
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BranchBookResponse"
+
+    /public/book/cover/{book}_{dimensions}.jpg:
+        get:
+            tags:
+                - public
+            parameters:
+                - name: book
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
                     type: string
-                  refresh_token:
+                - name: dimensions
+                  in: path
+                  required: true
+                  description: Dimensions of the cover
+                  schema:
                     type: string
-        '401':
-          description: Access token is missing or invalid
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                  example: 100x100
+            description: Returns the chosen cover
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        image/jpeg:
+                            schema:
+                                type: string
+                                format: binary
+                "404":
+                    description: Book not found
+                    content:
+                        text/html:
+                            schema:
+                                type: string
 
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
 
-  schemas:
-    UserResponse:
-      type: object
-      required:
-        - id
-        - username
-        - roles
-        - branch
-        - isUser
-        - isAdmin
-      properties:
-        id:
-          type: integer
-        username:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        branch:
-          type: object
-          properties:
-            id:
-                type: string
-            name:
-                type: string
-            steps:
-                type: string
-            currency:
-                type: string
-            ordering:
-                type: string
-        isUser:
-          type: boolean
-        isAdmin:
-          type: boolean
+    schemas:
+        UserResponse:
+            type: object
+            required:
+                - id
+                - username
+                - roles
+                - branch
+                - isUser
+                - isAdmin
+            properties:
+                id:
+                    type: integer
+                username:
+                    type: string
+                roles:
+                    type: array
+                    items:
+                        type: string
+                branch:
+                    type: object
+                    properties:
+                        id:
+                            type: string
+                        name:
+                            type: string
+                        steps:
+                            type: string
+                        currency:
+                            type: string
+                        ordering:
+                            type: string
+                isUser:
+                    type: boolean
+                isAdmin:
+                    type: boolean
 
-    ErrorResponse:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
+        FindBookResponse:
+            type: object
+            required:
+                - books
+                - counter
+            properties:
+                books:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - currency
+                            - title
+                            - shortDescription
+                            - authorFirstname
+                            - authorSurname
+                            - genre
+                            - price
+                            - releaseYear
+                            - type
+                            - branchName
+                            - branchOrdering
+                            - cond
+                            - cover_s
+                            - cover_m
+                            - cover_l
+                        properties:
+                            id:
+                                type: string
+                            currency:
+                                type: string
+                            title:
+                                type: string
+                            shortDescription:
+                                type: string
+                            authorFirstname:
+                                type: string
+                            authorSurname:
+                                type: string
+                            genre:
+                                type: string
+                            price:
+                                type: integer
+                            releaseYear:
+                                type: integer
+                            type:
+                                type: string
+                            branchName:
+                                type: string
+                            branchOrdering:
+                                type: string
+                            cond:
+                                type: string
+                            cover_s:
+                                type: string
+                            cover_m:
+                                type: string
+                            cover_l:
+                                type: string
+                counter:
+                    type: integer
+
+        RecommendationBookResponse:
+            type: object
+            required:
+                - books
+                - counter
+            properties:
+                books:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - currency
+                            - title
+                            - shortDescription
+                            - authorFirstname
+                            - authorSurname
+                            - genre
+                            - price
+                            - releaseYear
+                            - type
+                            - branchName
+                            - branchOrdering
+                            - cond
+                            - cover_s
+                            - cover_m
+                            - cover_l
+                        properties:
+                            id:
+                                type: string
+                            currency:
+                                type: string
+                            title:
+                                type: string
+                            shortDescription:
+                                type: string
+                            authorFirstname:
+                                type: string
+                            authorSurname:
+                                type: string
+                            genre:
+                                type: string
+                            price:
+                                type: integer
+                            releaseYear:
+                                type: integer
+                            type:
+                                type: string
+                            branchName:
+                                type: string
+                            branchOrdering:
+                                type: string
+                            cond:
+                                type: string
+                            cover_s:
+                                type: string
+                            cover_m:
+                                type: string
+                            cover_l:
+                                type: string
+                counter:
+                    type: integer
+
+        BranchBookResponse:
+            type: object
+            required:
+                - branches
+            properties:
+                branches:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - name
+                        properties:
+                            id:
+                                type: integer
+                            name:
+                                type: string
+
+        ErrorResponse:
+            type: object
+            required:
+                - code
+                - message
+            properties:
+                code:
+                    type: integer
+                message:
+                    type: string
 
 security:
-  - bearerAuth: []
+    - bearerAuth: []
