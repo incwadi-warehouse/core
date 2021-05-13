@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -60,8 +56,8 @@ class Reservation implements \JsonSerializable
         return [
             'id' => $this->getId(),
             'branch' => $this->getBranch(),
-            'createdAt' => $this->getCreatedAt() ? $this->getCreatedAt()->getTimestamp() : null,
-            'collection' => $this->getCollection() ? $this->getCollection()->getTimestamp() : null,
+            'createdAt' => null !== $this->getCreatedAt() ? $this->getCreatedAt()->getTimestamp() : null,
+            'collection' => null !== $this->getCollection() ? $this->getCollection()->getTimestamp() : null,
             'notes' => $this->getNotes(),
             'books' => $this->getBooks(),
         ];
@@ -140,11 +136,9 @@ class Reservation implements \JsonSerializable
 
     public function removeBook(Book $book): self
     {
-        if ($this->books->removeElement($book)) {
-            // set the owning side to null (unless already changed)
-            if ($book->getReservation() === $this) {
-                $book->setReservation(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->books->removeElement($book) && $book->getReservation() === $this) {
+            $book->setReservation(null);
         }
 
         return $this;

@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

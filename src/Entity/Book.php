@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Book implements \JsonSerializable
 {
+    /**
+     * @var string[]
+     */
     public const TYPES = ['paperback', 'hardcover'];
 
     /**
@@ -172,7 +171,7 @@ class Book implements \JsonSerializable
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
-            'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null,
+            'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
             'recommendation' => $this->getRecommendation(),
         ];
     }
