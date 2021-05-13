@@ -1,10 +1,6 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Util;
+namespace Incwadi\Core\Service\Portability;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Incwadi\Core\Entity\Author;

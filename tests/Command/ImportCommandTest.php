@@ -14,7 +14,7 @@ class ImportCommandTest extends TestCase
 {
     public function testExecute()
     {
-        $import = $this->getMockBuilder('\\Incwadi\\Core\\Util\\Import')
+        $import = $this->getMockBuilder('\\Incwadi\\Core\\Service\\Portability\\Import')
             ->disableOriginalConstructor()
             ->getMock();
 

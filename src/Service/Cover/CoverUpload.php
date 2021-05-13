@@ -1,10 +1,6 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Service;
+namespace Incwadi\Core\Service\Cover;
 
 use Incwadi\Core\Entity\Book;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

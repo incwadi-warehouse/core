@@ -8,7 +8,7 @@ namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\CoverShow;
+use Incwadi\Core\Service\Cover\CoverShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -127,7 +127,7 @@ class BookPublicController extends AbstractController
         $path = __DIR__.'/../../data/'.$filename;
 
         if (!is_file($path)) {
-            $path = __DIR__.'/../Service/none.jpg';
+            $path = __DIR__.'/../Service/Search/none.jpg';
         }
 
         return $this->file(

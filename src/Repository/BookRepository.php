@@ -10,8 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\CoverRemove;
-use Incwadi\Core\Util\Search;
+use Incwadi\Core\Service\Cover\CoverRemove;
+use Incwadi\Core\Service\Search\Search;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)

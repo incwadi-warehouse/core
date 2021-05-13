@@ -1,10 +1,6 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Util;
+namespace Incwadi\Core\Service\Search;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Andx;
@@ -12,7 +8,7 @@ use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\CoverShow;
+use Incwadi\Core\Service\Cover\CoverShow;
 
 class Search
 {
@@ -99,6 +95,7 @@ class Search
 
         $this->qb->setMaxResults(null);
         $this->qb->setFirstResult(null);
+
         $query = $this->qb->getQuery();
         $counter = count($query->getResult());
 
@@ -229,10 +226,7 @@ class Search
                 $query = $this->qb->expr()->in('b.'.$fieldName, ':'.$fieldId);
             break;
             case 'null':
-                $query = $this->qb->expr()->isNull('b.'.$fieldName);
-
-                return $query;
-            break;
+                return $this->qb->expr()->isNull('b.'.$fieldName);
             default:
                 $query = null;
             break;
