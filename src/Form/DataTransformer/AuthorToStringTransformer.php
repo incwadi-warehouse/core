@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Form\DataTransformer;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +15,7 @@ class AuthorToStringTransformer implements DataTransformerInterface
         $this->em = $em;
     }
 
-    public function transform($author)
+    public function transform($author): string
     {
         if (null === $author) {
             return '';
@@ -28,10 +24,10 @@ class AuthorToStringTransformer implements DataTransformerInterface
         return $author->getSurname().','.$author->getFirstname();
     }
 
-    public function reverseTransform($data)
+    public function reverseTransform($data): ?Author
     {
         if (!$data) {
-            return;
+            return null;
         }
 
         $data = explode(',', $data);

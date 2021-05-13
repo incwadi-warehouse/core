@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Form\DataTransformer;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +18,7 @@ class BookToStringTransformer implements DataTransformerInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function transform($books)
+    public function transform($books): string
     {
         if (null === $books) {
             return '';
@@ -36,7 +32,7 @@ class BookToStringTransformer implements DataTransformerInterface
         return implode(',', $list);
     }
 
-    public function reverseTransform($data)
+    public function reverseTransform($data): array
     {
         if (!$data) {
             return [];
