@@ -45,6 +45,8 @@ bin/console doctrine:migrations:migrate -n
 bin/console doctrine:fixtures:load -n
 ```
 
+You need to create a branch and a user. In case of `dev` the user `admin` with password `password` will be created by the fixtures.
+
 ## Auth
 
 To authenticate your users, you need to generate the SSL keys under `config/jwt/`.
@@ -86,49 +88,3 @@ Just call the following command, if you are updating the production environment.
 ```shell
 bin/setup
 ```
-
-## Branches
-
-Branches can only be created on the command line.
-
-Find out what branches are existing and the corresponding id for a specific branch.
-
-```shell
-bin/console branch:list
-```
-
-Creating a new branch is straightforward. Replace `[NAME]` with your desired name.
-
-```shell
-bin/console branch:new [NAME]
-```
-
-## Users Management
-
-Fetching a list with all users and their corresponding id:
-
-```shell
-bin/console user:list
-```
-
-Create a new user and replace `[NAME]` with the desired name of the user. Set `[ROLE]` that's either `ROLE_USER` or `ROLE_ADMIN`. The `[BRANCH]` is the id of the branch the user is supposed to be a part of.
-
-```shell
-bin/console user:new [NAME] [ROLE] [BRANCH]
-```
-
-You can of course delete a user. Replace `[ID]` with the id of the user.
-
-```shell
-bin/console user:delete [ID]
-```
-
-If the user has forgotten the password, you can reset it with this command. Replace `[ID]` with the id of the user.
-
-```shell
-bin/console user:reset-password [ID]
-```
-
-## Uploading Images
-
-You can upload JPEG and PNG images up to 10240KB. All images are saved as JPEG with quality of 75%. The source file is only saved temporarily.
