@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Staff;
@@ -26,11 +22,7 @@ class StaffController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Staff::class)->findBy(
-                [
-                    'branch' => $this->getUser()->getBranch(),
-                ]
-            )
+            $this->getDoctrine()->getRepository(Staff::class)->findByBranch($this->getUser()->getBranch())
         );
     }
 

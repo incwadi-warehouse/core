@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
@@ -123,12 +119,10 @@ class BookController extends AbstractController
         );
 
         $existingBook = $em->getRepository(Book::class)->findDuplicate($book);
-        if (null !== $existingBook) {
-            if ($existingBook->getId() !== $book->getId()) {
-                return $this->json([
-                'msg' => 'Book not saved, because it exists already!',
-                ], 409);
-            }
+        if (null !== $existingBook && $existingBook->getId() !== $book->getId()) {
+            return $this->json([
+            'msg' => 'Book not saved, because it exists already!',
+            ], 409);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -193,8 +187,6 @@ class BookController extends AbstractController
         }
 
         throw new \Error('Could not upload image ('.$form->get('cover')->getData()->getErrorMessage().').');
-
-        return $this->json(['msg' => 'Could not upload image.'], 500);
     }
 
     /**
