@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -28,21 +24,18 @@ class BookRepository extends ServiceEntityRepository
 
     private $cover;
 
-    public function __construct(ManagerRegistry $registry, CoverRemove $cover)
+    public function __construct(ManagerRegistry $registry, Search $search, CoverRemove $cover)
     {
         parent::__construct($registry, Book::class);
+        $this->search = $search;
         $this->cover = $cover;
     }
 
     public function findDemanded(array $options, bool $isPublic = false): array
     {
-        $search = new Search(
-            $this->getEntityManager()->createQueryBuilder(),
-            $this->getEntityManager()
-        );
-        $search->setPublic($isPublic);
+        $this->search->setPublic($isPublic);
 
-        return $search->find($options);
+        return $this->search->find($options);
     }
 
     public function deleteBooks(int $clearLimit = self::KEEP_REMOVED_DAYS): void

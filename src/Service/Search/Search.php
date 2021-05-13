@@ -23,9 +23,9 @@ class Search
 
     private bool $isPublic = false;
 
-    public function __construct(QueryBuilder $qb, EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->qb = $qb;
+        $this->qb = $em->createQueryBuilder();
         $this->em = $em;
     }
 
