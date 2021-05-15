@@ -111,11 +111,13 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Staff::class, inversedBy="books")
+     * Deprecated
      */
     private ?Staff $lendTo = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * Deprecated
      */
     private ?\DateTime $lendOn = null;
 
