@@ -1,6 +1,6 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace Incwadi\Core\Controller\Public;
 
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api/public/book")
  */
-class BookPublicController extends AbstractController
+class BookController extends AbstractController
 {
     /**
      * @Route("/find", methods={"GET"})
@@ -34,28 +34,6 @@ class BookPublicController extends AbstractController
                     true
                 )
         );
-    }
-
-    /**
-     * @Route("/branch", methods={"GET"})
-     */
-    public function branch(): JsonResponse
-    {
-        $branches = $this
-                ->getDoctrine()
-                ->getRepository(Branch::class)
-                ->findByPublic(true);
-        $processed = [];
-        foreach ($branches as $branch) {
-            $processed[] = [
-                'id' => $branch->getId(),
-                'name' => $branch->getName(),
-            ];
-        }
-
-        return $this->json([
-            'branches' => $processed,
-        ]);
     }
 
     /**

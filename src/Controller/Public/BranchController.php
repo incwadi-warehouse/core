@@ -1,0 +1,36 @@
+<?php
+
+namespace Incwadi\Core\Controller\Public;
+
+use Incwadi\Core\Entity\Branch;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/api/public/branch")
+ */
+class BranchController extends AbstractController
+{
+    /**
+     * @Route("/", methods={"GET"})
+     */
+    public function branch(): JsonResponse
+    {
+        $branches = $this
+                ->getDoctrine()
+                ->getRepository(Branch::class)
+                ->findByPublic(true);
+        $processed = [];
+        foreach ($branches as $branch) {
+            $processed[] = [
+                'id' => $branch->getId(),
+                'name' => $branch->getName(),
+            ];
+        }
+
+        return $this->json([
+            'branches' => $processed,
+        ]);
+    }
+}
