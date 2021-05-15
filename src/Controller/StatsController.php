@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/api/v1/stats")
+ * Deprecated
  */
 class StatsController extends AbstractController
 {
