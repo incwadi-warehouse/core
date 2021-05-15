@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/staff")
+ * @Route("/api/staff")
  */
 class StaffController extends AbstractController
 {

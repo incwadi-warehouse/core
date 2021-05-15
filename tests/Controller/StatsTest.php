@@ -10,7 +10,7 @@ class StatsTest extends WebTestCase
 
     public function testScenario()
     {
-        $request = $this->request('/api/v1/stats/', 'GET', [], []);
+        $request = $this->request('/api/stats/', 'GET', [], []);
 
         $this->assertIsInt($request->all);
         $this->assertIsInt($request->available);

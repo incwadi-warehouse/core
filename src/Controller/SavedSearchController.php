@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/v1/savedsearch")
+ * @Route("/api/savedsearch")
  */
 class SavedSearchController extends AbstractController
 {

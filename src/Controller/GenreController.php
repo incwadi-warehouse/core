@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/genre")
+ * @Route("/api/genre")
  */
 class GenreController extends AbstractController
 {

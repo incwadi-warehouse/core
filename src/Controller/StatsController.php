@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/stats")
+ * @Route("/api/stats")
  * Deprecated
  */
 class StatsController extends AbstractController

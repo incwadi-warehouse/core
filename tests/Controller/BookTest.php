@@ -18,7 +18,7 @@ class BookTest extends WebTestCase
     {
         $this->buildClient();
 
-        $request = $this->request('/api/v1/genre/new', 'POST', [], [
+        $request = $this->request('/api/genre/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -28,7 +28,7 @@ class BookTest extends WebTestCase
 
         $this->genreId = $request->id;
 
-        $request = $this->request('/api/v1/condition/new', 'POST', [], [
+        $request = $this->request('/api/condition/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -38,12 +38,12 @@ class BookTest extends WebTestCase
 
         $this->conditionId = $request->id;
 
-        $request = $this->request('/api/v1/tag/new', 'POST', [], [
+        $request = $this->request('/api/tag/new', 'POST', [], [
             'name' => 'tag1',
         ]);
         $this->tags[] = $request->id;
 
-        $request = $this->request('/api/v1/tag/new', 'POST', [], [
+        $request = $this->request('/api/tag/new', 'POST', [], [
             'name' => 'tag2',
         ]);
         $this->tags[] = $request->id;
@@ -51,16 +51,16 @@ class BookTest extends WebTestCase
 
     public function tearDown(): void
     {
-        $request = $this->request('/api/v1/genre/'.$this->genreId, 'DELETE');
+        $request = $this->request('/api/genre/'.$this->genreId, 'DELETE');
 
         $this->assertEquals('The genre was deleted successfully.', $request->msg);
 
-        $request = $this->request('/api/v1/condition/'.$this->conditionId, 'DELETE');
+        $request = $this->request('/api/condition/'.$this->conditionId, 'DELETE');
 
         $this->assertEquals('The condition was successfully deleted.', $request->msg);
 
         foreach ($this->tags as $tag) {
-            $request = $this->request('/api/v1/tag/'.$tag, 'DELETE');
+            $request = $this->request('/api/tag/'.$tag, 'DELETE');
 
             $this->assertEquals('The tag was deleted successfully.', $request->msg);
         }
@@ -71,7 +71,7 @@ class BookTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/api/v1/book/new', 'POST', [], [
+        $request = $this->request('/api/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -119,7 +119,7 @@ class BookTest extends WebTestCase
         $id = $request->id;
 
         // edit
-        $request = $this->request('/api/v1/book/'.$id, 'PUT', [], [
+        $request = $this->request('/api/book/'.$id, 'PUT', [], [
             'title' => 'book',
             'author' => 'surname1,firstname1',
             'genre' => $this->genreId,
@@ -165,28 +165,28 @@ class BookTest extends WebTestCase
         $this->assertIsString($request->tags[0]->name);
 
         // sell
-        $request = $this->request('/api/v1/book/sell/'.$id, 'PUT');
+        $request = $this->request('/api/book/sell/'.$id, 'PUT');
         $this->assertTrue($request->sold);
 
-        $request = $this->request('/api/v1/book/sell/'.$id, 'PUT');
+        $request = $this->request('/api/book/sell/'.$id, 'PUT');
         $this->assertFalse($request->sold);
 
         // remove
-        $request = $this->request('/api/v1/book/remove/'.$id, 'PUT');
+        $request = $this->request('/api/book/remove/'.$id, 'PUT');
         $this->assertTrue($request->removed);
 
-        $request = $this->request('/api/v1/book/remove/'.$id, 'PUT');
+        $request = $this->request('/api/book/remove/'.$id, 'PUT');
         $this->assertFalse($request->removed);
 
         // reserve
-        $request = $this->request('/api/v1/book/reserve/'.$id, 'PUT');
+        $request = $this->request('/api/book/reserve/'.$id, 'PUT');
         $this->assertTrue($request->reserved);
 
-        $request = $this->request('/api/v1/book/reserve/'.$id, 'PUT');
+        $request = $this->request('/api/book/reserve/'.$id, 'PUT');
         $this->assertFalse($request->reserved);
 
         // show
-        $request = $this->request('/api/v1/book/'.$id, 'GET');
+        $request = $this->request('/api/book/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertIsString($request->id);
@@ -220,7 +220,7 @@ class BookTest extends WebTestCase
         $this->assertIsString($request->tags[0]->name);
 
         // find
-        $request = $this->request('/api/v1/book/find', 'GET', [
+        $request = $this->request('/api/book/find', 'GET', [
             'options' => json_encode(['term' => 'book']),
         ]);
 
@@ -270,14 +270,14 @@ class BookTest extends WebTestCase
         }
 
         // delete
-        $request = $this->request('/api/v1/book/'.$id, 'DELETE');
+        $request = $this->request('/api/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
     public function testDuplicate()
     {
-        $request = $this->request('/api/v1/book/new', 'POST', [], [
+        $request = $this->request('/api/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,
@@ -292,7 +292,7 @@ class BookTest extends WebTestCase
 
         $this->assertIsString($request->id);
 
-        $request = $this->request('/api/v1/book/new', 'POST', [], [
+        $request = $this->request('/api/book/new', 'POST', [], [
             'title' => 'title',
             'author' => 'surname,firstname',
             'genre' => $this->genreId,

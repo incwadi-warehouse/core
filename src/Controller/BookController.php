@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/book")
+ * @Route("/api/book")
  */
 class BookController extends AbstractController
 {

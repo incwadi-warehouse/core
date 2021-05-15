@@ -14,7 +14,7 @@ class BookPublicTest extends WebTestCase
     {
         $this->buildClient();
 
-        $request = $this->request('/api/v1/branch/my', 'GET');
+        $request = $this->request('/api/branch/my', 'GET');
 
         $this->branch = $request->id;
     }
