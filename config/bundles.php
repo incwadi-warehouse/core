@@ -14,4 +14,5 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Baldeweg\Bundle\ExtraBundle\BaldewegExtraBundle::class => ['all' => true],
+    Baldeweg\Bundle\BookBundle\BaldewegBookBundle::class => ['all' => true],
 ];

@@ -1,4 +1,7 @@
 {
+    "baldeweg/book-bundle": {
+        "version": "dev-master"
+    },
     "baldeweg/extra-bundle": {
         "version": "v0.1.0"
     },
@@ -37,6 +40,9 @@
     },
     "doctrine/dbal": {
         "version": "2.12.0"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
         "version": "2.3",
@@ -578,6 +584,9 @@
     },
     "symplify/autowire-array-parameter": {
         "version": "v9.3.5"
+    },
+    "symplify/composer-json-manipulator": {
+        "version": "v9.3.11"
     },
     "symplify/console-color-diff": {
         "version": "v9.3.5"
