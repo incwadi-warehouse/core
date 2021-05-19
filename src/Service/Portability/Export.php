@@ -11,6 +11,9 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+/*
+ * Deprecated
+ */
 class Export implements ExportInterface
 {
     public function export(array $data): string

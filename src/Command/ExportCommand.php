@@ -11,6 +11,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/*
+ * Deprecated
+ */
 class ExportCommand extends Command
 {
     private EntityManagerInterface $em;
