@@ -219,4 +219,44 @@ class BookRepository extends ServiceEntityRepository
         $this->cover->remove($book);
         $this->getEntityManager()->remove($book);
     }
+
+    public function removeNotFoundBooks(Branch $branch): void
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->update(Book::class, 'b');
+        $qb->set('b.removed', ':removed');
+        $qb->set('b.removedOn', ':removedOn');
+        $qb->where(
+            $qb->expr()->andX(
+                $qb->expr()->eq('b.inventory', ':inventory'),
+                $qb->expr()->eq('b.branch', ':branch')
+            )
+        );
+
+        $qb->setParameter('removed', true);
+        $qb->setParameter('removedOn', new \DateTime());
+        $qb->setParameter('inventory', false);
+        $qb->setParameter('branch', $branch);
+
+        $query = $qb->getQuery();
+        $query->execute();
+    }
+
+    public function resetInventory(Branch $branch): void
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->update(Book::class, 'b');
+        $qb->set('b.inventory', ':inventory');
+        $qb->where(
+            $qb->expr()->eq('b.branch', ':branch')
+        );
+
+        $qb->setParameter('inventory', null);
+        $qb->setParameter('branch', $branch);
+
+        $query = $qb->getQuery();
+        $query->execute();
+    }
 }

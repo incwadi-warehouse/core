@@ -3,6 +3,7 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Inventory;
 use Incwadi\Core\Form\BookCoverType;
 use Incwadi\Core\Form\BookType;
 use Incwadi\Core\Service\Cover\CoverRemove;
@@ -79,6 +80,38 @@ class BookController extends AbstractController
             'sold' => $sold,
             'removed' => $removed,
         ]);
+    }
+
+    /**
+     * @Route("/inventory/found/{book}", methods={"PUT"})
+     * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
+     */
+    public function inventoryFound(Book $book): JsonResponse
+    {
+        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory->setFound($book->getInventory() ? $inventory->getFound() - 1 : $inventory->getFound() + 1);
+
+        $book->setInventory($book->getInventory() ? null : true);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
+    }
+
+    /**
+     * @Route("/inventory/notfound/{book}", methods={"PUT"})
+     * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
+     */
+    public function inventoryNotFound(Book $book): JsonResponse
+    {
+        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory->setNotFound(false === $book->getInventory() ? $inventory->getNotFound() - 1 : $inventory->getNotFound() + 1);
+
+        $book->setInventory(false === $book->getInventory() ? null : false);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
     }
 
     /**

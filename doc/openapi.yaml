@@ -17,6 +17,8 @@ tags:
       description: User
     - name: public
       description: Public
+    - name: inventory
+      description: Inventory
 
 paths:
     # User
@@ -249,6 +251,150 @@ paths:
                             schema:
                                 type: string
 
+    # inventory
+    /inventory/:
+        get:
+            tags:
+                - inventory
+            description: List all inventories for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/InventoryResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /inventory/new:
+        post:
+            tags:
+                - inventory
+            description: Create a new inventory
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InventoryResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /inventory/{id}:
+        get:
+            tags:
+                - inventory
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the inventory
+                  schema:
+                    type: integer
+            description: Shows an inventory
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InventoryResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - inventory
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the inventory
+                  schema:
+                    type: integer
+            description: Edit an inventory
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/InventoryRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/InventoryResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - inventory
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the inventory
+                  schema:
+                    type: integer
+            description: Delete an inventory
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
 components:
     securitySchemes:
         bearerAuth:
@@ -436,6 +582,37 @@ components:
                                 type: integer
                             name:
                                 type: string
+
+        InventoryRequest:
+            type: object
+            required:
+                - endedAt
+            properties:
+                endedAt:
+                    type: integer
+
+        InventoryResponse:
+            type: object
+            required:
+                - id
+                - branch
+                - startedAt
+                - endedAt
+                - found
+                - notFound
+            properties:
+                id:
+                    type: integer
+                branch:
+                    type: object
+                startedAt:
+                    type: integer
+                endedAt:
+                    type: integer
+                found:
+                    type: integer
+                notFound:
+                    type: integer
 
         ErrorResponse:
             type: object

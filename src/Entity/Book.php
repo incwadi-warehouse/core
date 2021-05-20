@@ -142,6 +142,11 @@ class Book implements \JsonSerializable
      */
     private bool $recommendation = false;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $inventory = null;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -175,6 +180,7 @@ class Book implements \JsonSerializable
             'tags' => $this->getTags(),
             'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
             'recommendation' => $this->getRecommendation(),
+            'inventory' => $this->getInventory(),
         ];
     }
 
@@ -445,6 +451,18 @@ class Book implements \JsonSerializable
     public function setRecommendation(bool $recommendation): self
     {
         $this->recommendation = $recommendation;
+
+        return $this;
+    }
+
+    public function getInventory(): ?bool
+    {
+        return $this->inventory;
+    }
+
+    public function setInventory(?bool $inventory): self
+    {
+        $this->inventory = $inventory;
 
         return $this;
     }
