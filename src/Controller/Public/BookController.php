@@ -101,7 +101,7 @@ class BookController extends AbstractController
         $path = __DIR__.'/../../data/'.$filename;
 
         if (!is_file($path)) {
-            $path = __DIR__.'/../Service/Search/none.jpg';
+            $path = __DIR__.'/../../Service/Cover/none.jpg';
         }
 
         return $this->file(
