@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Staff;
@@ -15,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/staff")
+ * @Route("/api/staff")
  */
 class StaffController extends AbstractController
 {
@@ -26,11 +22,7 @@ class StaffController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Staff::class)->findBy(
-                [
-                    'branch' => $this->getUser()->getBranch(),
-                ]
-            )
+            $this->getDoctrine()->getRepository(Staff::class)->findByBranch($this->getUser()->getBranch())
         );
     }
 

@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\SavedSearch;
@@ -15,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/v1/savedsearch")
+ * @Route("/api/savedsearch")
  */
 class SavedSearchController extends AbstractController
 {

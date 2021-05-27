@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,8 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Branch implements \JsonSerializable
 {
-    const CURRENCIES = ['EUR', 'USD'];
-    const ORDER_BY = ['name', 'books'];
+    /**
+     * @var string[]
+     */
+    public const CURRENCIES = ['EUR', 'USD'];
+    /**
+     * @var string[]
+     */
+    public const ORDER_BY = ['name', 'books'];
 
     /**
      * @ORM\Id()

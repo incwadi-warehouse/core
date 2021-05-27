@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Author;
@@ -16,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/author")
+ * @Route("/api/author")
  */
 class AuthorController extends AbstractController
 {

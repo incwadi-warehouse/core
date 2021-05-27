@@ -1,20 +1,19 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Util\Export;
+use Incwadi\Core\Service\Portability\Export;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/*
+ * Deprecated
+ */
 class ExportCommand extends Command
 {
     private EntityManagerInterface $em;

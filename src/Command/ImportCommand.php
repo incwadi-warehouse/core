@@ -1,12 +1,8 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Command;
 
-use Incwadi\Core\Util\Import;
+use Incwadi\Core\Service\Portability\Import;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

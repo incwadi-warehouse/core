@@ -1,14 +1,10 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Controller;
+namespace Incwadi\Core\Controller\Public;
 
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\CoverShow;
+use Incwadi\Core\Service\Cover\CoverShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api/public/book")
  */
-class BookPublicController extends AbstractController
+class BookController extends AbstractController
 {
     /**
      * @Route("/find", methods={"GET"})
@@ -38,28 +34,6 @@ class BookPublicController extends AbstractController
                     true
                 )
         );
-    }
-
-    /**
-     * @Route("/branch", methods={"GET"})
-     */
-    public function branch(): JsonResponse
-    {
-        $branches = $this
-                ->getDoctrine()
-                ->getRepository(Branch::class)
-                ->findByPublic(true);
-        $processed = [];
-        foreach ($branches as $branch) {
-            $processed[] = [
-                'id' => $branch->getId(),
-                'name' => $branch->getName(),
-            ];
-        }
-
-        return $this->json([
-            'branches' => $processed,
-        ]);
     }
 
     /**
@@ -127,7 +101,7 @@ class BookPublicController extends AbstractController
         $path = __DIR__.'/../../data/'.$filename;
 
         if (!is_file($path)) {
-            $path = __DIR__.'/../Service/none.jpg';
+            $path = __DIR__.'/../../Service/Cover/none.jpg';
         }
 
         return $this->file(

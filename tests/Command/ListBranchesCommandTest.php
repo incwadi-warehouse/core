@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Command;
 
 use Incwadi\Core\Command\ListBranchesCommand;

@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::CODE_QUALITY,
         SetList::CODING_STYLE,
         SetList::DEAD_CODE,
-        // SetList::PHP_80,
+        SetList::PHP_80,
         SetList::SYMFONY_52,
         SetList::PHPUNIT_80,
     ]);

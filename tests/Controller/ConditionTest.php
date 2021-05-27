@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,7 +11,7 @@ class ConditionTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/api/v1/condition/new', 'POST', [], [
+        $request = $this->request('/api/condition/new', 'POST', [], [
             'name' => 'name',
         ]);
 
@@ -26,7 +22,7 @@ class ConditionTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/api/v1/condition/', 'GET');
+        $request = $this->request('/api/condition/', 'GET');
 
         $this->assertIsArray($request);
 
@@ -35,14 +31,14 @@ class ConditionTest extends WebTestCase
         $this->assertIsInt($request[0]->branch->id);
 
         // show
-        $request = $this->request('/api/v1/condition/'.$id, 'GET');
+        $request = $this->request('/api/condition/'.$id, 'GET');
 
         $this->assertTrue(isset($request->id));
         $this->assertIsString($request->name);
         $this->assertIsInt($request->branch->id);
 
         // edit
-        $request = $this->request('/api/v1/condition/'.$id, 'PUT', [], [
+        $request = $this->request('/api/condition/'.$id, 'PUT', [], [
             'name' => 'name1',
         ]);
 
@@ -51,7 +47,7 @@ class ConditionTest extends WebTestCase
         $this->assertIsInt($request->branch->id);
 
         // delete
-        $request = $this->request('/api/v1/condition/'.$id, 'DELETE');
+        $request = $this->request('/api/condition/'.$id, 'DELETE');
 
         $this->assertEquals(
             'The condition was successfully deleted.',

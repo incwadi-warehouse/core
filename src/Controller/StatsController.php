@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
@@ -13,7 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/stats")
+ * @Route("/api/stats")
+ * Deprecated
  */
 class StatsController extends AbstractController
 {

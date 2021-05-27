@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -14,7 +10,7 @@ class StatsTest extends WebTestCase
 
     public function testScenario()
     {
-        $request = $this->request('/api/v1/stats/', 'GET', [], []);
+        $request = $this->request('/api/stats/', 'GET', [], []);
 
         $this->assertIsInt($request->all);
         $this->assertIsInt($request->available);

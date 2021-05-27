@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Book implements \JsonSerializable
 {
-    const TYPES = ['paperback', 'hardcover'];
+    /**
+     * @var string[]
+     */
+    public const TYPES = ['paperback', 'hardcover'];
 
     /**
      * @ORM\Id()
@@ -112,11 +111,13 @@ class Book implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Staff::class, inversedBy="books")
+     * Deprecated
      */
     private ?Staff $lendTo = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * Deprecated
      */
     private ?\DateTime $lendOn = null;
 
@@ -140,6 +141,11 @@ class Book implements \JsonSerializable
      * @ORM\Column(type="boolean")
      */
     private bool $recommendation = false;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $inventory = null;
 
     public function __construct()
     {
@@ -172,8 +178,9 @@ class Book implements \JsonSerializable
             'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
-            'reservation_id' => $this->getReservation() ? $this->getReservation()->getId() : null,
+            'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
             'recommendation' => $this->getRecommendation(),
+            'inventory' => $this->getInventory(),
         ];
     }
 
@@ -444,6 +451,18 @@ class Book implements \JsonSerializable
     public function setRecommendation(bool $recommendation): self
     {
         $this->recommendation = $recommendation;
+
+        return $this;
+    }
+
+    public function getInventory(): ?bool
+    {
+        return $this->inventory;
+    }
+
+    public function setInventory(?bool $inventory): self
+    {
+        $this->inventory = $inventory;
 
         return $this;
     }

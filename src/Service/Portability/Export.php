@@ -1,10 +1,6 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Util;
+namespace Incwadi\Core\Service\Portability;
 
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Branch;
@@ -15,6 +11,9 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+/*
+ * Deprecated
+ */
 class Export implements ExportInterface
 {
     public function export(array $data): string

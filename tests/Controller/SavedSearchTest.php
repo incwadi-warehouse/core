@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,7 +11,7 @@ class SavedSearchTest extends WebTestCase
     public function testScenario()
     {
         // new
-        $request = $this->request('/api/v1/savedsearch/new', 'POST', [], [
+        $request = $this->request('/api/savedsearch/new', 'POST', [], [
             'name' => 'name',
             'query' => ['term' => 'term', 'filter' => []],
         ]);
@@ -29,7 +25,7 @@ class SavedSearchTest extends WebTestCase
         $id = $request->id;
 
         // list
-        $request = $this->request('/api/v1/savedsearch/', 'GET');
+        $request = $this->request('/api/savedsearch/', 'GET');
 
         $this->assertIsArray($request);
         $this->assertIsInt($request[0]->id);
@@ -38,7 +34,7 @@ class SavedSearchTest extends WebTestCase
         $this->assertIsObject($request[0]->query);
 
         // edit
-        $request = $this->request('/api/v1/savedsearch/'.$id, 'PUT', [], [
+        $request = $this->request('/api/savedsearch/'.$id, 'PUT', [], [
             'name' => 'name',
             'query' => ['term' => 'term', 'filter' => []],
         ]);
@@ -49,7 +45,7 @@ class SavedSearchTest extends WebTestCase
         $this->assertIsObject($request->query);
 
         // show
-        $request = $this->request('/api/v1/savedsearch/'.$id, 'GET');
+        $request = $this->request('/api/savedsearch/'.$id, 'GET');
 
         $this->assertEquals($id, $request->id);
         $this->assertIsObject($request->branch);
@@ -57,7 +53,7 @@ class SavedSearchTest extends WebTestCase
         $this->assertIsObject($request->query);
 
         // delete
-        $request = $this->request('/api/v1/savedsearch/'.$id, 'DELETE');
+        $request = $this->request('/api/savedsearch/'.$id, 'DELETE');
 
         $this->assertEquals('The saved search was deleted successfully.', $request->msg);
     }

@@ -1,17 +1,13 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Repository;
 
+use Baldeweg\Bundle\BookBundle\Search\Find;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\CoverRemove;
-use Incwadi\Core\Util\Search;
+use Incwadi\Core\Service\Cover\CoverRemove;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,25 +20,123 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    const KEEP_REMOVED_DAYS = 28;
+    public const KEEP_REMOVED_DAYS = 28;
 
-    private $cover;
+    private CoverRemove $cover;
 
-    public function __construct(ManagerRegistry $registry, CoverRemove $cover)
+    private Find $find;
+
+    public function __construct(ManagerRegistry $registry, CoverRemove $cover, Find $find)
     {
         parent::__construct($registry, Book::class);
         $this->cover = $cover;
+        $this->find = $find;
     }
 
     public function findDemanded(array $options, bool $isPublic = false): array
     {
-        $search = new Search(
-            $this->getEntityManager()->createQueryBuilder(),
-            $this->getEntityManager()
-        );
-        $search->setPublic($isPublic);
+        $fields = [
+            'branch',
+            'added',
+            'title',
+            'author',
+            'genre',
+            'price',
+            'sold',
+            'soldOn',
+            'removed',
+            'removedOn',
+            'reserved',
+            'reservedAt',
+            'releaseYear',
+            'type',
+            'lendTo',
+            'lendOn',
+            'recommendation',
+        ];
+        if ($isPublic) {
+            if (strlen($options['term']) < 1) {
+                throw new \Exception('There is no term!');
+            }
 
-        return $search->find($options);
+            $branch = false;
+            foreach ($options['filter'] as $filter) {
+                if ('branch' === $filter['field']) {
+                    $branch = $filter['value'];
+                }
+            }
+            if ($branch) {
+                $branchObj = $this->getEntityManager()->getRepository(Branch::class)->find($branch);
+                if (!$branchObj->getPublic()) {
+                    throw new \Exception('No valid branch chosen!');
+                }
+            }
+
+            $fields = ['branch'];
+            $this->find->setForcedFilters([
+                [
+                    'field' => 'sold',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'removed',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'reserved',
+                    'operator' => 'eq',
+                    'value' => '0',
+                ],
+                [
+                    'field' => 'lendOn',
+                    'operator' => 'null',
+                    'value' => '0',
+                ],
+            ]);
+        }
+
+        $this->find->setFields($fields);
+
+        $result = $this->find->find($options);
+        $counter = $this->find->count($options);
+
+        if ($isPublic) {
+            return [
+                'books' => $this->getBook($result),
+                'counter' => $counter,
+            ];
+        }
+
+        return [
+            'books' => $result,
+            'counter' => $counter,
+        ];
+    }
+
+    private function getBook(array $books): array
+    {
+        $processed = [];
+        foreach ($books as $book) {
+            $processed[] = [
+                'id' => $book->getId(),
+                'currency' => $book->getBranch()->getCurrency(),
+                'title' => $book->getTitle(),
+                'shortDescription' => $book->getShortDescription(),
+                'authorFirstname' => $book->getAuthor()->getFirstname(),
+                'authorSurname' => $book->getAuthor()->getSurname(),
+                'genre' => $book->getGenre()->getName(),
+                'price' => $book->getPrice(),
+                'releaseYear' => $book->getReleaseYear(),
+                'type' => $book->getType(),
+                'branchName' => $book->getBranch()->getName(),
+                'branchOrdering' => $book->getBranch()->getOrdering(),
+                'cond' => $book->getCond() ? $book->getCond()->getName() : null,
+            ];
+        }
+
+        return $processed;
     }
 
     public function deleteBooks(int $clearLimit = self::KEEP_REMOVED_DAYS): void
@@ -124,5 +218,45 @@ class BookRepository extends ServiceEntityRepository
     {
         $this->cover->remove($book);
         $this->getEntityManager()->remove($book);
+    }
+
+    public function removeNotFoundBooks(Branch $branch): void
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->update(Book::class, 'b');
+        $qb->set('b.removed', ':removed');
+        $qb->set('b.removedOn', ':removedOn');
+        $qb->where(
+            $qb->expr()->andX(
+                $qb->expr()->eq('b.inventory', ':inventory'),
+                $qb->expr()->eq('b.branch', ':branch')
+            )
+        );
+
+        $qb->setParameter('removed', true);
+        $qb->setParameter('removedOn', new \DateTime());
+        $qb->setParameter('inventory', false);
+        $qb->setParameter('branch', $branch);
+
+        $query = $qb->getQuery();
+        $query->execute();
+    }
+
+    public function resetInventory(Branch $branch): void
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->update(Book::class, 'b');
+        $qb->set('b.inventory', ':inventory');
+        $qb->where(
+            $qb->expr()->eq('b.branch', ':branch')
+        );
+
+        $qb->setParameter('inventory', null);
+        $qb->setParameter('branch', $branch);
+
+        $query = $qb->getQuery();
+        $query->execute();
     }
 }

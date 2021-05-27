@@ -1,17 +1,14 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Inventory;
 use Incwadi\Core\Form\BookCoverType;
 use Incwadi\Core\Form\BookType;
-use Incwadi\Core\Service\CoverRemove;
-use Incwadi\Core\Service\CoverShow;
-use Incwadi\Core\Service\CoverUpload;
+use Incwadi\Core\Service\Cover\CoverRemove;
+use Incwadi\Core\Service\Cover\CoverShow;
+use Incwadi\Core\Service\Cover\CoverUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/book")
+ * @Route("/api/book")
  */
 class BookController extends AbstractController
 {
@@ -55,6 +52,66 @@ class BookController extends AbstractController
         $em->flush();
 
         return $this->json(['msg' => 'Cleaned up successfully!']);
+    }
+
+    /**
+     * @Route("/stats", methods={"GET"})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function stats(): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository(Book::class);
+
+        $all = count($repo->findAll());
+        $available = count($repo->findBy([
+            'sold' => false,
+            'removed' => false,
+            'reserved' => false,
+        ]));
+        $reserved = count($repo->findByReserved(true));
+        $sold = count($repo->findBySold(true));
+        $removed = count($repo->findByRemoved(true));
+
+        return $this->json([
+            'all' => $all,
+            'available' => $available,
+            'reserved' => $reserved,
+            'sold' => $sold,
+            'removed' => $removed,
+        ]);
+    }
+
+    /**
+     * @Route("/inventory/found/{book}", methods={"PUT"})
+     * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
+     */
+    public function inventoryFound(Book $book): JsonResponse
+    {
+        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory->setFound($book->getInventory() ? $inventory->getFound() - 1 : $inventory->getFound() + 1);
+
+        $book->setInventory($book->getInventory() ? null : true);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
+    }
+
+    /**
+     * @Route("/inventory/notfound/{book}", methods={"PUT"})
+     * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
+     */
+    public function inventoryNotFound(Book $book): JsonResponse
+    {
+        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory->setNotFound(false === $book->getInventory() ? $inventory->getNotFound() - 1 : $inventory->getNotFound() + 1);
+
+        $book->setInventory(false === $book->getInventory() ? null : false);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($book);
     }
 
     /**
@@ -123,12 +180,10 @@ class BookController extends AbstractController
         );
 
         $existingBook = $em->getRepository(Book::class)->findDuplicate($book);
-        if (null !== $existingBook) {
-            if ($existingBook->getId() !== $book->getId()) {
-                return $this->json([
-                'msg' => 'Book not saved, because it exists already!',
-                ], 409);
-            }
+        if (null !== $existingBook && $existingBook->getId() !== $book->getId()) {
+            return $this->json([
+            'msg' => 'Book not saved, because it exists already!',
+            ], 409);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -193,8 +248,6 @@ class BookController extends AbstractController
         }
 
         throw new \Error('Could not upload image ('.$form->get('cover')->getData()->getErrorMessage().').');
-
-        return $this->json(['msg' => 'Could not upload image.'], 500);
     }
 
     /**

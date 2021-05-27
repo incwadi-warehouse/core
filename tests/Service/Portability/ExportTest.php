@@ -1,17 +1,13 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Tests\Util;
+namespace Incwadi\Core\Tests\Service\Portability;
 
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Branch;
 use Incwadi\Core\Entity\Genre;
 use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Util\Export;
+use Incwadi\Core\Service\Portability\Export;
 use PHPUnit\Framework\TestCase;
 
 class ExportTest extends TestCase

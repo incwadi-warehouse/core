@@ -1,14 +1,10 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
-namespace Incwadi\Core\Tests\Controller;
+namespace Incwadi\Core\Tests\Controller\Public;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class BookPublicTest extends WebTestCase
+class BookTest extends WebTestCase
 {
     use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
 
@@ -18,7 +14,7 @@ class BookPublicTest extends WebTestCase
     {
         $this->buildClient();
 
-        $request = $this->request('/api/v1/branch/my', 'GET');
+        $request = $this->request('/api/branch/my', 'GET');
 
         $this->branch = $request->id;
     }
@@ -61,16 +57,8 @@ class BookPublicTest extends WebTestCase
             $this->assertIsString($request->books[0]->cond);
         }
 
-        // branch
-        $request = $this->request('/api/public/book/branch', 'GET');
-
-        $this->assertIsArray($request->branches);
-        $this->assertEquals(2, count((array) $request->branches[0]));
-        $this->assertIsInt($request->branches[0]->id);
-        $this->assertIsString($request->branches[0]->name);
-
         // recommendation
-        $request = $this->request('/api/public/book/recommendation/' . $this->branch, 'GET');
+        $request = $this->request('/api/public/book/recommendation/'.$this->branch, 'GET');
 
         $this->assertIsArray($request->books);
         $this->assertIsInt($request->counter);

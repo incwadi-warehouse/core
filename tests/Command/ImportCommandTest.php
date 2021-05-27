@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Command;
 
 use Incwadi\Core\Command\ImportCommand;
@@ -14,7 +10,7 @@ class ImportCommandTest extends TestCase
 {
     public function testExecute()
     {
-        $import = $this->getMockBuilder('\\Incwadi\\Core\\Util\\Import')
+        $import = $this->getMockBuilder('\\Incwadi\\Core\\Service\\Portability\\Import')
             ->disableOriginalConstructor()
             ->getMock();
 

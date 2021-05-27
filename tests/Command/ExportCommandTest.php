@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Tests\Command;
 
 use Incwadi\Core\Command\ExportCommand;
@@ -17,7 +13,7 @@ class ExportCommandTest extends TestCase
         $em = $this->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
-        $export = $this->getMockBuilder('\\Incwadi\\Core\\Util\\Export')
+        $export = $this->getMockBuilder('\\Incwadi\\Core\\Service\\Portability\\Export')
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Form;
 
 use Incwadi\Core\Entity\Reservation;
@@ -25,7 +21,7 @@ class ReservationType extends AbstractType
         $this->bookToStringTransformer = $bookToStringTransformer;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('collection', TextType::class)
@@ -39,7 +35,7 @@ class ReservationType extends AbstractType
             ->addModelTransformer($this->bookToStringTransformer);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,

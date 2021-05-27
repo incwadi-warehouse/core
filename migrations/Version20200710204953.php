@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;

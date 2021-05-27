@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This script is part of incwadi/core
- */
-
 namespace Incwadi\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -21,7 +17,7 @@ class AuthorRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    const LIMIT = 100;
+    public const LIMIT = 100;
 
     public function __construct(ManagerRegistry $registry)
     {
