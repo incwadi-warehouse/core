@@ -37,6 +37,7 @@ class BranchController extends AbstractController
     /**
      * @Route("/my", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
+     * Deprecated
      */
     public function my(): JsonResponse
     {
