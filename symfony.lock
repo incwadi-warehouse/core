@@ -1,6 +1,6 @@
 {
     "baldeweg/book-bundle": {
-        "version": "dev-master"
+        "version": "v0.1.4"
     },
     "baldeweg/extra-bundle": {
         "version": "v0.1.0"
