@@ -6,7 +6,7 @@ use Incwadi\Core\Entity\Book;
 
 class CoverShow
 {
-    private $path = __DIR__.'/../../data/';
+    private $path = __DIR__.'/../../../data/';
 
     public function setPath(string $path): void
     {

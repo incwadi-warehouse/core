@@ -98,7 +98,7 @@ class BookController extends AbstractController
         if ($width < 200) {
             $filename = $book->getId().'-s.jpg';
         }
-        $path = __DIR__.'/../../data/'.$filename;
+        $path = __DIR__.'/../../../data/'.$filename;
 
         if (!is_file($path)) {
             $path = __DIR__.'/../../Service/Cover/none.jpg';
