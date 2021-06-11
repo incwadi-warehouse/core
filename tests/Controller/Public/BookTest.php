@@ -27,7 +27,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request->books);
-        $this->assertEquals(16, count((array) $request->books[0]));
+        $this->assertEquals(13, count((array) $request->books[0]));
         $this->assertIsString($request->books[0]->id);
         $this->assertIsString($request->books[0]->currency);
         $this->assertIsString($request->books[0]->title);
@@ -43,15 +43,6 @@ class BookTest extends WebTestCase
         $this->assertIsString($request->books[0]->branchName);
         if (null !== $request->books[0]->branchOrdering) {
             $this->assertIsString($request->books[0]->branchOrdering);
-        }
-        if (null !== $request->books[0]->cover_s) {
-            $this->assertIsString($request->books[0]->cover_s);
-        }
-        if (null !== $request->books[0]->cover_m) {
-            $this->assertIsString($request->books[0]->cover_m);
-        }
-        if (null !== $request->books[0]->cover_l) {
-            $this->assertIsString($request->books[0]->cover_l);
         }
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);

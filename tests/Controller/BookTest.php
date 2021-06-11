@@ -251,8 +251,10 @@ class BookTest extends WebTestCase
         }
         $this->assertIsBool($request->books[0]->removed);
         $this->assertNull($request->books[0]->removedOn);
-        $this->assertFalse($request->books[0]->reserved);
-        $this->assertNull($request->books[0]->reservedAt);
+        $this->assertIsBool($request->books[0]->reserved);
+        if (null !== $request->books[0]->reservedAt) {
+            $this->assertIsInt($request->books[0]->reservedAt);
+        }
         $this->assertIsInt($request->books[0]->releaseYear);
         $this->assertEquals('paperback', $request->books[0]->type);
         if (null !== $request->books[0]->lendTo) {
