@@ -11,7 +11,7 @@ class CoverRemove
      */
     private const SIZES = ['s', 'm', 'l'];
 
-    private $path = __DIR__.'/../../data/';
+    private $path = __DIR__.'/../../../data/';
 
     public function setPath(string $path): void
     {

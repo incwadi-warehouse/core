@@ -17,7 +17,7 @@ class CoverUpload
      */
     private const QUALITY = 75;
 
-    private $path = __DIR__.'/../../data/';
+    private $path = __DIR__.'/../../../data/';
 
     public function __construct()
     {
