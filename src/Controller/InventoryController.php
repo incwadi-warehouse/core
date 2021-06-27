@@ -2,6 +2,7 @@
 
 namespace Incwadi\Core\Controller;
 
+use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Inventory;
 use Incwadi\Core\Form\InventoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -9,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Incwadi\Core\Entity\Book;
 
 /**
  * @Route("/api/inventory")
