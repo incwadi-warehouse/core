@@ -62,16 +62,29 @@ class BookController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Book::class);
+        $branch = $this->getUser()->getBranch();
 
-        $all = count($repo->findAll());
+        $all = count($repo->findByBranch($branch));
         $available = count($repo->findBy([
+            'branch' => $branch,
             'sold' => false,
             'removed' => false,
             'reserved' => false,
         ]));
-        $reserved = count($repo->findByReserved(true));
-        $sold = count($repo->findBySold(true));
-        $removed = count($repo->findByRemoved(true));
+        $reserved = count($repo->findBy([
+            'branch' => $branch,
+            'reserved' => true
+        ]));
+        $sold = count($repo->findBy(
+            [
+                'branch' => $branch,
+                'sold' => true
+            ]
+        ));
+        $removed = count($repo->findBy([
+            'branch' => $branch,
+            'removed' => true
+        ]));
 
         return $this->json([
             'all' => $all,
