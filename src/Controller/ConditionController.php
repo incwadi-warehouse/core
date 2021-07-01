@@ -23,7 +23,12 @@ class ConditionController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Condition::class)->findByBranch($this->getUser()->getBranch())
+            $this
+                ->getDoctrine()
+                ->getRepository(Condition::class)
+                ->findByBranch(
+                    $this->getUser()->getBranch()
+                )
         );
     }
 
@@ -34,8 +39,6 @@ class ConditionController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $condition = new Condition();
-        $condition->setBranch($this->getUser()->getBranch());
-
         $form = $this->createForm(ConditionType::class, $condition);
 
         $form->submit(
@@ -99,10 +102,6 @@ class ConditionController extends AbstractController
     public function delete(Condition $condition): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findByCond($condition);
-        foreach ($books as $book) {
-            $book->setCond(null);
-        }
         $em->remove($condition);
         $em->flush();
 

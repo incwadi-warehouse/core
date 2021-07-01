@@ -48,12 +48,14 @@ class InventoryController extends AbstractController
      */
     public function new(Request $request): JsonResponse
     {
-        $active = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $active = $this
+            ->getDoctrine()
+            ->getRepository(Inventory::class)
+            ->findActive(
+                $this->getUser()->getBranch()
+            );
 
         $inventory = new Inventory();
-        $inventory->setBranch(
-            $this->getUser()->getBranch()
-        );
         $form = $this->createForm(InventoryType::class, $inventory);
 
         $form->submit(

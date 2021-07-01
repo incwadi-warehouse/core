@@ -22,7 +22,12 @@ class StaffController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Staff::class)->findByBranch($this->getUser()->getBranch())
+            $this
+                ->getDoctrine()
+                ->getRepository(Staff::class)
+                ->findByBranch(
+                    $this->getUser()->getBranch()
+                )
         );
     }
 
@@ -42,9 +47,6 @@ class StaffController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $staff = new Staff();
-        $staff->setBranch(
-            $this->getUser()->getBranch()
-        );
         $form = $this->createForm(StaffType::class, $staff);
 
         $form->submit(

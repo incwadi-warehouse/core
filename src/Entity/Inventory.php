@@ -19,9 +19,9 @@ class Inventory implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Branch::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $branch;
+    private $branch = null;
 
     /**
      * @ORM\Column(type="datetime")
