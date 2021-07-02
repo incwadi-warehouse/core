@@ -97,14 +97,6 @@ class AuthorController extends AbstractController
     public function delete(Author $author): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findBy(
-            [
-                'author' => $author,
-            ]
-        );
-        foreach ($books as $book) {
-            $book->setAuthor(null);
-        }
         $em->remove($author);
         $em->flush();
 

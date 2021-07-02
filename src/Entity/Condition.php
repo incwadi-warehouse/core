@@ -27,9 +27,9 @@ class Condition implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Branch::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $branch;
+    private $branch = null;
 
     public function jsonSerialize()
     {

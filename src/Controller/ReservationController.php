@@ -50,9 +50,6 @@ class ReservationController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $reservation = new Reservation();
-        $reservation->setBranch(
-            $this->getUser()->getBranch()
-        );
         $form = $this->createForm(ReservationType::class, $reservation);
 
         $form->submit(
@@ -63,10 +60,6 @@ class ReservationController extends AbstractController
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($reservation->getBooks() as $book) {
-                $book->setReserved(true);
-                $book->setReservedAt(new \DateTime());
-            }
             $em->persist($reservation);
             $em->flush();
 
@@ -117,9 +110,6 @@ class ReservationController extends AbstractController
             }
         }
 
-        foreach ($reservation->getBooks() as $book) {
-            $book->setReservation(null);
-        }
         $em = $this->getDoctrine()->getManager();
         $em->remove($reservation);
         $em->flush();

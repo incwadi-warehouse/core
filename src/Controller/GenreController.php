@@ -45,8 +45,6 @@ class GenreController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $genre = new Genre();
-        $genre->setBranch($this->getUser()->getBranch());
-
         $form = $this->createForm(GenreType::class, $genre);
 
         $form->submit(
@@ -101,14 +99,6 @@ class GenreController extends AbstractController
     public function delete(Genre $genre): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $books = $em->getRepository(Book::class)->findBy(
-            [
-                'genre' => $genre,
-            ]
-        );
-        foreach ($books as $book) {
-            $book->setGenre(null);
-        }
         $em->remove($genre);
         $em->flush();
 
