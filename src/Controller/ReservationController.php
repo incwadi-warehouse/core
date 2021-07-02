@@ -100,7 +100,7 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/{id}", methods={"DELETE"})
-     * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === reservation.getBranch()")
+     * @Security("is_granted('ROLE_USER') and user.getBranch() === reservation.getBranch()")
      */
     public function delete(Reservation $reservation): JsonResponse
     {
