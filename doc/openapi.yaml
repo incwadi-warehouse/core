@@ -19,6 +19,8 @@ tags:
       description: Public
     - name: inventory
       description: Inventory
+    - name: format
+      description: Format
 
 paths:
     # User
@@ -395,6 +397,155 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
 
+    # format
+    /format/:
+        get:
+            tags:
+                - format
+            description: List all formats for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/FormatResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /format/new:
+        post:
+            tags:
+                - format
+            description: Create a new format
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/FormatRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FormatResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /format/{id}:
+        get:
+            tags:
+                - format
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the format
+                  schema:
+                    type: integer
+            description: Shows a format
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FormatResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - format
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the format
+                  schema:
+                    type: integer
+            description: Edit a format
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/FormatRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FormatResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - format
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the format
+                  schema:
+                    type: integer
+            description: Delete a format
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
 components:
     securitySchemes:
         bearerAuth:
@@ -466,6 +617,7 @@ components:
                             - cover_s
                             - cover_m
                             - cover_l
+                            - format
                         properties:
                             id:
                                 type: string
@@ -498,6 +650,8 @@ components:
                             cover_m:
                                 type: string
                             cover_l:
+                                type: string
+                            format:
                                 type: string
                 counter:
                     type: integer
@@ -613,6 +767,28 @@ components:
                     type: integer
                 notFound:
                     type: integer
+
+        FormatRequest:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+
+        FormatResponse:
+            type: object
+            required:
+                - id
+                - name
+                - branch
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                branch:
+                    type: object
 
         ErrorResponse:
             type: object

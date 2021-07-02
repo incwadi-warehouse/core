@@ -27,7 +27,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request->books);
-        $this->assertEquals(13, count((array) $request->books[0]));
+        $this->assertEquals(14, count((array) $request->books[0]));
         $this->assertIsString($request->books[0]->id);
         $this->assertIsString($request->books[0]->currency);
         $this->assertIsString($request->books[0]->title);

@@ -41,6 +41,7 @@ class BookType extends AbstractType
             ->add('cond')
             ->add('tags')
             ->add('recommendation')
+            ->add('format')
         ;
 
         $builder->get('added')

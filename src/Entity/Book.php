@@ -147,6 +147,11 @@ class Book implements \JsonSerializable
      */
     private $inventory = null;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="books")
+     */
+    private $format;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -181,6 +186,7 @@ class Book implements \JsonSerializable
             'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
             'recommendation' => $this->getRecommendation(),
             'inventory' => $this->getInventory(),
+            'format' => $this->getFormat()
         ];
     }
 
@@ -463,6 +469,18 @@ class Book implements \JsonSerializable
     public function setInventory(?bool $inventory): self
     {
         $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    public function getFormat(): ?Format
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?Format $format): self
+    {
+        $this->format = $format;
 
         return $this;
     }
