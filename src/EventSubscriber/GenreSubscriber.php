@@ -23,6 +23,9 @@ class GenreSubscriber implements EventSubscriberInterface
         if (!$genre instanceof Genre) {
             return;
         }
+        if(null !== $genre->getBranch()) {
+            return;
+        }
 
         $genre->setBranch(
             $this->token->getToken()->getUser()->getBranch()
