@@ -1,9 +1,12 @@
 security:
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
+    enable_authenticator_manager: false
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
 
-    encoders:
+    password_hashers:
         Incwadi\Core\Entity\User:
             algorithm: auto
 
@@ -17,6 +20,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
