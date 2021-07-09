@@ -94,14 +94,6 @@ class InventoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $em->getRepository(Book::class)->removeNotFoundBooks(
-                $this->getUser()->getBranch()
-            );
-
-            $em->getRepository(Book::class)->resetInventory(
-                $this->getUser()->getBranch()
-            );
-
             $em->flush();
 
             return $this->json($inventory);
