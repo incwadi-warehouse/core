@@ -2,13 +2,12 @@
 
 namespace Incwadi\Core\EventSubscriber;
 
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Entity\Book;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 class StaffSubscriber implements EventSubscriberInterface
 {

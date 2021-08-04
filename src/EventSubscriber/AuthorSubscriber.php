@@ -2,12 +2,12 @@
 
 namespace Incwadi\Core\EventSubscriber;
 
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Incwadi\Core\Entity\Author;
 use Incwadi\Core\Entity\Book;
-use Doctrine\ORM\EntityManagerInterface;
 
 class AuthorSubscriber implements EventSubscriberInterface
 {

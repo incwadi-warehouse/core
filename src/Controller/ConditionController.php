@@ -2,7 +2,6 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Condition;
 use Incwadi\Core\Form\ConditionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

@@ -3,7 +3,6 @@
 namespace Incwadi\Core\Controller;
 
 use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Form\AuthorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

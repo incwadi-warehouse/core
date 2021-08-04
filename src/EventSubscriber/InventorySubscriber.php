@@ -2,13 +2,13 @@
 
 namespace Incwadi\Core\EventSubscriber;
 
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Incwadi\Core\Entity\Inventory;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Inventory;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 class InventorySubscriber implements EventSubscriberInterface
 {
@@ -37,7 +37,7 @@ class InventorySubscriber implements EventSubscriberInterface
             return;
         }
 
-        if(null === $inventory->getEndedAt()) {
+        if (null === $inventory->getEndedAt()) {
             return;
         }
 
@@ -54,7 +54,7 @@ class InventorySubscriber implements EventSubscriberInterface
     {
         return [
             Events::prePersist,
-            Events::preUpdate
+            Events::preUpdate,
         ];
     }
 }

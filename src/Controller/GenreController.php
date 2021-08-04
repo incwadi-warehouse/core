@@ -2,7 +2,6 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Genre;
 use Incwadi\Core\Form\GenreType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

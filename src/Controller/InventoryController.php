@@ -2,7 +2,6 @@
 
 namespace Incwadi\Core\Controller;
 
-use Incwadi\Core\Entity\Book;
 use Incwadi\Core\Entity\Inventory;
 use Incwadi\Core\Form\InventoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

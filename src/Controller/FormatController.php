@@ -24,8 +24,8 @@ class FormatController extends AbstractController
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Format::class)->findBy(
-                ['branch'=>$this->getUser()->getBranch()],
-                ['name'=>'ASC']
+                ['branch' => $this->getUser()->getBranch()],
+                ['name' => 'ASC']
             ),
         );
     }

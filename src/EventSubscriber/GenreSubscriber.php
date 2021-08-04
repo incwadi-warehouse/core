@@ -2,13 +2,13 @@
 
 namespace Incwadi\Core\EventSubscriber;
 
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Incwadi\Core\Entity\Genre;
 use Incwadi\Core\Entity\Book;
+use Incwadi\Core\Entity\Genre;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 class GenreSubscriber implements EventSubscriberInterface
 {
@@ -23,7 +23,7 @@ class GenreSubscriber implements EventSubscriberInterface
         if (!$genre instanceof Genre) {
             return;
         }
-        if(null !== $genre->getBranch()) {
+        if (null !== $genre->getBranch()) {
             return;
         }
 

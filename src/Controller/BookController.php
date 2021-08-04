@@ -73,17 +73,17 @@ class BookController extends AbstractController
         ]));
         $reserved = count($repo->findBy([
             'branch' => $branch,
-            'reserved' => true
+            'reserved' => true,
         ]));
         $sold = count($repo->findBy(
             [
                 'branch' => $branch,
-                'sold' => true
+                'sold' => true,
             ]
         ));
         $removed = count($repo->findBy([
             'branch' => $branch,
-            'removed' => true
+            'removed' => true,
         ]));
 
         return $this->json([

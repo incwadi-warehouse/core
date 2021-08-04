@@ -186,7 +186,7 @@ class Book implements \JsonSerializable
             'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
             'recommendation' => $this->getRecommendation(),
             'inventory' => $this->getInventory(),
-            'format' => $this->getFormat()
+            'format' => $this->getFormat(),
         ];
     }
 

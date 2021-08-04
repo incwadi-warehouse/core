@@ -2,9 +2,9 @@
 
 namespace Incwadi\Core\Repository;
 
-use Incwadi\Core\Entity\Format;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Incwadi\Core\Entity\Format;
 
 /**
  * @method Format|null find($id, $lockMode = null, $lockVersion = null)
