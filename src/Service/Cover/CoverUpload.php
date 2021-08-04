@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Service\Cover;
+namespace App\Service\Cover;
 
-use Incwadi\Core\Entity\Book;
+use App\Entity\Book;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CoverUpload

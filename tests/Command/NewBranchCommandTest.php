@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Tests\Command;
+namespace App\Tests\Command;
 
-use Incwadi\Core\Command\NewBranchCommand;
+use App\Command\NewBranchCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Incwadi\Core\EventSubscriber;
+namespace App\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Book;
+use App\Entity\Author;
+use App\Entity\Book;
 
 class AuthorSubscriber implements EventSubscriberInterface
 {

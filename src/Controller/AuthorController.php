@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Form\AuthorType;
+use App\Entity\Author;
+use App\Form\AuthorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Form;
+namespace App\Form;
 
-use Incwadi\Core\Entity\Condition;
+use App\Entity\Condition;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Incwadi\Core\Service\Portability;
+namespace App\Service\Portability;
 
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Entity\Staff;
+use App\Entity\Author;
+use App\Entity\Branch;
+use App\Entity\Genre;
+use App\Entity\Staff;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Tests\Command;
+namespace App\Tests\Command;
 
-use Incwadi\Core\Command\ExportCommand;
+use App\Command\ExportCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 
@@ -13,7 +13,7 @@ class ExportCommandTest extends TestCase
         $em = $this->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
-        $export = $this->getMockBuilder('\\Incwadi\\Core\\Service\\Portability\\Export')
+        $export = $this->getMockBuilder('\\App\\Service\\Portability\\Export')
             ->disableOriginalConstructor()
             ->getMock();
 

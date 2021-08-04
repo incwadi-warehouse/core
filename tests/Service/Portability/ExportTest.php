@@ -1,13 +1,13 @@
 <?php
 
-namespace Incwadi\Core\Tests\Service\Portability;
+namespace App\Tests\Service\Portability;
 
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Service\Portability\Export;
+use App\Entity\Author;
+use App\Entity\Book;
+use App\Entity\Branch;
+use App\Entity\Genre;
+use App\Entity\Staff;
+use App\Service\Portability\Export;
 use PHPUnit\Framework\TestCase;
 
 class ExportTest extends TestCase

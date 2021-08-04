@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Tests\Command;
+namespace App\Tests\Command;
 
-use Incwadi\Core\Command\ImportCommand;
+use App\Command\ImportCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 
@@ -10,7 +10,7 @@ class ImportCommandTest extends TestCase
 {
     public function testExecute()
     {
-        $import = $this->getMockBuilder('\\Incwadi\\Core\\Service\\Portability\\Import')
+        $import = $this->getMockBuilder('\\App\\Service\\Portability\\Import')
             ->disableOriginalConstructor()
             ->getMock();
 

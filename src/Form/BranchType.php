@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Form;
+namespace App\Form;
 
-use Incwadi\Core\Entity\Branch;
+use App\Entity\Branch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

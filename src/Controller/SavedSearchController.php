@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\SavedSearch;
+use App\Entity\SavedSearch;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Incwadi\Core\Repository\SavedSearchRepository;
+use App\Repository\SavedSearchRepository;
 
 /**
  * @ORM\Entity(repositoryClass=SavedSearchRepository::class)

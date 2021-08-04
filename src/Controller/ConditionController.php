@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Condition;
-use Incwadi\Core\Form\ConditionType;
+use App\Entity\Condition;
+use App\Form\ConditionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

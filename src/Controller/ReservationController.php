@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Reservation;
-use Incwadi\Core\Form\ReservationType;
+use App\Entity\Reservation;
+use App\Form\ReservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

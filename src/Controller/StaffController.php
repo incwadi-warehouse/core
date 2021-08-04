@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Form\StaffType;
+use App\Entity\Staff;
+use App\Form\StaffType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

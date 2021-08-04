@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Controller\Public;
+namespace App\Controller\Public;
 
-use Incwadi\Core\Entity\Branch;
+use App\Entity\Branch;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

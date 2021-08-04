@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Inventory;
-use Incwadi\Core\Form\InventoryType;
+use App\Entity\Inventory;
+use App\Form\InventoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

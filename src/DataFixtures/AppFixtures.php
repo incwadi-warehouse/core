@@ -1,14 +1,14 @@
 <?php
 
-namespace Incwadi\Core\DataFixtures;
+namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Entity\User;
+use App\Entity\Author;
+use App\Entity\Book;
+use App\Entity\Branch;
+use App\Entity\Genre;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture

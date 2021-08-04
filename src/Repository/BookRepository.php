@@ -1,13 +1,13 @@
 <?php
 
-namespace Incwadi\Core\Repository;
+namespace App\Repository;
 
 use Baldeweg\Bundle\BookBundle\Search\Find;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\Cover\CoverRemove;
+use App\Entity\Book;
+use App\Entity\Branch;
+use App\Service\Cover\CoverRemove;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -144,9 +144,9 @@ class BookRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        // $qb->delete('Incwadi:Book', 'b');
+        // $qb->delete('App:Book', 'b');
         $qb->select('b');
-        $qb->from('Incwadi:Book', 'b');
+        $qb->from('App:Book', 'b');
         $qb->where(
             $qb->expr()->orX(
                 $qb->expr()->lte('b.soldOn', ':date'),
@@ -172,9 +172,9 @@ class BookRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        // $qb->delete('Incwadi:Book', 'b');
+        // $qb->delete('App:Book', 'b');
         $qb->select('b');
-        $qb->from('Incwadi:Book', 'b');
+        $qb->from('App:Book', 'b');
         $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->orX(

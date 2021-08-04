@@ -1,11 +1,11 @@
 <?php
 
-namespace Incwadi\Core\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Incwadi\Core\Repository\TagRepository;
+use App\Repository\TagRepository;
 
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)

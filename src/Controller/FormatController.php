@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Format;
-use Incwadi\Core\Form\FormatType;
+use App\Entity\Book;
+use App\Entity\Format;
+use App\Form\FormatType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

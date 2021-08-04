@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Controller\Public;
+namespace App\Controller\Public;
 
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Service\Cover\CoverShow;
+use App\Entity\Book;
+use App\Entity\Branch;
+use App\Service\Cover\CoverShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;

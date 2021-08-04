@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Incwadi\Core\Repository\UserRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -49,12 +49,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Incwadi\\Core\\": "src/"
+      "App\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Incwadi\\Core\\Tests\\": "tests/"
+      "App\\Tests\\": "tests/"
     }
   },
   "replace": {

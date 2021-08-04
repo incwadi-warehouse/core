@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Repository;
+namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Incwadi\Core\Entity\Author;
+use App\Entity\Author;
 
 /**
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)
@@ -58,7 +58,7 @@ class AuthorRepository extends ServiceEntityRepository
                 'a.firstname'
             )
         );
-        $qb->from('Incwadi:Author', 'a');
+        $qb->from('App:Author', 'a');
 
         $qb->where(
             $qb->expr()->orX(

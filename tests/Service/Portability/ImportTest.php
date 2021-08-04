@@ -1,19 +1,19 @@
 <?php
 
-namespace Incwadi\Core\Tests\Service\Portability;
+namespace App\Tests\Service\Portability;
 
-use Incwadi\Core\Entity\Author;
-use Incwadi\Core\Entity\Branch;
-use Incwadi\Core\Entity\Genre;
-use Incwadi\Core\Entity\Staff;
-use Incwadi\Core\Service\Portability\Import;
+use App\Entity\Author;
+use App\Entity\Branch;
+use App\Entity\Genre;
+use App\Entity\Staff;
+use App\Service\Portability\Import;
 use PHPUnit\Framework\TestCase;
 
 class ImportTest extends TestCase
 {
     public function testImport()
     {
-        $branch = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\BranchRepository')
+        $branch = $this->getMockBuilder('\\App\\Repository\\BranchRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $branch
@@ -22,7 +22,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $author = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\AuthorRepository')
+        $author = $this->getMockBuilder('\\App\\Repository\\AuthorRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $author
@@ -31,7 +31,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneBy'))
             ->willReturn(null);
 
-        $genre = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\GenreRepository')
+        $genre = $this->getMockBuilder('\\App\\Repository\\GenreRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $genre
@@ -40,7 +40,7 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $staff = $this->getMockBuilder('\\Incwadi\\Core\\Repository\\StaffRepository')
+        $staff = $this->getMockBuilder('\\App\\Repository\\StaffRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $staff
@@ -75,7 +75,7 @@ class ImportTest extends TestCase
 
         $this->assertIsArray($books);
 
-        $this->assertTrue($books[0] instanceof \Incwadi\Core\Entity\Book);
+        $this->assertTrue($books[0] instanceof \App\Entity\Book);
         $this->assertEquals('branch 1', $books[0]->getBranch()->getName());
         $this->assertTrue($books[0]->getAdded() instanceof \DateTime);
         $this->assertEquals('The Title', $books[0]->getTitle());

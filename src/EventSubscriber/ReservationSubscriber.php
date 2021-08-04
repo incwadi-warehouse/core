@@ -1,12 +1,12 @@
 <?php
 
-namespace Incwadi\Core\EventSubscriber;
+namespace App\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Incwadi\Core\Entity\Reservation;
+use App\Entity\Reservation;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ReservationSubscriber implements EventSubscriberInterface

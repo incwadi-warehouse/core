@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Form;
+namespace App\Form;
 
-use Incwadi\Core\Entity\Staff;
+use App\Entity\Staff;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

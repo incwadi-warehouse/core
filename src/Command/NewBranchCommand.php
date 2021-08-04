@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Command;
+namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Incwadi\Core\Entity\Branch;
+use App\Entity\Branch;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

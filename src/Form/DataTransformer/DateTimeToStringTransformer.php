@@ -1,6 +1,6 @@
 <?php
 
-namespace Incwadi\Core\Form\DataTransformer;
+namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 

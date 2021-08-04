@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Command;
+namespace App\Command;
 
-use Incwadi\Core\Service\Portability\Import;
+use App\Service\Portability\Import;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Incwadi\Core\Form;
+namespace App\Form;
 
-use Incwadi\Core\Entity\Author;
+use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Incwadi\Core\Service\Portability;
+namespace App\Service\Portability;
 
 interface ImportInterface
 {

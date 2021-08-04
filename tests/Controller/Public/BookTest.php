@@ -1,6 +1,6 @@
 <?php
 
-namespace Incwadi\Core\Tests\Controller\Public;
+namespace App\Tests\Controller\Public;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

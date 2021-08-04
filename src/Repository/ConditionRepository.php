@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Repository;
+namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Incwadi\Core\Entity\Condition;
+use App\Entity\Condition;
 
 /**
  * @method Condition|null find($id, $lockMode = null, $lockVersion = null)

@@ -7,13 +7,13 @@ security:
         ROLE_ADMIN: ROLE_USER
 
     password_hashers:
-        Incwadi\Core\Entity\User:
+        App\Entity\User:
             algorithm: auto
 
     providers:
         app_user_provider:
             entity:
-                class: Incwadi\Core\Entity\User
+                class: App\Entity\User
                 property: username
 
     firewalls:

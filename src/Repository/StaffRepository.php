@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Repository;
+namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Incwadi\Core\Entity\Staff;
+use App\Entity\Staff;
 
 /**
  * @method Staff|null find($id, $lockMode = null, $lockVersion = null)

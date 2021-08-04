@@ -1,14 +1,14 @@
 <?php
 
-namespace Incwadi\Core\Controller;
+namespace App\Controller;
 
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Entity\Inventory;
-use Incwadi\Core\Form\BookCoverType;
-use Incwadi\Core\Form\BookType;
-use Incwadi\Core\Service\Cover\CoverRemove;
-use Incwadi\Core\Service\Cover\CoverShow;
-use Incwadi\Core\Service\Cover\CoverUpload;
+use App\Entity\Book;
+use App\Entity\Inventory;
+use App\Form\BookCoverType;
+use App\Form\BookType;
+use App\Service\Cover\CoverRemove;
+use App\Service\Cover\CoverShow;
+use App\Service\Cover\CoverUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

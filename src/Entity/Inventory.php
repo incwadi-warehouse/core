@@ -1,9 +1,9 @@
 <?php
 
-namespace Incwadi\Core\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Incwadi\Core\Repository\InventoryRepository;
+use App\Repository\InventoryRepository;
 
 /**
  * @ORM\Entity(repositoryClass=InventoryRepository::class)

@@ -1,10 +1,10 @@
 <?php
 
-namespace Incwadi\Core\Command;
+namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Incwadi\Core\Entity\Book;
-use Incwadi\Core\Service\Portability\Export;
+use App\Entity\Book;
+use App\Service\Portability\Export;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
