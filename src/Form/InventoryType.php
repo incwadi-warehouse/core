@@ -11,11 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InventoryType extends AbstractType
 {
-    private DateTimeToStringTransformer $dateTimeToStringTransformer;
-
-    public function __construct(DateTimeToStringTransformer $dateTimeToStringTransformer)
+    public function __construct(private DateTimeToStringTransformer $dateTimeToStringTransformer)
     {
-        $this->dateTimeToStringTransformer = $dateTimeToStringTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

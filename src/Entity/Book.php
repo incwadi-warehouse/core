@@ -4,131 +4,81 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\BookRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 
-/**
- * @ORM\Entity(repositoryClass=BookRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: BookRepository::class)]
 class Book implements \JsonSerializable
 {
-    public const TYPES = ['paperback', 'hardcover'];
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="guid")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue(strategy: 'UUID')]
+    #[\Doctrine\ORM\Mapping\Column(type: 'guid')]
     private string $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
     private ?Branch $branch = null;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime')]
     private \DateTime $added;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: '255')]
     private string $title = '';
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'text', nullable: true)]
     private $shortDescription;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books", cascade={"persist"})
-     * @Assert\NotBlank()
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Author::class, inversedBy: 'books', cascade: ['persist'])]
     private ?Author $author = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="books")
-     * Assert\NotBlank()
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Genre::class, inversedBy: 'books')]
     private ?Genre $genre = null;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
-     * @Assert\NotBlank()
-     * @Assert\Type(type="float")
-     * @Assert\GreaterThanOrEqual(0.00)
-     */
+    #[\Symfony\Component\Validator\Constraints\Type(type: "float")]
+    #[\Symfony\Component\Validator\Constraints\GreaterThanOrEqual(0.00)]
+    #[\Doctrine\ORM\Mapping\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $price = 0.00;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
     private bool $sold = false;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $soldOn = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
     private bool $removed = false;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $removedOn = null;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
     private bool $reserved = false;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $reservedAt = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\Length(min=4, max=4)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\Length(min: 4, max: 4)]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private int $releaseYear;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Condition::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Condition::class)]
+    #[\Doctrine\ORM\Mapping\JoinColumn(nullable: true)]
     private ?Condition $cond = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="books")
-     */
+    #[\Doctrine\ORM\Mapping\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
     private $tags;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="books")
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Reservation::class, inversedBy: 'books')]
     private $reservation;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
     private bool $recommendation = false;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean', nullable: true)]
     private $inventory = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="books")
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
     private $format;
 
     public function __construct()

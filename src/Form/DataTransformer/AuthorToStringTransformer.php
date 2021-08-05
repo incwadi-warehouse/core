@@ -8,11 +8,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class AuthorToStringTransformer implements DataTransformerInterface
 {
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function transform($author): string

@@ -2,28 +2,33 @@
 
 declare(strict_types=1);
 
-/*
- * This script is part of incwadi/core
- */
-
 use Rector\Core\Configuration\Option;
+use Rector\Php74\Rector\Property\TypedPropertyRector;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Symfony\Set\SymfonySetList;
+use Rector\PHPUnit\Set\PHPUnitSetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
+use Rector\Doctrine\Set\DoctrineSetList;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
     // Define what rule sets will be applied
-    $parameters->set(Option::SETS, [
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        SetList::DEAD_CODE,
-        SetList::PHP_80,
-        SetList::SYMFONY_52,
-        SetList::PHPUNIT_80,
-    ]);
+    $containerConfigurator->import(SetList::DEAD_CODE);
+    $containerConfigurator->import(SetList::CODE_QUALITY);
+    $containerConfigurator->import(SetList::CODING_STYLE);
+    $containerConfigurator->import(SetList::PHP_80);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_50_TYPES);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_52);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_52_VALIDATOR_ATTRIBUTES);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_CODE_QUALITY);
+    $containerConfigurator->import(SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_ORM_29);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_COMMON_20);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_CODE_QUALITY);
+    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_80);
 
     // get services (needed for register a single rule)
     $services = $containerConfigurator->services();

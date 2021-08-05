@@ -2,61 +2,52 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\BranchRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 
-/**
- * @ORM\Entity(repositoryClass=BranchRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: BranchRepository::class)]
 class Branch implements \JsonSerializable
 {
+    /**
+     * @var string[]
+     */
     public const CURRENCIES = ['EUR', 'USD'];
+
+    /**
+     * @var string[]
+     */
     public const ORDER_BY = ['name', 'books'];
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private string $name = '';
 
-    /**
-     * @ORM\Column(type="decimal", precision=5, scale=2)
-     * @Assert\NotBlank()
-     * @Assert\Type(type="float")
-     * @Assert\GreaterThanOrEqual(0.00)
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Symfony\Component\Validator\Constraints\Type(type: 'float')]
+    #[\Symfony\Component\Validator\Constraints\GreaterThanOrEqual(value: '0.00')]
+    #[\Doctrine\ORM\Mapping\Column(type: 'decimal', precision: 5, scale: 2)]
     private float $steps = 0.00;
 
-    /**
-     * @ORM\Column(type="string", length=3)
-     * @Assert\Choice(choices=Branch::CURRENCIES)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\Choice(choices: Branch::CURRENCIES)]
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 3)]
     private $currency = 'EUR';
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'text', nullable: true)]
     private $ordering;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Choice(choices=Branch::ORDER_BY)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\Choice(choices: Branch::ORDER_BY)]
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private $orderBy = 'name';
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
     private $public = false;
 
     public function jsonSerialize()

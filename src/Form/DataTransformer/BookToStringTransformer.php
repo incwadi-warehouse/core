@@ -9,13 +9,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class BookToStringTransformer implements DataTransformerInterface
 {
-    private EntityManagerInterface $em;
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
+    public function __construct(private EntityManagerInterface $em, private TokenStorageInterface $tokenStorage)
     {
-        $this->em = $em;
-        $this->tokenStorage = $tokenStorage;
     }
 
     public function transform($books): string

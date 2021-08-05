@@ -2,45 +2,31 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\InventoryRepository;
 
-/**
- * @ORM\Entity(repositoryClass=InventoryRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: InventoryRepository::class)]
 class Inventory implements \JsonSerializable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $branch = null;
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[\Doctrine\ORM\Mapping\JoinColumn]
+    private $branch;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime')]
     private $startedAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $endedAt = null;
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
+    private $endedAt;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private $found = 0;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private $notFound = 0;
 
     public function __construct()
@@ -54,7 +40,7 @@ class Inventory implements \JsonSerializable
             'id' => $this->getId(),
             'branch' => $this->getBranch(),
             'startedAt' => $this->getStartedAt()->getTimestamp(),
-            'endedAt' => $this->getEndedAt() ? $this->getEndedAt()->getTimestamp() : null,
+            'endedAt' => $this->getEndedAt() !== null ? $this->getEndedAt()->getTimestamp() : null,
             'found' => $this->getFound(),
             'notFound' => $this->getNotFound(),
         ];

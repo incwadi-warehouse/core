@@ -7,15 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/public/branch")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/public/branch')]
 class BranchController extends AbstractController
 {
-    /**
-     * @Route("/", methods={"GET"})
-     */
-    public function branch(): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    public function branch() : JsonResponse
     {
         $branches = $this
                 ->getDoctrine()

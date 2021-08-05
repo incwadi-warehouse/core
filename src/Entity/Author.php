@@ -2,32 +2,24 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\AuthorRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 
-/**
- * @ORM\Entity(repositoryClass=AuthorRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: AuthorRepository::class)]
 class Author implements \JsonSerializable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotNull]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private string $firstname = '';
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private string $surname = '';
 
     public function jsonSerialize()

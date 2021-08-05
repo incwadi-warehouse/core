@@ -11,19 +11,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class BooksDeleteCommand extends Command
 {
-    private EntityManagerInterface $em;
+    protected static $defaultName = 'books:delete';
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
         parent::__construct();
-        $this->em = $em;
     }
 
     protected function configure(): void
     {
-        $this
-            ->setName('books:delete')
-            ->setDescription('Deletes the books from the database.')
+        $this->setDescription('Deletes the books from the database.')
             ->setHelp('Deletes books')
         ;
     }

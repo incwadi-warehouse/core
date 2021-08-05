@@ -4,36 +4,29 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\GenreRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 
-/**
- * @ORM\Entity(repositoryClass=GenreRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: GenreRepository::class)]
 class Genre implements \JsonSerializable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private string $name = '';
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
     private $branch;
 
     /**
-     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="genre")
+     * @var \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book>
      */
+    #[\Doctrine\ORM\Mapping\OneToMany(targetEntity: Book::class, mappedBy: 'genre')]
     private $books;
 
     public function __construct()
@@ -88,7 +81,10 @@ class Genre implements \JsonSerializable
         return $this->books;
     }
 
-    public function addBook(Book $book): self
+    /**
+     * @param \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book> $book
+     */
+    public function addBook(array|\Doctrine\Common\Collections\Collection $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;

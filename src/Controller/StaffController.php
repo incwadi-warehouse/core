@@ -10,16 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/staff")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/staff')]
 class StaffController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    public function index() : JsonResponse
     {
         return $this->json(
             $this
@@ -32,19 +30,19 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function show(Staff $staff): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    public function show(Staff $staff) : JsonResponse
     {
         return $this->json($staff);
     }
 
     /**
-     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function new(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    public function new(Request $request) : JsonResponse
     {
         $staff = new Staff();
         $form = $this->createForm(StaffType::class, $staff);
@@ -69,10 +67,10 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function edit(Request $request, Staff $staff): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    public function edit(Request $request, Staff $staff) : JsonResponse
     {
         $form = $this->createForm(StaffType::class, $staff);
 
@@ -95,10 +93,10 @@ class StaffController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function delete(Staff $staff): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    public function delete(Staff $staff) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($staff);

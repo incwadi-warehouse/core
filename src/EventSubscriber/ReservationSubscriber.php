@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ReservationSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private TokenStorageInterface $token, private EntityManagerInterface $em)
+    public function __construct(private TokenStorageInterface $token)
     {
     }
 

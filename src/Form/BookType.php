@@ -12,14 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
-    private AuthorToStringTransformer $authorToStringTransformer;
-
-    private DateTimeToStringTransformer $dateTimeToStringTransformer;
-
-    public function __construct(AuthorToStringTransformer $authorToStringTransformer, DateTimeToStringTransformer $dateTimeToStringTransformer)
+    public function __construct(private AuthorToStringTransformer $authorToStringTransformer, private DateTimeToStringTransformer $dateTimeToStringTransformer)
     {
-        $this->authorToStringTransformer = $authorToStringTransformer;
-        $this->dateTimeToStringTransformer = $dateTimeToStringTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

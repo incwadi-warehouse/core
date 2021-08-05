@@ -10,16 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/genre")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/genre')]
 class GenreController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    public function index() : JsonResponse
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Genre::class)->findDemanded(
@@ -29,19 +27,19 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
-    public function show(Genre $genre): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    public function show(Genre $genre) : JsonResponse
     {
         return $this->json($genre);
     }
 
     /**
-     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function new(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    public function new(Request $request) : JsonResponse
     {
         $genre = new Genre();
         $form = $this->createForm(GenreType::class, $genre);
@@ -66,10 +64,10 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
-    public function edit(Request $request, Genre $genre): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    public function edit(Request $request, Genre $genre) : JsonResponse
     {
         $form = $this->createForm(GenreType::class, $genre);
 
@@ -92,10 +90,10 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
-    public function delete(Genre $genre): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    public function delete(Genre $genre) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($genre);

@@ -2,31 +2,23 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\StaffRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 
-/**
- * @ORM\Entity(repositoryClass=StaffRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: StaffRepository::class)]
 class Staff implements \JsonSerializable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[\Symfony\Component\Validator\Constraints\NotBlank]
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private string $name = '';
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
     private $branch;
 
     public function jsonSerialize()

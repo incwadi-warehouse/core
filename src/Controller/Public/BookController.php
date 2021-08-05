@@ -12,15 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/public/book")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/public/book')]
 class BookController extends AbstractController
 {
-    /**
-     * @Route("/find", methods={"GET"})
-     */
-    public function find(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/find', methods: ['GET'])]
+    public function find(Request $request) : JsonResponse
     {
         return $this->json(
             $this
@@ -36,10 +32,8 @@ class BookController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/recommendation/{branch}", methods={"GET"})
-     */
-    public function recommendation(Branch $branch, CoverShow $cover): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/recommendation/{branch}', methods: ['GET'])]
+    public function recommendation(Branch $branch, CoverShow $cover) : JsonResponse
     {
         if (!$branch->getPublic()) {
             return $this->json(['books' => [], 'counter' => 0]);
@@ -72,7 +66,7 @@ class BookController extends AbstractController
                     'type' => $book->getType(),
                     'branchName' => $book->getBranch()->getName(),
                     'branchOrdering' => $book->getBranch()->getOrdering(),
-                    'cond' => $book->getCond() ? $book->getCond()->getName() : null,
+                    'cond' => $book->getCond() !== null ? $book->getCond()->getName() : null,
                 ],
                 $cover->show($book)
             );
@@ -84,10 +78,8 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/cover/{book}_{dimensions}.jpg", methods={"GET"})
-     */
-    public function image(Book $book, string $dimensions): BinaryFileResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/cover/{book}_{dimensions}.jpg', methods: ['GET'])]
+    public function image(Book $book, string $dimensions) : BinaryFileResponse
     {
         $width = (int) explode('x', $dimensions)[0];
         $filename = $book->getId().'-l.jpg';

@@ -10,36 +10,32 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/author")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/author')]
 class AuthorController extends AbstractController
 {
     /**
-     * @Route("/find", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function find(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/find', methods: ['GET'])]
+    public function find(Request $request) : JsonResponse
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Author::class)->findDemanded($request->get('term'))
         );
     }
-
     /**
-     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function show(Author $author): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    public function show(Author $author) : JsonResponse
     {
         return $this->json($author);
     }
-
     /**
-     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function new(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    public function new(Request $request) : JsonResponse
     {
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
@@ -64,10 +60,10 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function edit(Request $request, Author $author): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    public function edit(Request $request, Author $author) : JsonResponse
     {
         $form = $this->createForm(AuthorType::class, $author);
 
@@ -90,10 +86,10 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function delete(Author $author): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    public function delete(Author $author) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($author);

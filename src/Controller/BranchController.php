@@ -10,16 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/branch")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/branch')]
 class BranchController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    public function index() : JsonResponse
     {
         return $this->json(
             $this->isGranted('ROLE_ADMIN') ?
@@ -31,19 +29,19 @@ class BranchController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function show(Branch $branch): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    public function show(Branch $branch) : JsonResponse
     {
         return $this->json($branch);
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === branch")
      */
-    public function edit(Request $request, Branch $branch): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    public function edit(Request $request, Branch $branch) : JsonResponse
     {
         $form = $this->createForm(BranchType::class, $branch);
 

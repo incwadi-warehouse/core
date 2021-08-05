@@ -12,13 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
-    private DateTimeToStringTransformer $dateTimeToStringTransformer;
-    private BookToStringTransformer $bookToStringTransformer;
-
-    public function __construct(DateTimeToStringTransformer $dateTimeToStringTransformer, BookToStringTransformer $bookToStringTransformer)
+    public function __construct(private DateTimeToStringTransformer $dateTimeToStringTransformer, private BookToStringTransformer $bookToStringTransformer)
     {
-        $this->dateTimeToStringTransformer = $dateTimeToStringTransformer;
-        $this->bookToStringTransformer = $bookToStringTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -17,11 +17,8 @@ use Symfony\Component\Serializer\Serializer;
  */
 class Import implements ImportInterface
 {
-    protected EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(protected EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function import(string $data): array

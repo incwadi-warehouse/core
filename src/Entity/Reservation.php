@@ -4,45 +4,34 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\ReservationRepository;
 
-/**
- * @ORM\Entity(repositoryClass=ReservationRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation implements \JsonSerializable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="guid")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue(strategy: 'UUID')]
+    #[\Doctrine\ORM\Mapping\Column(type: 'guid')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $branch = null;
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[\Doctrine\ORM\Mapping\JoinColumn]
+    private $branch;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
     private $collection;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'text', nullable: true)]
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="reservation")
+     * @var \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book>
      */
+    #[\Doctrine\ORM\Mapping\OneToMany(targetEntity: Book::class, mappedBy: 'reservation')]
     private $books;
 
     public function __construct()
@@ -124,7 +113,10 @@ class Reservation implements \JsonSerializable
         return $this->books;
     }
 
-    public function addBook(Book $book): self
+    /**
+     * @param \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book> $book
+     */
+    public function addBook(array|\Doctrine\Common\Collections\Collection $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;

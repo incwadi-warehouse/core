@@ -4,34 +4,27 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping;
 use App\Repository\FormatRepository;
 
-/**
- * @ORM\Entity(repositoryClass=FormatRepository::class)
- */
+#[\Doctrine\ORM\Mapping\Entity(repositoryClass: FormatRepository::class)]
 class Format implements \JsonSerializable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[\Doctrine\ORM\Mapping\Id]
+    #[\Doctrine\ORM\Mapping\GeneratedValue]
+    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Branch::class)
-     */
+    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
     private $branch;
 
     /**
-     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="format")
+     * @var \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book>
      */
+    #[\Doctrine\ORM\Mapping\OneToMany(targetEntity: Book::class, mappedBy: 'format')]
     private $books;
 
     public function __construct()
@@ -85,7 +78,10 @@ class Format implements \JsonSerializable
         return $this->books;
     }
 
-    public function addBook(Book $book): self
+    /**
+     * @param \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book> $book
+     */
+    public function addBook(array|\Doctrine\Common\Collections\Collection $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
@@ -97,10 +93,8 @@ class Format implements \JsonSerializable
 
     public function removeBook(Book $book): self
     {
-        if ($this->books->removeElement($book)) {
-            if ($book->getFormat() === $this) {
-                $book->setFormat(null);
-            }
+        if ($this->books->removeElement($book) && $book->getFormat() === $this) {
+            $book->setFormat(null);
         }
 
         return $this;

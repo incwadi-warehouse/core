@@ -12,19 +12,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class NewBranchCommand extends Command
 {
-    private EntityManagerInterface $em;
+    protected static $defaultName = 'branch:new';
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
         parent::__construct();
-        $this->em = $em;
     }
 
     protected function configure(): void
     {
-        $this
-            ->setName('branch:new')
-            ->setDescription('Creates a new branch.')
+        $this->setDescription('Creates a new branch.')
             ->setHelp('This command creates a new branch.')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the branch')
         ;

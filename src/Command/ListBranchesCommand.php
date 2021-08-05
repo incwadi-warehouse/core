@@ -11,19 +11,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ListBranchesCommand extends Command
 {
-    private EntityManagerInterface $em;
+    protected static $defaultName = 'branch:list';
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
         parent::__construct();
-        $this->em = $em;
     }
 
     protected function configure(): void
     {
-        $this
-            ->setName('branch:list')
-            ->setDescription('Find and show all branches')
+        $this->setDescription('Find and show all branches')
             ->setHelp('This command finds and shows all branches.')
         ;
     }

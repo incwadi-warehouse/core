@@ -22,15 +22,9 @@ class BookRepository extends ServiceEntityRepository
      */
     public const KEEP_REMOVED_DAYS = 28;
 
-    private CoverRemove $cover;
-
-    private Find $find;
-
-    public function __construct(ManagerRegistry $registry, CoverRemove $cover, Find $find)
+    public function __construct(ManagerRegistry $registry, private CoverRemove $cover, private Find $find)
     {
         parent::__construct($registry, Book::class);
-        $this->cover = $cover;
-        $this->find = $find;
     }
 
     public function findDemanded(array $options, bool $isPublic = false): array

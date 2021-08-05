@@ -10,16 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/inventory")
- */
+#[\Symfony\Component\Routing\Annotation\Route(path: '/api/inventory')]
 class InventoryController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    public function index() : JsonResponse
     {
         return $this->json(
             $this
@@ -33,19 +31,19 @@ class InventoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
-    public function show(Inventory $inventory): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    public function show(Inventory $inventory) : JsonResponse
     {
         return $this->json($inventory);
     }
 
     /**
-     * @Route("/new", methods={"POST"})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function new(Request $request): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    public function new(Request $request) : JsonResponse
     {
         $active = $this
             ->getDoctrine()
@@ -77,10 +75,10 @@ class InventoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"PUT"})
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
-    public function edit(Request $request, Inventory $inventory): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    public function edit(Request $request, Inventory $inventory) : JsonResponse
     {
         $form = $this->createForm(InventoryType::class, $inventory);
 
@@ -104,10 +102,10 @@ class InventoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", methods={"DELETE"})
      * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
-    public function delete(Inventory $inventory): JsonResponse
+    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    public function delete(Inventory $inventory) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($inventory);
