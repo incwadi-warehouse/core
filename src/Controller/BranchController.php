@@ -31,18 +31,6 @@ class BranchController extends AbstractController
     }
 
     /**
-     * @Route("/my", methods={"GET"})
-     * @Security("is_granted('ROLE_USER')")
-     * Deprecated
-     */
-    public function my(): JsonResponse
-    {
-        return $this->json(
-            $this->getUser()->getBranch()
-        );
-    }
-
-    /**
      * @Route("/{id}", methods={"GET"})
      * @Security("is_granted('ROLE_ADMIN')")
      */

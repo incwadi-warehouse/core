@@ -24,9 +24,6 @@ class Export implements ExportInterface
         $formatAuthor = function ($object) {
             return $object instanceof Author ? ['firstname' => $object->getFirstname(), 'surname' => $object->getSurname()] : ['firstname' => null, 'surname' => null];
         };
-        $formatLendTo = function ($object) {
-            return $object instanceof Staff ? $object->getName() : null;
-        };
         $formatBranch = function ($object) {
             return $object instanceof Branch ? $object->getName() : null;
         };
@@ -37,9 +34,7 @@ class Export implements ExportInterface
         $defaultContext = [
             AbstractNormalizer::CALLBACKS => [
                 'added' => $formatDate,
-                'lendOn' => $formatDate,
                 'author' => $formatAuthor,
-                'lendTo' => $formatLendTo,
                 'branch' => $formatBranch,
                 'genre' => $formatGenre,
                 'soldOn' => $formatDate,

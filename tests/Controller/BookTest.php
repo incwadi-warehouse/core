@@ -79,7 +79,6 @@ class BookTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 859,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
@@ -108,9 +107,6 @@ class BookTest extends WebTestCase
         $this->assertFalse($request->reserved);
         $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
-        $this->assertEquals('paperback', $request->type);
-        $this->assertNull($request->lendTo);
-        $this->assertNull($request->lendOn);
         $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
         $this->assertIsInt($request->tags[0]->id);
@@ -127,7 +123,6 @@ class BookTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 4758,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
@@ -156,9 +151,6 @@ class BookTest extends WebTestCase
         $this->assertFalse($request->reserved);
         $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
-        $this->assertEquals('paperback', $request->type);
-        $this->assertNull($request->lendTo);
-        $this->assertNull($request->lendOn);
         $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
         $this->assertIsInt($request->tags[0]->id);
@@ -211,9 +203,6 @@ class BookTest extends WebTestCase
         $this->assertFalse($request->reserved);
         $this->assertNull($request->reservedAt);
         $this->assertEquals(2019, $request->releaseYear);
-        $this->assertEquals('paperback', $request->type);
-        $this->assertNull($request->lendTo);
-        $this->assertNull($request->lendOn);
         $this->assertIsInt($request->condition->id);
         $this->assertEquals(2, count($request->tags));
         $this->assertIsInt($request->tags[0]->id);
@@ -256,13 +245,6 @@ class BookTest extends WebTestCase
             $this->assertIsInt($request->books[0]->reservedAt);
         }
         $this->assertIsInt($request->books[0]->releaseYear);
-        $this->assertEquals('paperback', $request->books[0]->type);
-        if (null !== $request->books[0]->lendTo) {
-            $this->assertNotEmpty($request->books[0]->lendTo);
-        }
-        if (null !== $request->books[0]->lendOn) {
-            $this->assertNotEmpty($request->books[0]->lendOn);
-        }
         if (null !== $request->books[0]->condition) {
             $this->assertIsInt($request->books[0]->condition->id);
         }
@@ -287,7 +269,6 @@ class BookTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 4758,
             'cond' => $this->conditionId,
         ]);
@@ -302,7 +283,6 @@ class BookTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 4758,
             'cond' => $this->conditionId,
         ], 409);

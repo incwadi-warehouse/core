@@ -52,7 +52,6 @@ class BookController extends AbstractController
                 'branch' => $branch,
                 'sold' => false,
                 'removed' => false,
-                'lendOn' => null,
                 'reserved' => false,
                 'recommendation' => true,
             ]);

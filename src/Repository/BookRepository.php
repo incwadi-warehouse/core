@@ -49,9 +49,6 @@ class BookRepository extends ServiceEntityRepository
             'reserved',
             'reservedAt',
             'releaseYear',
-            'type',
-            'lendTo',
-            'lendOn',
             'recommendation',
         ];
         if ($isPublic) {
@@ -89,11 +86,6 @@ class BookRepository extends ServiceEntityRepository
                     'operator' => 'eq',
                     'value' => '0',
                 ],
-                [
-                    'field' => 'lendOn',
-                    'operator' => 'null',
-                    'value' => '0',
-                ],
             ]);
         }
 
@@ -129,7 +121,6 @@ class BookRepository extends ServiceEntityRepository
                 'genre' => $book->getGenre()->getName(),
                 'price' => $book->getPrice(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
                 'branchName' => $book->getBranch()->getName(),
                 'branchOrdering' => $book->getBranch()->getOrdering(),
                 'cond' => $book->getCond() ? $book->getCond()->getName() : null,
@@ -210,7 +201,7 @@ class BookRepository extends ServiceEntityRepository
                 'sold' => $book->getSold(),
                 'removed' => $book->getRemoved(),
                 'releaseYear' => $book->getReleaseYear(),
-                'type' => $book->getType(),
+                'format' => $book->getFormat(),
             ]
         );
     }

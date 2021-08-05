@@ -37,9 +37,6 @@ class ExportTest extends TestCase
         $book1->setSold(false);
         $book1->setRemoved(false);
         $book1->setReleaseYear(2019);
-        $book1->setType('paperback');
-        $book1->setLendTo($staff);
-        $book1->setLendOn(new \DateTime('2017-07-06T00:00:00+0200'));
         $book1->setCond(null);
 
         $book2 = new Book();
@@ -52,9 +49,6 @@ class ExportTest extends TestCase
         $book2->setSold(false);
         $book2->setRemoved(false);
         $book2->setReleaseYear(2019);
-        $book2->setType('paperback');
-        $book2->setLendTo(null);
-        $book2->setLendOn(null);
         $book2->setCond(null);
 
         $export = new Export();
@@ -63,9 +57,9 @@ class ExportTest extends TestCase
         $this->assertIsString($books);
 
         $expected = <<<EOF
-branch;added;title;shortDescription;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;reserved;reservedAt;releaseYear;type;lendTo;lendOn;cond;reservation;recommendation;inventory;format
-Branch;2017-10-06T00:00:00+0200;"The Title";;firstname;surname;"Foreign Language Books";25;0;;0;;0;;2019;paperback;admin;2017-07-06T00:00:00+0200;;;0;;
-Branch;2018-02-22T00:00:00+0100;"The Title";;firstname;surname;"Foreign Language Books";1.5;0;;0;;0;;2019;paperback;;;;;0;;
+branch;added;title;shortDescription;author.firstname;author.surname;genre;price;sold;soldOn;removed;removedOn;reserved;reservedAt;releaseYear;cond;reservation;recommendation;inventory;format
+Branch;2017-10-06T00:00:00+0200;"The Title";;firstname;surname;"Foreign Language Books";25;0;;0;;0;;2019;;;0;;
+Branch;2018-02-22T00:00:00+0100;"The Title";;firstname;surname;"Foreign Language Books";1.5;0;;0;;0;;2019;;;0;;
 
 EOF;
         $this->assertEquals($expected, $books);

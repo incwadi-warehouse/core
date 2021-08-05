@@ -68,7 +68,6 @@ class FormatTest extends WebTestCase
             'price' => '1.00',
             'sold' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => $date->getTimestamp(),
         ]);
 

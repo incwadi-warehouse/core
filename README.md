@@ -2,10 +2,6 @@
 
 incwadi is a book database to manage your books.
 
-## How it was made
-
-An article can be found here <https://medium.com/@A.Baldeweg/i-was-trying-new-things-accf33792e86>.
-
 ## Requirements
 
 - PHP 7.4

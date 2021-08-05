@@ -12,6 +12,9 @@ use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+/*
+ * Deprecated
+ */
 class Import implements ImportInterface
 {
     protected EntityManagerInterface $em;
@@ -47,10 +50,6 @@ class Import implements ImportInterface
             $book->setPrice($item['price']);
             $book->setSold($item['sold']);
             $book->setReleaseYear($item['releaseYear']);
-            $book->setType($item['type']);
-            $book->setLendTo($this->staff($item['lendTo']));
-            $book->setLendOn(new \DateTime($item['lendOn']));
-            null !== $book->getLendTo() ? $book->getLendTo()->setBranch($book->getBranch()) : null;
 
             $books[] = $book;
 

@@ -11,13 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Branch implements \JsonSerializable
 {
-    /**
-     * @var string[]
-     */
     public const CURRENCIES = ['EUR', 'USD'];
-    /**
-     * @var string[]
-     */
     public const ORDER_BY = ['name', 'books'];
 
     /**

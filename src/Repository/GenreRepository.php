@@ -22,9 +22,7 @@ class GenreRepository extends ServiceEntityRepository
 
     public function findDemanded(Branch $branch): array
     {
-        $orderBy = $branch->getOrderBy();
-
-        if ('books' === $orderBy) {
+        if ('books' === $branch->getOrderBy()) {
             return $this->findByBranchAndOrderByBooks(
                 $branch
             );

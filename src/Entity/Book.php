@@ -13,9 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Book implements \JsonSerializable
 {
-    /**
-     * @var string[]
-     */
     public const TYPES = ['paperback', 'hardcover'];
 
     /**
@@ -104,24 +101,6 @@ class Book implements \JsonSerializable
     private int $releaseYear;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Choice(choices=Book::TYPES)
-     */
-    private string $type = 'paperback';
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Staff::class, inversedBy="books")
-     * Deprecated
-     */
-    private ?Staff $lendTo = null;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * Deprecated
-     */
-    private ?\DateTime $lendOn = null;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Condition::class)
      * @ORM\JoinColumn(nullable=true)
      */
@@ -178,9 +157,6 @@ class Book implements \JsonSerializable
             'reserved' => $this->getReserved(),
             'reservedAt' => null !== $this->getReservedAt() ? $this->getReservedAt()->getTimestamp() : null,
             'releaseYear' => $this->getReleaseYear(),
-            'type' => $this->getType(),
-            'lendTo' => null !== $this->getLendTo() ? $this->getLendTo()->getId() : null,
-            'lendOn' => null !== $this->getLendOn() ? $this->getLendOn()->getTimestamp() : null,
             'condition' => $this->getCond(),
             'tags' => $this->getTags(),
             'reservation_id' => null !== $this->getReservation() ? $this->getReservation()->getId() : null,
@@ -359,42 +335,6 @@ class Book implements \JsonSerializable
     public function setReleaseYear(int $releaseYear): self
     {
         $this->releaseYear = $releaseYear;
-
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getLendTo(): ?Staff
-    {
-        return $this->lendTo;
-    }
-
-    public function setLendTo(?Staff $lendTo): self
-    {
-        $this->lendTo = $lendTo;
-
-        return $this;
-    }
-
-    public function getLendOn(): ?\DateTimeInterface
-    {
-        return $this->lendOn;
-    }
-
-    public function setLendOn(?\DateTimeInterface $lendOn): self
-    {
-        $this->lendOn = $lendOn;
 
         return $this;
     }

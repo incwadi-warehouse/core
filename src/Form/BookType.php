@@ -35,9 +35,6 @@ class BookType extends AbstractType
             ->add('removed')
             ->add('reserved')
             ->add('releaseYear')
-            ->add('type')
-            ->add('lendTo')
-            ->add('lendOn', TextType::class)
             ->add('cond')
             ->add('tags')
             ->add('recommendation')
@@ -48,8 +45,6 @@ class BookType extends AbstractType
             ->addModelTransformer($this->dateTimeToStringTransformer);
         $builder->get('author')
             ->addModelTransformer($this->authorToStringTransformer);
-        $builder->get('lendOn')
-            ->addModelTransformer($this->dateTimeToStringTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

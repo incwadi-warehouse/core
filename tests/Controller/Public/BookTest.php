@@ -14,9 +14,9 @@ class BookTest extends WebTestCase
     {
         $this->buildClient();
 
-        $request = $this->request('/api/branch/my', 'GET');
+        $request = $this->request('/api/me', 'GET');
 
-        $this->branch = $request->id;
+        $this->branch = $request->branch->id;
     }
 
     public function testScenario()
@@ -27,7 +27,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request->books);
-        $this->assertEquals(14, count((array) $request->books[0]));
+        $this->assertEquals(13, count((array) $request->books[0]));
         $this->assertIsString($request->books[0]->id);
         $this->assertIsString($request->books[0]->currency);
         $this->assertIsString($request->books[0]->title);
@@ -39,7 +39,6 @@ class BookTest extends WebTestCase
         $this->assertIsString($request->books[0]->genre);
         $this->assertNotEmpty($request->books[0]->price);
         $this->assertIsInt($request->books[0]->releaseYear);
-        $this->assertIsString($request->books[0]->type);
         $this->assertIsString($request->books[0]->branchName);
         if (null !== $request->books[0]->branchOrdering) {
             $this->assertIsString($request->books[0]->branchOrdering);

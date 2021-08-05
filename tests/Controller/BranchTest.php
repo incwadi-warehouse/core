@@ -45,17 +45,6 @@ class BranchTest extends WebTestCase
         $this->assertIsString($request->orderBy);
         $this->assertTrue($request->public);
 
-        // my
-        $request = $this->request('/api/branch/my', 'GET');
-
-        $this->assertIsInt($request->id);
-        $this->assertEquals('name', $request->name);
-        $this->assertTrue(isset($request->steps));
-        $this->assertIsString($request->currency);
-        $this->assertIsString($request->ordering);
-        $this->assertIsString($request->orderBy);
-        $this->assertTrue($request->public);
-
         // show
         $request = $this->request('/api/branch/'.$branch->id, 'GET');
 

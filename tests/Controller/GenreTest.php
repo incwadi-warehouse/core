@@ -67,7 +67,6 @@ class GenreTest extends WebTestCase
             'price' => '1.00',
             'sold' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 2367,
         ]);
 

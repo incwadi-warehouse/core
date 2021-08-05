@@ -46,7 +46,6 @@ class TagTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 859,
             'cond' => $this->conditionId,
         ]);
@@ -117,7 +116,6 @@ class TagTest extends WebTestCase
             'sold' => false,
             'removed' => false,
             'releaseYear' => 2019,
-            'type' => 'paperback',
             'added' => 859,
             'cond' => $this->conditionId,
             'tags' => [$id],

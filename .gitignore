@@ -1,6 +1,7 @@
 build/
-.php-version
 data/
+.scannerwork/
+.php-version
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -26,4 +27,3 @@ data/
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-.scannerwork
