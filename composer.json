@@ -4,7 +4,7 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.0",
     "baldeweg/book-bundle": "^0.1.6",
     "baldeweg/extra-bundle": "^0.2",
     "doctrine/doctrine-bundle": "^2.3",

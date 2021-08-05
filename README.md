@@ -4,7 +4,7 @@ incwadi is a book database to manage your books.
 
 ## Requirements
 
-- PHP 7.4
+- PHP 8.0
 - MySQL
 - SSH Access
 - PHP Composer
