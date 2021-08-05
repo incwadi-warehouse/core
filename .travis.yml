@@ -5,9 +5,7 @@ php:
 install:
     - composer update --no-interaction
 script:    
-    - mkdir ./config/jwt/
-    - openssl genrsa -out ./config/jwt/private.pem
-    - openssl rsa -pubout -in ./config/jwt/private.pem -out config/jwt/public.pem
+    - bin/console lexik:jwt:generate-keypair
     - bin/console doctrine:database:create --if-not-exists
     - bin/console doctrine:migrations:migrate -n
     - bin/console doctrine:fixtures:load -n
