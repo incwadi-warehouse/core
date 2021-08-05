@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/genre')]
+#[Route(path: '/api/genre')]
 class GenreController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -29,7 +29,7 @@ class GenreController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and genre.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Genre $genre) : JsonResponse
     {
         return $this->json($genre);
@@ -38,7 +38,7 @@ class GenreController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $genre = new Genre();
@@ -66,7 +66,7 @@ class GenreController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Genre $genre) : JsonResponse
     {
         $form = $this->createForm(GenreType::class, $genre);
@@ -92,7 +92,7 @@ class GenreController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Genre $genre) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

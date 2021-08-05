@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/format')]
+#[Route(path: '/api/format')]
 class FormatController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -31,7 +31,7 @@ class FormatController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and format.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Format $format) : JsonResponse
     {
         return $this->json($format);
@@ -40,7 +40,7 @@ class FormatController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $format = new Format();
@@ -70,7 +70,7 @@ class FormatController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Format $format) : JsonResponse
     {
         $form = $this->createForm(FormatType::class, $format);
@@ -96,7 +96,7 @@ class FormatController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Format $format) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

@@ -2,7 +2,7 @@
 
 Branches can only be created on the command line.
 
-Find out what branches are existing and the corresponding id for a specific branch.
+List all branches and there corresponding id.
 
 ```shell
 bin/console branch:list

@@ -4,27 +4,29 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FormatRepository;
+use Doctrine\ORM\Mapping\Entity;
+use App\Entity\Book;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: FormatRepository::class)]
+#[Entity(repositoryClass: FormatRepository::class)]
 class Format implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
     private $branch;
 
     /**
-     * @var \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book>
+     * @var Book[]|Collection<int, Book>
      */
-    #[\Doctrine\ORM\Mapping\OneToMany(targetEntity: Book::class, mappedBy: 'format')]
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'format')]
     private $books;
 
     public function __construct()
@@ -79,9 +81,9 @@ class Format implements \JsonSerializable
     }
 
     /**
-     * @param \App\Entity\Book[]|\Doctrine\Common\Collections\Collection<int, \App\Entity\Book> $book
+     * @param Book[]|Collection<int, Book> $book
      */
-    public function addBook(array|\Doctrine\Common\Collections\Collection $book): self
+    public function addBook(array|Collection $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;

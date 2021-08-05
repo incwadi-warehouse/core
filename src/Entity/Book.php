@@ -4,81 +4,82 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: BookRepository::class)]
+#[Entity(repositoryClass: BookRepository::class)]
 class Book implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue(strategy: 'UUID')]
-    #[\Doctrine\ORM\Mapping\Column(type: 'guid')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'UUID')]
+    #[ORM\Column(type: 'guid')]
     private string $id;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
     private ?Branch $branch = null;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime')]
     private \DateTime $added;
 
-    #[\Symfony\Component\Validator\Constraints\NotBlank]
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: '255')]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: '255')]
     private string $title = '';
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $shortDescription;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Author::class, inversedBy: 'books', cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books', cascade: ['persist'])]
     private ?Author $author = null;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Genre::class, inversedBy: 'books')]
+    #[ORM\ManyToOne(targetEntity: Genre::class, inversedBy: 'books')]
     private ?Genre $genre = null;
 
-    #[\Symfony\Component\Validator\Constraints\Type(type: "float")]
-    #[\Symfony\Component\Validator\Constraints\GreaterThanOrEqual(0.00)]
-    #[\Doctrine\ORM\Mapping\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\Type(type: "float")]
+    #[Assert\GreaterThanOrEqual(0.00)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $price = 0.00;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean')]
     private bool $sold = false;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $soldOn = null;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean')]
     private bool $removed = false;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $removedOn = null;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean')]
     private bool $reserved = false;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $reservedAt = null;
 
-    #[\Symfony\Component\Validator\Constraints\Length(min: 4, max: 4)]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[Assert\Length(min: 4, max: 4)]
+    #[ORM\Column(type: 'integer')]
     private int $releaseYear;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Condition::class)]
-    #[\Doctrine\ORM\Mapping\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Condition::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Condition $cond = null;
 
-    #[\Doctrine\ORM\Mapping\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
     private $tags;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Reservation::class, inversedBy: 'books')]
+    #[ORM\ManyToOne(targetEntity: Reservation::class, inversedBy: 'books')]
     private $reservation;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean')]
     private bool $recommendation = false;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $inventory = null;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
+    #[ORM\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
     private $format;
 
     public function __construct()

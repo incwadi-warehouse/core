@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api')]
+#[Route(path: '/api')]
 class CoreController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/me', methods: ['GET'])]
+    #[Route(path: '/me', methods: ['GET'])]
     public function me() : JsonResponse
     {
         return $this->json([
@@ -32,7 +32,7 @@ class CoreController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/password', methods: ['PUT'])]
+    #[Route(path: '/password', methods: ['PUT'])]
     public function password(Request $request, UserPasswordEncoderInterface $encoder) : JsonResponse
     {
         $user = $this->getUser();

@@ -2,31 +2,32 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InventoryRepository;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: InventoryRepository::class)]
+#[Entity(repositoryClass: InventoryRepository::class)]
 class Inventory implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
-    #[\Doctrine\ORM\Mapping\JoinColumn]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\JoinColumn]
     private $branch;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime')]
     private $startedAt;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $endedAt;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer')]
     private $found = 0;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer')]
     private $notFound = 0;
 
     public function __construct()

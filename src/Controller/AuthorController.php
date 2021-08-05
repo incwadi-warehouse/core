@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/author')]
+#[Route(path: '/api/author')]
 class AuthorController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/find', methods: ['GET'])]
+    #[Route(path: '/find', methods: ['GET'])]
     public function find(Request $request) : JsonResponse
     {
         return $this->json(
@@ -26,7 +26,7 @@ class AuthorController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Author $author) : JsonResponse
     {
         return $this->json($author);
@@ -34,7 +34,7 @@ class AuthorController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $author = new Author();
@@ -62,7 +62,7 @@ class AuthorController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Author $author) : JsonResponse
     {
         $form = $this->createForm(AuthorType::class, $author);
@@ -88,7 +88,7 @@ class AuthorController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Author $author) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

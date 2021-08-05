@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/staff')]
+#[Route(path: '/api/staff')]
 class StaffController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -32,7 +32,7 @@ class StaffController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Staff $staff) : JsonResponse
     {
         return $this->json($staff);
@@ -41,7 +41,7 @@ class StaffController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $staff = new Staff();
@@ -69,7 +69,7 @@ class StaffController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Staff $staff) : JsonResponse
     {
         $form = $this->createForm(StaffType::class, $staff);
@@ -95,7 +95,7 @@ class StaffController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Staff $staff) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

@@ -2,25 +2,26 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SavedSearchRepository;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: SavedSearchRepository::class)]
+#[Entity(repositoryClass: SavedSearchRepository::class)]
 class SavedSearch implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
-    #[\Doctrine\ORM\Mapping\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private Branch $branch;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'json')]
+    #[ORM\Column(type: 'json')]
     private array $query = [];
 
     public function jsonSerialize()

@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/tag')]
+#[Route(path: '/api/tag')]
 class TagController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -29,7 +29,7 @@ class TagController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and tag.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Tag $tag) : JsonResponse
     {
         return $this->json($tag);
@@ -38,7 +38,7 @@ class TagController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $content = json_decode(
@@ -78,7 +78,7 @@ class TagController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Tag $tag) : JsonResponse
     {
         $form = $this->createForm(TagType::class, $tag);
@@ -104,7 +104,7 @@ class TagController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Tag $tag) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

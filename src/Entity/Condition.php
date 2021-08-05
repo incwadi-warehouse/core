@@ -2,25 +2,26 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ConditionRepository;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Table(name: 'cond')]
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: ConditionRepository::class)]
+#[ORM\Table(name: 'cond')]
+#[Entity(repositoryClass: ConditionRepository::class)]
 class Condition implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[\Symfony\Component\Validator\Constraints\NotBlank]
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name = '';
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
-    #[\Doctrine\ORM\Mapping\JoinColumn]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\JoinColumn]
     private $branch;
 
     public function jsonSerialize()

@@ -2,31 +2,32 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: UserRepository::class)]
+#[Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[\Symfony\Component\Validator\Constraints\NotBlank]
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $username = '';
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'json')]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[\Symfony\Component\Validator\Constraints\NotBlank]
-    #[\Doctrine\ORM\Mapping\Column(type: 'string')]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string')]
     private string $password;
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
     private ?Branch $branch = null;
 
     public function jsonSerialize(): array

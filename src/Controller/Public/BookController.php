@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/public/book')]
+#[Route(path: '/api/public/book')]
 class BookController extends AbstractController
 {
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/find', methods: ['GET'])]
+    #[Route(path: '/find', methods: ['GET'])]
     public function find(Request $request) : JsonResponse
     {
         return $this->json(
@@ -32,7 +32,7 @@ class BookController extends AbstractController
         );
     }
 
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/recommendation/{branch}', methods: ['GET'])]
+    #[Route(path: '/recommendation/{branch}', methods: ['GET'])]
     public function recommendation(Branch $branch, CoverShow $cover) : JsonResponse
     {
         if (!$branch->getPublic()) {
@@ -78,7 +78,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/cover/{book}_{dimensions}.jpg', methods: ['GET'])]
+    #[Route(path: '/cover/{book}_{dimensions}.jpg', methods: ['GET'])]
     public function image(Book $book, string $dimensions) : BinaryFileResponse
     {
         $width = (int) explode('x', $dimensions)[0];

@@ -4,24 +4,25 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TagRepository;
+use Doctrine\ORM\Mapping\Entity;
 
-#[\Doctrine\ORM\Mapping\Entity(repositoryClass: TagRepository::class)]
+#[Entity(repositoryClass: TagRepository::class)]
 class Tag implements \JsonSerializable
 {
-    #[\Doctrine\ORM\Mapping\Id]
-    #[\Doctrine\ORM\Mapping\GeneratedValue]
-    #[\Doctrine\ORM\Mapping\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[\Doctrine\ORM\Mapping\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name = '';
 
-    #[\Doctrine\ORM\Mapping\ManyToOne(targetEntity: Branch::class)]
+    #[ORM\ManyToOne(targetEntity: Branch::class)]
     private Branch $branch;
 
-    #[\Doctrine\ORM\Mapping\ManyToMany(targetEntity: Book::class, mappedBy: 'tags')]
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'tags')]
     private $books;
 
     public function __construct()

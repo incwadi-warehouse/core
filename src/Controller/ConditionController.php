@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/condition')]
+#[Route(path: '/api/condition')]
 class ConditionController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -32,7 +32,7 @@ class ConditionController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $condition = new Condition();
@@ -60,7 +60,7 @@ class ConditionController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === condition.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Condition $condition) : JsonResponse
     {
         return $this->json($condition);
@@ -69,7 +69,7 @@ class ConditionController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Condition $condition) : JsonResponse
     {
         $form = $this->createForm(ConditionType::class, $condition);
@@ -95,7 +95,7 @@ class ConditionController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Condition $condition) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

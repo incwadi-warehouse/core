@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/inventory')]
+#[Route(path: '/api/inventory')]
 class InventoryController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/', methods: ['GET'])]
+    #[Route(path: '/', methods: ['GET'])]
     public function index() : JsonResponse
     {
         return $this->json(
@@ -33,7 +33,7 @@ class InventoryController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
+    #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Inventory $inventory) : JsonResponse
     {
         return $this->json($inventory);
@@ -42,7 +42,7 @@ class InventoryController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $active = $this
@@ -77,7 +77,7 @@ class InventoryController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Inventory $inventory) : JsonResponse
     {
         $form = $this->createForm(InventoryType::class, $inventory);
@@ -104,7 +104,7 @@ class InventoryController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Inventory $inventory) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();

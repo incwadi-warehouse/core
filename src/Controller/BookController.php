@@ -15,13 +15,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[\Symfony\Component\Routing\Annotation\Route(path: '/api/book')]
+#[Route(path: '/api/book')]
 class BookController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/find', methods: ['GET'])]
+    #[Route(path: '/find', methods: ['GET'])]
     public function find(Request $request) : JsonResponse
     {
         return $this->json(
@@ -40,7 +40,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/clean', methods: ['DELETE'])]
+    #[Route(path: '/clean', methods: ['DELETE'])]
     public function clean() : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
@@ -55,7 +55,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/stats', methods: ['GET'])]
+    #[Route(path: '/stats', methods: ['GET'])]
     public function stats() : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
@@ -96,7 +96,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/inventory/found/{book}', methods: ['PUT'])]
+    #[Route(path: '/inventory/found/{book}', methods: ['PUT'])]
     public function inventoryFound(Book $book) : JsonResponse
     {
         $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
@@ -112,7 +112,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/inventory/notfound/{book}', methods: ['PUT'])]
+    #[Route(path: '/inventory/notfound/{book}', methods: ['PUT'])]
     public function inventoryNotFound(Book $book) : JsonResponse
     {
         $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
@@ -128,8 +128,8 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch() or is_granted('ROLE_ADMIN')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['GET'])]
-    public function show(Request $request, Book $book) : JsonResponse
+    #[Route(path: '/{id}', methods: ['GET'])]
+    public function show(Book $book) : JsonResponse
     {
         return $this->json($book);
     }
@@ -137,7 +137,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/new', methods: ['POST'])]
+    #[Route(path: '/new', methods: ['POST'])]
     public function new(Request $request) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
@@ -177,7 +177,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['PUT'])]
+    #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Book $book) : JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
@@ -236,8 +236,8 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/cover/{id}', methods: ['GET'])]
-    public function showCover(Request $request, Book $book, CoverShow $cover) : JsonResponse
+    #[Route(path: '/cover/{id}', methods: ['GET'])]
+    public function showCover(Book $book, CoverShow $cover) : JsonResponse
     {
         return $this->json($cover->show($book));
     }
@@ -245,7 +245,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/cover/{id}', methods: ['POST'])]
+    #[Route(path: '/cover/{id}', methods: ['POST'])]
     public function cover(Request $request, Book $book, CoverUpload $coverUpload) : JsonResponse
     {
         $form = $this->createForm(BookCoverType::class, $book);
@@ -264,8 +264,8 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/cover/{id}', methods: ['DELETE'])]
-    public function deleteCover(Request $request, Book $book, CoverRemove $cover) : JsonResponse
+    #[Route(path: '/cover/{id}', methods: ['DELETE'])]
+    public function deleteCover(Book $book, CoverRemove $cover) : JsonResponse
     {
         $cover->remove($book);
 
@@ -275,7 +275,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/sell/{id}', methods: ['PUT'])]
+    #[Route(path: '/sell/{id}', methods: ['PUT'])]
     public function sell(Book $book) : JsonResponse
     {
         $book->setSold(!$book->getSold());
@@ -292,7 +292,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/remove/{id}', methods: ['PUT'])]
+    #[Route(path: '/remove/{id}', methods: ['PUT'])]
     public function remove(Book $book) : JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
@@ -311,7 +311,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/reserve/{id}', methods: ['PUT'])]
+    #[Route(path: '/reserve/{id}', methods: ['PUT'])]
     public function reserve(Book $book) : JsonResponse
     {
         if ($book->getReserved() && $book->getReservation()) {
@@ -329,7 +329,7 @@ class BookController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
-    #[\Symfony\Component\Routing\Annotation\Route(path: '/{id}', methods: ['DELETE'])]
+    #[Route(path: '/{id}', methods: ['DELETE'])]
     public function delete(Book $book, CoverRemove $cover) : JsonResponse
     {
         $cover->remove($book);
