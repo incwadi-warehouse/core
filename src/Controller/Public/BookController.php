@@ -63,7 +63,7 @@ class BookController extends AbstractController
                     'genre' => $book->getGenre()->getName(),
                     'price' => $book->getPrice(),
                     'releaseYear' => $book->getReleaseYear(),
-                    'type' => $book->getType(),
+                    'format_name' => $book->getFormat() ? $book->getFormat()->getName() : null,
                     'branchName' => $book->getBranch()->getName(),
                     'branchOrdering' => $book->getBranch()->getOrdering(),
                     'cond' => $book->getCond() !== null ? $book->getCond()->getName() : null,
