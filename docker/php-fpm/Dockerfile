@@ -1,5 +1,11 @@
 FROM php:8.0-fpm-alpine3.13
 
+ADD crontab.txt /crontab.txt
+ADD script.sh /script.sh
+COPY entry.sh /entry.sh
+RUN chmod 755 /script.sh /entry.sh
+RUN /usr/bin/crontab /crontab.txt
+
 COPY db.sh /usr/bin/db-setup.sh
 RUN chmod +x /usr/bin/db-setup.sh
 
@@ -14,6 +20,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /usr/local/apache2/htdocs
 
-CMD composer install ; composer dump-env prod ; /usr/bin/db-setup.sh ; php-fpm
+CMD composer install ; composer dump-env prod ; /usr/bin/db-setup.sh ; /entry.sh ; php-fpm
 
 EXPOSE 9000
