@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe8190bf3b4fc7274cc1b9550a611190",
+    "content-hash": "7eecb5c71b383550fca122bf8640e9c6",
     "packages": [
         {
             "name": "baldeweg/book-bundle",
-            "version": "v0.1.6",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/incwadi-warehouse/book-bundle.git",
-                "reference": "04d9b4859dc6bb3b7e087ca379937ae101e35f90"
+                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/04d9b4859dc6bb3b7e087ca379937ae101e35f90",
-                "reference": "04d9b4859dc6bb3b7e087ca379937ae101e35f90",
+                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
+                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
                 "shasum": ""
             },
             "require": {
@@ -54,9 +54,9 @@
             "description": "Offers tools for management of books.",
             "support": {
                 "issues": "https://github.com/incwadi-warehouse/book-bundle/issues",
-                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.1.6"
+                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.2.0"
             },
-            "time": "2021-06-14T16:37:08+00:00"
+            "time": "2021-08-09T19:16:56+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
@@ -191,16 +191,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08",
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08",
                 "shasum": ""
             },
             "require": {
@@ -257,9 +257,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.2"
             },
-            "time": "2021-05-16T18:07:53+00:00"
+            "time": "2021-08-05T19:00:23+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -7286,16 +7286,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "64c554bcef3c3b4702fcf34c227a316b47139b66"
+                "reference": "990b979379502feb7f393d6c9aa36cc9b9765f24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/64c554bcef3c3b4702fcf34c227a316b47139b66",
-                "reference": "64c554bcef3c3b4702fcf34c227a316b47139b66",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/990b979379502feb7f393d6c9aa36cc9b9765f24",
+                "reference": "990b979379502feb7f393d6c9aa36cc9b9765f24",
                 "shasum": ""
             },
             "require": {
@@ -7362,7 +7362,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.0.1"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.0.2"
             },
             "funding": [
                 {
@@ -7370,7 +7370,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-02T17:57:52+00:00"
+            "time": "2021-08-04T19:28:19+00:00"
         },
         {
             "name": "mikey179/vfsstream",
@@ -7718,16 +7718,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.43",
+            "version": "0.11.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "7541c3c02dd0c8a328be86ae10373200fc38dd21"
+                "reference": "9802271920e82f8004882094a254b598d3279708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/7541c3c02dd0c8a328be86ae10373200fc38dd21",
-                "reference": "7541c3c02dd0c8a328be86ae10373200fc38dd21",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/9802271920e82f8004882094a254b598d3279708",
+                "reference": "9802271920e82f8004882094a254b598d3279708",
                 "shasum": ""
             },
             "require": {
@@ -7765,7 +7765,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.43"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.46"
             },
             "funding": [
                 {
@@ -7773,7 +7773,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-04T13:48:18+00:00"
+            "time": "2021-08-09T13:46:17+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -8547,7 +8547,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4"
+        "php": ">=8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
