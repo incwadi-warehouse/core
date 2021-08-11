@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Branch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Branch;
 
 /**
  * @method Branch|null find($id, $lockMode = null, $lockVersion = null)
