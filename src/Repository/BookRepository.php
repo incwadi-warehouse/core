@@ -192,7 +192,6 @@ class BookRepository extends ServiceEntityRepository
                 'title' => $book->getTitle(),
                 'author' => $book->getAuthor(),
                 'genre' => $book->getGenre(),
-                'price' => $book->getPrice(),
                 'sold' => $book->getSold(),
                 'removed' => $book->getRemoved(),
                 'releaseYear' => $book->getReleaseYear(),
