@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2d31dd2a709b0b0a26f7a77665ac541",
+    "content-hash": "9a240e3afd7c7ddbe825195f2fe50163",
     "packages": [
         {
             "name": "baldeweg/book-bundle",
-            "version": "v0.1.6",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/incwadi-warehouse/book-bundle.git",
-                "reference": "04d9b4859dc6bb3b7e087ca379937ae101e35f90"
+                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/04d9b4859dc6bb3b7e087ca379937ae101e35f90",
-                "reference": "04d9b4859dc6bb3b7e087ca379937ae101e35f90",
+                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
+                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
                 "shasum": ""
             },
             "require": {
@@ -54,9 +54,9 @@
             "description": "Offers tools for management of books.",
             "support": {
                 "issues": "https://github.com/incwadi-warehouse/book-bundle/issues",
-                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.1.6"
+                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.2.0"
             },
-            "time": "2021-06-14T16:37:08+00:00"
+            "time": "2021-08-09T19:16:56+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
