@@ -731,10 +731,28 @@ components:
                         required:
                             - id
                             - name
+                            - steps
+                            - currency
+                            - ordering
+                            - orderBy
+                            - public
+                            - pricelist
                         properties:
                             id:
                                 type: integer
                             name:
+                                type: string
+                            steps:
+                                type: string
+                            currency:
+                                type: string
+                            ordering:
+                                type: string
+                            orderBy:
+                                type: string
+                            public:
+                                type: boolean
+                            pricelist:
                                 type: string
 
         InventoryRequest:
