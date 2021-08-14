@@ -29,7 +29,10 @@ Then install the composer dependencies and create the database.
 In `prod` run the following command.
 
 ```shell
-bin/setup
+composer install
+composer dump-env prod
+bin/console doctrine:database:create --if-not-exists
+bin/console doctrine:migrations:migrate -n
 ```
 
 If you are in `dev` run the following commands.
@@ -81,5 +84,8 @@ Configure your webserver to redirect all requests to the `index.php` file.
 Just call the following command, if you are updating the production environment.
 
 ```shell
-bin/setup
+composer install
+composer dump-env prod
+bin/console doctrine:database:create --if-not-exists
+bin/console doctrine:migrations:migrate -n
 ```
