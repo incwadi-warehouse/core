@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BranchRepository;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Entity(repositoryClass: BranchRepository::class)]
 class Branch implements \JsonSerializable
@@ -51,6 +51,9 @@ class Branch implements \JsonSerializable
     #[ORM\Column(type: 'boolean')]
     private $public = false;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $pricelist;
+
     public function jsonSerialize()
     {
         return [
@@ -61,6 +64,7 @@ class Branch implements \JsonSerializable
             'ordering' => $this->getOrdering(),
             'orderBy' => $this->getOrderBy(),
             'public' => $this->getPublic(),
+            'pricelist' => $this->getPricelist(),
         ];
     }
 
@@ -137,6 +141,18 @@ class Branch implements \JsonSerializable
     public function setPublic(bool $public): self
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    public function getPricelist(): ?string
+    {
+        return $this->pricelist;
+    }
+
+    public function setPricelist(string $pricelist): self
+    {
+        $this->pricelist = $pricelist;
 
         return $this;
     }
