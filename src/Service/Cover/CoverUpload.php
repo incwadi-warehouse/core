@@ -59,7 +59,7 @@ class CoverUpload
         if (file_exists($filename)) {
             throw new \Exception('File does exist already.');
         }
-        $quality = imagejpeg(
+        imagejpeg(
             imagescale($image, $width),
             $filename,
             self::QUALITY

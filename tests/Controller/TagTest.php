@@ -55,7 +55,7 @@ class TagTest extends WebTestCase
 
     public function tearDown(): void
     {
-        $request = $this->request('/api/book/'.$this->bookId, 'DELETE');
+        $this->request('/api/book/'.$this->bookId, 'DELETE');
 
         $request = $this->request('/api/genre/'.$this->genreId, 'DELETE');
 
