@@ -21,6 +21,22 @@ tags:
       description: Inventory
     - name: format
       description: Format
+    - name: author
+      description: Author
+    - name: book
+      description: Book
+    - name: branch
+      description: Branch
+    - name: condition
+      description: Condition
+    - name: genre
+      description: Genre
+    - name: reservation
+      description: Reservation
+    - name: staff
+      description: Staff
+    - name: tag
+      description: Tag
 
 paths:
     # User
@@ -546,6 +562,1471 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
 
+    # author
+    /author/find:
+        get:
+            tags:
+                - author
+            description: List all authors for a branch
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - term
+                            properties:
+                                term:
+                                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/AuthorResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /author/new:
+        post:
+            tags:
+                - author
+            description: Create a new author
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/AuthorRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AuthorResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /author/{id}:
+        get:
+            tags:
+                - author
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the author
+                  schema:
+                    type: integer
+            description: Shows a author
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AuthorResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - author
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the author
+                  schema:
+                    type: integer
+            description: Edit a author
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/AuthorRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AuthorResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - author
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the author
+                  schema:
+                    type: integer
+            description: Delete a author
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # book
+    /book/find:
+        get:
+            tags:
+                - book
+            description: List all books for a branch
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - options
+                            properties:
+                                options:
+                                    type: object
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/new:
+        post:
+            tags:
+                - book
+            description: Create a new book
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/{id}:
+        get:
+            tags:
+                - book
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: integer
+            description: Shows a book
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - book
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: integer
+            description: Edit a book
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - book
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: integer
+            description: Delete a book
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/clean:
+        delete:
+            tags:
+                - book
+            description: Delete sold or removed books
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/stats:
+        get:
+            tags:
+                - book
+            description: Fetch stats
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - all
+                                    - available
+                                    - reserved
+                                    - sold
+                                    - removed
+                                properties:
+                                    all:
+                                        type: number
+                                    available:
+                                        type: number
+                                    reserved:
+                                        type: number
+                                    sold:
+                                        type: number
+                                    removed:
+                                        type: number
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /inventory/found/{book}:
+        put:
+            tags:
+                - book
+            description: Found a book in inventory
+            parameters:
+                - name: book
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /inventory/notfound/{book}:
+        put:
+            tags:
+                - book
+            description: Not found a book in inventory
+            parameters:
+                - name: book
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /inventory/cover/{id}:
+        get:
+            tags:
+                - book
+            description: Fetch cover
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        post:
+            tags:
+                - book
+            description: Upload cover
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - book
+            description: Delete cover
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/sell/{id}:
+        put:
+            tags:
+                - book
+            description: Mark book as sold
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/remove/{id}:
+        put:
+            tags:
+                - book
+            description: Mark book as removed
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /book/reserve/{id}:
+        put:
+            tags:
+                - book
+            description: Mark book as reserved
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the book
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # branch
+    /branch/:
+        get:
+            tags:
+                - branch
+            description: List all branches for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/BranchResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /branch/{id}:
+        get:
+            tags:
+                - branch
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the branch
+                  schema:
+                    type: integer
+            description: Shows a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BranchResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - branch
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the branch
+                  schema:
+                    type: integer
+            description: Edit a branch
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BranchRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BranchResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # condition
+    /condition/:
+        get:
+            tags:
+                - condition
+            description: List all conditions for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/ConditionResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /condition/new:
+        post:
+            tags:
+                - condition
+            description: Create a new condition
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ConditionRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ConditionResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /condition/{id}:
+        get:
+            tags:
+                - condition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the condition
+                  schema:
+                    type: integer
+            description: Shows a condition
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ConditionResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - condition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the condition
+                  schema:
+                    type: integer
+            description: Edit a condition
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ConditionRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ConditionResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - condition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the condition
+                  schema:
+                    type: integer
+            description: Delete a condition
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # genre
+    /genre/:
+        get:
+            tags:
+                - genre
+            description: List all genres for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/GenreResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /genre/new:
+        post:
+            tags:
+                - genre
+            description: Create a new genre
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/GenreRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/FormatResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /genre/{id}:
+        get:
+            tags:
+                - genre
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the genre
+                  schema:
+                    type: integer
+            description: Shows a genre
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/GenreResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - genre
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the genre
+                  schema:
+                    type: integer
+            description: Edit a genre
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/GenreRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/GenreResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - genre
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the genre
+                  schema:
+                    type: integer
+            description: Delete a genre
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # reservation
+    /reservation/list:
+        get:
+            tags:
+                - reservation
+            description: List all reservations for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/ReservationResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /reservation/new:
+        post:
+            tags:
+                - reservation
+            description: Create a new reservation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ReservationRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ReservationResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /reservation/{id}:
+        get:
+            tags:
+                - reservation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the reservation
+                  schema:
+                    type: integer
+            description: Shows a reservation
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ReservationResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - reservation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the reservation
+                  schema:
+                    type: integer
+            description: Edit a reservation
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ReservationRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ReservationResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - reservation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the reservation
+                  schema:
+                    type: integer
+            description: Delete a reservation
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # staff
+    /staff/:
+        get:
+            tags:
+                - staff
+            description: List all staff members for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/StaffResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /staff/new:
+        post:
+            tags:
+                - staff
+            description: Create a new staff member
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/StaffRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/StaffResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /staff/{id}:
+        get:
+            tags:
+                - staff
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the staff member
+                  schema:
+                    type: integer
+            description: Shows a staff member
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/StaffResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - staff
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the staff member
+                  schema:
+                    type: integer
+            description: Edit a staff member
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/StaffRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/StaffResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - staff
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the staff member
+                  schema:
+                    type: integer
+            description: Delete a staff member
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    # tag
+    /tag/:
+        get:
+            tags:
+                - tag
+            description: List all tags for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/TagResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /tag/new:
+        post:
+            tags:
+                - tag
+            description: Create a new tag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/TagRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TagResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /tag/{id}:
+        get:
+            tags:
+                - tag
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the tag
+                  schema:
+                    type: integer
+            description: Shows a tag
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TagResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - tag
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the tag
+                  schema:
+                    type: integer
+            description: Edit a tag
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/TagRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/TagResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - tag
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the tag
+                  schema:
+                    type: integer
+            description: Delete a tag
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
 components:
     securitySchemes:
         bearerAuth:
@@ -788,6 +2269,322 @@ components:
                 name:
                     type: string
                 branch:
+                    type: object
+
+        AuthorRequest:
+            type: object
+            required:
+                - firstname
+                - surname
+            properties:
+                firstname:
+                    type: string
+                surname:
+                    type: object
+
+        AuthorResponse:
+            type: object
+            required:
+                - id
+                - firstname
+                - surname
+            properties:
+                id:
+                    type: integer
+                firstname:
+                    type: string
+                surname:
+                    type: object
+
+        BookRequest:
+            type: object
+            required:
+                - added
+                - title
+                - shortDescription
+                - author
+                - genre
+                - price
+                - sold
+                - removed
+                - reserved
+                - releaseYear
+                - cond
+                - tags
+                - recommendation
+                - format
+            properties:
+                added:
+                    type: object
+                title:
+                    type: string
+                shortDescription:
+                    type: string
+                author:
+                    type: object
+                genre:
+                    type: object
+                price:
+                    type: number
+                sold:
+                    type: boolean
+                removed:
+                    type: boolean
+                reserved:
+                    type: boolean
+                releaseYear:
+                    type: number
+                cond:
+                    type: object
+                tags:
+                    type: object
+                recommendation:
+                    type: boolean
+                format:
+                    type: object
+
+        BookResponse:
+            type: object
+            required:
+                - id
+                - branch
+                - added
+                - title
+                - shortDescription
+                - author
+                - genre
+                - price
+                - sold
+                - soldOn
+                - removed
+                - removedOn
+                - reserved
+                - reservedAt
+                - releaseYear
+                - cond
+                - tags
+                - reservation
+                - recommendation
+                - inventory
+                - format
+            properties:
+                id:
+                    type: string
+                branch:
+                    type: object
+                added:
+                    type: object
+                title:
+                    type: string
+                shortDescription:
+                    type: string
+                author:
+                    type: object
+                genre:
+                    type: object
+                price:
+                    type: number
+                sold:
+                    type: boolean
+                soldOn:
+                    type: object
+                removed:
+                    type: boolean
+                removedOn:
+                    type: object
+                reserved:
+                    type: boolean
+                reservedAt:
+                    type: object
+                releaseYear:
+                    type: number
+                cond:
+                    type: object
+                tags:
+                    type: object
+                reservation:
+                    type: object
+                recommendation:
+                    type: boolean
+                inventory:
+                    type: boolean
+                format:
+                    type: object
+
+        BranchRequest:
+            type: object
+            required:
+                - name
+                - steps
+                - currency
+                - ordering
+                - orderBy
+                - public
+            properties:
+                name:
+                    type: string
+                steps:
+                    type: number
+                currency:
+                    type: string
+                ordering:
+                    type: string
+                orderBy:
+                    type: string
+                public:
+                    type: boolean
+
+        BranchResponse:
+            type: object
+            required:
+                - id
+                - name
+                - steps
+                - currency
+                - ordering
+                - orderBy
+                - public
+            properties:
+                id:
+                    type: number
+                name:
+                    type: string
+                steps:
+                    type: number
+                currency:
+                    type: string
+                ordering:
+                    type: string
+                orderBy:
+                    type: string
+                public:
+                    type: boolean
+
+        ConditionRequest:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+
+        ConditionResponse:
+            type: object
+            required:
+                - id
+                - name
+                - branch
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                branch:
+                    type: object
+
+        GenreRequest:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+
+        GenreResponse:
+            type: object
+            required:
+                - id
+                - name
+                - branch
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                branch:
+                    type: object
+
+        ReservationRequest:
+            type: object
+            required:
+                - collection
+                - notes
+                - books
+            properties:
+                collection:
+                    type: object
+                notes:
+                    type: string
+                books:
+                    type: object
+
+        ReservationResponse:
+            type: object
+            required:
+                - id
+                - branch
+                - createdAt
+                - collection
+                - notes
+                - books
+            properties:
+                id:
+                    type: string
+                branch:
+                    type: object
+                createdAt:
+                    type: object
+                collection:
+                    type: object
+                notes:
+                    type: string
+                books:
+                    type: object
+
+        StaffRequest:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+
+        StaffResponse:
+            type: object
+            required:
+                - id
+                - name
+                - branch
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                branch:
+                    type: object
+
+        TagRequest:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+
+        TagResponse:
+            type: object
+            required:
+                - id
+                - name
+                - branch
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                branch:
+                    type: object
+                books:
                     type: object
 
         ErrorResponse:
