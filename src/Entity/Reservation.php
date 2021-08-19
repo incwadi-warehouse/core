@@ -107,18 +107,12 @@ class Reservation implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return Collection|Book[]
-     */
     public function getBooks(): Collection
     {
         return $this->books;
     }
 
-    /**
-     * @param Book[]|Collection<int, Book> $book
-     */
-    public function addBook(array|Collection $book): self
+    public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
