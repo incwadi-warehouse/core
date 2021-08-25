@@ -21,6 +21,8 @@ tags:
       description: Inventory
     - name: format
       description: Format
+    - name: bookmark
+      description: Bookmark
 
 paths:
     # User
@@ -572,6 +574,155 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
 
+    # bookmark
+    /bookmark/:
+        get:
+            tags:
+                - bookmark
+            description: List all bookmarks for a branch
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/BookmarkResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /bookmark/new:
+        post:
+            tags:
+                - bookmark
+            description: Create a new bookmark
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookmarkRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookmarkResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /bookmark/{id}:
+        get:
+            tags:
+                - bookmark
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the bookmark
+                  schema:
+                    type: string
+            description: Shows a bookmark
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookmarkResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        put:
+            tags:
+                - bookmark
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the bookmark
+                  schema:
+                    type: string
+            description: Edit a bookmark
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/BookmarkRequest"
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/BookmarkResponse"
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+        delete:
+            tags:
+                - bookmark
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Id of the bookmark
+                  schema:
+                    type: string
+            description: Delete a bookmark
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                required:
+                                    - msg
+                                properties:
+                                    msg:
+                                        type: string
+                "401":
+                    description: Access token is missing or invalid
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404":
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
 components:
     securitySchemes:
         bearerAuth:
@@ -881,6 +1032,31 @@ components:
                     type: string
                 branch:
                     type: object
+
+        BookmarkRequest:
+            type: object
+            required:
+                - url
+                - name
+            properties:
+                url:
+                    type: string
+                name:
+                    type: string
+
+        BookmarkResponse:
+            type: object
+            required:
+                - id
+                - url
+                - name
+            properties:
+                id:
+                    type: string
+                url:
+                    type: string
+                name:
+                    type: string
 
         ErrorResponse:
             type: object
