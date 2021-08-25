@@ -10,13 +10,42 @@ class BookTest extends WebTestCase
 
     private int $branch;
 
+    private string $book;
+
     public function setUp(): void
     {
         $this->buildClient();
 
+        // me
         $request = $this->request('/api/me', 'GET');
 
         $this->branch = $request->branch->id;
+
+        // new book
+        $request = $this->request('/api/book/new', 'POST', [], [
+            'title' => 'title',
+            'author' => 'surname,firstname',
+            'genre' => null,
+            'price' => '1.00',
+            'sold' => false,
+            'removed' => false,
+            'releaseYear' => 2019,
+            'added' => 859,
+            'cond' => null,
+            'tags' => null,
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $this->book = $request->id;
+    }
+
+    public function tearDown(): void
+    {
+        // delete book
+        $request = $this->request('/api/book/' . $this->book, 'DELETE');
+
+        $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 
     public function testScenario()
@@ -45,6 +74,31 @@ class BookTest extends WebTestCase
         }
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);
+        }
+
+        // show
+        $request = $this->request('/api/public/book/' . $this->book, 'GET');
+
+        $this->assertEquals(13, count((array) $request));
+        $this->assertIsString($request->id);
+        $this->assertIsString($request->currency);
+        $this->assertIsString($request->title);
+        if (null !== $request->shortDescription) {
+            $this->assertTrue(isset($request->shortDescription));
+        }
+        $this->assertIsString($request->authorFirstname);
+        $this->assertIsString($request->authorSurname);
+        if(null !== $request->genre) {
+            $this->assertIsString($request->genre);
+        }
+        $this->assertNotEmpty($request->price);
+        $this->assertIsInt($request->releaseYear);
+        $this->assertIsString($request->branchName);
+        if (null !== $request->branchOrdering) {
+            $this->assertIsString($request->branchOrdering);
+        }
+        if (null !== $request->cond) {
+            $this->assertIsString($request->cond);
         }
 
         // recommendation

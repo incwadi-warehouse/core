@@ -180,6 +180,32 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
 
+    /public/book/{id}:
+        get:
+            tags:
+                - public
+            description: Shows a Book
+            parameters:
+                - name: id
+                  in: path
+                  description: ID of the book
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/PublicBookResponse"
+                "404":
+                    description: Branch not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
     /public/book/recommendation/{branch}:
         get:
             tags:
@@ -591,6 +617,72 @@ components:
                     type: boolean
 
         FindBookResponse:
+            type: object
+            required:
+                - books
+                - counter
+            properties:
+                books:
+                    type: array
+                    items:
+                        type: object
+                        required:
+                            - id
+                            - currency
+                            - title
+                            - shortDescription
+                            - authorFirstname
+                            - authorSurname
+                            - genre
+                            - price
+                            - releaseYear
+                            - type
+                            - branchName
+                            - branchOrdering
+                            - cond
+                            - cover_s
+                            - cover_m
+                            - cover_l
+                            - format
+                        properties:
+                            id:
+                                type: string
+                            currency:
+                                type: string
+                            title:
+                                type: string
+                            shortDescription:
+                                type: string
+                            authorFirstname:
+                                type: string
+                            authorSurname:
+                                type: string
+                            genre:
+                                type: string
+                            price:
+                                type: integer
+                            releaseYear:
+                                type: integer
+                            type:
+                                type: string
+                            branchName:
+                                type: string
+                            branchOrdering:
+                                type: string
+                            cond:
+                                type: string
+                            cover_s:
+                                type: string
+                            cover_m:
+                                type: string
+                            cover_l:
+                                type: string
+                            format:
+                                type: string
+                counter:
+                    type: integer
+
+        PublicBookResponse:
             type: object
             required:
                 - books

@@ -32,6 +32,26 @@ class BookController extends AbstractController
         );
     }
 
+    #[Route(path: '/{id}', methods: ['GET'])]
+    public function show(Book $book): JsonResponse
+    {
+        return $this->json([
+            'id' => $book->getId(),
+            'currency' => $book->getBranch()->getCurrency(),
+            'title' => $book->getTitle(),
+            'shortDescription' => $book->getShortDescription(),
+            'authorFirstname' => $book->getAuthor()->getFirstname(),
+            'authorSurname' => $book->getAuthor()->getSurname(),
+            'genre' => $book->getGenre() ? $book->getGenre()->getName() : null,
+            'price' => $book->getPrice(),
+            'releaseYear' => $book->getReleaseYear(),
+            'branchName' => $book->getBranch()->getName(),
+            'branchOrdering' => $book->getBranch()->getOrdering(),
+            'cond' => $book->getCond() ? $book->getCond()->getName() : null,
+            'format_name' => $book->getFormat() ? $book->getFormat()->getName() : null,
+        ]);
+    }
+
     #[Route(path: '/recommendation/{branch}', methods: ['GET'])]
     public function recommendation(Branch $branch, CoverShow $cover) : JsonResponse
     {
