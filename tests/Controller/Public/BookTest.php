@@ -22,8 +22,9 @@ class BookTest extends WebTestCase
         $this->branch = $request->branch->id;
 
         // new book
+        $date = new \DateTime();
         $request = $this->request('/api/book/new', 'POST', [], [
-            'title' => 'title',
+            'title' => 'title '.$date->getTimestamp(),
             'author' => 'surname,firstname',
             'genre' => null,
             'price' => '1.00',
@@ -46,6 +47,8 @@ class BookTest extends WebTestCase
         $request = $this->request('/api/book/' . $this->book, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
+
+        parent::tearDown();
     }
 
     public function testScenario()
