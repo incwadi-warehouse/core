@@ -60,16 +60,16 @@
         },
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v0.2.11",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
-                "reference": "c9b62d58518f11605012be275a9aebbed8a15ff1"
+                "reference": "aa78a4796e46a862c4c0c2c239d8c0931d74781a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/c9b62d58518f11605012be275a9aebbed8a15ff1",
-                "reference": "c9b62d58518f11605012be275a9aebbed8a15ff1",
+                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/aa78a4796e46a862c4c0c2c239d8c0931d74781a",
+                "reference": "aa78a4796e46a862c4c0c2c239d8c0931d74781a",
                 "shasum": ""
             },
             "require": {
@@ -112,9 +112,9 @@
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
                 "issues": "https://github.com/abaldeweg/extra-bundle/issues",
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.2.11"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.3.0"
             },
-            "time": "2021-07-04T13:37:26+00:00"
+            "time": "2021-07-31T10:10:39+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
