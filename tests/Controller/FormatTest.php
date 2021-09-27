@@ -75,19 +75,14 @@ class FormatTest extends WebTestCase
 
         $id = $request->id;
 
-        // delete genre
-        $request = $this->request('/api/genre/'.$genreId, 'DELETE');
-
-        $this->assertEquals('The genre was deleted successfully.', $request->msg);
-
-        // show book
-        $request = $this->request('/api/book/'.$id, 'GET');
-
-        $this->assertEquals(null, $request->genre);
-
         // delete book
         $request = $this->request('/api/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
+
+        // delete genre
+        $request = $this->request('/api/genre/'.$genreId, 'DELETE');
+
+        $this->assertEquals('The genre was deleted successfully.', $request->msg);
     }
 }

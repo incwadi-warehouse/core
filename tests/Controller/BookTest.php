@@ -273,6 +273,8 @@ class BookTest extends WebTestCase
             'cond' => $this->conditionId,
         ]);
 
+        $id = $request->id;
+
         $this->assertIsString($request->id);
 
         $request = $this->request('/api/book/new', 'POST', [], [
@@ -288,5 +290,10 @@ class BookTest extends WebTestCase
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);
+
+        // delete
+        $request = $this->request('/api/book/' . $id, 'DELETE');
+
+        $this->assertEquals('The book was successfully deleted.', $request->msg);
     }
 }

@@ -32,25 +32,10 @@ class GenreSubscriber implements EventSubscriberInterface
         );
     }
 
-    public function preRemove(LifecycleEventArgs $args): void
-    {
-        $genre = $args->getObject();
-
-        if (!$genre instanceof Genre) {
-            return;
-        }
-
-        $books = $this->em->getRepository(Book::class)->findByGenre($genre);
-        foreach ($books as $book) {
-            $book->setGenre(null);
-        }
-    }
-
     public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist,
-            Events::preRemove,
         ];
     }
 }
