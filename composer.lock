@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "612edb8f1b3829d50de28d2dbeeb5bc6",
+    "content-hash": "deffd1f9e91adb8502922cdd5ca20c94",
     "packages": [
         {
             "name": "baldeweg/book-bundle",
@@ -60,16 +60,16 @@
         },
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v0.5.0",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
-                "reference": "664814c1640763948b6ad3b2b0266f4c13672832"
+                "reference": "8324b85b6b4f9b3f6c6564607afd0f5892c0bbdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/664814c1640763948b6ad3b2b0266f4c13672832",
-                "reference": "664814c1640763948b6ad3b2b0266f4c13672832",
+                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/8324b85b6b4f9b3f6c6564607afd0f5892c0bbdd",
+                "reference": "8324b85b6b4f9b3f6c6564607afd0f5892c0bbdd",
                 "shasum": ""
             },
             "require": {
@@ -112,9 +112,9 @@
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
                 "issues": "https://github.com/abaldeweg/extra-bundle/issues",
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.5.0"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.6.0"
             },
-            "time": "2021-10-01T18:59:45+00:00"
+            "time": "2021-10-01T21:32:41+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
