@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:8.0-node-browsers
+      - image: circleci/mysql:8.0
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: core
+          MYSQL_USER: adm
+          MYSQL_PASSWORD: password
+    steps:
+      - checkout
+      - run: sudo docker-php-ext-install zip pdo_mysql
+      - run: sudo apt update
+      - run:
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in $(seq 1 50)
+              do
+                nc -z 127.0.0.1 3306 && exit 0
+                echo .
+                sleep 1
+            done
+            echo "CAN NOT CONNECT TO MYSQL DATABASE!" && exit 1
+      - run: echo DATABASE_URL="mysql://adm:password@127.0.0.1:3306/core?serverVersion=8.0" >> .env.local
+      - run: echo DATABASE_URL="mysql://adm:password@127.0.0.1:3306/core?serverVersion=8.0" >> .env.test.local
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.lock" }}
+            - v1-dependencies-
+      - run:
+          name: "Install Dependencies"
+          command: composer install -n --prefer-dist
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.lock" }}
+          paths:
+            - ./vendor
+      - run:
+          name: "Generate Keypair"
+          command: bin/console lexik:jwt:generate-keypair
+      - run:
+          name: "Create Database"
+          command: |
+            bin/console doctrine:database:create --if-not-exists
+            bin/console doctrine:migrations:migrate -n
+            bin/console doctrine:fixtures:load -n
+      - run:
+          name: "Run tests"
+          command: bin/phpunit
