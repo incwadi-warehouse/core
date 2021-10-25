@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Reservation;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)

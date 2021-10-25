@@ -17,25 +17,27 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/find', methods: ['GET'])]
-    public function find(Request $request) : JsonResponse
+    public function find(Request $request): JsonResponse
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Author::class)->findDemanded($request->get('term'))
         );
     }
+
     /**
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Author $author) : JsonResponse
+    public function show(Author $author): JsonResponse
     {
         return $this->json($author);
     }
+
     /**
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
@@ -63,7 +65,7 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Author $author) : JsonResponse
+    public function edit(Request $request, Author $author): JsonResponse
     {
         $form = $this->createForm(AuthorType::class, $author);
 
@@ -89,7 +91,7 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Author $author) : JsonResponse
+    public function delete(Author $author): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($author);

@@ -44,7 +44,7 @@ class BookTest extends WebTestCase
     public function tearDown(): void
     {
         // delete book
-        $request = $this->request('/api/book/' . $this->book, 'DELETE');
+        $request = $this->request('/api/book/'.$this->book, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
 
@@ -80,7 +80,7 @@ class BookTest extends WebTestCase
         }
 
         // show
-        $request = $this->request('/api/public/book/' . $this->book, 'GET');
+        $request = $this->request('/api/public/book/'.$this->book, 'GET');
 
         $this->assertEquals(13, count((array) $request));
         $this->assertIsString($request->id);
@@ -91,7 +91,7 @@ class BookTest extends WebTestCase
         }
         $this->assertIsString($request->authorFirstname);
         $this->assertIsString($request->authorSurname);
-        if(null !== $request->genre) {
+        if (null !== $request->genre) {
             $this->assertIsString($request->genre);
         }
         $this->assertNotEmpty($request->price);

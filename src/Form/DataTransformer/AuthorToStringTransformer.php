@@ -2,8 +2,8 @@
 
 namespace App\Form\DataTransformer;
 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Author;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class AuthorToStringTransformer implements DataTransformerInterface

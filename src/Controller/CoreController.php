@@ -17,7 +17,7 @@ class CoreController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/me', methods: ['GET'])]
-    public function me() : JsonResponse
+    public function me(): JsonResponse
     {
         return $this->json([
             'id' => $this->getUser()->getId(),
@@ -33,7 +33,7 @@ class CoreController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/password', methods: ['PUT'])]
-    public function password(Request $request, UserPasswordEncoderInterface $encoder) : JsonResponse
+    public function password(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfilePasswordType::class, $user);

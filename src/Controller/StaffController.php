@@ -17,7 +17,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this
@@ -33,7 +33,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Staff $staff) : JsonResponse
+    public function show(Staff $staff): JsonResponse
     {
         return $this->json($staff);
     }
@@ -42,7 +42,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $staff = new Staff();
         $form = $this->createForm(StaffType::class, $staff);
@@ -70,7 +70,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Staff $staff) : JsonResponse
+    public function edit(Request $request, Staff $staff): JsonResponse
     {
         $form = $this->createForm(StaffType::class, $staff);
 
@@ -96,7 +96,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Staff $staff) : JsonResponse
+    public function delete(Staff $staff): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($staff);

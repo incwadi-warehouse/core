@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Author;
 
 /**
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)

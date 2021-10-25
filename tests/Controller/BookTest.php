@@ -292,7 +292,7 @@ class BookTest extends WebTestCase
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);
 
         // delete
-        $request = $this->request('/api/book/' . $id, 'DELETE');
+        $request = $this->request('/api/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
     }

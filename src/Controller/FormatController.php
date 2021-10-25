@@ -18,7 +18,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Format::class)->findBy(
@@ -32,7 +32,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_USER') and format.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Format $format) : JsonResponse
+    public function show(Format $format): JsonResponse
     {
         return $this->json($format);
     }
@@ -41,7 +41,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $format = new Format();
         $format->setBranch($this->getUser()->getBranch());
@@ -71,7 +71,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Format $format) : JsonResponse
+    public function edit(Request $request, Format $format): JsonResponse
     {
         $form = $this->createForm(FormatType::class, $format);
 
@@ -97,7 +97,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Format $format) : JsonResponse
+    public function delete(Format $format): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $books = $em->getRepository(Book::class)->findBy(

@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InventoryRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 
 #[Entity(repositoryClass: InventoryRepository::class)]
@@ -41,7 +41,7 @@ class Inventory implements \JsonSerializable
             'id' => $this->getId(),
             'branch' => $this->getBranch(),
             'startedAt' => $this->getStartedAt()->getTimestamp(),
-            'endedAt' => $this->getEndedAt() !== null ? $this->getEndedAt()->getTimestamp() : null,
+            'endedAt' => null !== $this->getEndedAt() ? $this->getEndedAt()->getTimestamp() : null,
             'found' => $this->getFound(),
             'notFound' => $this->getNotFound(),
         ];

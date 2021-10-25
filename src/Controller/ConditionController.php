@@ -17,7 +17,7 @@ class ConditionController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this
@@ -33,7 +33,7 @@ class ConditionController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $condition = new Condition();
         $form = $this->createForm(ConditionType::class, $condition);
@@ -61,7 +61,7 @@ class ConditionController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === condition.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Condition $condition) : JsonResponse
+    public function show(Condition $condition): JsonResponse
     {
         return $this->json($condition);
     }
@@ -70,7 +70,7 @@ class ConditionController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Condition $condition) : JsonResponse
+    public function edit(Request $request, Condition $condition): JsonResponse
     {
         $form = $this->createForm(ConditionType::class, $condition);
 
@@ -96,7 +96,7 @@ class ConditionController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === condition.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Condition $condition) : JsonResponse
+    public function delete(Condition $condition): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($condition);

@@ -17,7 +17,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this
@@ -34,7 +34,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Inventory $inventory) : JsonResponse
+    public function show(Inventory $inventory): JsonResponse
     {
         return $this->json($inventory);
     }
@@ -43,7 +43,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $active = $this
             ->getDoctrine()
@@ -78,7 +78,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Inventory $inventory) : JsonResponse
+    public function edit(Request $request, Inventory $inventory): JsonResponse
     {
         $form = $this->createForm(InventoryType::class, $inventory);
 
@@ -105,7 +105,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Inventory $inventory) : JsonResponse
+    public function delete(Inventory $inventory): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($inventory);
