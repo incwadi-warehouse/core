@@ -2,12 +2,12 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Author;
+use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use App\Entity\Author;
-use App\Entity\Book;
 
 class AuthorSubscriber implements EventSubscriberInterface
 {

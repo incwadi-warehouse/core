@@ -17,7 +17,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/list', methods: ['GET'])]
-    public function list() : JsonResponse
+    public function list(): JsonResponse
     {
         return $this->json(
             $this
@@ -34,7 +34,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER') and reservation.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Reservation $reservation) : JsonResponse
+    public function show(Reservation $reservation): JsonResponse
     {
         return $this->json($reservation);
     }
@@ -43,7 +43,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -73,7 +73,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === reservation.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Reservation $reservation) : JsonResponse
+    public function edit(Request $request, Reservation $reservation): JsonResponse
     {
         $form = $this->createForm(ReservationType::class, $reservation);
 
@@ -100,7 +100,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === reservation.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Reservation $reservation) : JsonResponse
+    public function delete(Reservation $reservation): JsonResponse
     {
         foreach ($reservation->getBooks() as $book) {
             if ($book->getReserved()) {

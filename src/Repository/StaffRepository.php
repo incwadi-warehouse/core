@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Staff;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Staff;
 
 /**
  * @method Staff|null find($id, $lockMode = null, $lockVersion = null)

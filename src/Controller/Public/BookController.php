@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     #[Route(path: '/find', methods: ['GET'])]
-    public function find(Request $request) : JsonResponse
+    public function find(Request $request): JsonResponse
     {
         return $this->json(
             $this
@@ -53,7 +53,7 @@ class BookController extends AbstractController
     }
 
     #[Route(path: '/recommendation/{branch}', methods: ['GET'])]
-    public function recommendation(Branch $branch, CoverShow $cover) : JsonResponse
+    public function recommendation(Branch $branch, CoverShow $cover): JsonResponse
     {
         if (!$branch->getPublic()) {
             return $this->json(['books' => [], 'counter' => 0]);
@@ -86,7 +86,7 @@ class BookController extends AbstractController
                     'format_name' => $book->getFormat() ? $book->getFormat()->getName() : null,
                     'branchName' => $book->getBranch()->getName(),
                     'branchOrdering' => $book->getBranch()->getOrdering(),
-                    'cond' => $book->getCond() !== null ? $book->getCond()->getName() : null,
+                    'cond' => null !== $book->getCond() ? $book->getCond()->getName() : null,
                 ],
                 $cover->show($book)
             );
@@ -99,7 +99,7 @@ class BookController extends AbstractController
     }
 
     #[Route(path: '/cover/{book}_{dimensions}.jpg', methods: ['GET'])]
-    public function image(Book $book, string $dimensions) : BinaryFileResponse
+    public function image(Book $book, string $dimensions): BinaryFileResponse
     {
         $width = (int) explode('x', $dimensions)[0];
         $filename = $book->getId().'-l.jpg';

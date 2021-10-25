@@ -2,12 +2,12 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Book;
+use App\Entity\Inventory;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use App\Entity\Book;
-use App\Entity\Inventory;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class InventorySubscriber implements EventSubscriberInterface

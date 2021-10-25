@@ -17,7 +17,7 @@ class BranchController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this->isGranted('ROLE_ADMIN') ?
@@ -32,7 +32,7 @@ class BranchController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Branch $branch) : JsonResponse
+    public function show(Branch $branch): JsonResponse
     {
         return $this->json($branch);
     }
@@ -41,7 +41,7 @@ class BranchController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === branch")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Branch $branch) : JsonResponse
+    public function edit(Request $request, Branch $branch): JsonResponse
     {
         $form = $this->createForm(BranchType::class, $branch);
 

@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Format;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Format;
 
 /**
  * @method Format|null find($id, $lockMode = null, $lockVersion = null)

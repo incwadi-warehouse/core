@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\SavedSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\SavedSearch;
 
 /**
  * @method SavedSearch|null find($id, $lockMode = null, $lockVersion = null)

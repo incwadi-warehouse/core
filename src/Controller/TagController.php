@@ -17,7 +17,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this->getDoctrine()->getRepository(Tag::class)->findByBranch(
@@ -30,7 +30,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_USER') and tag.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Tag $tag) : JsonResponse
+    public function show(Tag $tag): JsonResponse
     {
         return $this->json($tag);
     }
@@ -39,7 +39,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $content = json_decode(
             $request->getContent(),
@@ -79,7 +79,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Tag $tag) : JsonResponse
+    public function edit(Request $request, Tag $tag): JsonResponse
     {
         $form = $this->createForm(TagType::class, $tag);
 
@@ -105,7 +105,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Tag $tag) : JsonResponse
+    public function delete(Tag $tag): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         foreach ($tag->getBooks() as $book) {

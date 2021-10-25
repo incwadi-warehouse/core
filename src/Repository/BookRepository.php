@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use Baldeweg\Bundle\BookBundle\Search\Find;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Book;
 use App\Entity\Branch;
 use App\Service\Cover\CoverRemove;
+use Baldeweg\Bundle\BookBundle\Search\Find;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -44,7 +44,7 @@ class BookRepository extends ServiceEntityRepository
             'reservedAt',
             'releaseYear',
             'recommendation',
-            'format'
+            'format',
         ];
         if ($isPublic) {
             if (strlen($options['term']) < 1) {

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BranchController extends AbstractController
 {
     #[Route(path: '/', methods: ['GET'])]
-    public function branch() : JsonResponse
+    public function branch(): JsonResponse
     {
         $branches = $this
                 ->getDoctrine()

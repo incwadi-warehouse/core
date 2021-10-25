@@ -2,11 +2,10 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Staff;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use App\Entity\Staff;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class StaffSubscriber implements EventSubscriberInterface

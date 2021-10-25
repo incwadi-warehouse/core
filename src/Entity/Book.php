@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
+use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\BookRepository;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Entity(repositoryClass: BookRepository::class)]
 class Book implements \JsonSerializable
@@ -36,7 +36,7 @@ class Book implements \JsonSerializable
     #[ORM\ManyToOne(targetEntity: Genre::class, inversedBy: 'books')]
     private ?Genre $genre = null;
 
-    #[Assert\Type(type: "float")]
+    #[Assert\Type(type: 'float')]
     #[Assert\GreaterThanOrEqual(0.00)]
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $price = 0.00;

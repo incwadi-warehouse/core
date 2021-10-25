@@ -2,12 +2,12 @@
 
 namespace App\Service\Portability;
 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Branch;
 use App\Entity\Genre;
 use App\Entity\Staff;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;

@@ -17,14 +17,14 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return $this->json(
             $this
                 ->getDoctrine()
                 ->getRepository(Bookmark::class)
                 ->findBy([
-                    'branch' => $this->getUser()->getBranch()
+                    'branch' => $this->getUser()->getBranch(),
                 ])
         );
     }
@@ -33,7 +33,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === bookmark.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
-    public function show(Bookmark $bookmark) : JsonResponse
+    public function show(Bookmark $bookmark): JsonResponse
     {
         return $this->json($bookmark);
     }
@@ -42,7 +42,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request) : JsonResponse
+    public function new(Request $request): JsonResponse
     {
         $bookmark = new Bookmark();
         $bookmark->setBranch($this->getUser()->getBranch());
@@ -75,7 +75,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === bookmark.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Bookmark $bookmark) : JsonResponse
+    public function edit(Request $request, Bookmark $bookmark): JsonResponse
     {
         $editForm = $this->createForm(BookmarkType::class, $bookmark);
         $editForm->submit(
@@ -101,7 +101,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === bookmark.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Bookmark $bookmark) : JsonResponse
+    public function delete(Bookmark $bookmark): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($bookmark);

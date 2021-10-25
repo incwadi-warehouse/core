@@ -2,12 +2,11 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use App\Entity\Book;
-use App\Entity\Genre;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class GenreSubscriber implements EventSubscriberInterface

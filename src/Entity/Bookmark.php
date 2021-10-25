@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\BookmarkRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\BookmarkRepository;
-use App\Entity\Branch;
 
 #[ORM\Entity(repositoryClass: BookmarkRepository::class)]
 class Bookmark implements \JsonSerializable
@@ -15,10 +14,8 @@ class Bookmark implements \JsonSerializable
     #[ORM\Column(type: 'guid')]
     private string $id;
 
-
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     private Branch $branch;
-
 
     #[Assert\Url]
     #[ORM\Column(type: 'string', length: '255')]
