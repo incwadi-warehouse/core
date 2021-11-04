@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Finder\Finder;
 
 #[Route(path: '/api/book')]
 class BookController extends AbstractController
@@ -84,12 +85,20 @@ class BookController extends AbstractController
             'removed' => true,
         ]));
 
+        $finder = new Finder();
+        $finder->files()->in(__DIR__ . '/../../data/');
+        $size = 0;
+        foreach ($finder as $file) {
+            $size = $size + $file->getSize();
+        }
+
         return $this->json([
             'all' => $all,
             'available' => $available,
             'reserved' => $reserved,
             'sold' => $sold,
             'removed' => $removed,
+            'storage' => $size / 1000000
         ]);
     }
 
