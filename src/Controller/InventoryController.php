@@ -75,7 +75,7 @@ class InventoryController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_USER') and inventory.getBranch() === user.getBranch()")
+     * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
     public function edit(Request $request, Inventory $inventory): JsonResponse
