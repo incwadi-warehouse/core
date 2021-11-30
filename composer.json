@@ -33,7 +33,7 @@
     "friendsofphp/php-cs-fixer": "^3.0",
     "mikey179/vfsstream": "^1.6",
     "phploc/phploc": "^7.0",
-    "rector/rector": "^0.11",
+    "rector/rector": "^0.12",
     "symfony/browser-kit": "^5.3",
     "symfony/debug-bundle": "^5.3",
     "symfony/maker-bundle": "^1.31",
