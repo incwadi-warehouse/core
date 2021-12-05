@@ -26,7 +26,7 @@ waitForServer()
 {
   for i in $(seq 1 60)
     do
-      nc -z db 3306 && setup && return 0
+      nc -z $DATABASE_HOST 3306 && setup && return 0
       echo .
       sleep 1
   done
