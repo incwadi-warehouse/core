@@ -39,9 +39,10 @@ class BookToStringTransformer implements DataTransformerInterface
             $found = $this->em->getRepository(Book::class)->find(
                 $item
             );
-            if ($this->tokenStorage->getToken()->getUser()->getBranch() === $found->getBranch()) {
+            // @fix
+            // if ($this->tokenStorage->getToken()->getUser()->getBranch() === $found->getBranch()) {
                 $books[] = $found;
-            }
+            // }
         }
 
         return $books;

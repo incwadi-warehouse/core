@@ -22,9 +22,16 @@ class ReservationSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $reservation->setBranch(
-            $this->token->getToken()->getUser()->getBranch()
-        );
+        // @fix
+        if ($this->token->getToken()->getUser() === 'anon.') {
+            $reservation->setBranch(
+                $reservation->getBooks()[0]->getBranch()
+            );
+        } else {
+            $reservation->setBranch(
+                $this->token->getToken()->getUser()->getBranch()
+            );
+        }
 
         foreach ($reservation->getBooks() as $book) {
             $book->setReserved(true);
