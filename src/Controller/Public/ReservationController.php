@@ -31,7 +31,7 @@ class ReservationController extends AbstractController
             $em->persist($reservation);
             $em->flush();
 
-            return $this->json(['msg'=>'SUCCESS']);
+            return $this->json(['msg' => 'SUCCESS']);
         }
 
         return $this->json([

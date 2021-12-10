@@ -22,15 +22,23 @@ class ReservationSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // @fix
+        $branch = $reservation->getBooks()[0]->getBranch();
+
         if ($this->token->getToken()->getUser() === 'anon.') {
-            $reservation->setBranch(
-                $reservation->getBooks()[0]->getBranch()
-            );
+            $reservation->setBranch($branch);
         } else {
             $reservation->setBranch(
                 $this->token->getToken()->getUser()->getBranch()
             );
+        }
+
+        foreach ($reservation->getBooks() as $book) {
+            if ($book->getBranch() !== $branch) {
+                throw new \Exception('Not the correct branch.');
+            }
+            if ($book->getSold() || $book->getRemoved() || $book->getReserved()) {
+                throw new \Exception('Not available.');
+            }
         }
 
         foreach ($reservation->getBooks() as $book) {
