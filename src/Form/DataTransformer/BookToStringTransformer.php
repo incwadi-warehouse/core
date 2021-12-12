@@ -36,13 +36,9 @@ class BookToStringTransformer implements DataTransformerInterface
         $data = explode(',', $data);
         $books = [];
         foreach ($data as $item) {
-            $found = $this->em->getRepository(Book::class)->find(
+            $books[] = $this->em->getRepository(Book::class)->find(
                 $item
             );
-            // @fix
-            // if ($this->tokenStorage->getToken()->getUser()->getBranch() === $found->getBranch()) {
-                $books[] = $found;
-            // }
         }
 
         return $books;
