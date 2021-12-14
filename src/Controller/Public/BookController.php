@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 #[Route(path: '/api/public/book')]
 class BookController extends AbstractController
@@ -32,6 +34,9 @@ class BookController extends AbstractController
         );
     }
 
+    /**
+     * @Security("!book.getSold() and !book.getRemoved() and !book.getReserved()")
+     */
     #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Book $book): JsonResponse
     {
