@@ -5,6 +5,9 @@
     "baldeweg/extra-bundle": {
         "version": "v0.1.0"
     },
+    "composer/pcre": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "3.2.2"
     },

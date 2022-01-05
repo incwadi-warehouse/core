@@ -82,7 +82,7 @@ class BookTest extends WebTestCase
         // show
         $request = $this->request('/api/public/book/'.$this->book, 'GET');
 
-        $this->assertEquals(13, count((array) $request));
+        $this->assertEquals(14, count((array) $request));
         $this->assertIsString($request->id);
         $this->assertIsString($request->currency);
         $this->assertIsString($request->title);
@@ -103,6 +103,7 @@ class BookTest extends WebTestCase
         if (null !== $request->cond) {
             $this->assertIsString($request->cond);
         }
+        $this->assertIsBool($request->branchCart);
 
         // recommendation
         $request = $this->request('/api/public/book/recommendation/'.$this->branch, 'GET');
