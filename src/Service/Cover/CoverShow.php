@@ -6,7 +6,7 @@ use App\Entity\Book;
 
 class CoverShow
 {
-    private $path = __DIR__.'/../../../data/';
+    private $path = __DIR__. '/../../../data/cover/';
 
     public function setPath(string $path): void
     {
