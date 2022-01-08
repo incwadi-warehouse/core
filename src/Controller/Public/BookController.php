@@ -4,7 +4,7 @@ namespace App\Controller\Public;
 
 use App\Entity\Book;
 use App\Entity\Branch;
-use App\Service\Cover\CoverShow;
+use App\Service\Cover\ShowCover;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -59,7 +59,7 @@ class BookController extends AbstractController
     }
 
     #[Route(path: '/recommendation/{branch}', methods: ['GET'])]
-    public function recommendation(Branch $branch, CoverShow $cover): JsonResponse
+    public function recommendation(Branch $branch, ShowCover $cover): JsonResponse
     {
         if (!$branch->getPublic()) {
             return $this->json(['books' => [], 'counter' => 0]);
@@ -105,24 +105,23 @@ class BookController extends AbstractController
     }
 
     #[Route(path: '/cover/{book}_{dimensions}.jpg', methods: ['GET'])]
-    public function image(Book $book, string $dimensions): BinaryFileResponse
+    public function image(Book $book, string $dimensions, ShowCover $cover): BinaryFileResponse
     {
         $width = (int) explode('x', $dimensions)[0];
-        $filename = $book->getId().'-l.jpg';
-        if ($width < 400) {
-            $filename = $book->getId().'-m.jpg';
-        }
-        if ($width < 200) {
-            $filename = $book->getId().'-s.jpg';
-        }
-        $path = __DIR__.'/../../../data/cover/'.$filename;
 
-        if (!is_file($path)) {
-            $path = __DIR__.'/../../Service/Cover/none.jpg';
+        $size = 's';
+        if ($width >= 200) {
+            $size = 'm';
         }
+        if ($width >= 400) {
+            $size = 'l';
+        }
+
+        $file = $cover->getCoverPath($size, $book->getId());
+        $filename = $book->getId().'-'.$size.'.jpg';
 
         return $this->file(
-            $path,
+            $file,
             $filename,
             ResponseHeaderBag::DISPOSITION_INLINE
         );

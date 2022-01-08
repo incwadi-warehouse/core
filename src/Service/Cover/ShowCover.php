@@ -3,16 +3,10 @@
 namespace App\Service\Cover;
 
 use App\Entity\Book;
+use Symfony\Component\Filesystem\Filesystem;
 
-class CoverShow
+class ShowCover extends AbstractCover
 {
-    private $path = __DIR__. '/../../../data/cover/';
-
-    public function setPath(string $path): void
-    {
-        $this->path = $path;
-    }
-
     public function show(Book $book): array
     {
         return [
@@ -22,10 +16,24 @@ class CoverShow
         ];
     }
 
+    public function getCoverPath(string $size, string $id): string
+    {
+        $filesystem = new Filesystem();
+        $filename = $this->getPath() . $id . '-' . $size . '.jpg';
+
+        if ($filesystem->exists($filename)) {
+            return $filename;
+        }
+
+        return __DIR__ . '/none.jpg';
+    }
+
     private function getCover(string $size, string $id): ?string
     {
-        $filename = $this->path.$id.'-'.$size.'.jpg';
-        if (is_file($filename)) {
+        $filesystem = new Filesystem();
+        $filename = $this->getPath().$id.'-'.$size.'.jpg';
+
+        if ($filesystem->exists($filename)) {
             return 'data:image/jpeg;base64,'.base64_encode(
                 file_get_contents($filename)
             );

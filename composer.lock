@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c787bdd664aeeb04bf345d2ee8a40cf6",
+    "content-hash": "50ac1dc364b62bb25c9d3728fdb4da1a",
     "packages": [
         {
             "name": "baldeweg/book-bundle",
@@ -8639,5 +8639,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

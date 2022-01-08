@@ -6,9 +6,9 @@ use App\Entity\Book;
 use App\Entity\Inventory;
 use App\Form\BookCoverType;
 use App\Form\BookType;
-use App\Service\Cover\CoverRemove;
-use App\Service\Cover\CoverShow;
-use App\Service\Cover\CoverUpload;
+use App\Service\Cover\RemoveCover;
+use App\Service\Cover\ShowCover;
+use App\Service\Cover\UploadCover;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -246,7 +246,7 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/cover/{id}', methods: ['GET'])]
-    public function showCover(Book $book, CoverShow $cover): JsonResponse
+    public function showCover(Book $book, ShowCover $cover): JsonResponse
     {
         return $this->json($cover->show($book));
     }
@@ -255,14 +255,14 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/cover/{id}', methods: ['POST'])]
-    public function cover(Request $request, Book $book, CoverUpload $coverUpload): JsonResponse
+    public function cover(Request $request, Book $book, UploadCover $cover): JsonResponse
     {
         $form = $this->createForm(BookCoverType::class, $book);
         $form->submit(['cover' => $request->files->get('cover')]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('cover')->getData();
-            $coverUpload->upload($book, $file);
+            $cover->upload($book, $file);
 
             return $this->json($book);
         }
@@ -274,7 +274,7 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/cover/{id}', methods: ['DELETE'])]
-    public function deleteCover(Book $book, CoverRemove $cover): JsonResponse
+    public function deleteCover(Book $book, RemoveCover $cover): JsonResponse
     {
         $cover->remove($book);
 
@@ -339,7 +339,7 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Book $book, CoverRemove $cover): JsonResponse
+    public function delete(Book $book, RemoveCover $cover): JsonResponse
     {
         $cover->remove($book);
 

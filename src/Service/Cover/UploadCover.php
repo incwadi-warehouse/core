@@ -4,31 +4,17 @@ namespace App\Service\Cover;
 
 use App\Entity\Book;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Filesystem;
 
-class CoverUpload
+class UploadCover extends AbstractCover
 {
-    /**
-     * @var array<string, int>
-     */
-    private const SIZES = ['l' => 400, 'm' => 200, 's' => 100];
-
-    /**
-     * @var int
-     */
-    private const QUALITY = 75;
-
-    private $path = __DIR__.'/../../../data/cover/';
-
     public function __construct()
     {
-        if (!is_dir($this->path)) {
-            mkdir($this->path);
-        }
-    }
+        $filesystem = new Filesystem();
 
-    public function setPath(string $path): void
-    {
-        $this->path = $path;
+        if (!$filesystem->exists($this->getPath())) {
+            $filesystem->mkdir($this->getPath());
+        }
     }
 
     public function upload(Book $book, UploadedFile $file): void
@@ -55,8 +41,10 @@ class CoverUpload
 
     private function resize($image, int $width, string $suffix, string $id): void
     {
-        $filename = $this->path.$id.'-'.$suffix.'.jpg';
-        if (file_exists($filename)) {
+        $filesystem = new Filesystem();
+        $filename = $this->getPath().$id.'-'.$suffix.'.jpg';
+
+        if ($filesystem->exists($filename)) {
             throw new \Exception('File does exist already.');
         }
         imagejpeg(

@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use App\Entity\Branch;
-use App\Service\Cover\CoverRemove;
+use App\Service\Cover\RemoveCover;
 use Baldeweg\Bundle\BookBundle\Search\Find;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +22,7 @@ class BookRepository extends ServiceEntityRepository
      */
     public const KEEP_REMOVED_DAYS = 28;
 
-    public function __construct(ManagerRegistry $registry, private CoverRemove $cover, private Find $find)
+    public function __construct(ManagerRegistry $registry, private RemoveCover $cover, private Find $find)
     {
         parent::__construct($registry, Book::class);
     }
