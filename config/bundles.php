@@ -15,4 +15,5 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Baldeweg\Bundle\ExtraBundle\BaldewegExtraBundle::class => ['all' => true],
     Baldeweg\Bundle\BookBundle\BaldewegBookBundle::class => ['all' => true],
+    Baldeweg\Bundle\ApiBundle\BaldewegApiBundle::class => ['all' => true],
 ];
