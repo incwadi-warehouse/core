@@ -8,7 +8,7 @@ use Symfony\Component\Filesystem\Path;
 
 class Directory implements DirectoryInterface
 {
-    private string $basePath = __DIR__ . '/../../../data/directory/';
+    private string $basePath = __DIR__ . '/../../../data/directory';
 
     public function __construct()
     {
@@ -64,19 +64,18 @@ class Directory implements DirectoryInterface
 
     public function list(string $dir = './'): array
     {
-        if (!is_dir($dir)) {
+        $absolutePath = $this->makeAbsolute($dir);
+
+        if (!is_dir($absolutePath)) {
             return [];
         }
-
-
-        $absolutePath = $this->makeAbsolute($dir);
 
         if (!$this->isInBasePath($absolutePath)) {
             return [];
         }
 
         $finder = new Finder();
-        $finder->in($absolutePath);
+        $finder->in($absolutePath)->depth('== 0');
 
         $items = [];
         foreach ($finder as $item) {
@@ -121,6 +120,6 @@ class Directory implements DirectoryInterface
 
     private function isInBasePath(string $path): bool
     {
-        return (bool)preg_match('#^' . $this->getBasePath() . '#', $path);
+        return (bool)preg_match('#^' . Path::canonicalize($this->getBasePath()) . '#', $path);
     }
 }
