@@ -78,10 +78,24 @@ class Directory implements DirectoryInterface
         $finder->in($absolutePath)->depth('== 0');
 
         $items = [];
+        $items['details']['parent'] = [
+            'name' => '../',
+            'path' => Path::makeRelative($absolutePath . '/../', $this->basePath),
+            'isFile' => false,
+            'isDir' => true,
+            'size' => 0
+        ];
+        $items['details']['current'] = [
+            'name' => './',
+            'path' => Path::makeRelative($absolutePath, $this->basePath),
+            'isFile' => false,
+            'isDir' => true,
+            'size' => 0
+        ];
         foreach ($finder as $item) {
-            $items[] = [
+            $items['contents'][] = [
                 'name' => $item->getFilename(),
-                'path' => $item->getRelativePathname(),
+                'path' => Path::makeRelative($item->getPathname(), $this->basePath),
                 'isFile' => $item->isFile(),
                 'isDir' => $item->isDir(),
                 'size' => $item->getSize()

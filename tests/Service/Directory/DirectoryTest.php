@@ -42,7 +42,7 @@ class DirectoryTest extends TestCase
         // list directory
         $dir = $directory->list('./');
         $this->assertIsArray($dir);
-        $this->assertEquals(6, count($dir));
+        $this->assertEquals(2, count($dir));
 
         // remove file
         $directory->remove('file', 'test');
