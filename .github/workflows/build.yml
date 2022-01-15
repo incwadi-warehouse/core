@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - 34
+      - main
 jobs:
   build:
     name: Build
