@@ -13,7 +13,8 @@ class DirectoryTest extends WebTestCase
         // list
         $request = $this->request('/api/directory/', 'GET', [ 'dir'=> './' ]);
 
-        $this->assertIsArray($request);
+        $this->assertTrue(isset($request->details));
+        $this->assertTrue(isset($request->contents));
 
         // // new
         // $request = $this->request('/api/directory/new', 'POST', [], [
