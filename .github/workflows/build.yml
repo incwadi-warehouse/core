@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main # or the name of your main branch
+      - 34 # or the name of your main branch
 jobs:
   build:
     name: Build
