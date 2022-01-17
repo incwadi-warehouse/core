@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Directory\Directory;
+use App\Service\Cover\UploadCover;
+use App\Entity\Book;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Filesystem\Path;
 
 /**
  * @Route("/api/directory")
@@ -24,6 +28,27 @@ class DirectoryController extends AbstractApiController
     {
         $elements = $directory->list($request->query->get('dir'));
         return $this->json($elements);
+    }
+
+    /**
+     * @Route("/cover/{book}", methods={"POST"})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function cover(Directory $directory, Request $request, Book $book, UploadCover $cover): JsonResponse
+    {
+        $content = json_decode($request->getContent());
+        $absolutePath = Path::makeAbsolute($content->url, __DIR__ . '/../../data/directory/');
+
+        if (!preg_match('#^'. Path::canonicalize(__DIR__ . '/../../data/directory/').'#', $absolutePath)) {
+            throw $this->createNotFoundException();
+        }
+
+        $file = new File(__DIR__ . '/../../data/directory/'. $content->url);
+        $file->openFile();
+
+        $cover->upload($book, $file);
+
+        return $this->json($book);
     }
 
     // /**

@@ -17,7 +17,7 @@ class UploadCover extends AbstractCover
         }
     }
 
-    public function upload(Book $book, UploadedFile $file): void
+    public function upload(Book $book, \SplFileInfo $file): void
     {
         $image = $this->createImage($file);
         foreach (self::SIZES as $suffix => $size) {
@@ -25,7 +25,7 @@ class UploadCover extends AbstractCover
         }
     }
 
-    private function createImage(UploadedFile $file)
+    private function createImage(\SplFileInfo $file)
     {
         $mimeType = $file->getMimeType();
         if (in_array($mimeType, ['image/jpeg', 'image/jpg'])) {
