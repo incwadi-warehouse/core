@@ -98,7 +98,8 @@ class Directory implements DirectoryInterface
                 'path' => Path::makeRelative($item->getPathname(), $this->basePath),
                 'isFile' => $item->isFile(),
                 'isDir' => $item->isDir(),
-                'size' => $item->getSize()
+                'size' => $item->getSize(),
+                'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null
             ];
         }
 
@@ -135,5 +136,27 @@ class Directory implements DirectoryInterface
     private function isInBasePath(string $path): bool
     {
         return (bool)preg_match('#^' . Path::canonicalize($this->getBasePath()) . '#', $path);
+    }
+
+    private function readDoc($filename): ?string
+    {
+        if(!file_exists($filename)) {
+            return null;
+        }
+
+        $zip = new \ZipArchive();
+        $zip->open($filename);
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            if ('word/document.xml' === $zip->getNameIndex($i)) {
+                return trim(
+                    strip_tags(
+                        $zip->getFromIndex($i)
+                    )
+                );
+            }
+        }
+
+        return null;
     }
 }
