@@ -81,16 +81,10 @@ class Directory implements DirectoryInterface
         $items['details']['parent'] = [
             'name' => '../',
             'path' => Path::makeRelative($absolutePath . '/../', $this->basePath),
-            'isFile' => false,
-            'isDir' => true,
-            'size' => 0
         ];
         $items['details']['current'] = [
             'name' => './',
             'path' => Path::makeRelative($absolutePath, $this->basePath),
-            'isFile' => false,
-            'isDir' => true,
-            'size' => 0
         ];
         foreach ($finder as $item) {
             $items['contents'][] = [
