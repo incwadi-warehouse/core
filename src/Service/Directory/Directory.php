@@ -75,7 +75,7 @@ class Directory implements DirectoryInterface
         }
 
         $finder = new Finder();
-        $finder->in($absolutePath)->depth('== 0');
+        $finder->in($absolutePath)->depth('== 0')->sortByName()->sortByType();
 
         $items = [];
         $items['details']['parent'] = [
