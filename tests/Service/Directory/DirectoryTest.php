@@ -27,17 +27,17 @@ class DirectoryTest extends TestCase
         $this->assertTrue(is_dir($path . '/test/dir2'));
 
         // create file
-        $directory->touch('file', 'test');
-        $this->assertTrue(is_file($path . '/test/file'));
+        $directory->touch('file.jpg', 'test');
+        $this->assertTrue(is_file($path . '/test/file.jpg'));
 
-        $directory->touch('file', 'test/dir');
-        $this->assertTrue(is_file($path . '/test/dir/file'));
+        $directory->touch('file.jpg', 'test/dir');
+        $this->assertTrue(is_file($path . '/test/dir/file.jpg'));
 
-        $directory->touch('file2', 'test/dir/../');
-        $this->assertTrue(is_file($path . '/test/file2'));
+        $directory->touch('file2.jpg', 'test/dir/../');
+        $this->assertTrue(is_file($path . '/test/file2.jpg'));
 
-        $directory->touch('file:', '/test');
-        $this->assertFalse(is_file($path . '/test/file:'));
+        $directory->touch('file:.jpg', '/test');
+        $this->assertFalse(is_file($path . '/test/file:.jpg'));
 
         // list directory
         $dir = $directory->list('./');
@@ -45,10 +45,10 @@ class DirectoryTest extends TestCase
         $this->assertEquals(2, count($dir));
 
         // remove file
-        $directory->remove('file', 'test');
-        $directory->remove('file', 'test/dir');
-        $directory->remove('file2', 'test');
-        $this->assertTrue(!is_file($path . '/test/file'));
+        $directory->remove('file.jpg', 'test');
+        $directory->remove('file.jpg', 'test/dir');
+        $directory->remove('file2.jpg', 'test');
+        $this->assertTrue(!is_file($path . '/test/file.jpg'));
 
         // remove directory
         $directory->remove('dir', 'test');
