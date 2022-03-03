@@ -40,7 +40,7 @@ class DirectoryTest extends TestCase
         $this->assertFalse(is_file($path . '/test/file:.jpg'));
 
         // list directory
-        $dir = $directory->list('./');
+        $dir = $directory->list('./test/');
         $this->assertIsArray($dir);
         $this->assertEquals(2, count($dir));
 
