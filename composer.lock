@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e480ecf463b56755cd179cca66e8e6c5",
+    "content-hash": "144e5124261a09bb3051e6038f4fc457",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
@@ -62,16 +62,16 @@
         },
         {
             "name": "baldeweg/book-bundle",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/incwadi-warehouse/book-bundle.git",
-                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12"
+                "reference": "218c35a9c0fbcc5d2934acaabb913870aa8e63ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
-                "reference": "73d1fc9f9a8a64e7fa63c50a1e0e89b0af493c12",
+                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/218c35a9c0fbcc5d2934acaabb913870aa8e63ba",
+                "reference": "218c35a9c0fbcc5d2934acaabb913870aa8e63ba",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.11",
+                "rector/rector": "^0.12",
                 "symfony/browser-kit": "^5.3",
                 "symfony/maker-bundle": "^1.31",
                 "symfony/var-dumper": "^5.3"
@@ -108,9 +108,9 @@
             "description": "Offers tools for management of books.",
             "support": {
                 "issues": "https://github.com/incwadi-warehouse/book-bundle/issues",
-                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.2.0"
+                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.3.0"
             },
-            "time": "2021-08-09T19:16:56+00:00"
+            "time": "2022-01-22T11:14:12+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
@@ -5180,12 +5180,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5333,12 +5333,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php73\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -5412,12 +5412,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -5495,12 +5495,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php81\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php81\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
