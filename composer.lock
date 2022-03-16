@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35b7592dabba207f823ccd38d0223cad",
+    "content-hash": "c4d3e6fb753f9a9caab9963c54824cb1",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
@@ -62,32 +62,32 @@
         },
         {
             "name": "baldeweg/book-bundle",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/incwadi-warehouse/book-bundle.git",
-                "reference": "218c35a9c0fbcc5d2934acaabb913870aa8e63ba"
+                "reference": "1f599677c47989f2b560691bfdc519bf382b5ee4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/218c35a9c0fbcc5d2934acaabb913870aa8e63ba",
-                "reference": "218c35a9c0fbcc5d2934acaabb913870aa8e63ba",
+                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/1f599677c47989f2b560691bfdc519bf382b5ee4",
+                "reference": "1f599677c47989f2b560691bfdc519bf382b5ee4",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.9",
-                "php": ">=8.0",
-                "symfony/config": "^5.3",
-                "symfony/dependency-injection": "^5.3",
-                "symfony/http-kernel": "^5.3"
+                "php": ">=8.1",
+                "symfony/config": "^5.4|^6.0",
+                "symfony/dependency-injection": "^5.4|^6.0",
+                "symfony/http-kernel": "^5.4|^6.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpunit/phpunit": "^9.5",
                 "rector/rector": "^0.12",
-                "symfony/browser-kit": "^5.3",
+                "symfony/browser-kit": "^5.4|^6.0",
                 "symfony/maker-bundle": "^1.31",
-                "symfony/var-dumper": "^5.3"
+                "symfony/var-dumper": "^5.4|^6.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -108,9 +108,9 @@
             "description": "Offers tools for management of books.",
             "support": {
                 "issues": "https://github.com/incwadi-warehouse/book-bundle/issues",
-                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.3.0"
+                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.4.0"
             },
-            "time": "2022-01-22T11:14:12+00:00"
+            "time": "2022-03-10T11:45:07+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
