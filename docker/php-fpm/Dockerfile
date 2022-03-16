@@ -25,6 +25,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # run
 WORKDIR /usr/local/apache2/htdocs
 
+COPY . .
+
 CMD composer install; composer dump-env prod; /entry.sh; php-fpm
 
 EXPOSE 9000
