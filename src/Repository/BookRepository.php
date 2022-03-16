@@ -130,7 +130,6 @@ class BookRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        // $qb->delete('App:Book', 'b');
         $qb->select('b');
         $qb->from('App:Book', 'b');
         $qb->where(
@@ -158,7 +157,6 @@ class BookRepository extends ServiceEntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        // $qb->delete('App:Book', 'b');
         $qb->select('b');
         $qb->from('App:Book', 'b');
         $qb->where(
