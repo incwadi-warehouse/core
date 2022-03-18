@@ -14,7 +14,7 @@ class NewBranchCommand extends Command
 {
     protected static $defaultName = 'branch:new';
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
         parent::__construct();
     }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class DateTimeToStringTransformer implements DataTransformerInterface
 {
-    public function transform($date): ?string
+    public function transform($date): mixed
     {
         if (!$date) {
             return null;
@@ -15,7 +15,10 @@ class DateTimeToStringTransformer implements DataTransformerInterface
         return (string) $date->getTimestamp();
     }
 
-    public function reverseTransform($date): ?\DateTime
+    /**
+     * @return \DateTime|\DateTimeImmutable|null
+     */
+    public function reverseTransform($date): mixed
     {
         return $date ? new \DateTime('@'.$date) : null;
     }

@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ConditionSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private TokenStorageInterface $token, private EntityManagerInterface $em)
+    public function __construct(private readonly TokenStorageInterface $token, private readonly EntityManagerInterface $em)
     {
     }
 

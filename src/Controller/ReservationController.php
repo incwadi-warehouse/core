@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/reservation')]
 class ReservationController extends AbstractController
@@ -17,11 +18,10 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/list', methods: ['GET'])]
-    public function list(): JsonResponse
+    public function list(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this
-                ->getDoctrine()
+            $manager
                 ->getRepository(Reservation::class)
                 ->findByBranch(
                     $this->getUser()->getBranch(),
@@ -43,9 +43,9 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -73,7 +73,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === reservation.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Reservation $reservation): JsonResponse
+    public function edit(Request $request, Reservation $reservation, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(ReservationType::class, $reservation);
 
@@ -85,7 +85,7 @@ class ReservationController extends AbstractController
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($reservation);
@@ -100,7 +100,7 @@ class ReservationController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === reservation.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Reservation $reservation): JsonResponse
+    public function delete(Reservation $reservation, ManagerRegistry $manager): JsonResponse
     {
         foreach ($reservation->getBooks() as $book) {
             if ($book->getReserved()) {
@@ -108,7 +108,7 @@ class ReservationController extends AbstractController
             }
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($reservation);
         $em->flush();
 

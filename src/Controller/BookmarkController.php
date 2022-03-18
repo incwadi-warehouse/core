@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/bookmark')]
 class BookmarkController extends AbstractController
@@ -17,11 +18,10 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this
-                ->getDoctrine()
+            $manager
                 ->getRepository(Bookmark::class)
                 ->findBy([
                     'branch' => $this->getUser()->getBranch(),
@@ -42,7 +42,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $bookmark = new Bookmark();
         $bookmark->setBranch($this->getUser()->getBranch());
@@ -59,7 +59,8 @@ class BookmarkController extends AbstractController
             if (null == $bookmark->getName()) {
                 $bookmark->setName(parse_url($bookmark->getUrl())['host']);
             }
-            $em = $this->getDoctrine()->getManager();
+
+            $em = $manager->getManager();
             $em->persist($bookmark);
             $em->flush();
 
@@ -75,7 +76,7 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === bookmark.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Bookmark $bookmark): JsonResponse
+    public function edit(Request $request, Bookmark $bookmark, ManagerRegistry $manager): JsonResponse
     {
         $editForm = $this->createForm(BookmarkType::class, $bookmark);
         $editForm->submit(
@@ -86,7 +87,7 @@ class BookmarkController extends AbstractController
         );
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($bookmark);
@@ -101,9 +102,9 @@ class BookmarkController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === bookmark.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Bookmark $bookmark): JsonResponse
+    public function delete(Bookmark $bookmark, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($bookmark);
         $em->flush();
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\BookmarkRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,20 +12,20 @@ class Bookmark implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'UUID')]
-    #[ORM\Column(type: 'guid')]
+    #[ORM\Column(type: Types::GUID)]
     private string $id;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     private Branch $branch;
 
     #[Assert\Url]
-    #[ORM\Column(type: 'string', length: '255')]
+    #[ORM\Column(type: Types::STRING, length: '255')]
     private string $url = '';
 
-    #[ORM\Column(type: 'string', length: '255', nullable: true)]
+    #[ORM\Column(type: Types::STRING, length: '255', nullable: true)]
     private ?string $name = null;
 
-    public function jsonSerialize(): array
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

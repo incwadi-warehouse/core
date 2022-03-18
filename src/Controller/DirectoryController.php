@@ -12,29 +12,26 @@ use App\Service\Cover\UploadCover;
 use App\Entity\Book;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Path;
+use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @Route("/api/directory")
- */
+#[Route(path: '/api/directory')]
 class DirectoryController extends AbstractApiController
 {
-    private $fields = [];
-
     /**
-     * @Route("/", methods={"GET"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(Directory $directory, Request $request): JsonResponse
+    #[Route(path: '/', methods: ['GET'])]
+    public function index(Directory $directory, Request $request) : JsonResponse
     {
         $elements = $directory->list($request->query->get('dir'));
         return $this->json($elements);
     }
 
     /**
-     * @Route("/cover/{book}", methods={"POST"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function cover(Directory $directory, Request $request, Book $book, UploadCover $cover): JsonResponse
+    #[Route(path: '/cover/{book}', methods: ['POST'])]
+    public function cover(Directory $directory, Request $request, Book $book, UploadCover $cover) : JsonResponse
     {
         $content = json_decode($request->getContent());
         $absolutePath = Path::makeAbsolute($content->url, __DIR__ . '/../../data/directory/');
@@ -64,7 +61,7 @@ class DirectoryController extends AbstractApiController
     //  * @Route("/new", methods={"POST"})
     //  * @Security("is_granted('ROLE_USER')")
     //  */
-    // public function new(Request $request): JsonResponse
+    // public function new(Request $request,ManagerRegistry $manager): JsonResponse
     // {
     //     $directory = new Directory();
     //     $form = $this->createForm(DirectoryType::class, $directory);
@@ -73,7 +70,7 @@ class DirectoryController extends AbstractApiController
     //         $this->submitForm($request)
     //     );
     //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $em = $this->getDoctrine()->getManager();
+    //         $em = $manager->getManager();
     //         $em->persist($directory);
     //         $em->flush();
 
@@ -87,7 +84,7 @@ class DirectoryController extends AbstractApiController
     //  * @Route("/{directory}", methods={"PUT"})
     //  * @Security("is_granted('ROLE_USER')")
     //  */
-    // public function edit(Request $request, Directory $directory): JsonResponse
+    // public function edit(Request $request, Directory $directory,ManagerRegistry $manager): JsonResponse
     // {
     //     $form = $this->createForm(DirectoryType::class, $directory);
 
@@ -95,7 +92,7 @@ class DirectoryController extends AbstractApiController
     //         $this->submitForm($request)
     //     );
     //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $em = $this->getDoctrine()->getManager();
+    //         $em = $manager->getManager();
     //         $em->flush();
 
     //         return $this->setResponse()->single($this->fields, $directory);
@@ -108,9 +105,9 @@ class DirectoryController extends AbstractApiController
     //  * @Route("/{directory}", methods={"DELETE"})
     //  * @Security("is_granted('ROLE_USER')")
     //  */
-    // public function delete(Directory $directory): JsonResponse
+    // public function delete(Directory $directory,ManagerRegistry $manager): JsonResponse
     // {
-    //     $em = $this->getDoctrine()->getManager();
+    //     $em = $manager->getManager();
     //     $em->remove($directory);
     //     $em->flush();
 

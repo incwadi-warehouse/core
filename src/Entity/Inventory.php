@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\InventoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
@@ -11,31 +12,31 @@ class Inventory implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     #[ORM\JoinColumn]
-    private $branch;
+    private ?Branch $branch = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private $startedAt;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $startedAt = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $endedAt;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $endedAt = null;
 
-    #[ORM\Column(type: 'integer')]
-    private $found = 0;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $found = 0;
 
-    #[ORM\Column(type: 'integer')]
-    private $notFound = 0;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $notFound = 0;
 
     public function __construct()
     {
         $this->startedAt = new \DateTime();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

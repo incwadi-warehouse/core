@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\FormatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,27 +14,30 @@ class Format implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name = null;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
-    private $branch;
+    private ?Branch $branch = null;
 
     /**
-     * @var Book[]|Collection<int, Book>
+     * @var Collection<Book>
+     */
+    /**
+     * @var Collection<Book>
      */
     #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'format')]
-    private $books;
+    private Collection $books;
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

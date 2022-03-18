@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\ProfilePasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api')]
 class CoreController extends AbstractController
@@ -21,7 +22,7 @@ class CoreController extends AbstractController
     {
         return $this->json([
             'id' => $this->getUser()->getId(),
-            'username' => $this->getUser()->getUsername(),
+            'username' => $this->getUser()->getUserIdentifier(),
             'roles' => $this->getUser()->getRoles(),
             'branch' => $this->getUser()->getBranch(),
             'isUser' => $this->isGranted('ROLE_USER'),
@@ -33,7 +34,7 @@ class CoreController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/password', methods: ['PUT'])]
-    public function password(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
+    public function password(Request $request, UserPasswordHasherInterface $encoder, ManagerRegistry $manager): JsonResponse
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfilePasswordType::class, $user);
@@ -51,11 +52,11 @@ class CoreController extends AbstractController
                     $user->getPassword()
                 )
             );
-            $this->getDoctrine()->getManager()->flush();
+            $manager->getManager()->flush();
 
             return $this->json([
                 'id' => $this->getUser()->getId(),
-                'username' => $this->getUser()->getUsername(),
+                'username' => $this->getUser()->getUserIdentifier(),
                 'roles' => $this->getUser()->getRoles(),
                 'branch' => $this->getUser()->getBranch(),
                 'isUser' => $this->isGranted('ROLE_USER'),

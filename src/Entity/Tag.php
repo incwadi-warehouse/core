@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,24 +14,30 @@ class Tag implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private string $name = '';
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     private Branch $branch;
 
+    /**
+     * @var Collection<Book>
+     */
+    /**
+     * @var Collection<Book>
+     */
     #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'tags')]
-    private $books;
+    private Collection $books;
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

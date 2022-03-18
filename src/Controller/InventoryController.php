@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/inventory')]
 class InventoryController extends AbstractController
@@ -17,11 +18,10 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this
-                ->getDoctrine()
+            $manager
                 ->getRepository(Inventory::class)
                 ->findBy(
                     ['branch' => $this->getUser()->getBranch()],
@@ -43,10 +43,9 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
-        $active = $this
-            ->getDoctrine()
+        $active = $manager
             ->getRepository(Inventory::class)
             ->findActive(
                 $this->getUser()->getBranch()
@@ -62,7 +61,7 @@ class InventoryController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid() && !$active) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($inventory);
             $em->flush();
 
@@ -78,7 +77,7 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Inventory $inventory): JsonResponse
+    public function edit(Request $request, Inventory $inventory, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(InventoryType::class, $inventory);
 
@@ -89,7 +88,7 @@ class InventoryController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
 
             $em->flush();
 
@@ -105,9 +104,9 @@ class InventoryController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and inventory.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Inventory $inventory): JsonResponse
+    public function delete(Inventory $inventory, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($inventory);
         $em->flush();
 

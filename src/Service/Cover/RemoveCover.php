@@ -11,7 +11,7 @@ class RemoveCover extends AbstractCover
     {
         $filesystem = new Filesystem();
 
-        foreach (self::SIZES as $suffix => $size) {
+        foreach (array_keys(self::SIZES) as $suffix) {
             $filename = $this->getPath().$book->getId().'-'.$suffix.'.jpg';
             if ($filesystem->exists($filename)) {
                 $filesystem->remove($filename);

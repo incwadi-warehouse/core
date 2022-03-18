@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,27 +14,30 @@ class Reservation implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'UUID')]
-    #[ORM\Column(type: 'guid')]
+    #[ORM\Column(type: Types::GUID)]
     private $id;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     #[ORM\JoinColumn]
-    private $branch;
+    private ?Branch $branch = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private $createdAt;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $collection;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $collection = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $notes;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $notes = null;
 
     /**
-     * @var Book[]|Collection<int, Book>
+     * @var Collection<Book>
+     */
+    /**
+     * @var Collection<Book>
      */
     #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'reservation')]
-    private $books;
+    private Collection $books;
 
     public function __construct()
     {
@@ -41,7 +45,7 @@ class Reservation implements \JsonSerializable
         $this->books = new ArrayCollection();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

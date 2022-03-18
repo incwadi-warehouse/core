@@ -20,9 +20,9 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    public const KEEP_REMOVED_DAYS = 28;
+    public final const KEEP_REMOVED_DAYS = 28;
 
-    public function __construct(ManagerRegistry $registry, private RemoveCover $cover, private Find $find)
+    public function __construct(ManagerRegistry $registry, private readonly RemoveCover $cover, private readonly Find $find)
     {
         parent::__construct($registry, Book::class);
     }
@@ -47,7 +47,7 @@ class BookRepository extends ServiceEntityRepository
             'format',
         ];
         if ($isPublic) {
-            if (strlen($options['term']) < 1) {
+            if (strlen((string) $options['term']) < 1) {
                 throw new \Exception('There is no term!');
             }
 
@@ -57,6 +57,7 @@ class BookRepository extends ServiceEntityRepository
                     $branch = $filter['value'];
                 }
             }
+
             if ($branch) {
                 $branchObj = $this->getEntityManager()->getRepository(Branch::class)->find($branch);
                 if (!$branchObj->getPublic()) {

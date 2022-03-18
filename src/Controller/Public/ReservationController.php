@@ -8,14 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/public/reservation')]
 class ReservationController extends AbstractController
 {
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);

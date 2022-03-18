@@ -10,12 +10,12 @@ class ListBranchesCommandTest extends TestCase
 {
     public function testExecute()
     {
-        $em = $this->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
+        $repo = $this->getMockBuilder('\\App\\Repository\\BranchRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
         $application = new Application();
-        $application->add(new ListBranchesCommand($em));
+        $application->add(new ListBranchesCommand($repo));
         $command = $application->find('branch:list');
 
         $this->assertEquals(

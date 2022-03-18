@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Repository\BranchRepository;
 use App\Entity\Branch;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -13,7 +14,7 @@ class ListBranchesCommand extends Command
 {
     protected static $defaultName = 'branch:list';
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly BranchRepository $branchRepository)
     {
         parent::__construct();
     }
@@ -29,7 +30,7 @@ class ListBranchesCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $branches = $this->em->getRepository(Branch::class)->findAll();
+        $branches = $this->branchRepository->findAll();
         $data = [];
         foreach ($branches as $branch) {
             $data[] = [

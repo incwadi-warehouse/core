@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Finder\Finder;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/book')]
 class BookController extends AbstractController
@@ -23,11 +24,10 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/find', methods: ['GET'])]
-    public function find(Request $request): JsonResponse
+    public function find(Request $request, ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this
-                ->getDoctrine()
+            $manager
                 ->getRepository(Book::class)
                 ->findDemanded(
                     json_decode(
@@ -42,9 +42,9 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/clean', methods: ['DELETE'])]
-    public function clean(): JsonResponse
+    public function clean(ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->getRepository(Book::class)->deleteBooksByBranch(
             $this->getUser()->getBranch()
         );
@@ -57,9 +57,9 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/stats', methods: ['GET'])]
-    public function stats(): JsonResponse
+    public function stats(ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $repo = $em->getRepository(Book::class);
         $branch = $this->getUser()->getBranch();
 
@@ -89,7 +89,7 @@ class BookController extends AbstractController
         $finder->files()->in(__DIR__ . '/../../data/');
         $size = 0;
         foreach ($finder as $file) {
-            $size = $size + $file->getSize();
+            $size += $file->getSize();
         }
 
         return $this->json([
@@ -106,14 +106,14 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
      */
     #[Route(path: '/inventory/found/{book}', methods: ['PUT'])]
-    public function inventoryFound(Book $book): JsonResponse
+    public function inventoryFound(Book $book, ManagerRegistry $manager): JsonResponse
     {
-        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory = $manager->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
         $inventory->setFound($book->getInventory() ? $inventory->getFound() - 1 : $inventory->getFound() + 1);
 
         $book->setInventory($book->getInventory() ? null : true);
 
-        $this->getDoctrine()->getManager()->flush();
+        $manager->getManager()->flush();
 
         return $this->json($book);
     }
@@ -122,14 +122,14 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and book.getBranch() === user.getBranch()")
      */
     #[Route(path: '/inventory/notfound/{book}', methods: ['PUT'])]
-    public function inventoryNotFound(Book $book): JsonResponse
+    public function inventoryNotFound(Book $book, ManagerRegistry $manager): JsonResponse
     {
-        $inventory = $this->getDoctrine()->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
+        $inventory = $manager->getRepository(Inventory::class)->findActive($this->getUser()->getBranch());
         $inventory->setNotFound(false === $book->getInventory() ? $inventory->getNotFound() - 1 : $inventory->getNotFound() + 1);
 
         $book->setInventory(false === $book->getInventory() ? null : false);
 
-        $this->getDoctrine()->getManager()->flush();
+        $manager->getManager()->flush();
 
         return $this->json($book);
     }
@@ -147,9 +147,9 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
 
         $book = new Book();
         $book->setBranch(
@@ -187,9 +187,9 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Book $book): JsonResponse
+    public function edit(Request $request, Book $book, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $form = $this->createForm(BookType::class, $book);
 
         $form->submit(
@@ -211,27 +211,33 @@ class BookController extends AbstractController
             if (true === $book->getSold() && null === $book->getSoldOn()) {
                 $book->setSoldOn(new \DateTime());
             }
+
             // revert sold
             if (false === $book->getSold() && null !== $book->getSoldOn()) {
                 $book->setSoldOn(null);
             }
+
             // removed
             if (true === $book->getRemoved() && null === $book->getRemovedOn()) {
                 $book->setRemovedOn(new \DateTime());
             }
+
             // revert removed
             if (false === $book->getRemoved() && null !== $book->getRemovedOn()) {
                 $book->setRemovedOn(null);
             }
+
             // reserved
             if (true === $book->getReserved() && null === $book->getReservedAt()) {
                 $book->setReservedAt(new \DateTime());
             }
+
             // revert reserved
             if (false === $book->getReserved() && null !== $book->getReservedAt()) {
                 $book->setReservedAt(null);
                 $book->setReservation(null);
             }
+
             $em->flush();
 
             return $this->json($book);
@@ -285,7 +291,7 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/sell/{id}', methods: ['PUT'])]
-    public function sell(Book $book): JsonResponse
+    public function sell(Book $book, ManagerRegistry $manager): JsonResponse
     {
         $book->setSold(!$book->getSold());
         $book->setSoldOn(null === $book->getSoldOn() ? new \DateTime() : null);
@@ -293,7 +299,7 @@ class BookController extends AbstractController
         $book->setReserved(false);
         $book->setReservedAt(null);
 
-        $this->getDoctrine()->getManager()->flush();
+        $manager->getManager()->flush();
 
         return $this->json($book);
     }
@@ -302,7 +308,7 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/remove/{id}', methods: ['PUT'])]
-    public function remove(Book $book): JsonResponse
+    public function remove(Book $book, ManagerRegistry $manager): JsonResponse
     {
         $book->setRemoved(!$book->getRemoved());
         $book->setRemovedOn(
@@ -312,7 +318,7 @@ class BookController extends AbstractController
         $book->setReserved(false);
         $book->setReservedAt(null);
 
-        $this->getDoctrine()->getManager()->flush();
+        $manager->getManager()->flush();
 
         return $this->json($book);
     }
@@ -321,16 +327,17 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/reserve/{id}', methods: ['PUT'])]
-    public function reserve(Book $book): JsonResponse
+    public function reserve(Book $book, ManagerRegistry $manager): JsonResponse
     {
         if ($book->getReserved() && $book->getReservation()) {
             throw new \Error('Can not reserve an already reserved book!', 500);
         }
+
         $book->setReserved(!$book->getReserved());
         $book->setReservedAt(
             null === $book->getReservedAt() ? new \DateTime() : null
         );
-        $this->getDoctrine()->getManager()->flush();
+        $manager->getManager()->flush();
 
         return $this->json($book);
     }
@@ -339,11 +346,11 @@ class BookController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === book.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Book $book, RemoveCover $cover): JsonResponse
+    public function delete(Book $book, RemoveCover $cover, ManagerRegistry $manager): JsonResponse
     {
         $cover->remove($book);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($book);
         $em->flush();
 

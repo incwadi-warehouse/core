@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/branch')]
 class BranchController extends AbstractController
@@ -17,12 +18,12 @@ class BranchController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
             $this->isGranted('ROLE_ADMIN') ?
-            $this->getDoctrine()->getRepository(Branch::class)->findAll() :
-            $this->getDoctrine()->getRepository(Branch::class)->find(
+            $manager->getRepository(Branch::class)->findAll() :
+            $manager->getRepository(Branch::class)->find(
                 $this->getUser()->getBranch()->getId()
             ),
         );
@@ -41,7 +42,7 @@ class BranchController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and user.getBranch() === branch")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Branch $branch): JsonResponse
+    public function edit(Request $request, Branch $branch, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(BranchType::class, $branch);
 
@@ -52,7 +53,7 @@ class BranchController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($branch);

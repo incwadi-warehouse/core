@@ -6,15 +6,15 @@ use App\Entity\Branch;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/public/branch')]
 class BranchController extends AbstractController
 {
     #[Route(path: '/', methods: ['GET'])]
-    public function branch(): JsonResponse
+    public function branch(ManagerRegistry $manager): JsonResponse
     {
-        $branches = $this
-                ->getDoctrine()
+        $branches = $manager
                 ->getRepository(Branch::class)
                 ->findByPublic(true);
         $processed = [];

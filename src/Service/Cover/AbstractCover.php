@@ -5,7 +5,7 @@ namespace App\Service\Cover;
 abstract class AbstractCover
 {
     /**
-     * @var string[]
+     * @var array<string, int>
      */
     protected const SIZES = ['l' => 400, 'm' => 200, 's' => 100];
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\BranchRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
@@ -13,51 +14,51 @@ class Branch implements \JsonSerializable
     /**
      * @var string[]
      */
-    public const CURRENCIES = ['EUR', 'USD'];
+    public final const CURRENCIES = ['EUR', 'USD'];
 
     /**
      * @var string[]
      */
-    public const ORDER_BY = ['name', 'books'];
+    public final const ORDER_BY = ['name', 'books'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private string $name = '';
 
     #[Assert\NotBlank]
     #[Assert\Type(type: 'float')]
     #[Assert\GreaterThanOrEqual(value: '0.00')]
-    #[ORM\Column(type: 'decimal', precision: 5, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private float $steps = 0.00;
 
     #[Assert\Choice(choices: Branch::CURRENCIES)]
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 3)]
-    private $currency = 'EUR';
+    #[ORM\Column(type: Types::STRING, length: 3)]
+    private ?string $currency = 'EUR';
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $ordering;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $ordering = null;
 
     #[Assert\Choice(choices: Branch::ORDER_BY)]
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 255)]
-    private $orderBy = 'name';
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $orderBy = 'name';
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private $public = false;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $pricelist;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $pricelist = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private $cart = false;
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

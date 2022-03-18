@@ -17,7 +17,7 @@ class AuthorRepository extends ServiceEntityRepository
     /**
      * @var int
      */
-    public const LIMIT = 100;
+    public final const LIMIT = 100;
 
     public function __construct(ManagerRegistry $registry)
     {

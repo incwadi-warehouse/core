@@ -11,7 +11,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class AuthorSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
     }
 

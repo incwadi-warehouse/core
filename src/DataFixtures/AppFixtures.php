@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Branch;
@@ -9,11 +10,10 @@ use App\Entity\Genre;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(private UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(private readonly UserPasswordHasherInterface $passwordEncoder)
     {
     }
 
@@ -35,6 +35,7 @@ class AppFixtures extends Fixture
             )
         );
         $user->setBranch($branch);
+
         $manager->persist($user);
 
         $user = new User();
@@ -47,16 +48,19 @@ class AppFixtures extends Fixture
             )
         );
         $user->setBranch($branch);
+
         $manager->persist($user);
 
         $author = new Author();
         $author->setFirstname('John');
         $author->setSurname('Doe');
+
         $manager->persist($author);
 
         $genre = new Genre();
         $genre->setName('Crime');
         $genre->setBranch($branch);
+
         $manager->persist($genre);
 
         $books = 50;

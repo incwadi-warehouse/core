@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
-    public function __construct(private AuthorToStringTransformer $authorToStringTransformer, private DateTimeToStringTransformer $dateTimeToStringTransformer)
+    public function __construct(private readonly AuthorToStringTransformer $authorToStringTransformer, private readonly DateTimeToStringTransformer $dateTimeToStringTransformer)
     {
     }
 

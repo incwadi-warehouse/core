@@ -75,7 +75,7 @@ class GenreTest extends WebTestCase
         $id = $request->id;
 
         // delete book
-        $this->request('/api/book/'.$id, 'DELETE');
+        $request = $this->request('/api/book/'.$id, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
 

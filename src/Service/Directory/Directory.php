@@ -141,7 +141,7 @@ class Directory implements DirectoryInterface
         $zip = new \ZipArchive();
         $zip->open($filename);
 
-        for ($i = 0; $i < $zip->numFiles; $i++) {
+        for ($i = 0; $i < $zip->numFiles; ++$i) {
             if ('word/document.xml' === $zip->getNameIndex($i)) {
                 return trim(
                     strip_tags(

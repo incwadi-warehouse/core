@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use App\Entity\Branch;
 use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -40,7 +41,7 @@ class GenreRepository extends ServiceEntityRepository
             ->addSelect('SIZE(g.books) AS HIDDEN books')
             ->andWhere('g.branch = :branch')
             ->setParameter('branch', $branch)
-            ->orderBy('books', \Doctrine\Common\Collections\Criteria::DESC)
+            ->orderBy('books', Criteria::DESC)
             ->getQuery()
             ->getResult()
         ;

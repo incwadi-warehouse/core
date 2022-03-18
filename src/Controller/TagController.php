@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/tag')]
 class TagController extends AbstractController
@@ -17,10 +18,10 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Tag::class)->findByBranch(
+            $manager->getRepository(Tag::class)->findByBranch(
                 $this->getUser()->getBranch()
             )
         );
@@ -39,13 +40,13 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $content = json_decode(
             $request->getContent(),
             true
         );
-        $tag = $this->getDoctrine()->getRepository(Tag::class)
+        $tag = $manager->getRepository(Tag::class)
             ->findOneByName($content['name']);
         if ($tag) {
             return $this->json($tag);
@@ -63,7 +64,7 @@ class TagController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($tag);
             $em->flush();
 
@@ -79,7 +80,7 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Tag $tag): JsonResponse
+    public function edit(Request $request, Tag $tag, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(TagType::class, $tag);
 
@@ -90,7 +91,7 @@ class TagController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($tag);
@@ -105,12 +106,13 @@ class TagController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and tag.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Tag $tag): JsonResponse
+    public function delete(Tag $tag, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         foreach ($tag->getBooks() as $book) {
             $tag->removeBook($book);
         }
+
         $em->remove($tag);
         $em->flush();
 

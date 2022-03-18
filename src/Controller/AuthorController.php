@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/author')]
 class AuthorController extends AbstractController
@@ -17,10 +18,10 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/find', methods: ['GET'])]
-    public function find(Request $request): JsonResponse
+    public function find(Request $request, ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Author::class)->findDemanded($request->get('term'))
+            $manager->getRepository(Author::class)->findDemanded($request->get('term'))
         );
     }
 
@@ -37,7 +38,7 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
@@ -49,7 +50,7 @@ class AuthorController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($author);
             $em->flush();
 
@@ -65,7 +66,7 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Author $author): JsonResponse
+    public function edit(Request $request, Author $author, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(AuthorType::class, $author);
 
@@ -76,7 +77,7 @@ class AuthorController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($author);
@@ -91,9 +92,9 @@ class AuthorController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Author $author): JsonResponse
+    public function delete(Author $author, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($author);
         $em->flush();
 

@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InventoryType extends AbstractType
 {
-    public function __construct(private DateTimeToStringTransformer $dateTimeToStringTransformer)
+    public function __construct(private readonly DateTimeToStringTransformer $dateTimeToStringTransformer)
     {
     }
 

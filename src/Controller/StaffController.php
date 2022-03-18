@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/staff')]
 class StaffController extends AbstractController
@@ -17,11 +18,10 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this
-                ->getDoctrine()
+            $manager
                 ->getRepository(Staff::class)
                 ->findByBranch(
                     $this->getUser()->getBranch()
@@ -42,7 +42,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $staff = new Staff();
         $form = $this->createForm(StaffType::class, $staff);
@@ -54,7 +54,7 @@ class StaffController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($staff);
             $em->flush();
 
@@ -70,7 +70,7 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Staff $staff): JsonResponse
+    public function edit(Request $request, Staff $staff, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(StaffType::class, $staff);
 
@@ -81,7 +81,7 @@ class StaffController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($staff);
@@ -96,9 +96,9 @@ class StaffController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Staff $staff): JsonResponse
+    public function delete(Staff $staff, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($staff);
         $em->flush();
 

@@ -13,7 +13,7 @@ class BooksDeleteCommand extends Command
 {
     protected static $defaultName = 'books:delete';
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
         parent::__construct();
     }

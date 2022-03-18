@@ -52,6 +52,7 @@ class Import implements ImportInterface
 
             $this->em->persist($book);
         }
+
         $this->em->flush();
 
         return $books;

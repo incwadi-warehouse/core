@@ -31,9 +31,11 @@ class UploadCover extends AbstractCover
         if (in_array($mimeType, ['image/jpeg', 'image/jpg'])) {
             return imagecreatefromjpeg($file);
         }
+
         if ('image/png' === $mimeType) {
             return imagecreatefrompng($file);
         }
+
         if ('image/webp' === $mimeType) {
             return imagecreatefromwebp($file);
         }
@@ -47,6 +49,7 @@ class UploadCover extends AbstractCover
         if ($filesystem->exists($filename)) {
             throw new \Exception('File does exist already.');
         }
+
         imagejpeg(
             imagescale($image, $width),
             $filename,

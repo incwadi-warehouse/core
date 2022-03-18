@@ -1,6 +1,10 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
 
 api_login_check:
     path: /api/login_check
@@ -8,11 +12,6 @@ api_login_check:
 gesdinet_jwt_refresh_token:
     path:       /api/token/refresh
     controller: gesdinet.jwtrefreshtoken::refresh
-
-# me:
-#   path: /api/me
-#   controller: Baldeweg\Bundle\ExtraBundle\Service\MeUser::me
-#   methods: GET
 
 password:
   path: /api/password

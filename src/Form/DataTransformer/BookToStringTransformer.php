@@ -2,6 +2,7 @@
 
 namespace App\Form\DataTransformer;
 
+use App\Repository\BookRepository;
 use App\Entity\Book;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -9,11 +10,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class BookToStringTransformer implements DataTransformerInterface
 {
-    public function __construct(private EntityManagerInterface $em, private TokenStorageInterface $tokenStorage)
+    public function __construct(private readonly BookRepository $bookRepository)
     {
     }
 
-    public function transform($books): string
+    public function transform($books): mixed
     {
         if (null === $books) {
             return '';
@@ -27,16 +28,16 @@ class BookToStringTransformer implements DataTransformerInterface
         return implode(',', $list);
     }
 
-    public function reverseTransform($data): array
+    public function reverseTransform($data): mixed
     {
         if (!$data) {
             return [];
         }
 
-        $data = explode(',', $data);
+        $data = explode(',', (string) $data);
         $books = [];
         foreach ($data as $item) {
-            $books[] = $this->em->getRepository(Book::class)->find(
+            $books[] = $this->bookRepository->find(
                 $item
             );
         }

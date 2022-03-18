@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/genre')]
 class GenreController extends AbstractController
@@ -17,10 +18,10 @@ class GenreController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Genre::class)->findDemanded(
+            $manager->getRepository(Genre::class)->findDemanded(
                 $this->getUser()->getBranch(),
             ),
         );
@@ -39,7 +40,7 @@ class GenreController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $genre = new Genre();
         $form = $this->createForm(GenreType::class, $genre);
@@ -51,7 +52,7 @@ class GenreController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($genre);
             $em->flush();
 
@@ -67,7 +68,7 @@ class GenreController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Genre $genre): JsonResponse
+    public function edit(Request $request, Genre $genre, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(GenreType::class, $genre);
 
@@ -78,7 +79,7 @@ class GenreController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($genre);
@@ -93,9 +94,9 @@ class GenreController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and genre.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Genre $genre): JsonResponse
+    public function delete(Genre $genre, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $em->remove($genre);
         $em->flush();
 

@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ReservationSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private TokenStorageInterface $token)
+    public function __construct(private readonly TokenStorageInterface $token)
     {
     }
 
@@ -36,6 +36,7 @@ class ReservationSubscriber implements EventSubscriberInterface
             if ($book->getBranch() !== $branch) {
                 throw new \Exception('Not the correct branch.');
             }
+
             if ($book->getSold() || $book->getRemoved() || $book->getReserved()) {
                 throw new \Exception('Not available.');
             }

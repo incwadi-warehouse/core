@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,21 +15,24 @@ class Book implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'UUID')]
-    #[ORM\Column(type: 'guid')]
+    #[ORM\Column(type: Types::GUID)]
     private string $id;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     private ?Branch $branch = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private \DateTime $added;
+    /**
+     * @var \DateTime|\DateTimeImmutable
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private \DateTimeInterface $added;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: '255')]
+    #[ORM\Column(type: Types::STRING, length: '255')]
     private string $title = '';
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $shortDescription;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $shortDescription = null;
 
     #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books', cascade: ['persist'])]
     private ?Author $author = null;
@@ -38,49 +42,63 @@ class Book implements \JsonSerializable
 
     #[Assert\Type(type: 'float')]
     #[Assert\GreaterThanOrEqual(0.00)]
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private float $price = 0.00;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $sold = false;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $soldOn = null;
+    /**
+     * @var \DateTime|\DateTimeImmutable|null
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $soldOn = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $removed = false;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $removedOn = null;
+    /**
+     * @var \DateTime|\DateTimeImmutable|null
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $removedOn = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $reserved = false;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $reservedAt = null;
+    /**
+     * @var \DateTime|\DateTimeImmutable|null
+     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $reservedAt = null;
 
     #[Assert\Length(min: 4, max: 4)]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private int $releaseYear;
 
     #[ORM\ManyToOne(targetEntity: Condition::class)]
-    #[ORM\JoinColumn(nullable: true)]
     private ?Condition $cond = null;
 
+    /**
+     * @var Collection<Tag>
+     */
+    /**
+     * @var Collection<Tag>
+     */
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
-    private $tags;
+    private Collection $tags;
 
     #[ORM\ManyToOne(targetEntity: Reservation::class, inversedBy: 'books')]
-    private $reservation;
+    private ?Reservation $reservation = null;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $recommendation = false;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $inventory = null;
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private $inventory;
 
     #[ORM\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
-    private $format;
+    private ?Format $format = null;
 
     public function __construct()
     {
@@ -90,7 +108,7 @@ class Book implements \JsonSerializable
         $this->tags = new ArrayCollection();
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),

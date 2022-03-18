@@ -2,39 +2,37 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
-#[Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, \JsonSerializable
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    #[Assert\NotBlank]
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private string $username = '';
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    private ?string $username = null;
 
-    #[ORM\Column(type: 'json')]
-    private array $roles = [];
+    #[ORM\Column(type: Types::JSON)]
+    private $roles = [];
 
-    #[Assert\NotBlank]
-    #[ORM\Column(type: 'string')]
-    private string $password;
+    #[ORM\Column(type: Types::STRING)]
+    private ?string $password = null;
 
     #[ORM\ManyToOne(targetEntity: Branch::class)]
     private ?Branch $branch = null;
 
-    public function jsonSerialize(): array
+    public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->getId(),
-            'username' => $this->getUsername(),
+            'username' => $this->getUserIdentifier(),
             'roles' => $this->getRoles(),
         ];
     }
@@ -45,11 +43,11 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
-     * @see UserInterface
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
     public function getUsername(): string
     {
-        return $this->username;
+        return (string) $this->username;
     }
 
     public function setUsername(string $username): self
@@ -60,11 +58,22 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -78,7 +87,7 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
-     * @see UserInterface
+     * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
@@ -93,10 +102,14 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
      * @see UserInterface
      */
-    public function getSalt(): void
+    public function getSalt(): ?string
     {
+        return null;
     }
 
     /**
@@ -104,6 +117,8 @@ class User implements UserInterface, \JsonSerializable
      */
     public function eraseCredentials(): void
     {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getBranch(): ?Branch

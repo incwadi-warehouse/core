@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
-    public function __construct(private DateTimeToStringTransformer $dateTimeToStringTransformer, private BookToStringTransformer $bookToStringTransformer)
+    public function __construct(private readonly DateTimeToStringTransformer $dateTimeToStringTransformer, private readonly BookToStringTransformer $bookToStringTransformer)
     {
     }
 

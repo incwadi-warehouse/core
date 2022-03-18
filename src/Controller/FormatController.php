@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/format')]
 class FormatController extends AbstractController
@@ -18,10 +19,10 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/', methods: ['GET'])]
-    public function index(): JsonResponse
+    public function index(ManagerRegistry $manager): JsonResponse
     {
         return $this->json(
-            $this->getDoctrine()->getRepository(Format::class)->findBy(
+            $manager->getRepository(Format::class)->findBy(
                 ['branch' => $this->getUser()->getBranch()],
                 ['name' => 'ASC']
             ),
@@ -41,7 +42,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ManagerRegistry $manager): JsonResponse
     {
         $format = new Format();
         $format->setBranch($this->getUser()->getBranch());
@@ -55,7 +56,7 @@ class FormatController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->persist($format);
             $em->flush();
 
@@ -71,7 +72,7 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['PUT'])]
-    public function edit(Request $request, Format $format): JsonResponse
+    public function edit(Request $request, Format $format, ManagerRegistry $manager): JsonResponse
     {
         $form = $this->createForm(FormatType::class, $format);
 
@@ -82,7 +83,7 @@ class FormatController extends AbstractController
             )
         );
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $manager->getManager();
             $em->flush();
 
             return $this->json($format);
@@ -97,9 +98,9 @@ class FormatController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN') and format.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['DELETE'])]
-    public function delete(Format $format): JsonResponse
+    public function delete(Format $format, ManagerRegistry $manager): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $manager->getManager();
         $books = $em->getRepository(Book::class)->findBy(
             [
                 'format' => $format,
@@ -108,6 +109,7 @@ class FormatController extends AbstractController
         foreach ($books as $book) {
             $book->setFormat(null);
         }
+
         $em->remove($format);
         $em->flush();
 

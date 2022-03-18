@@ -2,34 +2,35 @@
 
 namespace App\Form\DataTransformer;
 
+use App\Repository\AuthorRepository;
 use App\Entity\Author;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class AuthorToStringTransformer implements DataTransformerInterface
 {
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly AuthorRepository $authorRepository)
     {
     }
 
-    public function transform($author): string
+    public function transform($author): mixed
     {
-        if (null === $author) {
+        if (!$author instanceof Author) {
             return '';
         }
 
         return $author->getSurname().','.$author->getFirstname();
     }
 
-    public function reverseTransform($data): ?Author
+    public function reverseTransform($data): mixed
     {
         if (!$data) {
             return null;
         }
 
-        $data = explode(',', $data);
+        $data = explode(',', (string) $data);
 
-        $author = $this->em->getRepository(Author::class)->findOneBy(
+        $author = $this->authorRepository->findOneBy(
             [
                 'firstname' => $data[1],
                 'surname' => $data[0],
