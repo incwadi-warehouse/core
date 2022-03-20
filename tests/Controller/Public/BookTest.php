@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookTest extends WebTestCase
 {
-    use \Baldeweg\Bundle\ExtraBundle\ApiTestTrait;
+    use \Baldeweg\Bundle\ApiBundle\ApiTestTrait;
 
     private int $branch;
 
