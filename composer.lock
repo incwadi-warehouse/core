@@ -4,38 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c32ffc2b01a4e366c6b4872934a3205f",
+    "content-hash": "a1041bd39ac9ee15d62d8fd00747190e",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
-            "version": "v0.5.0",
+            "version": "v1.0.0-beta.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/api-bundle.git",
-                "reference": "b2c0e2e06d2bd2e54eb386a814e3d7c9bcea042c"
+                "reference": "0257ca50fc1e47dc05c494a1903ee7e5e1a571af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/api-bundle/zipball/b2c0e2e06d2bd2e54eb386a814e3d7c9bcea042c",
-                "reference": "b2c0e2e06d2bd2e54eb386a814e3d7c9bcea042c",
+                "url": "https://api.github.com/repos/abaldeweg/api-bundle/zipball/0257ca50fc1e47dc05c494a1903ee7e5e1a571af",
+                "reference": "0257ca50fc1e47dc05c494a1903ee7e5e1a571af",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/config": "^5.4|^6.0",
-                "symfony/dependency-injection": "^5.4|^6.0",
-                "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/http-foundation": "^5.4|^6.0",
-                "symfony/http-kernel": "^5.4|^6.0",
-                "symfony/property-access": "^5.4|^6.0"
+                "symfony/config": "^6.0",
+                "symfony/dependency-injection": "^6.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/http-foundation": "^6.0",
+                "symfony/http-kernel": "^6.0",
+                "symfony/property-access": "^6.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpunit/phpunit": "^9.5",
                 "rector/rector": "^0.12",
-                "symfony/browser-kit": "^5.4|^6.0",
+                "symfony/browser-kit": "^6.0",
                 "symfony/maker-bundle": "^1.31",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "symfony/var-dumper": "^6.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -56,9 +56,9 @@
             "description": "Offers tools for API's.",
             "support": {
                 "issues": "https://github.com/abaldeweg/api-bundle/issues",
-                "source": "https://github.com/abaldeweg/api-bundle/tree/v0.5.0"
+                "source": "https://github.com/abaldeweg/api-bundle/tree/v1.0.0-beta.1"
             },
-            "time": "2022-03-10T09:39:12+00:00"
+            "time": "2022-03-20T15:09:05+00:00"
         },
         {
             "name": "baldeweg/book-bundle",
@@ -114,38 +114,38 @@
         },
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v0.7.0",
+            "version": "v1.0.0-beta.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
-                "reference": "0993c539f27aaab98c03e4ecca64c87f4cb995ae"
+                "reference": "3fb5004c8a1597e20b20cfd99276c8b7bd727997"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/0993c539f27aaab98c03e4ecca64c87f4cb995ae",
-                "reference": "0993c539f27aaab98c03e4ecca64c87f4cb995ae",
+                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/3fb5004c8a1597e20b20cfd99276c8b7bd727997",
+                "reference": "3fb5004c8a1597e20b20cfd99276c8b7bd727997",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.9",
                 "php": ">=8.1",
-                "symfony/config": "^5.4|^6.0",
-                "symfony/console": "^5.4|^6.0",
-                "symfony/dependency-injection": "^5.4|^6.0",
-                "symfony/form": "^5.4|^6.0",
-                "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/http-foundation": "^5.4|^6.0",
-                "symfony/http-kernel": "^5.4|^6.0",
-                "symfony/options-resolver": "^5.4|^6.0",
-                "symfony/security-bundle": "^5.4|^6.0"
+                "symfony/config": "^6.0",
+                "symfony/console": "^6.0",
+                "symfony/dependency-injection": "^6.0",
+                "symfony/form": "^6.0",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/http-foundation": "^6.0",
+                "symfony/http-kernel": "^6.0",
+                "symfony/options-resolver": "^6.0",
+                "symfony/security-bundle": "^6.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpunit/phpunit": "^9.5",
                 "rector/rector": "^0.12",
-                "symfony/browser-kit": "^5.4|^6.0",
+                "symfony/browser-kit": "^6.0",
                 "symfony/maker-bundle": "^1.31",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "symfony/var-dumper": "^6.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -166,9 +166,9 @@
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
                 "issues": "https://github.com/abaldeweg/extra-bundle/issues",
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v0.7.0"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v1.0.0-beta.1"
             },
-            "time": "2022-03-10T09:38:14+00:00"
+            "time": "2022-03-20T14:23:48+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -8375,7 +8375,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "baldeweg/api-bundle": 10,
+        "baldeweg/extra-bundle": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
