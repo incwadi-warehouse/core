@@ -74,8 +74,14 @@ class Directory implements DirectoryInterface
             return [];
         }
 
+        $filter = function (\SplFileInfo $file) {
+            if($file->isFile()) {
+                return in_array($file->getExtension(), ['docx', 'JPG', 'jpg', 'webp']);
+            }
+        };
+
         $finder = new Finder();
-        $finder->in($absolutePath)->name(['*.docx', '*.JPG', '*.jpg', '*.webp'])->depth('== 0')->sortByName()->sortByType();
+        $finder->in($absolutePath)->filter($filter)->depth('== 0')->sortByName()->sortByType();
 
         $items = [];
         $items['details']['parent'] = [
