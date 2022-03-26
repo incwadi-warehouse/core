@@ -2,9 +2,6 @@
     "baldeweg/api-bundle": {
         "version": "v0.4.0"
     },
-    "baldeweg/book-bundle": {
-        "version": "v0.1.5"
-    },
     "baldeweg/extra-bundle": {
         "version": "v0.1.0"
     },

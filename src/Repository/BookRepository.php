@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Book;
 use App\Entity\Branch;
 use App\Service\Cover\RemoveCover;
-use Baldeweg\Bundle\BookBundle\Search\Find;
+use App\Service\Search\Find;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

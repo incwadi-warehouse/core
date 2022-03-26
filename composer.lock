@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "758eebb5d7d972e17ffaae65088877ca",
+    "content-hash": "7c269f1f1e0b58563df61470213d1c69",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
@@ -59,58 +59,6 @@
                 "source": "https://github.com/abaldeweg/api-bundle/tree/v1.0.0-beta.1"
             },
             "time": "2022-03-20T15:09:05+00:00"
-        },
-        {
-            "name": "baldeweg/book-bundle",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/incwadi-warehouse/book-bundle.git",
-                "reference": "1f599677c47989f2b560691bfdc519bf382b5ee4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/incwadi-warehouse/book-bundle/zipball/1f599677c47989f2b560691bfdc519bf382b5ee4",
-                "reference": "1f599677c47989f2b560691bfdc519bf382b5ee4",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.9",
-                "php": ">=8.1",
-                "symfony/config": "^5.4|^6.0",
-                "symfony/dependency-injection": "^5.4|^6.0",
-                "symfony/http-kernel": "^5.4|^6.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.12",
-                "symfony/browser-kit": "^5.4|^6.0",
-                "symfony/maker-bundle": "^1.31",
-                "symfony/var-dumper": "^5.4|^6.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Baldeweg\\Bundle\\BookBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "André Baldeweg",
-                    "email": "a@baldeweg.org"
-                }
-            ],
-            "description": "Offers tools for management of books.",
-            "support": {
-                "issues": "https://github.com/incwadi-warehouse/book-bundle/issues",
-                "source": "https://github.com/incwadi-warehouse/book-bundle/tree/v0.4.0"
-            },
-            "time": "2022-03-10T11:45:07+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
