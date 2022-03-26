@@ -6,11 +6,8 @@ use Doctrine\ORM\QueryBuilder;
 
 class OrderBy
 {
-    private Validator $validator;
-
-    public function __construct(Validator $validator)
+    public function __construct(private readonly Validator $validator)
     {
-        $this->validator = $validator;
     }
 
     public function setFields(array $fields): void
@@ -28,6 +25,7 @@ class OrderBy
         if ('genre' === $orderBy['field']) {
             $field = 'g.name';
         }
+
         if ('author' === $orderBy['field']) {
             $field = 'a.surname';
         }

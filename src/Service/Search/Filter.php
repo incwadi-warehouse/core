@@ -6,11 +6,8 @@ use Doctrine\ORM\QueryBuilder;
 
 class Filter
 {
-    private Validator $validator;
-
-    public function __construct(Validator $validator)
+    public function __construct(private readonly Validator $validator)
     {
-        $this->validator = $validator;
     }
 
     public function setFields(array $fields): void
@@ -36,45 +33,28 @@ class Filter
         if (!$forced && !$this->validator->isValidField($filter['field'])) {
             return false;
         }
+
         if (!isset($filter['value'])) {
             return false;
         }
-        if (!$this->validator->isValidOperator($filter['operator'])) {
-            return false;
-        }
 
-        return true;
+
+        return $this->validator->isValidOperator($filter['operator']);
     }
 
     private function createQuery(QueryBuilder $qb, array $filter, string $fieldId): mixed
     {
-        switch ($filter['operator']) {
-            case 'eq':
-                return $qb->expr()->eq('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'gte':
-                return $qb->expr()->gte('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'gt':
-                return $qb->expr()->gt('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'lte':
-                return $qb->expr()->lte('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'lt':
-                return $qb->expr()->lt('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'in':
-                return $qb->expr()->in('b.'.$filter['field'], ':'.$fieldId);
-            break;
-            case 'null':
-                return $qb->expr()->isNull('b.'.$filter['field']);
-            case 'notNull':
-                return $qb->expr()->isNotNull('b.'.$filter['field']);
-            default:
-                return null;
-            break;
-        }
+        return match ($filter['operator']) {
+            'eq' => $qb->expr()->eq('b.'.$filter['field'], ':'.$fieldId),
+            'gte' => $qb->expr()->gte('b.'.$filter['field'], ':'.$fieldId),
+            'gt' => $qb->expr()->gt('b.'.$filter['field'], ':'.$fieldId),
+            'lte' => $qb->expr()->lte('b.'.$filter['field'], ':'.$fieldId),
+            'lt' => $qb->expr()->lt('b.'.$filter['field'], ':'.$fieldId),
+            'in' => $qb->expr()->in('b.'.$filter['field'], ':'.$fieldId),
+            'null' => $qb->expr()->isNull('b.'.$filter['field']),
+            'notNull' => $qb->expr()->isNotNull('b.'.$filter['field']),
+            default => null,
+        };
     }
 
     private function setParam(QueryBuilder $qb, array $filter, mixed $query, string $fieldId): void

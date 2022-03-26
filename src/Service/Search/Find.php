@@ -11,19 +11,12 @@ class Find implements FindInterface
     /**
      * @var int
      */
-    public const LIMIT = 20;
-    private EntityManagerInterface $em;
-    private Term $term;
-    private Filter $filter;
-    private OrderBy $orderBy;
+    public final const LIMIT = 20;
+
     private ?array $forcedFilters = null;
 
-    public function __construct(EntityManagerInterface $em, Term $term, Filter $filter, OrderBy $orderBy)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly Term $term, private readonly Filter $filter, private readonly OrderBy $orderBy)
     {
-        $this->em = $em;
-        $this->term = $term;
-        $this->filter = $filter;
-        $this->orderBy = $orderBy;
     }
 
     public function setFields(array $fields): void
@@ -52,9 +45,11 @@ class Find implements FindInterface
                 $this->parseOptions($qb, $options)
             );
         }
+
         if (isset($options['orderBy']['book'][0])) {
             $this->orderBy->orderBy($qb, $options['orderBy']['book'][0]);
         }
+
         $qb->setMaxResults(
             isset($options['limit']) ? $options['limit'] : self::LIMIT
         );
@@ -105,6 +100,7 @@ class Find implements FindInterface
                 );
             }
         }
+
         if (null !== $this->forcedFilters) {
             foreach ($this->forcedFilters as $forcedFilter) {
                 $query->add(
