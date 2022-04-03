@@ -1,9 +1,5 @@
 FROM php:8.1-fpm-alpine3.14
 
-# entry
-COPY docker/php-fpm/entry.sh /entry.sh
-RUN chmod 755 /entry.sh
-
 # cron
 COPY docker/php-fpm/crontab.txt /crontab.txt
 COPY docker/php-fpm/script.sh /script.sh
@@ -22,11 +18,21 @@ RUN install-php-extensions gd pdo_mysql opcache zip intl bcmath tidy gmp apcu im
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-# run
+# entry
+COPY docker/php-fpm/entry.sh /entry.sh
+RUN chmod 755 /entry.sh
+
+#  workdir
 WORKDIR /usr/local/apache2/htdocs
 
+# copy app
 COPY . .
 
-CMD composer install; composer dump-env prod; /entry.sh; php-fpm
+# composer
+RUN composer install --no-interaction
+RUN composer dump-env prod
+
+# run
+CMD /entry.sh ${DATABASE_SERVER} ${DATABASE_PORT}; php-fpm
 
 EXPOSE 9000

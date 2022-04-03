@@ -1,10 +1,13 @@
 #!/bin/sh
 
+set -eu
+
+db=${1:-"db"}
+port=${2:-"3306"}
+
 setup()
 {
   echo "SETUP"
-
-  composer dump-env prod
 
   bin/console doctrine:database:create --if-not-exists
   bin/console doctrine:migrations:migrate -n
@@ -26,10 +29,11 @@ waitForServer()
 {
   for i in $(seq 1 60)
     do
-      nc -z db 3306 && setup && return 0
+      nc -z "${db}" "${port}" && setup && return 0
       echo .
       sleep 1
   done
+
   echo "CANNOT CONNECT TO MYSQL DATABASE!" && exit 1
 }
 
