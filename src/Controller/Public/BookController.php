@@ -33,12 +33,13 @@ class BookController extends AbstractController
         );
     }
 
-    /**
-     * @Security("!book.getSold() and !book.getRemoved() and !book.getReserved()")
-     */
     #[Route(path: '/{id}', methods: ['GET'])]
     public function show(Book $book): JsonResponse
     {
+        if ($book->getSold() || $book->getRemoved() || $book->getReserved()) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->json([
             'id' => $book->getId(),
             'currency' => $book->getBranch()->getCurrency(),
