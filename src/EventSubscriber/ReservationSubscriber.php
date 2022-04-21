@@ -24,7 +24,7 @@ class ReservationSubscriber implements EventSubscriberInterface
 
         $branch = $reservation->getBooks()[0]->getBranch();
 
-        if ($this->token->getToken()->getUser() === 'anon.') {
+        if ($this->token->getToken() === null) {
             $reservation->setBranch($branch);
         } else {
             $reservation->setBranch(
