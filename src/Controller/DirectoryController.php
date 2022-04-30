@@ -32,7 +32,7 @@ class DirectoryController extends AbstractApiController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/cover/{book}', methods: ['POST'])]
-    public function cover(Directory $directory, Request $request, Book $book, UploadCover $cover) : JsonResponse
+    public function cover(Request $request, Book $book, UploadCover $cover) : JsonResponse
     {
         $content = json_decode($request->getContent());
         $absolutePath = Path::makeAbsolute($content->url, __DIR__ . '/../../data/directory/');
