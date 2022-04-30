@@ -58,28 +58,20 @@ class DirectoryController extends AbstractApiController
     //     return $this->setResponse()->single($this->fields, $directory);
     // }
 
-    // /**
-    //  * @Route("/new", methods={"POST"})
-    //  * @Security("is_granted('ROLE_USER')")
-    //  */
-    // public function new(Request $request,ManagerRegistry $manager): JsonResponse
-    // {
-    //     $directory = new Directory();
-    //     $form = $this->createForm(DirectoryType::class, $directory);
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route(path: '/new', methods: ['POST'])]
+    public function new(Directory $directory, Request $request): JsonResponse
+    {
+        $directory = new Directory();
+        $directory->mkdir(
+            $request->query->get('name'),
+            $request->query->get('path')
+        );
 
-    //     $form->submit(
-    //         $this->submitForm($request)
-    //     );
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $em = $manager->getManager();
-    //         $em->persist($directory);
-    //         $em->flush();
-
-    //         return $this->setResponse()->single($this->fields, $directory);
-    //     }
-
-    //     return $this->setResponse()->invalid();
-    // }
+        return $this->json(['msg'=>'SUCCESS']);
+    }
 
     // /**
     //  * @Route("/{directory}", methods={"PUT"})
