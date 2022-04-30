@@ -24,6 +24,7 @@ class DirectoryController extends AbstractApiController
     public function index(Directory $directory, Request $request) : JsonResponse
     {
         $elements = $directory->list($request->query->get('dir'));
+
         return $this->json($elements);
     }
 
@@ -101,16 +102,17 @@ class DirectoryController extends AbstractApiController
     //     return $this->setResponse()->invalid();
     // }
 
-    // /**
-    //  * @Route("/{directory}", methods={"DELETE"})
-    //  * @Security("is_granted('ROLE_USER')")
-    //  */
-    // public function delete(Directory $directory,ManagerRegistry $manager): JsonResponse
-    // {
-    //     $em = $manager->getManager();
-    //     $em->remove($directory);
-    //     $em->flush();
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route(path: '/', methods: ['DELETE'])]
+    public function delete(Directory $directory, Request $request): JsonResponse
+    {
+        $directory->remove(
+            $request->query->get('name'),
+            $request->query->get('path')
+        );
 
-    //     return $this->setResponse()->deleted();
-    // }
+        return $this->setResponse()->deleted();
+    }
 }
