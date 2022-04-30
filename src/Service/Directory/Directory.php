@@ -99,6 +99,7 @@ class Directory implements DirectoryInterface
                 'isFile' => $item->isFile(),
                 'isDir' => $item->isDir(),
                 'size' => $item->getSize(),
+                'extension' => $item->getExtension(),
                 'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null
             ];
         }
