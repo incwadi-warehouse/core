@@ -12,7 +12,6 @@ use App\Service\Cover\UploadCover;
 use App\Entity\Book;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Path;
-use Doctrine\Persistence\ManagerRegistry;
 
 #[Route(path: '/api/directory')]
 class DirectoryController extends AbstractApiController
