@@ -5,6 +5,8 @@ namespace App\Service\Directory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Path;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 class Directory implements DirectoryInterface
 {
@@ -60,6 +62,36 @@ class Directory implements DirectoryInterface
 
         $fs = new Filesystem();
         $fs->touch($absolutePath);
+    }
+
+    public function upload(UploadedFile $file, string $filename, string $path = './'): ?File
+    {
+        if (!$this->isValidName($filename)) {
+            return null;
+        }
+
+        // 10 mb
+        if ($file->getSize() > (10 * 1000 * 1000)) {
+            return null;
+        }
+
+        $mimeTypes = [
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+            'image/webp',
+        ];
+        if (!in_array($file->getMimeType(), $mimeTypes)) {
+            return null;
+        }
+
+        $absolutePath = $this->makeAbsolute($path);
+
+        if (!$this->isInBasePath($absolutePath . '/' . $filename)) {
+            return null;
+        }
+
+        return $file->move($absolutePath, $filename);
     }
 
     public function list(string $dir = './'): array

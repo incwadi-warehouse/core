@@ -73,6 +73,25 @@ class DirectoryController extends AbstractApiController
         return $this->json(['msg'=>'SUCCESS']);
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route(path: '/upload', methods: ['POST'])]
+    public function upload(Directory $directory, Request $request): JsonResponse
+    {
+        $file = $directory->upload(
+            $request->files->get('image'),
+            $request->files->get('image')->getClientOriginalName(),
+            $request->query->get('dir'),
+        );
+
+        if ($file instanceof File) {
+            return $this->json(['msg'=> 'SUCCESS']);
+        }
+
+        throw new \Error('Could not upload image.');
+    }
+
     // /**
     //  * @Route("/{directory}", methods={"PUT"})
     //  * @Security("is_granted('ROLE_USER')")
