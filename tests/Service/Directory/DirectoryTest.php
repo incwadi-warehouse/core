@@ -53,7 +53,7 @@ class DirectoryTest extends TestCase
         $uploadedFile->method('getMimeType')->willReturn('image/jpg');
         $uploadedFile->method('move')->willReturn($file);
 
-        $result = $directory->upload($uploadedFile, 'file.jpg', 'test');
+        $result = $directory->upload($uploadedFile, 'file_upload.jpg', 'test');
         $this->assertTrue($result instanceof File);
 
         // rename file

@@ -53,7 +53,6 @@ class Directory implements DirectoryInterface
             return;
         }
 
-
         $absolutePath = $this->makeAbsolute($path . '/' . $filename);
 
         if (!$this->isInBasePath($absolutePath)) {
@@ -61,6 +60,11 @@ class Directory implements DirectoryInterface
         }
 
         $fs = new Filesystem();
+
+        if ($fs->exists($absolutePath)) {
+            return;
+        }
+
         $fs->touch($absolutePath);
     }
 
@@ -88,6 +92,12 @@ class Directory implements DirectoryInterface
         $absolutePath = $this->makeAbsolute($path);
 
         if (!$this->isInBasePath($absolutePath . '/' . $filename)) {
+            return null;
+        }
+
+        $fs = new Filesystem();
+
+        if ($fs->exists($absolutePath . '/' . $filename)) {
             return null;
         }
 
@@ -170,7 +180,6 @@ class Directory implements DirectoryInterface
             return;
         }
 
-
         $absolutePath = $this->makeAbsolute($path . '/' . $name);
 
         if (!$this->isInBasePath($absolutePath)) {
@@ -198,7 +207,9 @@ class Directory implements DirectoryInterface
 
     private function readDoc($filename): ?string
     {
-        if(!file_exists($filename)) {
+        $fs = new Filesystem();
+
+        if (!$fs->exists($filename)) {
             return null;
         }
 
