@@ -94,6 +94,31 @@ class Directory implements DirectoryInterface
         return $file->move($absolutePath, $filename);
     }
 
+    public function rename(string $orig, string $target, string $path = './'): bool
+    {
+        if (!$this->isValidName($target)) {
+            return false;
+        }
+
+        $absolutePathOrig = $this->makeAbsolute($path . '/' . $orig);
+        $absolutePathTarget = $this->makeAbsolute($path . '/' . $target);
+
+
+        if (!$this->isInBasePath($absolutePathOrig) || !$this->isInBasePath($absolutePathTarget)) {
+            return false;
+        }
+
+        $fs = new Filesystem();
+
+        if (!$fs->exists($absolutePathOrig)) {
+            return false;
+        }
+
+        $fs->rename($absolutePathOrig, $absolutePathTarget);
+
+        return $fs->exists($absolutePathTarget);
+    }
+
     public function list(string $dir = './'): array
     {
         $absolutePath = $this->makeAbsolute($dir);

@@ -92,26 +92,25 @@ class DirectoryController extends AbstractApiController
         throw new \Error('Could not upload image.');
     }
 
-    // /**
-    //  * @Route("/{directory}", methods={"PUT"})
-    //  * @Security("is_granted('ROLE_USER')")
-    //  */
-    // public function edit(Request $request, Directory $directory,ManagerRegistry $manager): JsonResponse
-    // {
-    //     $form = $this->createForm(DirectoryType::class, $directory);
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route(path: '/edit', methods: ['PUT'])]
+    public function edit(Directory $directory, Request $request): JsonResponse
+    {
+        $directory = new Directory();
+        $rename = $directory->rename(
+            $request->query->get('orig'),
+            $request->query->get('target'),
+            $request->query->get('path')
+        );
 
-    //     $form->submit(
-    //         $this->submitForm($request)
-    //     );
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $em = $manager->getManager();
-    //         $em->flush();
+        if ($rename) {
+            return $this->json(['msg' => 'SUCCESS']);
+        }
 
-    //         return $this->setResponse()->single($this->fields, $directory);
-    //     }
-
-    //     return $this->setResponse()->invalid();
-    // }
+        return $this->setResponse()->invalid();
+    }
 
     /**
      * @Security("is_granted('ROLE_USER')")

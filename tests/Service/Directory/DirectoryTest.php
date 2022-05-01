@@ -56,6 +56,11 @@ class DirectoryTest extends TestCase
         $result = $directory->upload($uploadedFile, 'file.jpg', 'test');
         $this->assertTrue($result instanceof File);
 
+        // rename file
+        $directory->touch('file_orig.jpg', 'test');
+        $directory->rename('file_orig.jpg', 'file_target.jpg', 'test');
+        $this->assertTrue(is_file($path . '/test/file_target.jpg'));
+
         // list directory
         $dir = $directory->list('./test/');
         $this->assertIsArray($dir);
