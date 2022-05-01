@@ -49,15 +49,6 @@ class DirectoryController extends AbstractApiController
         return $this->json($book);
     }
 
-    // /**
-    //  * @Route("/{directory}", methods={"GET"})
-    //  * @Security("is_granted('ROLE_USER')")
-    //  */
-    // public function show(Directory $directory): JsonResponse
-    // {
-    //     return $this->setResponse()->single($this->fields, $directory);
-    // }
-
     /**
      * @Security("is_granted('ROLE_USER')")
      */
