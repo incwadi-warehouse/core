@@ -66,7 +66,7 @@ class Filter
         if ('added' === $filter['field']) {
             $qb->setParameter(
                 $fieldId,
-                new \DateTime('@'.$filter['value']),
+                new \DateTime($filter['value']),
                 'datetime'
             );
         } else {
