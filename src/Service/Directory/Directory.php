@@ -31,20 +31,67 @@ class Directory implements DirectoryInterface
         return $this->basePath;
     }
 
-    public function mkdir(string $dirname, string $path = './'): void
+    public function list(string $dir = './'): array
+    {
+        $absolutePath = $this->makeAbsolute($dir);
+
+        if (!is_dir($absolutePath)) {
+            return [];
+        }
+
+        if (!$this->isInBasePath($absolutePath)) {
+            return [];
+        }
+
+        $filter = function (\SplFileInfo $file) {
+            if ($file->isFile()) {
+                return in_array($file->getExtension(), ['docx', 'JPG', 'jpg', 'webp']);
+            }
+        };
+
+        $finder = new Finder();
+        $finder->in($absolutePath)->filter($filter)->depth('== 0')->sortByName()->sortByType();
+
+        $items = [];
+        $items['details']['parent'] = [
+            'name' => '../',
+            'path' => Path::makeRelative($absolutePath . '/../', $this->basePath),
+        ];
+        $items['details']['current'] = [
+            'name' => './',
+            'path' => Path::makeRelative($absolutePath, $this->basePath),
+        ];
+        foreach ($finder as $item) {
+            $items['contents'][] = [
+                'name' => $item->getFilename(),
+                'path' => Path::makeRelative($item->getPathname(), $this->basePath),
+                'isFile' => $item->isFile(),
+                'isDir' => $item->isDir(),
+                'size' => $item->getSize(),
+                'extension' => $item->getExtension(),
+                'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null
+            ];
+        }
+
+        return $items;
+    }
+
+    public function mkdir(string $dirname, string $path = './'): bool
     {
         if(!$this->isValidName($dirname)) {
-            return;
+            return false;
         }
 
         $absolutePath = $this->makeAbsolute($path . '/' . $dirname);
 
         if (!$this->isInBasePath($absolutePath)) {
-            return;
+            return false;
         }
 
         $fs = new Filesystem();
         $fs->mkdir($absolutePath);
+
+        return $fs->exists($absolutePath);
     }
 
     public function touch(string $filename, string $path = './'): void
@@ -127,51 +174,6 @@ class Directory implements DirectoryInterface
         $fs->rename($absolutePathOrig, $absolutePathTarget);
 
         return $fs->exists($absolutePathTarget);
-    }
-
-    public function list(string $dir = './'): array
-    {
-        $absolutePath = $this->makeAbsolute($dir);
-
-        if (!is_dir($absolutePath)) {
-            return [];
-        }
-
-        if (!$this->isInBasePath($absolutePath)) {
-            return [];
-        }
-
-        $filter = function (\SplFileInfo $file) {
-            if($file->isFile()) {
-                return in_array($file->getExtension(), ['docx', 'JPG', 'jpg', 'webp']);
-            }
-        };
-
-        $finder = new Finder();
-        $finder->in($absolutePath)->filter($filter)->depth('== 0')->sortByName()->sortByType();
-
-        $items = [];
-        $items['details']['parent'] = [
-            'name' => '../',
-            'path' => Path::makeRelative($absolutePath . '/../', $this->basePath),
-        ];
-        $items['details']['current'] = [
-            'name' => './',
-            'path' => Path::makeRelative($absolutePath, $this->basePath),
-        ];
-        foreach ($finder as $item) {
-            $items['contents'][] = [
-                'name' => $item->getFilename(),
-                'path' => Path::makeRelative($item->getPathname(), $this->basePath),
-                'isFile' => $item->isFile(),
-                'isDir' => $item->isDir(),
-                'size' => $item->getSize(),
-                'extension' => $item->getExtension(),
-                'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null
-            ];
-        }
-
-        return $items;
     }
 
     public function remove(string $name, string $path = './'): void

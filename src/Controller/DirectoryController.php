@@ -55,12 +55,16 @@ class DirectoryController extends AbstractApiController
     public function new(Directory $directory, Request $request): JsonResponse
     {
         $directory = new Directory();
-        $directory->mkdir(
+        $result = $directory->mkdir(
             $request->query->get('name'),
             $request->query->get('path')
         );
 
-        return $this->json(['msg'=>'SUCCESS']);
+        if ($result) {
+            return $this->json(['msg'=>'SUCCESS']);
+        }
+
+        return $this->setResponse()->invalid();
     }
 
     /**
