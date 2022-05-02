@@ -65,7 +65,7 @@ class BookRepository extends ServiceEntityRepository
                 }
             }
 
-            $fields = ['branch'];
+            $fields = ['branch', 'added'];
             $this->find->setForcedFilters([
                 [
                     'field' => 'sold',
