@@ -7,6 +7,10 @@ use org\bovigo\vfs\vfsStream;
 use App\Service\Directory\Directory;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\Token\JWTPostAuthenticationToken;
+use App\Entity\User;
+use App\Entity\Branch;
 
 class DirectoryTest extends TestCase
 {
@@ -15,7 +19,27 @@ class DirectoryTest extends TestCase
         vfsStream::setup('/');
         $path = vfsStream::url('/root');
 
-        $directory = new Directory();
+        $branch = $this->getMockBuilder(Branch::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $branch->method('getId')->willReturn(1);
+
+        $user = $this->getMockBuilder(User::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $user->method('getBranch')->willReturn($branch);
+
+        $token = $this->getMockBuilder(JWTPostAuthenticationToken::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $token->method('getUser')->willReturn($user);
+
+        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $tokenStorage->method('getToken')->willReturn($token);
+
+        $directory = new Directory($tokenStorage);
         $directory->setBasePath($path);
 
         // create directory

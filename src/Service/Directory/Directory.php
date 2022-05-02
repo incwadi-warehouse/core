@@ -7,18 +7,22 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class Directory implements DirectoryInterface
 {
     private string $basePath = __DIR__ . '/../../../data/directory';
 
-    public function __construct()
+    public function __construct(private TokenStorageInterface $token)
     {
         $fs = new Filesystem();
 
         if (!$fs->exists($this->getBasePath())) {
             $fs->mkdir($this->getBasePath());
         }
+
+        $branch = $token->getToken()->getUser()->getBranch()->getId();
+        $this->basePath = $this->basePath .'/'. $branch;
     }
 
     public function setBasePath(string $path): void
