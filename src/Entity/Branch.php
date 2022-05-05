@@ -58,6 +58,9 @@ class Branch implements \JsonSerializable
     #[ORM\Column(type: Types::BOOLEAN)]
     private $cart = false;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $content = null;
+
     public function jsonSerialize(): mixed
     {
         return [
@@ -70,6 +73,7 @@ class Branch implements \JsonSerializable
             'public' => $this->getPublic(),
             'pricelist' => $this->getPricelist(),
             'cart' => $this->getCart(),
+            'content' => $this->getContent()
         ];
     }
 
@@ -170,6 +174,18 @@ class Branch implements \JsonSerializable
     public function setCart(bool $cart): self
     {
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

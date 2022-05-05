@@ -20,6 +20,7 @@ class BranchType extends AbstractType
             ->add('public')
             ->add('pricelist')
             ->add('cart')
+            ->add('content')
         ;
     }
 

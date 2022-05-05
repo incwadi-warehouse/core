@@ -22,11 +22,26 @@ class BranchController extends AbstractController
             $processed[] = [
                 'id' => $branch->getId(),
                 'name' => $branch->getName(),
+                'content' => $branch->getContent()
             ];
         }
 
         return $this->json([
             'branches' => $processed,
+        ]);
+    }
+
+    #[Route(path: '/show/{id}', methods: ['GET'])]
+    public function show(Branch $branch): JsonResponse
+    {
+        if ($branch->getPublic() === false) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->json([
+            'id' => $branch->getId(),
+            'name' => $branch->getName(),
+            'content' => $branch->getContent()
         ]);
     }
 }
