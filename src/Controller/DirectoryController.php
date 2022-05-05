@@ -54,7 +54,6 @@ class DirectoryController extends AbstractApiController
     #[Route(path: '/new', methods: ['POST'])]
     public function new(Directory $directory, Request $request): JsonResponse
     {
-        $directory = new Directory();
         $result = $directory->mkdir(
             $request->query->get('name'),
             $request->query->get('path')
