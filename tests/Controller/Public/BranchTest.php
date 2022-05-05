@@ -14,7 +14,7 @@ class BranchTest extends WebTestCase
         $request = $this->request('/api/public/branch/', 'GET');
 
         $this->assertIsArray($request->branches);
-        $this->assertEquals(2, count((array) $request->branches[0]));
+        $this->assertEquals(3, count((array) $request->branches[0]));
         $this->assertIsInt($request->branches[0]->id);
         $this->assertIsString($request->branches[0]->name);
     }
