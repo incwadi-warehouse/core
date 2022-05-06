@@ -49,7 +49,7 @@ class Directory implements DirectoryInterface
 
         $filter = function (\SplFileInfo $file) {
             if ($file->isFile()) {
-                return in_array($file->getExtension(), ['docx', 'JPG', 'jpg', 'webp']);
+                return in_array($file->getExtension(), ['docx', 'JPG', 'jpg', 'jpeg', 'webp', 'png']);
             }
         };
 
@@ -121,6 +121,8 @@ class Directory implements DirectoryInterface
 
     public function upload(UploadedFile $file, string $filename, string $path = './'): ?File
     {
+        $filename = preg_replace('#[^a-zA-Z0-9-_\.]#', '_', $filename);
+
         if (!$this->isValidName($filename)) {
             return null;
         }
@@ -135,6 +137,7 @@ class Directory implements DirectoryInterface
             'image/jpg',
             'image/png',
             'image/webp',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ];
         if (!in_array($file->getMimeType(), $mimeTypes)) {
             return null;

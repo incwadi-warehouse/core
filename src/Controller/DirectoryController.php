@@ -54,7 +54,6 @@ class DirectoryController extends AbstractApiController
     #[Route(path: '/new', methods: ['POST'])]
     public function new(Directory $directory, Request $request): JsonResponse
     {
-        $directory = new Directory();
         $result = $directory->mkdir(
             $request->query->get('name'),
             $request->query->get('path')
@@ -83,7 +82,7 @@ class DirectoryController extends AbstractApiController
             return $this->json(['msg'=> 'SUCCESS']);
         }
 
-        throw new \Error('Could not upload image.');
+        throw new \Error('Could not upload file.');
     }
 
     /**
@@ -92,7 +91,6 @@ class DirectoryController extends AbstractApiController
     #[Route(path: '/edit', methods: ['PUT'])]
     public function edit(Directory $directory, Request $request): JsonResponse
     {
-        $directory = new Directory();
         $rename = $directory->rename(
             $request->query->get('orig'),
             $request->query->get('target'),
