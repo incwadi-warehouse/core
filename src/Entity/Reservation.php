@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Entity(repositoryClass: ReservationRepository::class)]
 class Reservation implements \JsonSerializable
@@ -33,11 +34,25 @@ class Reservation implements \JsonSerializable
     /**
      * @var Collection<Book>
      */
-    /**
-     * @var Collection<Book>
-     */
     #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'reservation')]
     private Collection $books;
+
+    #[ORM\Column(type: 'string', length: 1, nullable: true)]
+    #[Assert\Choice(['m', 'f', 'd'])]
+    private $salutation;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $firstname;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $surname;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Email()]
+    private $mail;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $phone;
 
     public function __construct()
     {
@@ -54,6 +69,11 @@ class Reservation implements \JsonSerializable
             'collection' => null !== $this->getCollection() ? $this->getCollection()->getTimestamp() : null,
             'notes' => $this->getNotes(),
             'books' => $this->getBooks(),
+            'salutation' => null !== $this->getSalutation() ? $this->getSalutation() : null,
+            'firstname' => null !== $this->getFirstname() ? $this->getFirstname() : null,
+            'surname' => null !== $this->getSurname() ? $this->getSurname() : null,
+            'mail' => null !== $this->getMail() ? $this->getMail() : null,
+            'phone' => null !== $this->getPhone() ? $this->getPhone() : null
         ];
     }
 
@@ -131,6 +151,66 @@ class Reservation implements \JsonSerializable
         if ($this->books->removeElement($book) && $book->getReservation() === $this) {
             $book->setReservation(null);
         }
+
+        return $this;
+    }
+
+    public function getSalutation(): ?string
+    {
+        return $this->salutation;
+    }
+
+    public function setSalutation(?string $salutation): self
+    {
+        $this->salutation = $salutation;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(?string $surname): self
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }

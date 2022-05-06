@@ -22,6 +22,11 @@ class ReservationType extends AbstractType
             ->add('collection', TextType::class)
             ->add('notes')
             ->add('books', TextType::class)
+            ->add('salutation')
+            ->add('firstname')
+            ->add('surname')
+            ->add('mail')
+            ->add('phone')
         ;
 
         $builder->get('collection')
