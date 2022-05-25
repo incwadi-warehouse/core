@@ -12,6 +12,7 @@
     "doctrine/doctrine-migrations-bundle": "^3.2",
     "doctrine/orm": "^2.11",
     "gesdinet/jwt-refresh-token-bundle": "^1.0",
+    "intervention/image": "^2.7",
     "lexik/jwt-authentication-bundle": "^2.14",
     "nelmio/cors-bundle": "^2.2",
     "sensio/framework-extra-bundle": "^6.2",

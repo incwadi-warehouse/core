@@ -8,6 +8,7 @@ use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Intervention\Image\ImageManager;
 
 class Directory implements DirectoryInterface
 {
@@ -73,7 +74,8 @@ class Directory implements DirectoryInterface
                 'isDir' => $item->isDir(),
                 'size' => $item->getSize(),
                 'extension' => $item->getExtension(),
-                'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null
+                'doc' => $item->getExtension() === 'docx' ? $this->readDoc($item->getPathname()) : null,
+                'preview' => in_array($item->getExtension(), ['jpg', 'jpeg', 'png', 'webp']) ? $this->generatePreview($item->getPathname()) : null
             ];
         }
 
@@ -236,5 +238,20 @@ class Directory implements DirectoryInterface
         }
 
         return null;
+    }
+
+    private function generatePreview($filename): string
+    {
+        $fs = new Filesystem();
+
+        if (!$fs->exists($filename)) {
+            return null;
+        }
+
+        $file = file_get_contents($filename);
+        $manager = new ImageManager(['driver' => 'imagick']);
+        $image = $manager->make($file)->widen(200)->encode('data-url');
+
+        return $image;
     }
 }
