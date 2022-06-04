@@ -34,13 +34,13 @@ class DirectoryController extends AbstractApiController
     public function cover(Request $request, Book $book, UploadCover $cover) : JsonResponse
     {
         $content = json_decode($request->getContent());
-        $absolutePath = Path::makeAbsolute($content->url, __DIR__ . '/../../data/directory/');
+        $absolutePath = Path::makeAbsolute($content->url, __DIR__ . '/../../data/directory/'.$this->getUser()->getBranch()->getId().'/');
 
-        if (!preg_match('#^'. Path::canonicalize(__DIR__ . '/../../data/directory/').'#', $absolutePath)) {
+        if (!preg_match('#^'. Path::canonicalize(__DIR__ . '/../../data/directory/'.$this->getUser()->getBranch()->getId().'/').'#', $absolutePath)) {
             throw $this->createNotFoundException();
         }
 
-        $file = new File(__DIR__ . '/../../data/directory/'. $content->url);
+        $file = new File(__DIR__ . '/../../data/directory/'.$this->getUser()->getBranch()->getId().'/'. $content->url);
         $file->openFile();
 
         $cover->upload($book, $file);
