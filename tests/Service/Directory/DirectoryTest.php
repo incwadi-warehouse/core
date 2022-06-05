@@ -85,16 +85,20 @@ class DirectoryTest extends TestCase
         $directory->rename('file_orig.jpg', 'file_target.jpg', 'test');
         $this->assertTrue(is_file($path . '/test/file_target.jpg'));
 
-        // list directory
-        $dir = $directory->list('./test/');
-        $this->assertIsArray($dir);
-        $this->assertEquals(2, count($dir));
-
         // remove file
         $directory->remove('file.jpg', 'test');
         $directory->remove('file.jpg', 'test/dir');
         $directory->remove('file2.jpg', 'test');
+        $directory->remove('file_upload.jpg', 'test');
+        $directory->remove('file_target.jpg', 'test');
         $this->assertTrue(!is_file($path . '/test/file.jpg'));
+
+        // list directory
+        $directory->touch('file1.docx', 'test');
+        $directory->touch('file2.docx', 'test');
+        $dir = $directory->list('./test/');
+        $this->assertIsArray($dir);
+        $this->assertEquals(2, count($dir));
 
         // remove directory
         $directory->remove('dir', 'test');
