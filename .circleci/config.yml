@@ -12,6 +12,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt update
+      - run : apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && pecl install imagick && docker-php-ext-enable imagick
       - run:
           name: Waiting for MySQL to be ready
           command: |
