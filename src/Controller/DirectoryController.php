@@ -105,7 +105,7 @@ class DirectoryController extends AbstractApiController
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/', methods: ['DELETE'])]
     public function delete(Directory $directory, Request $request): JsonResponse
