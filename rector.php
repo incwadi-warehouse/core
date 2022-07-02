@@ -49,7 +49,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->import(PHPUnitSetList::PHPUNIT_80);
 
-
     // get services (needed for register a single rule)
     $services = $containerConfigurator->services();
     $services->set(NoUnusedImportsFixer::class);
