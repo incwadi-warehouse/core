@@ -6,7 +6,6 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Branch;
 use App\Entity\Genre;
-use App\Entity\Staff;
 use App\Service\Portability\Export;
 use PHPUnit\Framework\TestCase;
 
@@ -23,9 +22,6 @@ class ExportTest extends TestCase
 
         $genre = new Genre();
         $genre->setName('Foreign Language Books');
-
-        $staff = new Staff();
-        $staff->setName('admin');
 
         $book1 = new Book();
         $book1->setBranch($branch);

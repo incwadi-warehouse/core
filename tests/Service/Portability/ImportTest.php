@@ -5,7 +5,6 @@ namespace App\Tests\Service\Portability;
 use App\Entity\Author;
 use App\Entity\Branch;
 use App\Entity\Genre;
-use App\Entity\Staff;
 use App\Service\Portability\Import;
 use PHPUnit\Framework\TestCase;
 
@@ -40,22 +39,13 @@ class ImportTest extends TestCase
             ->with($this->equalTo('findOneByName'))
             ->willReturn(null);
 
-        $staff = $this->getMockBuilder('\\App\\Repository\\StaffRepository')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $staff
-            ->expects($this->any())
-            ->method('__call')
-            ->with($this->equalTo('findOneByName'))
-            ->willReturn(null);
-
         $em = $this->getMockBuilder('\\Doctrine\\ORM\\EntityManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
         $em->method('getRepository')
             ->will(
                 $this->returnCallback(
-                    function ($class) use ($branch, $author, $genre, $staff) {
+                    function ($class) use ($branch, $author, $genre) {
                         switch ($class) {
                         case Branch::class:
                             return $branch;
@@ -63,8 +53,6 @@ class ImportTest extends TestCase
                             return $author;
                         case Genre::class:
                             return $genre;
-                        case Staff::class:
-                            return $staff;
                         }
                     }
                 )
