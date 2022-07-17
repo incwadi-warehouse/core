@@ -36,7 +36,6 @@
     "doctrine/doctrine-fixtures-bundle": "^3.4",
     "friendsofphp/php-cs-fixer": "^3.9",
     "mikey179/vfsstream": "^1.6",
-    "phploc/phploc": "^7.0",
     "rector/rector": "^0.13",
     "symfony/browser-kit": "^6.1",
     "symfony/debug-bundle": "^6.1",
