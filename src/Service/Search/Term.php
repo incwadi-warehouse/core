@@ -10,6 +10,8 @@ class Term
 {
     public function term(QueryBuilder $qb, ?string $term = null): ?Orx
     {
+        $term = trim($term);
+
         if (!$term) {
             return null;
         }
