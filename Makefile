@@ -9,3 +9,5 @@ rector:
 	vendor/bin/rector process src/
 fixtures:
 	bin/console doctrine:fixtures:load -n
+csfixer:
+  vendor/bin/php-cs-fixer fix
