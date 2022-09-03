@@ -10,4 +10,8 @@ rector:
 fixtures:
 	bin/console doctrine:fixtures:load -n
 csfixer:
-  vendor/bin/php-cs-fixer fix
+	vendor/bin/php-cs-fixer fix
+psalm:
+	vendor/bin/psalm
+psalter:
+	vendor/bin/psalter --issues=all

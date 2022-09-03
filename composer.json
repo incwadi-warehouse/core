@@ -42,7 +42,8 @@
     "symfony/maker-bundle": "^1.44",
     "symfony/phpunit-bridge": "^6.1",
     "symfony/stopwatch": "^6.1",
-    "symfony/var-dumper": "^6.1"
+    "symfony/var-dumper": "^6.1",
+    "vimeo/psalm": "^4.27"
   },
   "config": {
     "preferred-install": {
