@@ -29,6 +29,7 @@ class ReservationController extends AbstractController
         );
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->setOpen(true);
             $em->persist($reservation);
             $em->flush();
 

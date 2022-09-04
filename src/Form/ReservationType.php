@@ -27,6 +27,7 @@ class ReservationType extends AbstractType
             ->add('surname')
             ->add('mail')
             ->add('phone')
+            ->add('open')
         ;
 
         $builder->get('collection')
