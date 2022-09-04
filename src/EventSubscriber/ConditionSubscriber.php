@@ -24,9 +24,11 @@ class ConditionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $condition->setBranch(
-            $this->token->getToken()->getUser()->getBranch()
-        );
+        if($this->token->getToken()){
+            $condition->setBranch(
+                $this->token->getToken()->getUser()->getBranch()
+            );
+        }
     }
 
     public function preRemove(LifecycleEventArgs $args): void

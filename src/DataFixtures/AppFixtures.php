@@ -6,6 +6,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Branch;
+use App\Entity\Condition;
 use App\Entity\Genre;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -74,6 +75,12 @@ class AppFixtures extends Fixture
             $book->setReleaseYear(2020);
             $manager->persist($book);
         }
+
+        $condition = new Condition();
+        $condition->setName('Condition 1');
+        $condition->setBranch($branch);
+
+        $manager->persist($condition);
 
         $manager->flush();
     }
