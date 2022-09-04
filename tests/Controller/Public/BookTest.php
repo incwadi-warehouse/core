@@ -34,6 +34,7 @@ class BookTest extends WebTestCase
             'added' => 859,
             'cond' => null,
             'tags' => null,
+            'subtitle' => 'Subtitle'
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -59,7 +60,7 @@ class BookTest extends WebTestCase
         ]);
 
         $this->assertIsArray($request->books);
-        $this->assertEquals(13, count((array) $request->books[0]));
+        $this->assertEquals(14, count((array) $request->books[0]));
         $this->assertIsString($request->books[0]->id);
         $this->assertIsString($request->books[0]->currency);
         $this->assertIsString($request->books[0]->title);
@@ -78,11 +79,14 @@ class BookTest extends WebTestCase
         if (null !== $request->books[0]->cond) {
             $this->assertIsString($request->books[0]->cond);
         }
+        if (null !== $request->books[0]->subtitle) {
+            $this->assertIsString($request->books[0]->subtitle);
+        }
 
         // show
         $request = $this->request('/api/public/book/'.$this->book, 'GET');
 
-        $this->assertEquals(14, count((array) $request));
+        $this->assertEquals(15, count((array) $request));
         $this->assertIsString($request->id);
         $this->assertIsString($request->currency);
         $this->assertIsString($request->title);
@@ -104,6 +108,7 @@ class BookTest extends WebTestCase
             $this->assertIsString($request->cond);
         }
         $this->assertIsBool($request->branchCart);
+        $this->assertEquals('Subtitle', $request->subtitle);
 
         // recommendation
         $request = $this->request('/api/public/book/recommendation/'.$this->branch, 'GET');

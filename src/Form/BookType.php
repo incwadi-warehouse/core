@@ -33,6 +33,7 @@ class BookType extends AbstractType
             ->add('tags')
             ->add('recommendation')
             ->add('format')
+            ->add('subtitle')
         ;
 
         $builder->get('added')

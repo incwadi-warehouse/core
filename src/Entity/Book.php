@@ -100,6 +100,9 @@ class Book implements \JsonSerializable
     #[ORM\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
     private ?Format $format = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $subtitle = null;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -132,6 +135,7 @@ class Book implements \JsonSerializable
             'recommendation' => $this->getRecommendation(),
             'inventory' => $this->getInventory(),
             'format' => $this->getFormat(),
+            'subtitle' => $this->getSubtitle()
         ];
     }
 
@@ -390,6 +394,18 @@ class Book implements \JsonSerializable
     public function setFormat(?Format $format): self
     {
         $this->format = $format;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

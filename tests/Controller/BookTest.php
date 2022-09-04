@@ -82,6 +82,7 @@ class BookTest extends WebTestCase
             'added' => 859,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
+            'subtitle' => 'Subtitle'
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -111,6 +112,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2, count($request->tags));
         $this->assertIsInt($request->tags[0]->id);
         $this->assertIsString($request->tags[0]->name);
+        $this->assertEquals('Subtitle', $request->subtitle);
 
         $id = $request->id;
 
@@ -126,6 +128,7 @@ class BookTest extends WebTestCase
             'added' => 4758,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
+            'subtitle' => 'Subtitle 2'
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -155,6 +158,7 @@ class BookTest extends WebTestCase
         $this->assertEquals(2, count($request->tags));
         $this->assertIsInt($request->tags[0]->id);
         $this->assertIsString($request->tags[0]->name);
+        $this->assertEquals('Subtitle 2', $request->subtitle);
 
         // sell
         $request = $this->request('/api/book/sell/'.$id, 'PUT');

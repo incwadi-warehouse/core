@@ -55,6 +55,7 @@ class BookController extends AbstractController
             'branchCart' => $book->getBranch()->getCart(),
             'cond' => $book->getCond() !== null ? $book->getCond()->getName() : null,
             'format_name' => $book->getFormat() !== null ? $book->getFormat()->getName() : null,
+            'subtitle' => $book->getSubtitle()
         ]);
     }
 
