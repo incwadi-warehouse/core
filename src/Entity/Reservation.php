@@ -54,6 +54,9 @@ class Reservation implements \JsonSerializable
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $phone;
 
+    #[ORM\Column]
+    private bool $open = true;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -73,7 +76,8 @@ class Reservation implements \JsonSerializable
             'firstname' => null !== $this->getFirstname() ? $this->getFirstname() : null,
             'surname' => null !== $this->getSurname() ? $this->getSurname() : null,
             'mail' => null !== $this->getMail() ? $this->getMail() : null,
-            'phone' => null !== $this->getPhone() ? $this->getPhone() : null
+            'phone' => null !== $this->getPhone() ? $this->getPhone() : null,
+            'open' => $this->isOpen()
         ];
     }
 
@@ -211,6 +215,18 @@ class Reservation implements \JsonSerializable
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function isOpen(): bool
+    {
+        return $this->open;
+    }
+
+    public function setOpen(bool $open): self
+    {
+        $this->open = $open;
 
         return $this;
     }
