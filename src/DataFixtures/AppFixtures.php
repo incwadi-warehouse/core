@@ -7,6 +7,7 @@ use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Branch;
 use App\Entity\Condition;
+use App\Entity\Format;
 use App\Entity\Genre;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -81,6 +82,12 @@ class AppFixtures extends Fixture
         $condition->setBranch($branch);
 
         $manager->persist($condition);
+
+        $format = new Format();
+        $format->setName('Format 1');
+        $format->setBranch($branch);
+
+        $manager->persist($format);
 
         $manager->flush();
     }
