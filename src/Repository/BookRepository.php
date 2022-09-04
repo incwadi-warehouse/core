@@ -121,6 +121,7 @@ class BookRepository extends ServiceEntityRepository
                 'branchOrdering' => $book->getBranch()->getOrdering(),
                 'cond' => $book->getCond() ? $book->getCond()->getName() : null,
                 'format_name' => $book->getFormat() ? $book->getFormat()->getName() : null,
+                'subtitle' => $book->getSubtitle()
             ];
         }
 
