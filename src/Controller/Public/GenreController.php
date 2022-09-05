@@ -21,9 +21,7 @@ class GenreController extends AbstractApiController
             throw $this->createNotFoundException();
         }
 
-        $genres = $manager
-                ->getRepository(Genre::class)
-                ->findByBranch($branch);
+        $genres = $manager->getRepository(Genre::class)->findDemanded($branch);
 
         if (!$genres) {
             throw $this->createNotFoundException();
