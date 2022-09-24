@@ -29,21 +29,24 @@ security:
             # switch_user: true
 
         login:
-            pattern:  ^/api/login
+            pattern: ^/api/login
             stateless: true
             json_login:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        refresh:
-            pattern:  ^/api/token/refresh
-            stateless: true
-
         api:
-            pattern:   ^/
+            pattern: ^/api
             stateless: true
+            entry_point: jwt
+            json_login:
+                check_path: /api/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
+            refresh_jwt:
+                check_path: /api/token/refresh
 
     access_decision_manager:
         strategy: unanimous
@@ -52,8 +55,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/public, roles: PUBLIC_ACCESS }
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
+        - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
