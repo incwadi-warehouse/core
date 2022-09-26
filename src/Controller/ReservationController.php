@@ -31,6 +31,27 @@ class ReservationController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route(path: '/status', methods: ['GET'])]
+    public function status(ManagerRegistry $manager): JsonResponse
+    {
+        return $this->json([
+            'open' =>
+                count($manager
+                    ->getRepository(Reservation::class)
+                    ->findBy(
+                        [
+                            'branch' => $this->getUser()->getBranch(),
+                            'open' => true
+                        ],
+                        ['createdAt' => 'DESC']
+                    )
+                )
+        ]);
+    }
+
+    /**
      * @Security("is_granted('ROLE_USER') and reservation.getBranch() === user.getBranch()")
      */
     #[Route(path: '/{id}', methods: ['GET'])]
