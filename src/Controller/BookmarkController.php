@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
+// @deprecated
 #[Route(path: '/api/bookmark')]
 class BookmarkController extends AbstractController
 {
