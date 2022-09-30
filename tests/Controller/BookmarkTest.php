@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+// @deprecated
 class BookmarkTest extends WebTestCase
 {
     use \Baldeweg\Bundle\ApiBundle\ApiTestTrait;

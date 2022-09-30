@@ -7,6 +7,7 @@ use App\Repository\BookmarkRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// @deprecated
 #[ORM\Entity(repositoryClass: BookmarkRepository::class)]
 class Bookmark implements \JsonSerializable
 {
