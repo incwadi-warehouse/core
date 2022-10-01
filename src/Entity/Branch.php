@@ -44,11 +44,6 @@ class Branch implements \JsonSerializable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $ordering = null;
 
-    #[Assert\Choice(choices: Branch::ORDER_BY)]
-    #[Assert\NotBlank]
-    #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $orderBy = 'name';
-
     #[ORM\Column(type: Types::BOOLEAN)]
     private $public = false;
 
@@ -69,7 +64,6 @@ class Branch implements \JsonSerializable
             'steps' => $this->getSteps(),
             'currency' => $this->getCurrency(),
             'ordering' => $this->getOrdering(),
-            'orderBy' => $this->getOrderBy(),
             'public' => $this->getPublic(),
             'pricelist' => $this->getPricelist(),
             'cart' => $this->getCart(),
@@ -126,18 +120,6 @@ class Branch implements \JsonSerializable
     public function setOrdering(?string $ordering): self
     {
         $this->ordering = $ordering;
-
-        return $this;
-    }
-
-    public function getOrderBy(): string
-    {
-        return $this->orderBy;
-    }
-
-    public function setOrderBy(string $orderBy): self
-    {
-        $this->orderBy = $orderBy;
 
         return $this;
     }
