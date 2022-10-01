@@ -44,6 +44,7 @@ class Branch implements \JsonSerializable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $ordering = null;
 
+    // @deprecated
     #[Assert\Choice(choices: Branch::ORDER_BY)]
     #[Assert\NotBlank]
     #[ORM\Column(type: Types::STRING, length: 255)]
@@ -130,11 +131,13 @@ class Branch implements \JsonSerializable
         return $this;
     }
 
+    // @deprecated
     public function getOrderBy(): string
     {
         return $this->orderBy;
     }
 
+    // @deprecated
     public function setOrderBy(string $orderBy): self
     {
         $this->orderBy = $orderBy;
