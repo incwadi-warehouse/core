@@ -23,6 +23,7 @@ class GenreRepository extends ServiceEntityRepository
 
     public function findDemanded(Branch $branch): array
     {
+        // @deprecated getOrderBy()
         if ('books' === $branch->getOrderBy()) {
             return $this->findByBranchAndOrderByBooks(
                 $branch
@@ -35,6 +36,7 @@ class GenreRepository extends ServiceEntityRepository
         );
     }
 
+    // @deprecated
     public function findByBranchAndOrderByBooks(Branch $branch): array
     {
         return $this->createQueryBuilder('g')
