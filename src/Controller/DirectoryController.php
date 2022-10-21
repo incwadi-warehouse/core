@@ -12,6 +12,7 @@ use App\Service\Cover\UploadCover;
 use App\Entity\Book;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Path;
+use Baldeweg\Bundle\ApiBundle\Response;
 
 #[Route(path: '/api/directory')]
 class DirectoryController extends AbstractApiController
@@ -52,7 +53,7 @@ class DirectoryController extends AbstractApiController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/new', methods: ['POST'])]
-    public function new(Directory $directory, Request $request): JsonResponse
+    public function new(Directory $directory, Request $request, Response $res): JsonResponse
     {
         $result = $directory->mkdir(
             $request->query->get('name'),
@@ -63,7 +64,7 @@ class DirectoryController extends AbstractApiController
             return $this->json(['msg'=>'SUCCESS']);
         }
 
-        return $this->setResponse()->invalid();
+        return $res->invalid();
     }
 
     /**
@@ -89,7 +90,7 @@ class DirectoryController extends AbstractApiController
      * @Security("is_granted('ROLE_USER')")
      */
     #[Route(path: '/edit', methods: ['PUT'])]
-    public function edit(Directory $directory, Request $request): JsonResponse
+    public function edit(Directory $directory, Request $request, Response $res): JsonResponse
     {
         $rename = $directory->rename(
             $request->query->get('orig'),
@@ -101,20 +102,20 @@ class DirectoryController extends AbstractApiController
             return $this->json(['msg' => 'SUCCESS']);
         }
 
-        return $this->setResponse()->invalid();
+        return $res->invalid();
     }
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
      */
     #[Route(path: '/', methods: ['DELETE'])]
-    public function delete(Directory $directory, Request $request): JsonResponse
+    public function delete(Directory $directory, Request $request, Response $res): JsonResponse
     {
         $directory->remove(
             $request->query->get('name'),
             $request->query->get('path')
         );
 
-        return $this->setResponse()->deleted();
+        return $res->deleted();
     }
 }

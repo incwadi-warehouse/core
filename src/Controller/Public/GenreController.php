@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Baldeweg\Bundle\ApiBundle\AbstractApiController;
+use Baldeweg\Bundle\ApiBundle\Response;
 
 #[Route(path: '/api/public/genre')]
 class GenreController extends AbstractApiController
@@ -15,7 +16,7 @@ class GenreController extends AbstractApiController
     private $fields = ['id', 'name'];
 
     #[Route(path: '/{branch}', methods: ['GET'])]
-    public function list(Branch $branch, ManagerRegistry $manager): JsonResponse
+    public function list(Branch $branch, ManagerRegistry $manager, Response $res): JsonResponse
     {
         if (!$branch->getPublic()) {
             throw $this->createNotFoundException();
@@ -27,6 +28,7 @@ class GenreController extends AbstractApiController
             throw $this->createNotFoundException();
         }
 
-        return $this->setResponse()->collection($this->fields, $genres);
+
+        return $res->collection($this->fields, $genres);
     }
 }
