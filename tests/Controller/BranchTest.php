@@ -22,7 +22,6 @@ class BranchTest extends WebTestCase
         if (null !== $request[0]->ordering) {
             $this->assertIsString($request[0]->ordering);
         }
-        $this->assertIsString($request[0]->orderBy);
         $this->assertIsBool($request[0]->public);
         if ($request[0]->content !== null) {
             $this->assertIsString($request[0]->content);
@@ -36,7 +35,6 @@ class BranchTest extends WebTestCase
             'steps' => 0.01,
             'currency' => 'EUR',
             'ordering' => 'ordering',
-            'orderBy' => 'name',
             'public' => true,
             'pricelist' => '{}',
             'content' => 'content'
@@ -47,7 +45,6 @@ class BranchTest extends WebTestCase
         $this->assertEquals(0.01, $request->steps);
         $this->assertEquals('EUR', $request->currency);
         $this->assertIsString($request->ordering);
-        $this->assertIsString($request->orderBy);
         $this->assertTrue($request->public);
         $this->assertEquals('{}', $request->pricelist);
         $this->assertEquals('content', $request->content);
@@ -60,7 +57,6 @@ class BranchTest extends WebTestCase
         $this->assertEquals(0.01, $request->steps);
         $this->assertEquals('EUR', $request->currency);
         $this->assertIsString($request->ordering);
-        $this->assertIsString($request->orderBy);
         $this->assertTrue($request->public);
         $this->assertEquals('{}', $request->pricelist);
         $this->assertEquals('content', $request->content);
