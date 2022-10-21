@@ -16,7 +16,6 @@ class BranchType extends AbstractType
             ->add('steps')
             ->add('currency')
             ->add('ordering')
-            ->add('orderBy')
             ->add('public')
             ->add('pricelist')
             ->add('cart')
