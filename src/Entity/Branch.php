@@ -123,7 +123,7 @@ class Branch implements \JsonSerializable
 
         return $this;
     }
-
+    
     public function getPublic(): ?bool
     {
         return $this->public;
