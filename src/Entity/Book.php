@@ -72,7 +72,7 @@ class Book implements \JsonSerializable
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $reservedAt = null;
 
-    #[Assert\Length(min: 4, max: 4)]
+    #[Assert\Length(max: 4)]
     #[ORM\Column(type: Types::INTEGER)]
     private int $releaseYear;
 
