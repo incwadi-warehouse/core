@@ -21,17 +21,24 @@ class OrderBy
             return null;
         }
 
-        $field = 'b.'.$orderBy['field'];
-        if ('genre' === $orderBy['field']) {
-            $field = 'g.name';
+        if ($orderBy['field'] === 'genre') {
+            return $qb->orderBy(
+                'g.name',
+                $this->getDirection($orderBy)
+            );
         }
 
-        if ('author' === $orderBy['field']) {
-            $field = 'a.surname';
+        if ($orderBy['field'] === 'author') {
+            return $qb->orderBy(
+                'a.surname',
+                $this->getDirection($orderBy)
+            )->addOrderBy(
+                'a.firstname',
+                $this->getDirection($orderBy));
         }
 
         return $qb->orderBy(
-            $field,
+            'b.' . $orderBy['field'],
             $this->getDirection($orderBy)
         );
     }
