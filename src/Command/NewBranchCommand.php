@@ -9,11 +9,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'branch:new')]
 class NewBranchCommand extends Command
 {
-    protected static $defaultName = 'branch:new';
-
     public function __construct(private readonly EntityManagerInterface $em)
     {
         parent::__construct();

@@ -8,11 +8,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'books:delete')]
 class BooksDeleteCommand extends Command
 {
-    protected static $defaultName = 'books:delete';
-
     public function __construct(private readonly EntityManagerInterface $em)
     {
         parent::__construct();

@@ -9,11 +9,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'branch:list')]
 class ListBranchesCommand extends Command
 {
-    protected static $defaultName = 'branch:list';
-
     public function __construct(private readonly BranchRepository $branchRepository)
     {
         parent::__construct();
