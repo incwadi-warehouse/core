@@ -4,37 +4,37 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9448b1a366cb794b519567f3839b417",
+    "content-hash": "2b501e5cb9b6f5978487e2bc333ec79c",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
-            "version": "v44.0.2",
+            "version": "v48.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/api-bundle.git",
-                "reference": "d32c0e6b0404064917d99a79bb9b48e25f340ece"
+                "reference": "d131a66bb4c3776518d275688c6ef7263965e1a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/api-bundle/zipball/d32c0e6b0404064917d99a79bb9b48e25f340ece",
-                "reference": "d32c0e6b0404064917d99a79bb9b48e25f340ece",
+                "url": "https://api.github.com/repos/abaldeweg/api-bundle/zipball/d131a66bb4c3776518d275688c6ef7263965e1a0",
+                "reference": "d131a66bb4c3776518d275688c6ef7263965e1a0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/console": "^6.1",
-                "symfony/dependency-injection": "^6.1",
-                "symfony/framework-bundle": "^6.1",
-                "symfony/http-foundation": "^6.1",
-                "symfony/property-access": "^6.1",
-                "symfony/serializer": "^6.1"
+                "symfony/console": "^6.2",
+                "symfony/dependency-injection": "^6.2",
+                "symfony/framework-bundle": "^6.2",
+                "symfony/http-foundation": "^6.2",
+                "symfony/property-access": "^6.2",
+                "symfony/serializer": "^6.2"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.11",
                 "phpunit/phpunit": "^9.5",
                 "rector/rector": "^0.12",
                 "symfony/maker-bundle": "^1.46",
-                "symfony/var-dumper": "^6.1"
+                "symfony/var-dumper": "^6.2"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -54,35 +54,34 @@
             ],
             "description": "Offers tools for API's.",
             "support": {
-                "issues": "https://github.com/abaldeweg/api-bundle/issues",
-                "source": "https://github.com/abaldeweg/api-bundle/tree/v44.0.2"
+                "source": "https://github.com/abaldeweg/api-bundle/tree/v48.1.0"
             },
-            "time": "2022-10-21T21:37:09+00:00"
+            "time": "2023-02-05T14:09:01+00:00"
         },
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v44.0.2",
+            "version": "v48.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
-                "reference": "cac98f7b9b048c33259130a9ce97d0a352bc17d7"
+                "reference": "c27d97e89b4f6442aaa16d8cc9fe77a6be57ce6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/cac98f7b9b048c33259130a9ce97d0a352bc17d7",
-                "reference": "cac98f7b9b048c33259130a9ce97d0a352bc17d7",
+                "url": "https://api.github.com/repos/abaldeweg/extra-bundle/zipball/c27d97e89b4f6442aaa16d8cc9fe77a6be57ce6d",
+                "reference": "c27d97e89b4f6442aaa16d8cc9fe77a6be57ce6d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.9",
                 "php": ">=8.1",
-                "symfony/console": "^6.0",
-                "symfony/dependency-injection": "^6.0",
-                "symfony/form": "^6.0",
-                "symfony/framework-bundle": "^6.0",
-                "symfony/http-foundation": "^6.0",
-                "symfony/options-resolver": "^6.0",
-                "symfony/security-bundle": "^6.0"
+                "symfony/console": "^6.2",
+                "symfony/dependency-injection": "^6.2",
+                "symfony/form": "^6.2",
+                "symfony/framework-bundle": "^6.2",
+                "symfony/http-foundation": "^6.2",
+                "symfony/options-resolver": "^6.2",
+                "symfony/security-bundle": "^6.2"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
@@ -90,7 +89,7 @@
                 "phpunit/phpunit": "^9.5",
                 "rector/rector": "^0.12",
                 "symfony/maker-bundle": "^1.31",
-                "symfony/var-dumper": "^6.0"
+                "symfony/var-dumper": "^6.2"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -110,10 +109,9 @@
             ],
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
-                "issues": "https://github.com/abaldeweg/extra-bundle/issues",
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v44.0.2"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v48.1.0"
             },
-            "time": "2022-10-21T09:25:43+00:00"
+            "time": "2023-02-05T14:16:56+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2050,16 +2048,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.17.0",
+            "version": "v2.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "6a6f1988451663181ca68df1a56bac6b005bfbec"
+                "reference": "0609638166981258bd68663fd15b3c57ac63a0df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/6a6f1988451663181ca68df1a56bac6b005bfbec",
-                "reference": "6a6f1988451663181ca68df1a56bac6b005bfbec",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/0609638166981258bd68663fd15b3c57ac63a0df",
+                "reference": "0609638166981258bd68663fd15b3c57ac63a0df",
                 "shasum": ""
             },
             "require": {
@@ -2081,9 +2079,9 @@
                 "symfony/console": "<4.4"
             },
             "require-dev": {
-                "symfony/browser-kit": "^4.4|^5.3|^6.0",
+                "symfony/browser-kit": "^5.4|^6.0",
                 "symfony/console": "^4.4|^5.3|^6.0",
-                "symfony/dom-crawler": "^4.4|^5.3|^6.0",
+                "symfony/dom-crawler": "^5.4|^6.0",
                 "symfony/filesystem": "^4.4|^5.3|^6.0",
                 "symfony/framework-bundle": "^4.4|^5.3|^6.0",
                 "symfony/phpunit-bridge": "^4.4|^5.3|^6.0",
@@ -2152,7 +2150,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
-                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.17.0"
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.18.1"
             },
             "funding": [
                 {
@@ -2164,20 +2162,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-03T15:12:45+00:00"
+            "time": "2023-02-13T12:30:12+00:00"
         },
         {
             "name": "monolog/monolog",
-            "version": "3.2.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "305444bc6fb6c89e490f4b34fa6e979584d7fa81"
+                "reference": "9b5daeaffce5b926cac47923798bba91059e60e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/305444bc6fb6c89e490f4b34fa6e979584d7fa81",
-                "reference": "305444bc6fb6c89e490f4b34fa6e979584d7fa81",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9b5daeaffce5b926cac47923798bba91059e60e2",
+                "reference": "9b5daeaffce5b926cac47923798bba91059e60e2",
                 "shasum": ""
             },
             "require": {
@@ -2192,16 +2190,16 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2",
-                "guzzlehttp/guzzle": "^7.4",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
+                "guzzlehttp/guzzle": "^7.4.5",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
-                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan": "^1.9",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.1",
-                "phpunit/phpunit": "^9.5.16",
-                "predis/predis": "^1.1",
+                "phpstan/phpstan-strict-rules": "^1.4",
+                "phpunit/phpunit": "^9.5.26",
+                "predis/predis": "^1.1 || ^2",
                 "ruflin/elastica": "^7",
                 "symfony/mailer": "^5.4 || ^6",
                 "symfony/mime": "^5.4 || ^6"
@@ -2253,7 +2251,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.2.0"
+                "source": "https://github.com/Seldaek/monolog/tree/3.3.1"
             },
             "funding": [
                 {
@@ -2265,7 +2263,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T12:00:55+00:00"
+            "time": "2023-02-06T13:46:10+00:00"
         },
         {
             "name": "namshi/jose",
@@ -2336,29 +2334,30 @@
         },
         {
             "name": "nelmio/cors-bundle",
-            "version": "2.2.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioCorsBundle.git",
-                "reference": "0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0"
+                "reference": "185d2c0ae50a3f0b628790170164d5f1c5b7c281"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0",
-                "reference": "0ee5ee30b0ee08ea122d431ae6e0ddeb87f035c0",
+                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/185d2c0ae50a3f0b628790170164d5f1c5b7c281",
+                "reference": "185d2c0ae50a3f0b628790170164d5f1c5b7c281",
                 "shasum": ""
             },
             "require": {
-                "symfony/framework-bundle": "^4.3 || ^5.0 || ^6.0"
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.2",
-                "symfony/phpunit-bridge": "^4.3 || ^5.0 || ^6.0"
+                "symfony/phpunit-bridge": "^4.4 || ^5.4 || ^6.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2391,9 +2390,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioCorsBundle/issues",
-                "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.2.0"
+                "source": "https://github.com/nelmio/NelmioCorsBundle/tree/2.3.1"
             },
-            "time": "2021-12-01T09:34:27+00:00"
+            "time": "2023-02-16T08:49:29+00:00"
         },
         {
             "name": "psr/cache",
@@ -8366,16 +8365,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.14",
+            "version": "1.9.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58"
+                "reference": "f2d5cf71be91172a57c649770b73c20ebcffb0bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5fcc96289cf737304286a9b505fbed091f02e58",
-                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f2d5cf71be91172a57c649770b73c20ebcffb0bf",
+                "reference": "f2d5cf71be91172a57c649770b73c20ebcffb0bf",
                 "shasum": ""
             },
             "require": {
@@ -8405,7 +8404,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.14"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.18"
             },
             "funding": [
                 {
@@ -8421,7 +8420,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-19T10:47:09+00:00"
+            "time": "2023-02-17T15:01:27+00:00"
         },
         {
             "name": "rector/rector",
@@ -9274,16 +9273,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3ffcf4b7d890770466da3b2666f82ac054e7ec72"
+                "reference": "a6e0510cc793912b451fd40ab983a1d28f611c15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3ffcf4b7d890770466da3b2666f82ac054e7ec72",
-                "reference": "3ffcf4b7d890770466da3b2666f82ac054e7ec72",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a6e0510cc793912b451fd40ab983a1d28f611c15",
+                "reference": "a6e0510cc793912b451fd40ab983a1d28f611c15",
                 "shasum": ""
             },
             "require": {
@@ -9334,7 +9333,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.5.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.5.1"
             },
             "funding": [
                 {
@@ -9346,7 +9345,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-27T12:28:18+00:00"
+            "time": "2023-02-08T07:49:20+00:00"
         },
         {
             "name": "vimeo/psalm",
