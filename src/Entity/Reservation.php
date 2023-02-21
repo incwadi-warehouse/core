@@ -25,10 +25,6 @@ class Reservation implements \JsonSerializable
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    // @deprecated
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $collection = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
 
@@ -70,7 +66,6 @@ class Reservation implements \JsonSerializable
             'id' => $this->getId(),
             'branch' => $this->getBranch(),
             'createdAt' => null !== $this->getCreatedAt() ? $this->getCreatedAt()->getTimestamp() : null,
-            'collection' => null !== $this->getCollection() ? $this->getCollection()->getTimestamp() : null,
             'notes' => $this->getNotes(),
             'books' => $this->getBooks(),
             'salutation' => null !== $this->getSalutation() ? $this->getSalutation() : null,
@@ -107,18 +102,6 @@ class Reservation implements \JsonSerializable
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getCollection(): ?\DateTimeInterface
-    {
-        return $this->collection;
-    }
-
-    public function setCollection(?\DateTimeInterface $collection): self
-    {
-        $this->collection = $collection;
 
         return $this;
     }
