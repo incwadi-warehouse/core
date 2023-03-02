@@ -298,6 +298,7 @@ class BookController extends AbstractController
 
         $book->setReserved(false);
         $book->setReservedAt(null);
+        $book->setReservation(null);
 
         $manager->getManager()->flush();
 
