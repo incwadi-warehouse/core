@@ -6,7 +6,7 @@
   "require": {
     "php": ">=8.1",
     "baldeweg/api-bundle": "^48.1",
-    "baldeweg/extra-bundle": "^48.1",
+    "baldeweg/extra-bundle": "^49.0",
     "doctrine/dbal": "^2.13",
     "doctrine/doctrine-bundle": "^2.7",
     "doctrine/doctrine-migrations-bundle": "^3.2",
