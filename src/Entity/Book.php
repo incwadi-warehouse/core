@@ -97,6 +97,7 @@ class Book implements \JsonSerializable
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private $inventory;
 
+    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Format::class, inversedBy: 'books')]
     private ?Format $format = null;
 
