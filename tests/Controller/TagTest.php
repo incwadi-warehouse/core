@@ -133,6 +133,7 @@ class TagTest extends WebTestCase
             'added' => 859,
             'cond' => $this->conditionId,
             'tags' => [$id],
+            'format' => $this->formatId
         ]);
 
         // show book
