@@ -12,6 +12,8 @@ class BookTest extends WebTestCase
 
     protected int $conditionId;
 
+    protected int $formatId;
+
     private array $tags = [];
 
     public function setUp(): void
@@ -47,6 +49,14 @@ class BookTest extends WebTestCase
             'name' => 'tag2',
         ]);
         $this->tags[] = $request->id;
+
+        $request = $this->request('/api/format/new', 'POST', [], [
+            'name' => 'name',
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $this->formatId = $request->id;
     }
 
     public function tearDown(): void
@@ -65,6 +75,10 @@ class BookTest extends WebTestCase
             $this->assertEquals('The tag was deleted successfully.', $request->msg);
         }
 
+        $request = $this->request('/api/format/' . $this->formatId, 'DELETE');
+
+        $this->assertEquals('The format was deleted successfully.', $request->msg);
+
         parent::tearDown();
     }
 
@@ -82,7 +96,8 @@ class BookTest extends WebTestCase
             'added' => 859,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
-            'subtitle' => 'Subtitle'
+            'subtitle' => 'Subtitle',
+            'format' => $this->formatId,
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -275,6 +290,7 @@ class BookTest extends WebTestCase
             'releaseYear' => 2019,
             'added' => 4758,
             'cond' => $this->conditionId,
+            'format' => $this->formatId
         ]);
 
         $id = $request->id;
@@ -291,6 +307,7 @@ class BookTest extends WebTestCase
             'releaseYear' => 2019,
             'added' => 4758,
             'cond' => $this->conditionId,
+            'format' => $this->formatId
         ], 409);
 
         $this->assertEquals('Book not saved, because it exists already!', $request->msg);

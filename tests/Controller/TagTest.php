@@ -11,6 +11,7 @@ class TagTest extends WebTestCase
     protected int $genreId;
 
     protected int $conditionId;
+    protected int $formatId;
     private string $bookId;
 
     public function setUp(): void
@@ -37,6 +38,14 @@ class TagTest extends WebTestCase
 
         $this->conditionId = $request->id;
 
+        $request = $this->request('/api/format/new', 'POST', [], [
+            'name' => 'name',
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $this->formatId = $request->id;
+
         $time = new \DateTime();
         $request = $this->request('/api/book/new', 'POST', [], [
             'title' => 'title'.$time->getTimestamp(),
@@ -48,6 +57,7 @@ class TagTest extends WebTestCase
             'releaseYear' => 2019,
             'added' => 859,
             'cond' => $this->conditionId,
+            'format' => $this->formatId
         ]);
 
         $this->bookId = $request->id;
@@ -64,6 +74,10 @@ class TagTest extends WebTestCase
         $request = $this->request('/api/condition/'.$this->conditionId, 'DELETE');
 
         $this->assertEquals('The condition was successfully deleted.', $request->msg);
+
+        $request = $this->request('/api/format/' . $this->formatId, 'DELETE');
+
+        $this->assertEquals('The format was deleted successfully.', $request->msg);
 
         parent::tearDown();
     }
