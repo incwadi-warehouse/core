@@ -12,6 +12,8 @@ class BookTest extends WebTestCase
 
     private string $book;
 
+    protected int $formatId;
+
     public function setUp(): void
     {
         $this->buildClient();
@@ -20,6 +22,14 @@ class BookTest extends WebTestCase
         $request = $this->request('/api/me', 'GET');
 
         $this->branch = $request->branch->id;
+
+        $request = $this->request('/api/format/new', 'POST', [], [
+            'name' => 'name',
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $this->formatId = $request->id;
 
         // new book
         $date = new \DateTime();
@@ -34,7 +44,8 @@ class BookTest extends WebTestCase
             'added' => 859,
             'cond' => null,
             'tags' => null,
-            'subtitle' => 'Subtitle'
+            'subtitle' => 'Subtitle',
+            'format' => $this->formatId
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -48,6 +59,11 @@ class BookTest extends WebTestCase
         $request = $this->request('/api/book/'.$this->book, 'DELETE');
 
         $this->assertEquals('The book was successfully deleted.', $request->msg);
+
+        // delete format
+        $request = $this->request('/api/format/' . $this->formatId, 'DELETE');
+
+        $this->assertEquals('The format was deleted successfully.', $request->msg);
 
         parent::tearDown();
     }
