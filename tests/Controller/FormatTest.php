@@ -59,6 +59,15 @@ class FormatTest extends WebTestCase
 
         $genreId = $request->id;
 
+        // new format
+        $request = $this->request('/api/format/new', 'POST', [], [
+            'name' => 'name',
+        ]);
+
+        $this->assertTrue(isset($request->id));
+
+        $formatId = $request->id;
+
         // new book
         $date = new \DateTime();
         $request = $this->request('/api/book/new', 'POST', [], [
@@ -69,6 +78,7 @@ class FormatTest extends WebTestCase
             'sold' => false,
             'releaseYear' => 2019,
             'added' => $date->getTimestamp(),
+            'format' => $formatId
         ]);
 
         $this->assertTrue(isset($request->id));
@@ -84,5 +94,10 @@ class FormatTest extends WebTestCase
         $request = $this->request('/api/genre/'.$genreId, 'DELETE');
 
         $this->assertEquals('The genre was deleted successfully.', $request->msg);
+
+        // delete format
+        $request = $this->request('/api/format/' . $formatId, 'DELETE');
+
+        $this->assertEquals('The format was deleted successfully.', $request->msg);
     }
 }

@@ -143,7 +143,8 @@ class BookTest extends WebTestCase
             'added' => 4758,
             'cond' => $this->conditionId,
             'tags' => $this->tags,
-            'subtitle' => 'Subtitle 2'
+            'subtitle' => 'Subtitle 2',
+            'format' => $this->formatId
         ]);
 
         $this->assertTrue(isset($request->id));
