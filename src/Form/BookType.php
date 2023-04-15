@@ -34,6 +34,7 @@ class BookType extends AbstractType
             ->add('recommendation')
             ->add('format')
             ->add('subtitle')
+            ->add('duplicate')
         ;
 
         $builder->get('added')
