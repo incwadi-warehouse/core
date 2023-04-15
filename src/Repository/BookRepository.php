@@ -45,6 +45,7 @@ class BookRepository extends ServiceEntityRepository
             'releaseYear',
             'recommendation',
             'format',
+            'duplicate',
         ];
         if ($isPublic) {
             if (strlen((string) $options['term']) < 1) {

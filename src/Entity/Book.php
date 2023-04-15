@@ -104,6 +104,9 @@ class Book implements \JsonSerializable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $subtitle = null;
 
+    #[ORM\Column]
+    private bool $duplicate = false;
+
     public function __construct()
     {
         $this->added = new \DateTime();
@@ -136,7 +139,8 @@ class Book implements \JsonSerializable
             'recommendation' => $this->getRecommendation(),
             'inventory' => $this->getInventory(),
             'format' => $this->getFormat(),
-            'subtitle' => $this->getSubtitle()
+            'subtitle' => $this->getSubtitle(),
+            'duplicate' => $this->isDuplicate()
         ];
     }
 
@@ -407,6 +411,18 @@ class Book implements \JsonSerializable
     public function setSubtitle(?string $subtitle): self
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    public function isDuplicate(): bool
+    {
+        return $this->duplicate;
+    }
+
+    public function setDuplicate(bool $duplicate = false): self
+    {
+        $this->duplicate = $duplicate;
 
         return $this;
     }
