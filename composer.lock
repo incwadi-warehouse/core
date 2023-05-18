@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cababd0ccff6ef1b5a5759395843d28",
+    "content-hash": "4123bb990e7cc7fecef15ca31c5fb908",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
@@ -60,7 +60,7 @@
         },
         {
             "name": "baldeweg/extra-bundle",
-            "version": "v50.0.0",
+            "version": "v51.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/extra-bundle.git",
@@ -109,7 +109,7 @@
             ],
             "description": "Offers tools for management of users, testing and setup.",
             "support": {
-                "source": "https://github.com/abaldeweg/extra-bundle/tree/v50.0.0"
+                "source": "https://github.com/abaldeweg/extra-bundle/tree/v51.0.0"
             },
             "time": "2023-02-05T14:16:56+00:00"
         },
