@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6a95fd70b2020f16658b29307135615",
+    "content-hash": "fe503dba667488ec6ec58a4b23c35d67",
     "packages": [
         {
             "name": "baldeweg/api-bundle",
-            "version": "v52.0.0",
+            "version": "v53.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abaldeweg/api-bundle.git",
@@ -54,7 +54,7 @@
             ],
             "description": "Offers tools for API's.",
             "support": {
-                "source": "https://github.com/abaldeweg/api-bundle/tree/v52.0.0"
+                "source": "https://github.com/abaldeweg/api-bundle/tree/v53.0.0"
             },
             "time": "2023-02-05T14:09:01+00:00"
         },
