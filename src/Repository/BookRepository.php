@@ -48,10 +48,6 @@ class BookRepository extends ServiceEntityRepository
             'duplicate',
         ];
         if ($isPublic) {
-            if (strlen((string) $options['term']) < 1) {
-                throw new \Exception('There is no term!');
-            }
-
             $branch = false;
             foreach ($options['filter'] as $filter) {
                 if ('branch' === $filter['field']) {
