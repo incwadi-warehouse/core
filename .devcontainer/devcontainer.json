@@ -1,0 +1,55 @@
+{
+	"name": "Ubuntu",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/shyim/devcontainers-features/symfony-cli:0": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/guiyomh/features/goreleaser:0.1.1": {},
+		"ghcr.io/EliiseS/devcontainer-features/bash-profile:1": {
+			"command": ". /etc/bash_custom"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"forwardPorts": [
+		8080,
+		3306
+	],
+	"postCreateCommand": {
+		"php": "cd core/ && composer install",
+		"js": "cd monorepo-js/ && yarn install",
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mrmlnc.vscode-apache",
+				"mikestead.dotenv",
+				"streetsidesoftware.code-spell-checker",
+				"ikappas.composer",
+				"EditorConfig.EditorConfig",
+				"dbaeumer.vscode-eslint",
+				"donjayamanne.githistory",
+				"DavidAnson.vscode-markdownlint",
+				"christian-kohler.npm-intellisense",
+				"42Crunch.vscode-openapi",
+				"christian-kohler.path-intellisense",
+				"junstyle.php-cs-fixer",
+				"bmewburn.vscode-intelephense-client",
+				"MehediDracula.php-namespace-resolver",
+				"timonwong.shellcheck",
+				"ZixuanChen.vitest-explorer",
+				"Vue.volar",
+				"redhat.vscode-yaml",
+				"formulahendry.vscode-mysql",
+				"arjun.swagger-viewer",
+				"streetsidesoftware.code-spell-checker-german",
+				"ms-playwright.playwright"
+			]
+		}
+	}
+}
