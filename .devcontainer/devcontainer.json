@@ -32,23 +32,16 @@
 				"streetsidesoftware.code-spell-checker",
 				"ikappas.composer",
 				"EditorConfig.EditorConfig",
-				"dbaeumer.vscode-eslint",
 				"donjayamanne.githistory",
 				"DavidAnson.vscode-markdownlint",
-				"christian-kohler.npm-intellisense",
-				"42Crunch.vscode-openapi",
 				"christian-kohler.path-intellisense",
 				"junstyle.php-cs-fixer",
 				"bmewburn.vscode-intelephense-client",
 				"MehediDracula.php-namespace-resolver",
 				"timonwong.shellcheck",
-				"ZixuanChen.vitest-explorer",
-				"Vue.volar",
 				"redhat.vscode-yaml",
 				"formulahendry.vscode-mysql",
-				"arjun.swagger-viewer",
-				"streetsidesoftware.code-spell-checker-german",
-				"ms-playwright.playwright"
+				"streetsidesoftware.code-spell-checker-german"
 			]
 		}
 	}
