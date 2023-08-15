@@ -4,12 +4,9 @@
 	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/shyim/devcontainers-features/symfony-cli:0": {
 			"version": "latest"
 		},
-		"ghcr.io/devcontainers/features/go:1": {},
-		"ghcr.io/guiyomh/features/goreleaser:0.1.1": {},
 		"ghcr.io/EliiseS/devcontainer-features/bash-profile:1": {
 			"command": ". /etc/bash_custom"
 		},
