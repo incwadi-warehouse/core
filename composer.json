@@ -24,6 +24,7 @@
     "symfony/finder": "^6.3",
     "symfony/flex": "^2.3",
     "symfony/form": "^6.3",
+    "symfony/http-client": "^6.3",
     "symfony/mime": "^6.3",
     "symfony/monolog-bundle": "^3.8",
     "symfony/runtime": "^6.3",
