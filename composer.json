@@ -7,7 +7,7 @@
     "php": ">=8.2",
     "baldeweg/api-bundle": "^55.0",
     "baldeweg/extra-bundle": "^55.0",
-    "doctrine/dbal": "^2.13",
+    "doctrine/dbal": "^4.0",
     "doctrine/doctrine-bundle": "^2.7",
     "doctrine/doctrine-migrations-bundle": "^3.2",
     "doctrine/orm": "^2.14",
