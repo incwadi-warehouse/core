@@ -15,7 +15,7 @@ class Term
         if (!$term) {
             return null;
         }
-        $term = preg_replace('#[^a-zA-Z0-9 äöüß]#', '', $term);
+        $term = preg_replace('#[%*]#', '', $term);
         if (!$term) {
             return null;
         }
