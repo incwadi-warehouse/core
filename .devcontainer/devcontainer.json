@@ -7,9 +7,7 @@
 		"ghcr.io/shyim/devcontainers-features/symfony-cli:0": {
 			"version": "latest"
 		},
-		"ghcr.io/EliiseS/devcontainer-features/bash-profile:1": {
-			"command": ". /etc/bash_custom"
-		},
+		"ghcr.io/abaldeweg/devcontainer_features/bash:latest": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
