@@ -1,0 +1,71 @@
+name: Unit-Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: core
+          MYSQL_USER: adm
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2, pecl
+          extensions: imagick
+
+      - name: Install imagick dependencies
+        run: sudo apt-get update && sudo apt-get install -y libmagickwand-dev --no-install-recommends
+
+      - name: Install imagick
+        run: (yes || true) | sudo pecl install imagick
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: vendor/
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install -n --prefer-dist
+
+      - name: Generate Keypair
+        run: bin/console lexik:jwt:generate-keypair
+
+      - name: Create Database
+        run: |
+          bin/console doctrine:database:create --if-not-exists
+          bin/console doctrine:migrations:migrate -n
+          bin/console doctrine:fixtures:load -n
+        env:
+          DATABASE_URL: mysql://adm:password@127.0.0.1:3306/core?serverVersion=8.0
+
+      - name: Run tests
+        run: bin/phpunit
+        env:
+          DATABASE_URL: mysql://adm:password@127.0.0.1:3306/core?serverVersion=8.0
