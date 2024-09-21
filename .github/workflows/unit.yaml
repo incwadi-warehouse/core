@@ -41,7 +41,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libmagickwand-dev --no-install-recommends
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor/
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
