@@ -16,7 +16,7 @@
 	],
 	"postCreateCommand": {
 		"php": "cd core/ && composer install",
-		"js": "cd monorepo-js/ && yarn install",
+		"js": "cd monorepo-js/ && yarn install"
 	},
 	"customizations": {
 		"vscode": {
