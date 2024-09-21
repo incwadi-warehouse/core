@@ -40,9 +40,6 @@ jobs:
       - name: Install imagick dependencies
         run: sudo apt-get update && sudo apt-get install -y libmagickwand-dev --no-install-recommends
 
-      - name: Install imagick
-        run: (yes || true) | sudo pecl install imagick
-
       - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
