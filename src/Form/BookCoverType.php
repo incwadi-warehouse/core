@@ -15,17 +15,6 @@ class BookCoverType extends AbstractType
             ->add('cover', FileType::class, [
                 'mapped' => false,
                 'required' => true,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '10240k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/jpg',
-                            'image/png',
-                            'image/webp',
-                        ],
-                    ]),
-                ],
             ])
         ;
     }
