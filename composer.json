@@ -33,7 +33,7 @@
     "symfony/yaml": "^6.3"
   },
   "require-dev": {
-    "doctrine/doctrine-fixtures-bundle": "^3.4",
+    "doctrine/doctrine-fixtures-bundle": "^4.0",
     "friendsofphp/php-cs-fixer": "^3.14",
     "mikey179/vfsstream": "^1.6",
     "rector/rector": "^0.16",
