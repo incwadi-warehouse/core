@@ -56,6 +56,9 @@ class Branch implements \JsonSerializable
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $mail_reservation = null;
+
     public function jsonSerialize(): mixed
     {
         return [
@@ -67,7 +70,8 @@ class Branch implements \JsonSerializable
             'public' => $this->getPublic(),
             'pricelist' => $this->getPricelist(),
             'cart' => $this->getCart(),
-            'content' => $this->getContent()
+            'content' => $this->getContent(),
+            'mail_reservation' => $this->getMailReservation()
         ];
     }
 
@@ -123,7 +127,7 @@ class Branch implements \JsonSerializable
 
         return $this;
     }
-    
+
     public function getPublic(): ?bool
     {
         return $this->public;
@@ -169,6 +173,17 @@ class Branch implements \JsonSerializable
     {
         $this->content = $content;
 
+        return $this;
+    }
+
+    public function getMailReservation(): ?string
+    {
+        return $this->mail_reservation;
+    }
+
+    public function setMailReservation(?string $mail_reservation): self
+    {
+        $this->mail_reservation = $mail_reservation;
         return $this;
     }
 }
