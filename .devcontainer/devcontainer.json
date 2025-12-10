@@ -7,7 +7,7 @@
 		"ghcr.io/shyim/devcontainers-features/symfony-cli:0.0.1": {
 			"version": "latest"
 		},
-		"ghcr.io/abaldeweg/devcontainer_features/bash:3.0.0": {},
+		"ghcr.io/abaldeweg/devcontainer_features/bash:4.0.0": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2.13.0": {}
 	},
 	"forwardPorts": [
