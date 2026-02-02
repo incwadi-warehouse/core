@@ -9,7 +9,7 @@
     "baldeweg/extra-bundle": "^55.0",
     "doctrine/dbal": "^2.13",
     "doctrine/doctrine-bundle": "^2.7",
-    "doctrine/doctrine-migrations-bundle": "^3.2",
+    "doctrine/doctrine-migrations-bundle": "^4.0",
     "doctrine/orm": "^2.14",
     "gesdinet/jwt-refresh-token-bundle": "^1.1",
     "intervention/image": "^2.7",
