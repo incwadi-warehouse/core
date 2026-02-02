@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/php:1-8.2
+FROM mcr.microsoft.com/devcontainers/php:3-8.2
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y mariadb-client libpng-dev libjpeg-dev \
