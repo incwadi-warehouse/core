@@ -1,4 +1,4 @@
-FROM php:8.2.35-fpm-alpine3.23
+FROM php:8.2.36-fpm-alpine3.24
 
 # cron
 COPY docker/php-fpm/crontab.txt /crontab.txt
